@@ -115,13 +115,51 @@ function handleQuestion(message) {
 
     }
 
+    if (question === "what did you write down?") {
+
+        return showChronicle();
+
+    }
+
     return "I'm not sure how to answer that yet.";
 
 }
 
+function showChronicle() {
+    
+    let latestEntry = recall("entry");
+    
+    return "📖 Pip carefully opens the Chronicle." +
+        
+        "<br><br>" +
+        
+        "He gently turns a few pages." +
+        
+        "<br><br>" +
+        
+        "📝 <strong>Latest Entry</strong>" +
+        
+        "<br><br>" +
+        
+        "\"" + latestEntry + "\"" +
+        
+        "<br><br>" +
+        
+        "🐿️ He smiles proudly." +
+        
+        "<br><br>" +
+        
+        "\"I thought this one was worth writing down.\"" +
+        
+        "<br><br>" +
+        
+        "📚 He carefully closes the Chronicle.";
+    
+}
+
 function handleNote(message) {
 
-    remember("note", message, "note");
+    remember("entry", message, "entry");
 
     return buildChronicleEntry(message);
 
@@ -178,4 +216,5 @@ function think(message) {
 
     return handleNote(message);
 
+    
 }
