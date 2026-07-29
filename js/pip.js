@@ -157,13 +157,36 @@ function showChronicle() {
     
 }
 
-function handleNote(message) {
+function looksLikeANote(message) {
 
-    remember("entry", message, "entry");
+    let text = message.trim().toLowerCase();
 
-    return buildChronicleEntry(message);
+    if (text.startsWith("i ")) return true;
+
+    if (text.startsWith("my ")) return true;
+
+    if (text.startsWith("today")) return true;
+
+    if (text.startsWith("yesterday")) return true;
+
+    return false;
 
 }
+
+function handleNote(message) {
+    
+    if (!looksLikeANote(message)) {
+        
+        return null;
+        
+    }
+    
+    remember("entry", message, "entry");
+    
+    return buildChronicleEntry(message);
+    
+}
+
 
 function buildChronicleEntry(message) {
 
@@ -196,25 +219,40 @@ function buildChronicleEntry(message) {
 
 function think(message) {
 
-    if (message.startsWith("My name is ")) {
+    let memory = memoryBrain(message);
 
-        return handleName(message);
+    if (memory !== null) {
 
-    }
-
-    if (message.trim().toLowerCase() === "hello") {
-
-        return handleGreeting(message);
+        return memory;
 
     }
 
-    if (message.trim().endsWith("?")) {
+    let social = socialBrain(message);
 
-        return handleQuestion(message);
+    if (social !== null) {
+
+        return social;
 
     }
 
-    return handleNote(message);
+    let knowledge = knowledgeBrain(message);
 
+if (knowledge !== null) {
     
+    return knowledge;
+    
+}
+
+    let chronicle = chronicleBrain(message);
+
+if (chronicle !== null) {
+
+    return chronicle;
+
+}
+
+    let library = askLibrary(message);
+
+    return library.answer;
+
 }

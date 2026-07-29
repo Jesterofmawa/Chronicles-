@@ -1,3 +1,15 @@
+function memoryBrain(message) {
+
+    if (message.startsWith("My name is ")) {
+
+        return handleName(message);
+
+    }
+
+    return null;
+
+}
+
 let shortTerm = {};
 
 let longTerm = {};
