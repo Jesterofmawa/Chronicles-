@@ -1,5 +1,59 @@
 {
-    "dragons": "creatures/dragons.md",
-    "pirate": "people/pirate.md",
-    "squirrel": "creatures/squirrel.md"
+    "_library": {
+
+        "name": "The Great Library",
+
+        "version": "1.0",
+
+        "books": 3
+
+    },
+
+
+    "dragons": {
+
+        "title": "Dragons",
+
+        "category": "Creatures",
+
+        "path": "creatures/dragons.md",
+
+        "aliases": [
+            "dragon",
+            "drake",
+            "wyrm"
+        ]
+
+    },
+
+    "pirate": {
+
+        "title": "Pirates",
+
+        "category": "People",
+
+        "path": "people/pirate.md",
+
+        "aliases": [
+            "pirates",
+            "corsair",
+            "buccaneer"
+        ]
+
+    },
+
+    "squirrel": {
+
+        "title": "Squirrels",
+
+        "category": "Creatures",
+
+        "path": "creatures/squirrel.md",
+
+        "aliases": [
+            "squirrels"
+        ]
+
+    }
+
 }

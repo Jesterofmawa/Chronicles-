@@ -123,7 +123,7 @@ function handleQuestion(message) {
 
     }
 
-    return "I'm not sure how to answer that yet.";
+    return null;
 
 }
 
