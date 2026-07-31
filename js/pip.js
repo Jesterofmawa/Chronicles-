@@ -1,3 +1,5 @@
+loadLibraryIndex();
+
 let actions = [
 
     "📖 Pip eagerly flips open the Chronicle.",

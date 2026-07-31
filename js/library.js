@@ -1,3 +1,47 @@
+let libraryIndex = {};
+
+async function loadLibraryIndex() {
+    
+    try {
+        
+        const response = await fetch("GreatLibrary/index.json");
+        
+        libraryIndex = await response.json();
+        
+        const dragonBook = await readBook("creatures/dragons.md");
+
+alert(dragonBook);
+        
+        console.log("📚 Great Library loaded.");
+        
+    }
+    
+    catch (error) {
+        
+        console.error("Failed to load Great Library:", error);
+        
+    }
+    
+}
+
+async function readBook(path) {
+
+    try {
+
+        const response = await fetch("GreatLibrary/" + path);
+
+        return await response.text();
+
+    }
+
+    catch (error) {
+
+        return "🐿️ Pip couldn't find that book.";
+
+    }
+
+}
+
 let libraryBooks = {
 
     dragons:

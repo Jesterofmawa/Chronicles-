@@ -1,0 +1,1 @@
+Pirates sailed the seas in search of fortune, but many legends tell of cursed captains and haunted ships.
