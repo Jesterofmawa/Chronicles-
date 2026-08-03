@@ -5,7 +5,7 @@
 
         "version": "1.0",
 
-        "books": 3
+        "books": 4
 
     },
 
@@ -55,5 +55,23 @@
         ]
 
     }
+
+,
+"greyhaven": {
+
+    "title": "Greyhaven",
+
+    "category": "Places",
+
+    "path": "places/greyhaven.md",
+
+    "aliases": [
+        "greyhaven",
+        "grey haven",
+        "harbour",
+        "port"
+    ]
+
+}
 
 }

@@ -1,30 +1,71 @@
+let currentBook = null;
+let currentSection = "SUMMARY";
+
 let libraryIndex = {};
 
+let librarySession = {
+
+    book: null,
+
+    section: null
+
+};
+
 async function loadLibraryIndex() {
-    
+
     try {
-        
+
         const response = await fetch("GreatLibrary/index.json");
-        
+
+
         libraryIndex = await response.json();
 
-for (let topic in libraryIndex) {
-    
-    let bookText = await readBook(libraryIndex[topic].path);
-    
-    libraryBooks[topic] = bookText;
-    
+
+        for (let topic in libraryIndex) {
+
+            let summary = await readSection(
+                libraryIndex[topic].path,
+                "SUMMARY"
+            );
+
+            libraryBooks[topic] = summary;
+
+        }
+
+        console.log("📚 Great Library loaded.");
+
+    }
+
+    catch (error) {
+
+        console.error("Failed to load Great Library:", error);
+
+    }
+
 }
 
-console.log("📚 Great Library loaded.");
-        
-    }
+function findBook(question) {
     
-    catch (error) {
+    let text = question.toLowerCase();
+    
+    
+    for (let topic in libraryIndex) {
         
-        console.error("Failed to load Great Library:", error);
+        
+        let book = libraryIndex[topic];
+        
+        if (!book.path) {
+            continue;
+        }
+        
+        if (text.includes(topic)) {
+            
+            return topic;
+            
+        }
         
     }
+    return null;
     
 }
 
@@ -46,11 +87,45 @@ async function readBook(path) {
 
 }
 
+async function readSection(path, section) {
+
+    const book = await readBook(path);
+
+    const startTag = "[" + section + "]";
+
+    const start = book.indexOf(startTag);
+
+    if (start === -1) {
+
+        return "🐿️ Pip couldn't find that page.";
+
+    }
+
+    const text = book.substring(start + startTag.length);
+
+    const nextSection = text.match(/\[[A-Z ]+\]/);
+
+    if (nextSection) {
+
+        return text.substring(0, nextSection.index).trim();
+
+    }
+
+    return text.trim();
+
+}
+
 let libraryBooks = {};
 
 function askLibrary(question) {
 
     let text = question.toLowerCase();
+
+let section = "SUMMARY";
+
+if (text.includes("founding")) {
+    section = "FOUNDING";
+}
 
     for (let topic in libraryBooks) {
 
