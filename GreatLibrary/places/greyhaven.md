@@ -81,27 +81,6 @@ Greyhaven is built around a deep natural harbour protected by towering black cli
 
 Its districts climb the hillside in uneven terraces connected by steep stone stairways.
 
-Major landmarks include:
-
-The Old Harbour
-
-Fisherman's Row
-
-Bellwatch Church
-
-Lantern Square
-
-The Salt Market
-
-Widow's Bluff
-
-The Breakwater
-
-The Old Lighthouse
-
-Black Gull Docks
-
-
 Everything smells faintly of salt, smoke and damp rope.
 
 Even inland homes carry the scent.

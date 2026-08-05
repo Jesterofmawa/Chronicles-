@@ -3,11 +3,13 @@ let currentSection = "SUMMARY";
 
 let libraryIndex = {};
 
-let librarySession = {
+librarySession = {
 
     book: null,
 
-    section: null
+    pages: [],
+
+    currentPage: 0
 
 };
 
@@ -39,36 +41,84 @@ async function loadLibraryIndex() {
     catch (error) {
 
         console.error("Failed to load Great Library:", error);
-
+        
+        
     }
 
 }
+
+
 
 function findBook(question) {
-    
+
     let text = question.toLowerCase();
-    
-    
+
     for (let topic in libraryIndex) {
-        
-        
-        let book = libraryIndex[topic];
-        
-        if (!book.path) {
-            continue;
-        }
-        
-        if (text.includes(topic)) {
-            
-            return topic;
-            
-        }
-        
-    }
-    return null;
     
+    let book = libraryIndex[topic];
+    
+    if (!book || !book.path) {
+        continue;
+    }
+
+        // Check the book name
+        if (text.includes(topic)) {
+            return topic;
+        }
+
+        // Check aliases
+        if (book.aliases) {
+
+            for (let alias of book.aliases) {
+
+                if (text.includes(alias.toLowerCase())) {
+                    return topic;
+                }
+
+            }
+
+        }
+
+        // Check contains
+        if (book.contains) {
+
+            for (let item of book.contains) {
+
+                if (text.includes(item.toLowerCase())) {
+                    return topic;
+                }
+
+            }
+
+        }
+
+    }
+
+    return null;
+
 }
 
+function findSection(question, topic) {
+
+    let text = question.toLowerCase();
+
+    let book = libraryIndex[topic];
+
+    if (!book || !book.contains) {
+        return "SUMMARY";
+    }
+
+    for (let item of book.contains) {
+
+        if (text.includes(item.toLowerCase())) {
+            return item.toUpperCase();
+        }
+
+    }
+
+    return "SUMMARY";
+
+}
 async function readBook(path) {
 
     try {
@@ -87,112 +137,147 @@ async function readBook(path) {
 
 }
 
-async function readSection(path, section) {
+function getHeadings(markdown) {
 
-    const book = await readBook(path);
+    let headings = [];
 
-    const startTag = "[" + section + "]";
+    let lines = markdown.split("\n");
 
-    const start = book.indexOf(startTag);
+    for (let line of lines) {
 
-    if (start === -1) {
+        line = line.trim();
+
+        if (line.startsWith("[") && line.endsWith("]")) {
+
+            headings.push(
+                line.substring(1, line.length - 1)
+            );
+
+        }
+
+    }
+
+    return headings;
+
+}
+
+function normalizeHeading(text) {
+
+    return text
+        .toLowerCase()
+        .replace(/\[|\]/g, "")
+        .replace(/^the\s+/i, "")
+        .replace(/^a\s+/i, "")
+        .replace(/^an\s+/i, "")
+        .replace(/'/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+}
+
+async function readSection(path, heading) {
+
+    let text = await readBook(path);
+
+    let lines = text.split("\n");
+
+    let reading = false;
+
+    let result = [];
+
+    for (let line of lines) {
+
+        line = line.trim();
+
+        if (normalizeHeading(line) === normalizeHeading(heading)) {
+
+    reading = true;
+
+    continue;
+
+}
+
+        if (reading &&
+            line.startsWith("[") &&
+            line.endsWith("]")) {
+
+            break;
+
+        }
+
+        if (reading) {
+
+            result.push(line);
+
+        }
+
+    }
+
+    if (result.length === 0) {
 
         return "🐿️ Pip couldn't find that page.";
 
     }
 
-    const text = book.substring(start + startTag.length);
-
-    const nextSection = text.match(/\[[A-Z ]+\]/);
-
-    if (nextSection) {
-
-        return text.substring(0, nextSection.index).trim();
-
-    }
-
-    return text.trim();
-
+    return result.join("<br>");
 }
+
+
+
 
 let libraryBooks = {};
 
-function askLibrary(question) {
+async function askLibrary(question) {
 
-    let text = question.toLowerCase();
+    let topic = findBook(question);
 
-let section = "SUMMARY";
+let book = libraryIndex[topic];
+let section = findSection(question, topic);
 
-if (text.includes("founding")) {
-    section = "FOUNDING";
-}
+    if (topic === null) {
 
-    for (let topic in libraryBooks) {
-
-        let book = libraryIndex[topic];
-
-        if (!book || !book.path) {
-            continue;
-        }
-
-        if (text.includes(topic)) {
-
-            return {
-                found: true,
-                answer:
-                    "📚 Pip adjusts his tiny satchel." +
-                    "<br><br>" +
-                    "\"I think I've seen a book about that...\"" +
-                    "<br><br>" +
-                    "He disappears into the Great Library." +
-                    "<br><br>" +
-                    "🐿️ \"Aha! Here it is!\"" +
-                    "<br><br>" +
-                    libraryBooks[topic]
-            };
-
-        }
-
-        if (book.aliases) {
-
-            for (let alias of book.aliases) {
-
-                if (text.includes(alias.toLowerCase())) {
-
-                    return {
-                        found: true,
-                        answer:
-                            "📚 Pip adjusts his tiny satchel." +
-                            "<br><br>" +
-                            "\"I think I've seen a book about that...\"" +
-                            "<br><br>" +
-                            "He disappears into the Great Library." +
-                            "<br><br>" +
-                            "🐿️ \"Aha! Here it is!\"" +
-                            "<br><br>" +
-                            libraryBooks[topic]
-                    };
-
-                }
-
-            }
-
-        }
+        return {
+            found: false,
+            answer:
+                "📚 Pip adjusts his tiny satchel." +
+                "<br><br>" +
+                "\"I don't know that one...\"" +
+                "<br><br>" +
+                "He scampers into the Great Library between towering shelves." +
+                "<br><br>" +
+                "After a few moments he returns, looking slightly embarrassed." +
+                "<br><br>" +
+                "🐿️ \"I'm afraid I couldn't find anything just yet.\""
+        };
 
     }
 
+    librarySession.book = topic;
+librarySession.section = findSection(question, topic);
+
     return {
-        found: false,
+        found: true,
         answer:
             "📚 Pip adjusts his tiny satchel." +
             "<br><br>" +
-            "\"I don't know that one...\"" +
+            "\"I think I've seen a book about that...\"" +
             "<br><br>" +
-            "He scampers into the Great Library between towering shelves." +
+            "He disappears into the Great Library." +
             "<br><br>" +
-            "After a few moments he returns, looking slightly embarrassed." +
+            "🐿️ \"Aha! Here it is!\"" +
             "<br><br>" +
-            "🐿️ \"I'm afraid I couldn't find anything just yet.\""
+            await readSection(book.path, section)
     };
+
+}
+async function turnPage() {
+
+    if (librarySession.book === null) {
+
+        return null;
+
+    }
+
+    return "Turning page...";
 
 }

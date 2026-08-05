@@ -219,7 +219,7 @@ function buildChronicleEntry(message) {
 
 }
 
-function think(message) {
+async function think(message) {
 
     let memory = memoryBrain(message);
 
@@ -245,6 +245,8 @@ if (knowledge !== null) {
     
 }
 
+
+
     let chronicle = chronicleBrain(message);
 
 if (chronicle !== null) {
@@ -253,8 +255,8 @@ if (chronicle !== null) {
 
 }
 
-    let library = askLibrary(message);
+    let library = await askLibrary(message);
 
-    return library.answer;
+return library.answer;
 
 }
