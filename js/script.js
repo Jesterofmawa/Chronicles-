@@ -5,7 +5,8 @@ async function teachPip() {
 
     let reply = await think(message);
 
-    document.getElementById("output").innerHTML = reply;
+    document.getElementById("output").innerHTML =
+    `<div class="pip-roll">${reply}</div>`;
 
 }
 
