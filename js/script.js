@@ -8,3 +8,10 @@ async function teachPip() {
     document.getElementById("output").innerHTML = reply;
 
 }
+
+function testRoll(notation) {
+
+    document.getElementById("output").innerHTML =
+        pipRoll(notation);
+
+}

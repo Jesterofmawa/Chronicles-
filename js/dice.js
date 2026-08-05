@@ -39,21 +39,34 @@ function rollD20() {
 
 let attack = rollD20();
 
-function pipRoll(sides) {
 
-    let result = roll(sides);
+function pipRoll(sides, modifier = 0) {
+
+    let result = rollDice(sides, modifier);
 
     return `
+<div class="pip-roll">
+
 ${randomRollMessage()}
 
-🎲 Pip rolls a d${result.sides}...
+<p>🎲 <strong>The dice tumble across the table...</strong></p>
 
-🎲 Result: ${result.value}
+<p><strong>Roll:</strong> ${sides}</p>
+
+<p>🎲 Rolls: <strong>${result.rolls.join(", ")}</strong></p>
+
+${modifier !== 0 ? `
+<p>➕ Modifier: <strong>${modifier > 0 ? "+" : ""}${modifier}</strong></p>
+` : ""}
+
+<p>✨ <strong>Total: ${result.total}</strong></p>
+
+</div>
 `;
 
 }
 
-function rollDice(expression) {
+function rollDice(expression, modifier = 0) {
 
     let parts = expression.split("d");
 
@@ -77,16 +90,16 @@ function rollDice(expression) {
 
     return {
 
-        total: total,
+    total: total + modifier,
 
-        rolls: rolls,
+    rawTotal: total,
 
-        sides: sides
+    modifier: modifier,
 
-    };
+    rolls: rolls,
+
+    sides: sides
+
+};
 
 }
-
-let result = rollDice("4d8");
-
-alert(JSON.stringify(result));

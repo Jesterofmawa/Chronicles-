@@ -1,52 +1,68 @@
 const rollMessages = [
 
-`🎲 Pip rummages through his satchel.
+`
+<p>🎒 <strong>Pip rummages through his satchel.</strong></p>
 
-"Hang on... I've got just the thing."
+<p><em>"Hang on... I've got just the thing."</em></p>
 
-He triumphantly produces a well-worn die.
+<p>He triumphantly produces a well-worn die.</p>
+`,
 
-He tosses it into the air...`,
+`
+<p>🐿️ <strong>Pip grins mischievously.</strong></p>
 
-`🐿️ Pip disappears almost entirely inside his satchel.
+<p><em>"I've been waiting to roll this all day."</em></p>
 
-"...It's definitely in here somewhere."
+<p>He spins a die across the table.</p>
+`,
 
-A moment later he pops back out holding a die.
+`
+<p>📚 <strong>Pip adjusts his tiny satchel.</strong></p>
 
-"Found it!"`,
+<p><em>"Every chronicler should carry a lucky die."</em></p>
 
-`🎒 Pip pats his satchel proudly.
+<p>He dusts one off before handing it over.</p>
+`,
 
-"Every chronicler carries a few lucky dice."
+`
+<p>🎲 <strong>Pip shakes a small leather pouch.</strong></p>
 
-He selects one carefully before giving it a flick.`,
+<p><em>"Listen to that! Sounds promising."</em></p>
 
-`📚 Pip shifts a pile of journals aside.
+<p>A die tumbles into his paw.</p>
+`,
 
-Maps.
+`
+<p>🎒 <strong>Pip disappears almost entirely inside his satchel.</strong></p>
 
-Bookmarks.
+<p><em>"...It's definitely in here somewhere."</em></p>
 
-Loose parchment.
+<p>A moment later he pops back out, proudly holding a die.</p>
+`,
 
-A biscuit.
+`
+<p>🧭 <strong>Pip searches every pocket.</strong></p>
 
-"...Ah!"
+<p><em>"I know I packed one..."</em></p>
 
-At last he uncovers a die.`,
+<p><em>"...Ah! Found it!"</em></p>
+`,
 
-`🐿️ Pip grins mischievously.
+`
+<p>🪙 <strong>Pip pats his satchel proudly.</strong></p>
 
-"I've been waiting to roll this all day."
+<p><em>"Every chronicler carries a few lucky dice."</em></p>
 
-He spins a die across the table.`,
+<p>He carefully selects one before giving it a flick.</p>
+`,
 
-`🎲 Pip reaches into his satchel without looking.
+`
+<p>✨ <strong>Pip smiles warmly.</strong></p>
 
-"I wonder which one I'll find today..."
+<p><em>"Let's see what fate has written."</em></p>
 
-He smiles as a die lands neatly in his paw.`
+<p>He rolls the die with surprising confidence.</p>
+`
 
 ];
 
@@ -55,5 +71,27 @@ function randomRollMessage() {
     return rollMessages[
         Math.floor(Math.random() * rollMessages.length)
     ];
+
+}
+
+function pipRoll(expression) {
+
+    let message = randomRollMessage();
+
+    let result = rollDice(expression);
+
+    let output = message;
+
+    output += "<br><br>🎲 Pip rolls " + expression + "...<br><br>";
+
+    for (let i = 0; i < result.rolls.length; i++) {
+
+        output += "🎲 Roll " + (i + 1) + ": " + result.rolls[i] + "<br>";
+
+    }
+
+    output += "<br>✨ Total: <b>" + result.total + "</b>";
+
+    return output;
 
 }
