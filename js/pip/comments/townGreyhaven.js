@@ -42,6 +42,4 @@ const townGreyhavenComments = [
 
 "Do you think the sea ever gets lonely? ... No... that's probably a silly question.",
 
-"I was going to say this reminds me of somewhere... ...I've forgotten where."
-
 ];
