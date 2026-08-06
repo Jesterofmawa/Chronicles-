@@ -5,14 +5,14 @@ async function teachPip() {
 
     let reply = await think(message);
 
-    document.getElementById("output").innerHTML =
+    document.getElementById("pip").innerHTML =
     `<div class="pip-roll">${reply}</div>`;
-
+    
 }
 
 function testRoll(notation) {
 
-    document.getElementById("output").innerHTML =
+    document.getElementById("pip").innerHTML =
         pipRoll(notation);
 
 }
