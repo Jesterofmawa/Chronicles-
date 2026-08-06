@@ -5,3 +5,32 @@
     border-radius: 10px;
     background: #f8f4e8;
 }
+
+.story-panel {
+
+    margin-top: 20px;
+    padding: 16px;
+
+    background: #ece6d8;
+
+    border: 2px solid #8d7b58;
+
+    border-radius: 10px;
+
+    color: #2f2a22;
+
+}
+
+.story-panel h2 {
+
+    margin-top: 0;
+
+    color: #5c4624;
+
+}
+
+.story-panel p {
+
+    line-height: 1.6;
+
+}
