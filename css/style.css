@@ -34,3 +34,29 @@
     line-height: 1.6;
 
 }
+
+#titleScreen {
+    
+    min-height: 100vh;
+    
+    display: flex;
+    
+    flex-direction: column;
+    
+    justify-content: flex-start;
+
+padding-top: 100px;
+    
+    align-items: center;
+    
+    text-align: center;
+    
+    background-image: url("../images/title-background.png");
+    
+    background-size: cover;
+    
+    background-position: center;
+    
+    background-repeat: no-repeat;
+    
+}
