@@ -1,7 +1,10 @@
 function beginGame() {
 
     document.getElementById("titleScreen").style.display = "none";
+
     document.getElementById("pipIntro").style.display = "block";
+
+    startDialogue(pipIntro);
 
 }
 
