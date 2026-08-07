@@ -1,4 +1,4 @@
-const oldharbourcomments = [
+const oldHarbourComments = [
   
   "Now this is a proper harbour. Every dock has a story tied to it.",
   
