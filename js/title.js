@@ -11,6 +11,7 @@ function beginGame() {
 function beginAdventure() {
 
     document.getElementById("pipIntro").style.display = "none";
+    
     document.getElementById("game").style.display = "block";
 
 }
