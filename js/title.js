@@ -4,7 +4,10 @@ function beginGame() {
 
     document.getElementById("pipIntro").style.display = "block";
 
-    startDialogue(pipIntro);
+    startDialogue(pipIntro, {
+    name: "Pip",
+    revealNameAt: 7
+});
 
 }
 

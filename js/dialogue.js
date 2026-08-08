@@ -2,13 +2,34 @@ let dialogue = [];
 
 let dialogueIndex = 0;
 
-function startDialogue(lines) {
+let dialogueName = null;
+
+let revealNameAt = null;
+
+function startDialogue(lines, options = {}) {
 
     dialogue = lines;
+
     dialogueIndex = 0;
 
-    document.getElementById("continueButton").innerHTML = "Next";
-    document.getElementById("continueButton").onclick = nextDialogue;
+    dialogueName = options.name || null;
+    revealNameAt = options.revealNameAt ?? null;
+
+    document.getElementById("continueButton").innerHTML =
+        "Next";
+
+    document.getElementById("continueButton").onclick =
+        nextDialogue;
+
+    if (dialogueName) {
+
+        document.getElementById("pipName").innerHTML =
+            dialogueName;
+
+        document.getElementById("pipName").style.display =
+            "none";
+
+    }
 
     showDialogue();
 
@@ -34,6 +55,16 @@ function showDialogue() {
 function nextDialogue() {
 
     dialogueIndex++;
+
+    if (
+        dialogueName &&
+        dialogueIndex === revealNameAt
+    ) {
+
+        document.getElementById("pipName").style.display =
+            "block";
+
+    }
 
     if (dialogueIndex < dialogue.length) {
 
