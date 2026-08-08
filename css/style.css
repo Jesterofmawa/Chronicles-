@@ -210,3 +210,30 @@ padding-top: 100px;
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.18);
 }
+
+.pip-ambient {
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border: 2px solid #d8c89a;
+
+    border-radius: 10px;
+
+    background: #f8f4e8;
+
+    color: #4b3925;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+}

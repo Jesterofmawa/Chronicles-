@@ -1,5 +1,7 @@
 function startStory() {
 
+setPipLocation("greyhaven");
+
     document.getElementById("story").innerHTML = `
 <div class="story-panel">
 
@@ -58,6 +60,8 @@ function startGreyhaven() {
         "📖 Talk with Pip"
     ]);
 
+startPipObservations();
+
 }
 
 function lookAroundGreyhaven() {
@@ -105,6 +109,8 @@ function lookAroundGreyhaven() {
 }
 
 function enterGreyhaven() {
+
+setPipLocation("greyhaven");
 
     document.getElementById("story").innerHTML = `
         <div class="story-panel">
