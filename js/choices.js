@@ -18,16 +18,28 @@ function showChoices(choices) {
 
 function choose(choice) {
 
-    if (choice === "⚔️ Attack") {
+    if (choice === "👀 Look Around") {
 
-        document.getElementById("pip").innerHTML =
-            pipRoll("1d20");
+        lookAroundGreyhaven();
 
         return;
 
     }
 
-    document.getElementById("pip").innerHTML =
-        "<p>You chose: <strong>" + choice + "</strong></p>";
+    if (choice === "🚪 Enter Greyhaven") {
+
+        enterGreyhaven();
+
+        return;
+
+    }
+
+    if (choice === "📖 Talk with Pip") {
+
+        talkWithPip();
+
+        return;
+
+    }
 
 }
