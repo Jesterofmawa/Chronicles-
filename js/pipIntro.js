@@ -32,16 +32,36 @@ const pipIntro = [
 
 "\"And... If fortune smiles upon us, I might even let you borrow one of my lucky dice.\"", 
 
-"\"Oh! Before we begin... There's one more person you should meet.\"", 
-
-"\"The Storyteller. They'll paint the world around us.\"", 
-
 "\"I'll simply walk beside you... And perhaps... help uncover a few stories of our own.\"", 
 
 "\"There are an awful lot of stories waiting out there... I suppose we'd better go and find one.\"", 
 
 "<em>Pip carefully slips a pencil behind one ear, hugs his oversized journal to his chest and smiles.</em>",
 
+"\"Oh! Before we begin... There's one more person you should meet.\"", 
+
+"\"The Storyteller. They'll paint the world around us.\"",
+
 "<strong>\"Shall we?\"</strong>"
+
+];
+
+let storytellerIntro = [
+
+    "\"Thank you, Pip.\"",
+
+    "\"That was a most generous introduction.\"",
+
+    "\"People call me the Storyteller. I suppose that is as good a name as any.\"",
+
+    "\"I will tell you what you see, what you hear, the places you visit, and the people you encounter.\"",
+
+    "\"But what you do... That is yours to decide.\"",
+
+    "\"Pip will walk beside you. I will tell the tale.\"",
+
+    "\"And you...\"",
+
+    "\"...will live it.\""
 
 ];

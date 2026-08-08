@@ -6,14 +6,25 @@ let dialogueName = null;
 
 let revealNameAt = null;
 
+let currentCharacter = "pip";
+
+
 const pipExpressions = {
+
     default: "images/pip.png",
+
     surprised: "images/pip-surprised.png",
+
     amused: "images/pip-amused.png",
+
     cheeky: "images/pip-cheeky.png",
+
     happy: "images/pip-happy.png",
+
     thoughtful: "images/pip-thoughtful.png"
+
 };
+
 
 function startDialogue(lines, options = {}) {
 
@@ -22,7 +33,10 @@ function startDialogue(lines, options = {}) {
     dialogueIndex = 0;
 
     dialogueName = options.name || null;
+
     revealNameAt = options.revealNameAt ?? null;
+
+    currentCharacter = options.character || "pip";
 
     document.getElementById("continueButton").innerHTML =
         "Next";
@@ -30,161 +44,481 @@ function startDialogue(lines, options = {}) {
     document.getElementById("continueButton").onclick =
         nextDialogue;
 
-    if (dialogueName) {
+// Set character name
 
-        document.getElementById("pipName").innerHTML =
-            dialogueName;
+const nameElement =
+    document.getElementById("pipName");
+
+if (dialogueName) {
+
+    nameElement.innerHTML =
+        dialogueName;
+
+}
+
+nameElement.classList.remove("storyteller-name");
+
+if (currentCharacter === "storyteller") {
+
+    nameElement.classList.add("storyteller-name");
+
+}
+
+    // Pip setup
+
+    if (currentCharacter === "pip") {
 
         document.getElementById("pipName").style.display =
             "none";
 
+        document.getElementById("storytellerPortrait").style.display =
+            "none";
+
     }
+
+    // Storyteller setup
+
+    if (currentCharacter === "storyteller") {
+
+        document.getElementById("pipName").style.display =
+            "none";
+
+        document.getElementById("pipWriting").style.display =
+            "none";
+
+        document.getElementById("pipPortrait").style.display =
+            "none";
+
+        document.getElementById("storytellerPortrait").style.display =
+            "block";
+
+        document.getElementById("storytellerPortrait").src =
+            "images/storyteller-forward.png";
+
+    }
+
 
     showDialogue();
 
 }
+
 
 function showDialogue() {
 
     document.getElementById("dialogueText").innerHTML =
         dialogue[dialogueIndex];
 
-const pipWriting = document.getElementById("pipWriting");
-const pipPortrait = document.getElementById("pipPortrait");
 
-if (dialogueIndex === 0) {
+    // =========================
+    // PIP
+    // =========================
 
-    pipWriting.style.display = "block";
-    pipPortrait.style.display = "none";
+    if (currentCharacter === "pip") {
 
-} else {
+        const pipWriting =
+            document.getElementById("pipWriting");
 
-    pipWriting.style.display = "none";
-    pipPortrait.style.display = "block";
+        const pipPortrait =
+            document.getElementById("pipPortrait");
 
-}
 
-let portrait = pipExpressions.default;
+        if (dialogueIndex === 0) {
 
-const currentLine = dialogue[dialogueIndex];
+            pipWriting.style.display =
+                "block";
 
-if (currentLine === "\"Oh!\"") {
+            pipPortrait.style.display =
+                "none";
 
-    portrait = pipExpressions.surprised;
+        } else {
 
-}
+            pipWriting.style.display =
+                "none";
 
-else if (currentLine === "\"Hello!\"") {
+            pipPortrait.style.display =
+                "block";
 
-    portrait = pipExpressions.happy;
 
-}
+            let portrait =
+                pipExpressions.default;
 
-else if (currentLine.includes("It's nice to see a new face")) {
+            const currentLine =
+                dialogue[dialogueIndex];
 
-    portrait = pipExpressions.happy;
 
-}
+            if (currentLine === "\"Oh!\"") {
 
-else if (currentLine.includes("I'm a Chronicler")) {
+                portrait =
+                    pipExpressions.surprised;
 
-    portrait = pipExpressions.thoughtful;
+            }
 
-}
+            else if (currentLine === "\"Hello!\"") {
 
-else if (currentLine.includes("I've still got rather a lot to learn")) {
+                portrait =
+                    pipExpressions.happy;
 
-    portrait = pipExpressions.thoughtful;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "It's nice to see a new face"
+                )
+            ) {
 
-else if (currentLine.includes("Every town has a tale")) {
+                portrait =
+                    pipExpressions.happy;
 
-    portrait = pipExpressions.thoughtful;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "I'm a Chronicler"
+                )
+            ) {
 
-else if (currentLine.includes("Every road remembers")) {
+                portrait =
+                    pipExpressions.thoughtful;
 
-    portrait = pipExpressions.thoughtful;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "I've still got rather a lot to learn"
+                )
+            ) {
 
-else if (currentLine.includes("Every person has a story worth telling")) {
+                portrait =
+                    pipExpressions.thoughtful;
 
-    portrait = pipExpressions.happy;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "Every town has a tale"
+                )
+            ) {
 
-else if (currentLine.includes("Interesting places")) {
+                portrait =
+                    pipExpressions.thoughtful;
 
-    portrait = pipExpressions.happy;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "Every road remembers"
+                )
+            ) {
 
-else if (currentLine.toLowerCase().includes("recipes")) {
+                portrait =
+                    pipExpressions.thoughtful;
 
-    portrait = pipExpressions.amused;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "Every person has a story worth telling"
+                )
+            ) {
 
-else if (currentLine.includes("Probably ask far too many questions")) {
+                portrait =
+                    pipExpressions.happy;
 
-    portrait = pipExpressions.cheeky;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "Interesting places"
+                )
+            ) {
 
-else if (currentLine.includes("borrow one of my lucky dice")) {
+                portrait =
+                    pipExpressions.happy;
 
-    portrait = pipExpressions.cheeky;
+            }
 
-}
+            else if (
+                currentLine.toLowerCase().includes(
+                    "recipes"
+                )
+            ) {
 
-else if (currentLine.includes("The Storyteller")) {
+                portrait =
+                    pipExpressions.amused;
 
-    portrait = pipExpressions.thoughtful;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "Probably ask far too many questions"
+                )
+            ) {
 
-else if (currentLine.includes("help uncover a few stories of our own")) {
+                portrait =
+                    pipExpressions.cheeky;
 
-    portrait = pipExpressions.happy;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "borrow one of my lucky dice"
+                )
+            ) {
 
-else if (currentLine.includes("There are an awful lot of stories waiting out there")) {
+                portrait =
+                    pipExpressions.cheeky;
 
-    portrait = pipExpressions.thoughtful;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "The Storyteller"
+                )
+            ) {
 
-else if (currentLine.includes("I suppose we'd better go and find one")) {
+                portrait =
+                    pipExpressions.thoughtful;
 
-    portrait = pipExpressions.happy;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "help uncover a few stories of our own"
+                )
+            ) {
 
-else if (currentLine.includes("Shall we?")) {
+                portrait =
+                    pipExpressions.happy;
 
-    portrait = pipExpressions.happy;
+            }
 
-}
+            else if (
+                currentLine.includes(
+                    "There are an awful lot of stories waiting out there"
+                )
+            ) {
 
-    // Update Pip's portrait
-    if (dialogueIndex > 0) {
+                portrait =
+                    pipExpressions.thoughtful;
+
+            }
+
+            else if (
+                currentLine.includes(
+                    "I suppose we'd better go and find one"
+                )
+            ) {
+
+                portrait =
+                    pipExpressions.happy;
+
+            }
+
+            else if (
+                currentLine.includes(
+                    "Shall we?"
+                )
+            ) {
+
+                portrait =
+                    pipExpressions.happy;
+
+            }
+
+
+            // Smooth expression transition
+
+            if (pipPortrait.src.endsWith(portrait)) {
+
+                pipPortrait.style.opacity =
+                    "1";
+
+            } else {
+
+                pipPortrait.style.opacity =
+                    "0";
+
+                setTimeout(() => {
+
+                    pipPortrait.src =
+                        portrait;
+
+                    pipPortrait.style.opacity =
+                        "1";
+
+                }, 100);
+
+            }
+
+        }
+
+    }
+
+
+    // =========================
+    // STORYTELLER
+    // =========================
+
+    if (currentCharacter === "storyteller") {
     
-    if (pipPortrait.src.endsWith(portrait)) {
+    const storytellerPortrait =
+        document.getElementById("storytellerPortrait");
+    
+    storytellerPortrait.style.display =
+        "block";
+    
+    let storytellerImage =
+        "images/storyteller-forward.png";
+    
+    const currentLine =
+        dialogue[dialogueIndex];
+    
+    
+    if (
+        currentLine.includes(
+            "That was a most generous introduction"
+        )
+    ) {
         
-        pipPortrait.style.opacity = "1";
+        storytellerImage =
+            "images/storyteller-slight-turn.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "People call me the Storyteller"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-left.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "I suppose that is as good a name as any"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-right.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "What you hear"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-slight-turn.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "The places you visit"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-left.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "But what you do"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-dark-left.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "That is yours to decide"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-right.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "Pip will walk beside you"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-forward.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "I will tell the tale"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-slight-turn.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "And you"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-dark-forward.png";
+        
+    }
+    
+    else if (
+        currentLine.includes(
+            "...will live it"
+        )
+    ) {
+        
+        storytellerImage =
+            "images/storyteller-dark-forward.png";
+        
+    }
+    
+    
+    // Smooth portrait transition
+    
+    if (
+        storytellerPortrait.src.endsWith(
+            storytellerImage
+        )
+    ) {
+        
+        storytellerPortrait.style.opacity =
+            "1";
         
     } else {
         
-        pipPortrait.style.opacity = "0";
+        storytellerPortrait.style.opacity =
+            "0";
         
         setTimeout(() => {
             
-            pipPortrait.src = portrait;
-            pipPortrait.style.opacity = "1";
+            storytellerPortrait.src =
+                storytellerImage;
+            
+            storytellerPortrait.style.opacity =
+                "1";
             
         }, 100);
         
@@ -192,35 +526,43 @@ else if (currentLine.includes("Shall we?")) {
     
 }
 
-const newPortrait = portrait;
+    // =========================
+    // FINAL BUTTON
+    // =========================
 
-if (pipPortrait.src.endsWith(newPortrait)) {
-    
-    // Same expression, so don't animate
-    pipPortrait.style.opacity = "1";
-    
-} else {
-    
-    // Expression is changing
-    pipPortrait.style.opacity = "0";
-    
-    setTimeout(() => {
-        
-        pipPortrait.src = newPortrait;
-        pipPortrait.style.opacity = "1";
-        
-    }, 100);
-    
-}
+    if (
+        dialogueIndex ===
+        dialogue.length - 1
+    ) {
+
+        if (currentCharacter === "pip") {
+
+            document.getElementById(
+                "continueButton"
+            ).innerHTML =
+                "Meet the Storyteller";
+
+            document.getElementById(
+                "continueButton"
+            ).onclick =
+                meetStoryteller;
+
+        }
 
 
-    if (dialogueIndex === dialogue.length - 1) {
+        if (currentCharacter === "storyteller") {
 
-        document.getElementById("continueButton").innerHTML =
-            "📖 Begin Our Adventure";
+            document.getElementById(
+                "continueButton"
+            ).innerHTML =
+                "📖 Begin Our Adventure";
 
-        document.getElementById("continueButton").onclick =
-            beginAdventure;
+            document.getElementById(
+                "continueButton"
+            ).onclick =
+                beginAdventure;
+
+        }
 
     }
 
@@ -230,20 +572,56 @@ function nextDialogue() {
 
     dialogueIndex++;
 
+
     if (
-        dialogueName &&
-        dialogueIndex === revealNameAt
+    dialogueName &&
+    dialogueIndex === revealNameAt
+) {
+
+    document.getElementById("pipName").style.display =
+        "block";
+
+}
+
+
+    if (
+    dialogueIndex <
+    dialogue.length
+) {
+
+    showDialogue();
+
+
+    // Give the Storyteller's final line
+    // a little room to breathe
+
+    if (
+        currentCharacter === "storyteller" &&
+        dialogueIndex === dialogue.length - 1
     ) {
 
-        document.getElementById("pipName").style.display =
-            "block";
+        const continueButton =
+            document.getElementById("continueButton");
+
+        continueButton.style.display =
+            "none";
+
+
+        setTimeout(() => {
+
+            continueButton.innerHTML =
+                "📖 Begin Our Adventure";
+
+            continueButton.onclick =
+                beginAdventure;
+
+            continueButton.style.display =
+                "block";
+
+        }, 900);
 
     }
 
-    if (dialogueIndex < dialogue.length) {
-
-        showDialogue();
-
-    }
+}
 
 }
