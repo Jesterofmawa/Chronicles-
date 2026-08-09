@@ -64,64 +64,125 @@ style="display:none;">
 </div>
 
 
-<div id="game" style="display:none;">
+    <div id="game" style="display:none;">
 
     <h1>Chronicles</h1>
 
-    <input
-        type="text"
-        id="memoryInput"
-        placeholder="Teach Pip something...">
 
-    <button onclick="teachPip()">
-        Talk with Pip
-    </button>
-
-    <button onclick="testRoll('2d6')">
-        Roll Test
-    </button>
-
-    <button onclick="showChoices([
-'Attack',
-'Talk',
-'Search',
-'Run'
-])">
-        Test Choices
-    </button>
-
-    <button onclick="startStory()">
-        Start Story
-    </button>
+    <!-- ========================= -->
+    <!-- STORY -->
+    <!-- ========================= -->
 
     <div id="story"></div>
 
+
+    <!-- ========================= -->
+    <!-- PIP -->
+    <!-- ========================= -->
+
     <div id="pip"></div>
 
+
+    <!-- ========================= -->
+    <!-- PIP CHAT -->
+    <!-- ========================= -->
+
+    <div id="pipChat" style="display:none;">
+
+        <input
+            type="text"
+            id="pipChatInput"
+            placeholder="Talk to Pip...">
+
+        <button onclick="sendPipMessage()">
+            Send
+        </button>
+
+        <button onclick="closePipChat()">
+            Close
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PLAYER CHOICES -->
+    <!-- ========================= -->
+
     <div id="choices"></div>
+
+
+    <!-- ========================= -->
+    <!-- DEVELOPER / TEST TOOLS -->
+    <!-- ========================= -->
+
+    <div id="developerTools">
+
+        <input
+            type="text"
+            id="memoryInput"
+            placeholder="Teach Pip something...">
+
+        <button onclick="teachPip()">
+            Talk with Pip
+        </button>
+
+        <button onclick="testRoll('2d6')">
+            Roll Test
+        </button>
+
+        <button onclick="showChoices([
+            'Attack',
+            'Talk',
+            'Search',
+            'Run'
+        ])">
+            Test Choices
+        </button>
+
+        <button onclick="startStory()">
+            Start Story
+        </button>
+
+    </div>
 
 </div>
 
 
 <script src="js/memory.js"></script>
+
 <script src="js/social.js"></script>
+
 <script src="js/knowledge.js"></script>
+
 <script src="js/chronicle.js"></script>
+
 <script src="js/library.js"></script>
+
 <script src="js/pip.js"></script>
+
 <script src="js/pip/comments/observations.js"></script>
+
 <script src="js/pip/comments/townGreyhaven.js"></script>
+
 <script src="js/pipComments.js"></script>
 
 <script src="js/scenes/greyhaven/arrival.js"></script>
 
 <script src="js/script.js"></script>
+
 <script src="js/rollmessages.js"></script>
+
 <script src="js/dice.js"></script>
+
 <script src="js/choices.js"></script>
+
 <script src="js/story.js"></script>
+
 <script src="js/dialogue.js"></script>
+
 <script src="js/pipIntro.js"></script>
+
 <script src="js/title.js"></script>
 
 </body>

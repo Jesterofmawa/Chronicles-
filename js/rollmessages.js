@@ -73,25 +73,3 @@ function randomRollMessage() {
     ];
 
 }
-
-function pipRoll(expression) {
-
-    let message = randomRollMessage();
-
-    let result = rollDice(expression);
-
-    let output = message;
-
-    output += "<br><br>🎲 Pip rolls " + expression + "...<br><br>";
-
-    for (let i = 0; i < result.rolls.length; i++) {
-
-        output += "🎲 Roll " + (i + 1) + ": " + result.rolls[i] + "<br>";
-
-    }
-
-    output += "<br>✨ Total: <b>" + result.total + "</b>";
-
-    return output;
-
-}

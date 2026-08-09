@@ -52,10 +52,41 @@ function choose(choice) {
 
     if (choice === "🐿️ Ask Pip about the ruins") {
 
-        askPipAboutRuins();
+    openPipChat();
+
+    return;
+
+}
+
+    if (choice === "🔎 Investigate the Damage") {
+
+        investigateOldHarbourDamage();
 
         return;
 
     }
 
+    if (choice === "🌊 Search the Shoreline") {
+
+        searchOldHarbourShoreline();
+
+        return;
+
+    }
+
+    if (choice === "🐿️ Ask Pip") {
+
+    openPipChat();
+
+    return;
+
+}
+
+    if (choice === "↩️ Leave the Old Harbour") {
+
+        lookAroundGreyhaven();
+
+        return;
+
+    }
 }

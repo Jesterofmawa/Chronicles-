@@ -40,6 +40,37 @@ function rollD20() {
 let attack = rollD20();
 
 
+function createPipRoll(expression, modifier = 0) {
+
+    let result = rollDice(expression, modifier);
+
+    let html = `
+<div class="pip-roll">
+
+${randomRollMessage()}
+
+<p>🎲 <strong>The dice tumble across the table...</strong></p>
+
+<p><strong>Roll:</strong> ${expression}</p>
+
+<p>🎲 Rolls: <strong>${result.rolls.join(", ")}</strong></p>
+
+${modifier !== 0 ? `
+<p>➕ Modifier: <strong>${modifier > 0 ? "+" : ""}${modifier}</strong></p>
+` : ""}
+
+<p>✨ <strong>Total: ${result.total}</strong></p>
+
+</div>
+`;
+
+    return {
+        result: result,
+        html: html
+    };
+
+}
+
 function pipRoll(sides, modifier = 0) {
 
     let result = rollDice(sides, modifier);

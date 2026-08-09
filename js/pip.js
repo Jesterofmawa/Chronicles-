@@ -129,7 +129,7 @@ function handleQuestion(message) {
 
 function showChronicle() {
     
-    let latestEntry = recall("entry");
+    let latestEntry = recall("greyhaven_old_harbour_damage");
     
     return "📖 Pip carefully opens the Chronicle." +
         
@@ -258,5 +258,43 @@ if (chronicle !== null) {
     let library = await askLibrary(message);
 
 return library.answer;
+
+}
+
+function openPipChat() {
+    
+    document.getElementById("pipChat").style.display = "block";
+    
+    document.getElementById("pipChatInput").focus();
+    
+}
+
+function closePipChat() {
+
+    document.getElementById("pipChat").style.display = "none";
+
+}
+
+async function sendPipMessage() {
+
+    const input =
+        document.getElementById("pipChatInput");
+
+    const message =
+        input.value.trim();
+
+    if (!message) {
+
+        return;
+
+    }
+
+    const reply =
+        await think(message);
+
+    document.getElementById("pip").innerHTML =
+        `<div class="pip-roll">${reply}</div>`;
+
+    input.value = "";
 
 }
