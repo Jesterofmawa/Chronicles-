@@ -42,4 +42,20 @@ function choose(choice) {
 
     }
 
+    if (choice === "⚓ Examine the Old Harbour") {
+
+        examineOldHarbour();
+
+        return;
+
+    }
+
+    if (choice === "🐿️ Ask Pip about the ruins") {
+
+        askPipAboutRuins();
+
+        return;
+
+    }
+
 }
