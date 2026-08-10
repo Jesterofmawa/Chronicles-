@@ -68,11 +68,51 @@ function choose(choice) {
 
     if (choice === "🌊 Search the Shoreline") {
 
-        searchOldHarbourShoreline();
+       searchShoreline();
 
         return;
 
     }
+
+if (choice === "🔎 Examine the Material") {
+
+    examineShorelineMaterial();
+
+    return;
+
+}
+
+if (choice === "🗡️ Dig Out the Object") {
+
+    digOutShorelineObject();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave It") {
+
+    examineOldHarbour(true);
+
+    return;
+
+}
+
+if (choice === "🔍 Search Between the Rocks") {
+
+    searchBetweenRocks();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Shoreline") {
+
+    examineOldHarbour(true);
+
+    return;
+
+}
 
     if (choice === "🐿️ Ask Pip") {
 
@@ -84,9 +124,12 @@ function choose(choice) {
 
     if (choice === "↩️ Leave the Old Harbour") {
 
-        lookAroundGreyhaven();
+    resumePipObservations();
 
-        return;
+    lookAroundGreyhaven();
 
-    }
+    return;
+
+}
+
 }

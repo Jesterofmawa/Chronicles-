@@ -2,6 +2,8 @@ let pipObservationTimer = null;
 
 let pipObservationActive = false;
 
+let pipObservationPaused = false;
+
 let pipCurrentLocation = "arrival";
 
 // Random delay between 10 and 30 seconds
@@ -51,12 +53,48 @@ function stopPipObservations() {
 
 }
 
+// Pause Pip's ambient observations
+
+function pausePipObservations() {
+
+    pipObservationPaused = true;
+
+    if (pipObservationTimer !== null) {
+
+        clearTimeout(
+            pipObservationTimer
+        );
+
+        pipObservationTimer = null;
+
+    }
+
+    const pip = document.getElementById("pip");
+
+    if (pip) {
+
+        pip.innerHTML = "";
+
+    }
+
+}
+
+
+// Resume Pip's ambient observations
+
+function resumePipObservations() {
+
+    pipObservationPaused = false;
+
+    scheduleNextPipObservation();
+
+}
 
 // Schedule the next observation
 
 function scheduleNextPipObservation() {
 
-    if (!pipObservationActive) {
+    if (!pipObservationActive || pipObservationPaused) {
 
         return;
 
@@ -75,7 +113,7 @@ function scheduleNextPipObservation() {
 
 function triggerPipObservation() {
 
-    if (!pipObservationActive) {
+    if (!pipObservationActive || pipObservationPaused) {
 
         return;
 

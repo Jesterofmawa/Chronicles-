@@ -2,6 +2,8 @@ let old_harbour_damage_examined = false;
 
 let oldHarbourDiscovery = "";
 
+let old_iron_dagger_acquired = false;
+
 function startGreyhaven() {
   
   document.getElementById("story").innerHTML = `
@@ -112,10 +114,59 @@ function lookAroundGreyhaven() {
 
 }
 
-function examineOldHarbour() {
+function examineOldHarbour(returning = false) {
+    
+        let harbourDescription;
 
-    document.getElementById("story").innerHTML = `
-        <div class="story-panel">
+    if (returning) {
+
+        harbourDescription = `
+
+            <p>
+                You make your way back towards the old harbour.
+            </p>
+
+            <p>
+                The tide has shifted while you were away.
+            </p>
+
+            <p>
+                More of the old stonework now lies exposed beneath the receding water.
+            </p>
+
+            <p>
+                The broken timbers cast long shadows across the shallows.
+            </p>
+
+            <p>
+                From here, the shoreline looks strangely quiet.
+            </p>
+
+            <p>
+                Whatever drew your attention among the rocks is hidden from view now.
+            </p>
+
+            <p>
+                The ruined harbour waits ahead.
+            </p>
+
+            <p>
+                Silent.
+            </p>
+
+            <p>
+                Patient.
+            </p>
+
+            <p>
+                There is still more to find here, if you choose to look.
+            </p>
+
+        `;
+
+    } else {
+
+        harbourDescription = `
 
             <p>
                 You make your way closer to the ruined harbour.
@@ -165,6 +216,15 @@ function examineOldHarbour() {
                 There is more to find here, if you care to look.
             </p>
 
+        `;
+
+    }
+
+        document.getElementById("story").innerHTML = `
+        <div class="story-panel">
+
+            ${harbourDescription}
+
         </div>
     `;
 
@@ -201,6 +261,8 @@ function enterGreyhaven() {
 
 function investigateOldHarbourDamage() {
 
+    pausePipObservations();
+
     const diceRoll = createPipRoll("1d20");
 const roll = diceRoll.result.total;
 
@@ -212,67 +274,59 @@ let discoveryMemory = "";
 
     if (roll === 20) {
 
-discoveryMemory =
-    "The damage is more complex than it first appears. Four deep parallel scratches are accompanied by a second set of shallower marks. The shallower marks stop abruptly at the edge of the stone, suggesting whatever caused the damage passed across the harbour rather than simply striking it. Whatever made the marks was considerably larger than a person.";
+    outcome = `
 
-        outcome = `
+        <p>
+            The tide has left more than driftwood behind.
+        </p>
 
-            <p>
-                You examine the stonework carefully, tracing the damage
-                with your eyes rather than your hands.
-            </p>
+        <p>
+            Marks begin at the waterline.
+        </p>
 
-            <p>
-                There are marks in the stone.
-            </p>
+        <p>
+            Something has dragged itself ashore.
+        </p>
 
-            <p>
-                Deep grooves.
-                <br>
-                Too wide to have been made by a tool.
-            </p>
+        <p>
+            The trail leads away from the water and toward the rocks.
+        </p>
 
-            <p>
-                Four parallel scratches.
-                <br>
-                Then another four beneath them.
-            </p>
+        <p>
+            It disappears between two large stones.
+        </p>
 
-            <p>
-                Whatever made them was considerably larger than a person.
-            </p>
+        <p>
+            You move closer.
+        </p>
 
-            <p>
-                But there is something else.
-            </p>
+        <p>
+            Something is wedged in the gap.
+        </p>
 
-            <p>
-                Almost hidden beneath the deeper grooves are several
-                much shallower marks.
-            </p>
+        <p>
+            At first, it looks like another piece of debris.
+        </p>
 
-            <p>
-                They follow the same direction, but they don't quite
-                match the larger scratches.
-            </p>
+        <p>
+            Then you notice something beneath it.
+        </p>
 
-            <p>
-                At first they look like damage caused by debris.
-            </p>
+        <p>
+            A piece of strange, leathery material.
+        </p>
 
-            <p>
-                Then you notice that they stop abruptly at the edge
-                of the stone.
-            </p>
+        <p>
+            And beneath the wet sand beside it, something catches the light.
+        </p>
 
-            <p>
-                Whatever made them did not simply strike the harbour.
-                It passed across it.
-            </p>
+        <p>
+            Whatever came ashore did not leave everything behind.
+        </p>
 
-        `;
+    `;
 
-    }
+}
 
     else if (roll >= 15) {
 
@@ -400,6 +454,388 @@ rememberLongTerm(
     showChoices([
         "🐿️ Ask Pip",
         "↩️ Leave the Old Harbour"
+    ]);
+
+}
+
+function searchShoreline() {
+
+    pausePipObservations();
+
+    document.getElementById("story").innerHTML = `
+
+            <p>
+                You leave the old stonework behind and follow the shoreline away from the ruined harbour.
+            </p>
+
+            <p>
+                The beach narrows here, squeezed between the water and a line of dark rocks.
+            </p>
+
+            <p>
+                The tide has left a scattered trail of driftwood, seaweed and broken fragments of timber across the wet sand.
+            </p>
+
+            <p>
+                Pools of seawater glimmer between the rocks.
+            </p>
+
+            <p>
+                A few gulls pick through the debris, fighting over something you cannot quite make out from here.
+            </p>
+
+            <p>
+                There are plenty of places for something small to have been washed ashore.
+            </p>
+
+            <p>
+                Or for something larger to have come looking.
+            </p>
+
+            <p>
+                Nothing immediately catches your attention.
+            </p>
+
+            <p>
+                If there's anything worth finding here, you'll need to look carefully.
+            </p>
+
+        </div>
+    `;
+
+
+    // Pip rolls the perception check
+
+    const diceRoll = createPipRoll("1d20");
+
+    const roll = diceRoll.result.total;
+
+
+    // Determine what the player discovers
+
+    let outcome = "";
+
+
+    if (roll === 20) {
+
+        outcome = `
+
+            <p>
+                The tide has left more than driftwood behind.
+            </p>
+
+            <p>
+                Marks begin at the waterline.
+            </p>
+
+            <p>
+                Something has dragged itself ashore.
+            </p>
+
+            <p>
+                The trail leads away from the water and toward the rocks.
+            </p>
+
+            <p>
+                It disappears between two large stones.
+            </p>
+
+            <p>
+                Something appears to be wedged in the gap.
+            </p>
+
+        `;
+
+    }
+
+    else if (roll >= 15) {
+
+        outcome = `
+
+            <p>
+                Something catches your attention beneath the sand.
+            </p>
+
+            <p>
+                A piece of strange, leathery material lies among the debris.
+            </p>
+
+            <p>
+                Nearby, something glints beneath the wet sand.
+            </p>
+
+        `;
+
+    }
+
+    else if (roll >= 8) {
+
+        outcome = `
+
+            <p>
+                Beneath the wet sand, you find a length of old rope.
+            </p>
+
+            <p>
+                It is badly damaged, but the damage does not appear to be entirely natural.
+            </p>
+
+        `;
+
+    }
+
+    else {
+
+        outcome = `
+
+            <p>
+                You search the shoreline carefully.
+            </p>
+
+            <p>
+                Driftwood, rope and broken timber litter the beach.
+            </p>
+
+            <p>
+                Nothing appears significant.
+            </p>
+
+        `;
+
+    }
+
+
+    // Show Pip's dice roll and the discovery together
+
+        document.getElementById("story").innerHTML += `
+
+    ${diceRoll.html}
+
+    <div class="story-panel">
+
+        ${outcome}
+
+    </div>
+
+`;
+
+    if (roll === 20) {
+
+    document.getElementById("choices").innerHTML = "";
+
+    showChoices([
+        "🔍 Search Between the Rocks"
+    ]);
+
+}
+
+else if (roll >= 15 && roll <= 19) {
+
+    document.getElementById("choices").innerHTML = "";
+
+    showChoices([
+        "🔎 Examine the Material",
+        "🗡️ Dig Out the Object",
+        "↩️ Leave It"
+    ]);
+
+}
+
+}
+
+function examineShorelineMaterial() {
+
+    const discoveryMemory =
+        "A strange leathery fragment was found on the Greyhaven shoreline. It is thin but unusually tough, covered in fine ridges, darker and damp underneath, and appears to have been torn from a living creature.";
+
+    rememberLongTerm(
+        "greyhaven_strange_material",
+        discoveryMemory
+    );
+
+    const outcome = `
+
+        <p>
+            You crouch beside the debris and carefully lift the strange material.
+        </p>
+
+        <p>
+            It's thin, but surprisingly tough.
+        </p>
+
+        <p>
+            It isn't leather, though it resembles it.
+        </p>
+
+        <p>
+            The surface is covered in tiny ridges, running in almost perfect lines.
+        </p>
+
+        <p>
+            You turn it over.
+        </p>
+
+        <p>
+            The underside is darker.
+        </p>
+
+        <p>
+            Damp.
+        </p>
+
+        <p>
+            Almost warm.
+        </p>
+
+        <p>
+            One edge has been torn rather than cut.
+        </p>
+
+        <p>
+            Whatever this came from was alive.
+        </p>
+
+        <p>
+            And whatever tore it away was not gentle.
+        </p>
+
+    `;
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            ${outcome}
+
+        </div>
+
+    `;
+
+    showPipComment(
+        "That's definitely not something I've seen before."
+    );
+
+    showChoices([
+        "🗡️ Dig Out the Object",
+        "↩️ Leave It"
+    ]);
+
+}
+
+function digOutShorelineObject() {
+
+    old_iron_dagger_acquired = true;
+
+    rememberLongTerm(
+        "greyhaven_old_iron_dagger",
+        "The player uncovered an old iron dagger beneath the wet sand on the Greyhaven shoreline. The blade is heavily weathered but surprisingly intact, and the handle is wrapped in faded black leather."
+    );
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You kneel beside the glint and carefully dig through the wet sand.
+            </p>
+
+            <p>
+                Your fingers close around something cold.
+            </p>
+
+            <p>
+                You pull it free.
+            </p>
+
+            <p>
+                An old iron dagger.
+            </p>
+
+            <p>
+                The blade is heavily weathered, but surprisingly intact.
+            </p>
+
+            <p>
+                The handle is wrapped in faded black leather.
+            </p>
+
+            <p>
+                It isn't particularly impressive.
+            </p>
+
+            <p>
+                But it is usable.
+            </p>
+
+            <p>
+                <strong>ITEM ACQUIRED: OLD IRON DAGGER</strong>
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Leave It"
+    ]);
+
+}
+
+function searchBetweenRocks() {
+
+    let old_harbour_key_acquired = true;
+
+    rememberLongTerm(
+        "greyhaven_old_harbour_key",
+        "The player found a small iron key between the rocks on the Greyhaven shoreline. It is badly corroded but still intact. A tiny brass tag attached to it bears the number 7."
+    );
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You squeeze carefully between the two rocks and reach into the gap.
+            </p>
+
+            <p>
+                Your fingers find something cold beneath the damp sand.
+            </p>
+
+            <p>
+                You pull it free.
+            </p>
+
+            <p>
+                A small iron key.
+            </p>
+
+            <p>
+                It is badly corroded, but still intact.
+            </p>
+
+            <p>
+                A tiny brass tag hangs from it.
+            </p>
+
+            <p>
+                One number is stamped into the metal.
+            </p>
+
+            <p>
+                <strong>7</strong>
+            </p>
+
+            <p>
+                <strong>ITEM ACQUIRED: OLD HARBOUR KEY</strong>
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Leave the Shoreline"
     ]);
 
 }
