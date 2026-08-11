@@ -104,3 +104,22 @@ function meetStoryteller() {
     });
 
 }
+
+function showFutureFeature(featureName) {
+
+    document.getElementById("mainMenu").style.display = "none";
+
+    document.getElementById("futureFeatureScreen").style.display = "flex";
+
+    document.getElementById("futureFeatureTitle").textContent = featureName;
+
+}
+
+
+function returnToMenu() {
+
+    document.getElementById("futureFeatureScreen").style.display = "none";
+
+    document.getElementById("mainMenu").style.display = "flex";
+
+}

@@ -492,6 +492,41 @@ padding-top: 100px;
 
 }
 
+#futureFeatureScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    z-index: 2;
+
+}
+
+#futureFeatureScreen .menu-panel p {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    color: #4b3925;
+
+    margin: 20px 0 25px 0;
+
+}
+
 /* ========================= */
 /* STORY OPENING */
 /* ========================= */
