@@ -19,7 +19,7 @@ body {
     padding: 12px;
     border: 2px solid #d8c89a;
     border-radius: 10px;
-    background: #f8f4e8;
+    background: rgba(248, 244, 232, 0.72);
 }
 
 .pip-roll {
@@ -75,7 +75,7 @@ body {
     margin-top: 20px;
     padding: 16px;
 
-    background: #ece6d8;
+    background: rgba(248, 244, 232, 0.72);
 
     border: 2px solid #8d7b58;
 
@@ -237,7 +237,7 @@ padding-top: 100px;
 
     border-radius: 10px;
 
-    background: #f8f4e8;
+    background: rgba(248, 244, 232, 0.72);
 
     color: #4b3925;
 
