@@ -582,5 +582,71 @@ animation: storyOpeningFadeIn 1.5s ease forwards;
 
 }
 
+/* ========================= */
+/* PIP / STORYTELLER INTRO */
+/* ========================= */
+
+#pipIntro {
+
+    position: fixed;
+
+    inset: 0;
+
+    min-height: 100vh;
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    padding: 20px;
+
+}
+
+#pipIntro::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image: url("../images/great-library.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    opacity: 0;
+
+    animation: libraryFadeIn 1.25s ease forwards;
+
+    z-index: 0;
+
+}
+
+.pip-waiting > * {
+    visibility: hidden;
+}
+
+#pipIntro > * {
+
+    position: relative;
+
+    z-index: 1;
+
+}
 
 
+@keyframes libraryFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}

@@ -68,20 +68,30 @@ function startNewGame() {
     }, 6500);
 
 
-    // Once the sentence has faded away, move into Pip
+// Once the sentence has faded away, begin the transition to the library
+setTimeout(() => {
+
+    opening.style.display = "none";
+
+    pip.style.display = "block";
+
+    // Keep Pip's content hidden while the library appears
+    pip.classList.add("pip-waiting");
+
+    startDialogue(pipIntro, {
+        name: "Pip",
+        revealNameAt: 7,
+        character: "pip"
+    });
+
+    // Reveal Pip once the library transition is complete
     setTimeout(() => {
 
-        opening.style.display = "none";
+        pip.classList.remove("pip-waiting");
 
-        pip.style.display = "block";
+    }, 1250);
 
-        startDialogue(pipIntro, {
-            name: "Pip",
-            revealNameAt: 7,
-            character: "pip"
-        });
-
-    }, 7500);
+}, 7500);
 
 }
 
