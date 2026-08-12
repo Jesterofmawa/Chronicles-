@@ -467,70 +467,190 @@ function searchShoreline() {
 
     pausePipObservations();
 
+    const diceRoll = createPipRoll("1d20");
+    const roll = diceRoll.result.total;
+
+    // The leathery material is now guaranteed.
+    // The roll determines what else is discovered.
+    window.shorelineObjectVisible = roll >= 15;
+
     document.getElementById("story").innerHTML = `
 
-            <p>
-                You leave the old stonework behind and follow the shoreline away from the ruined harbour.
-            </p>
+        <p>
+            You leave the old stonework behind and follow the shoreline away from the ruined harbour.
+        </p>
 
-            <p>
-                The beach narrows here, squeezed between the water and a line of dark rocks.
-            </p>
+        <p>
+            The beach narrows here, squeezed between the water and a line of dark rocks.
+        </p>
 
-            <p>
-                The tide has left a scattered trail of driftwood, seaweed and broken fragments of timber across the wet sand.
-            </p>
+        <p>
+            The tide has left a scattered trail of driftwood, seaweed and broken fragments of timber across the wet sand.
+        </p>
 
-            <p>
-                Pools of seawater glimmer between the rocks.
-            </p>
+        <p>
+            Pools of seawater glimmer between the rocks.
+        </p>
 
-            <p>
-                A few gulls pick through the debris, fighting over something you cannot quite make out from here.
-            </p>
+        <p>
+            A few gulls pick through the debris, fighting over something you cannot quite make out from here.
+        </p>
 
-            <p>
-                There are plenty of places for something small to have been washed ashore.
-            </p>
+        <p>
+            There are plenty of places for something small to have been washed ashore.
+        </p>
 
-            <p>
-                Or for something larger to have come looking.
-            </p>
+        <p>
+            Or for something larger to have come looking.
+        </p>
 
-            <p>
-                Nothing immediately catches your attention.
-            </p>
+        <p>
+            Nothing immediately catches your attention.
+        </p>
 
-            <p>
-                If there's anything worth finding here, you'll need to look carefully.
-            </p>
+        <p>
+            If there's anything worth finding here, you'll need to look carefully.
+        </p>
 
-        </div>
     `;
 
 
-    // Pip rolls the perception check
-
-    const diceRoll = createPipRoll("1d20");
-
-    const roll = diceRoll.result.total;
-
-
-    // Determine what the player discovers
-
     let outcome = "";
-let discoveryMemory = "";
 
 
-    if (roll === 20) {
+    // =====================================
+    // NATURAL MATERIAL — ALWAYS FOUND
+    // =====================================
 
-discoveryMemory =
-    "The player discovered a trail beginning at the waterline where something had dragged itself ashore. The trail led away from the water and disappeared between two large rocks.";
+    if (roll < 8) {
 
         outcome = `
 
             <p>
-                The tide has left more than driftwood behind.
+                Something unusual catches your attention among the debris.
+            </p>
+
+            <p>
+                A fragment of dark, leathery material is tangled around a piece of driftwood.
+            </p>
+
+            <p>
+                It doesn't appear to be fish skin.
+            </p>
+
+            <p>
+                You aren't sure what it is.
+            </p>
+
+        `;
+
+    }
+
+
+    // =====================================
+    // MODERATE RESULT
+    // =====================================
+
+    else if (roll < 15) {
+
+        outcome = `
+
+            <p>
+                Something unusual catches your attention among the debris.
+            </p>
+
+            <p>
+                A fragment of dark, leathery material is tangled around a piece of driftwood.
+            </p>
+
+            <p>
+                It doesn't appear to be fish skin.
+            </p>
+
+            <p>
+                You aren't sure what it is.
+            </p>
+
+            <p>
+                Nearby, you notice a length of old rope beneath the wet sand.
+            </p>
+
+            <p>
+                It is badly damaged.
+            </p>
+
+            <p>
+                Several strands have been pulled apart as though something caught hold of it with considerable force.
+            </p>
+
+        `;
+
+    }
+
+
+    // =====================================
+    // HIGH RESULT
+    // =====================================
+
+    else if (roll < 20) {
+
+        outcome = `
+
+            <p>
+                Something unusual catches your attention among the debris.
+            </p>
+
+            <p>
+                A fragment of dark, leathery material is tangled around a piece of driftwood.
+            </p>
+
+            <p>
+                It doesn't appear to be fish skin.
+            </p>
+
+            <p>
+                You aren't sure what it is.
+            </p>
+
+            <p>
+                Then something catches the light beneath the wet sand nearby.
+            </p>
+
+            <p>
+                A small metallic glint.
+            </p>
+
+        `;
+
+    }
+
+
+    // =====================================
+    // EXCEPTIONAL RESULT
+    // =====================================
+
+    else {
+
+        outcome = `
+
+            <p>
+                Something unusual catches your attention among the debris.
+            </p>
+
+            <p>
+                A fragment of dark, leathery material is tangled around a piece of driftwood.
+            </p>
+
+            <p>
+                It doesn't appear to be fish skin.
+            </p>
+
+            <p>
+                You aren't sure what it is.
+            </p>
+
+            <p>
+                Further along the shoreline, something else catches your attention.
             </p>
 
             <p>
@@ -542,7 +662,7 @@ discoveryMemory =
             </p>
 
             <p>
-                The trail leads away from the water and toward the rocks.
+                The trail leads away from the water and towards the rocks.
             </p>
 
             <p>
@@ -557,117 +677,62 @@ discoveryMemory =
 
     }
 
-    else if (roll >= 15) {
 
-discoveryMemory =
-    "The player discovered a strange leathery fragment among the debris on the Greyhaven shoreline and noticed something glinting beneath the wet sand nearby.";
+    // =====================================
+    // SHOW RESULT
+    // =====================================
 
-        outcome = `
+    document.getElementById("story").innerHTML += `
 
-            <p>
-                Something catches your attention beneath the sand.
-            </p>
+        ${diceRoll.html}
 
-            <p>
-                A piece of strange, leathery material lies among the debris.
-            </p>
+        <div class="story-panel">
 
-            <p>
-                Nearby, something glints beneath the wet sand.
-            </p>
+            ${outcome}
 
-        `;
+        </div>
+
+    `;
+
+
+    // =====================================
+    // FOLLOW-UP CHOICES
+    // =====================================
+
+    if (roll === 20) {
+
+        document.getElementById("choices").innerHTML = "";
+
+        showChoices([
+            "🔎 Examine the Material",
+            "🔍 Search Between the Rocks",
+            "↩️ Leave It"
+        ]);
 
     }
 
-    else if (roll >= 8) {
+    else if (roll >= 15) {
 
-discoveryMemory =
-    "The player found a badly damaged length of old rope beneath the wet sand on the Greyhaven shoreline. The damage did not appear to be entirely natural.";
+        document.getElementById("choices").innerHTML = "";
 
-        outcome = `
-
-            <p>
-                Beneath the wet sand, you find a length of old rope.
-            </p>
-
-            <p>
-                It is badly damaged, but the damage does not appear to be entirely natural.
-            </p>
-
-        `;
+        showChoices([
+            "🔎 Examine the Material",
+            "🗡️ Dig Out the Object",
+            "↩️ Leave It"
+        ]);
 
     }
 
     else {
 
-        outcome = `
+        document.getElementById("choices").innerHTML = "";
 
-            <p>
-                You search the shoreline carefully.
-            </p>
-
-            <p>
-                Driftwood, rope and broken timber litter the beach.
-            </p>
-
-            <p>
-                Nothing appears significant.
-            </p>
-
-        `;
+        showChoices([
+            "🔎 Examine the Material",
+            "↩️ Leave It"
+        ]);
 
     }
-
-    if (discoveryMemory) {
-
-        rememberLongTerm(
-            "greyhaven_shoreline_search_" + roll,
-            discoveryMemory,
-            {
-                topic: "shoreline",
-                type: "discovery",
-                importance: 3
-            }
-        );
-
-    }
-
-    // Show Pip's dice roll and the discovery together
-
-        document.getElementById("story").innerHTML += `
-
-    ${diceRoll.html}
-
-    <div class="story-panel">
-
-        ${outcome}
-
-    </div>
-
-`;
-
-    if (roll === 20) {
-
-    document.getElementById("choices").innerHTML = "";
-
-    showChoices([
-        "🔍 Search Between the Rocks"
-    ]);
-
-}
-
-else if (roll >= 15 && roll <= 19) {
-
-    document.getElementById("choices").innerHTML = "";
-
-    showChoices([
-        "🔎 Examine the Material",
-        "🗡️ Dig Out the Object",
-        "↩️ Leave It"
-    ]);
-
-}
 
 }
 
@@ -748,10 +813,20 @@ function examineShorelineMaterial() {
         "That's definitely not something I've seen before."
     );
 
+    if (window.shorelineObjectVisible) {
+
     showChoices([
         "🗡️ Dig Out the Object",
         "↩️ Leave It"
     ]);
+
+} else {
+
+    showChoices([
+        "↩️ Leave It"
+    ]);
+
+}
 
 }
 
@@ -763,10 +838,11 @@ function digOutShorelineObject() {
     "greyhaven_old_iron_dagger",
     "The player uncovered an old iron dagger beneath the wet sand on the Greyhaven shoreline. The blade is heavily weathered but surprisingly intact, and the handle is wrapped in faded black leather.",
     {
-        topic: "shoreline",
-        type: "item",
-        importance: 4
-    }
+    topic: "shoreline",
+    type: "item",
+    importance: 4,
+    pip: "Oh! That was the old iron dagger. You pulled it out from beneath the wet sand. It's battered, but it looked perfectly usable."
+}
 );
 
     document.getElementById("story").innerHTML += `
@@ -829,7 +905,8 @@ function searchBetweenRocks() {
     {
         topic: "shoreline",
         type: "item",
-        importance: 4
+        importance: 4,
+        pip: "Oh, the little iron key! You found it wedged between the rocks. It was badly corroded, but still intact. And there was that tiny brass tag on it... number seven. I remember that part."
     }
 );
 

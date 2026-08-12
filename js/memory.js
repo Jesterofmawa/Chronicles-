@@ -34,16 +34,18 @@ function rememberShortTerm(key, value) {
 function rememberLongTerm(key, value, metadata = {}) {
 
     longTerm[key] = {
-
-        value: value,
-
-        topic: metadata.topic || null,
-
-        type: metadata.type || null,
-
-        importance: metadata.importance || 1
-
-    };
+    
+    value: value,
+    
+    pip: metadata.pip || null,
+    
+    topic: metadata.topic || null,
+    
+    type: metadata.type || null,
+    
+    importance: metadata.importance || 1
+    
+};
 
 }
 
@@ -89,12 +91,13 @@ function recallStoryMemories() {
         .map(([key, memory]) => {
 
             return {
-                key: key,
-                value: memory.value,
-                topic: memory.topic,
-                type: memory.type,
-                importance: memory.importance
-            };
+    key: key,
+    value: memory.value,
+    pip: memory.pip,
+    topic: memory.topic,
+    type: memory.type,
+    importance: memory.importance
+};
 
         })
 

@@ -204,14 +204,14 @@ function showMemorySearch(memories) {
     memories.forEach(memory => {
 
         entries +=
-
-            "<p>" +
-
-            "\"" +
-            memory.value +
-            "\"" +
-
-            "</p>";
+    
+    "<p>" +
+    
+    "\"" +
+    (memory.pip || memory.value) +
+    "\"" +
+    
+    "</p>";
 
     });
 
