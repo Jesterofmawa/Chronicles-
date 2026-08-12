@@ -933,8 +933,9 @@ function digOutShorelineObject() {
     `;
 
     showChoices([
-        "↩️ Leave It"
-    ]);
+    "🎒 Take the Dagger",
+    "↩️ Leave the Shoreline"
+]);
 
 }
 
@@ -998,7 +999,8 @@ function searchBetweenRocks() {
     `;
 
     showChoices([
-        "↩️ Leave the Shoreline"
-    ]);
+    "🎒 Take the Key",
+    "↩️ Leave the Shoreline"
+]);
 
 }
