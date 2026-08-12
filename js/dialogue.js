@@ -108,6 +108,15 @@ function showDialogue() {
     document.getElementById("dialogueText").innerHTML =
         dialogue[dialogueIndex];
 
+    // Pip's surprised "Oh!"
+    if (
+        currentCharacter === "pip" &&
+        dialogueIndex === 1
+    ) {
+
+        playPipOh();
+
+    }
 
     // =========================
     // PIP

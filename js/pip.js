@@ -118,45 +118,118 @@ function handleQuestion(message) {
     }
 
     if (question === "what did you write down?") {
+    
+    return showChronicle();
+    
+}
 
-        return showChronicle();
 
-    }
+const relevantMemories = searchMemories(question);
 
-    return null;
+if (relevantMemories.length > 0) {
+    
+    return showMemorySearch(relevantMemories);
+    
+}
+
+
+return null;
 
 }
 
 function showChronicle() {
-    
-    let latestEntry = recall("greyhaven_old_harbour_damage");
-    
+
+    const memories = recallStoryMemories();
+
+
+    let entries = "";
+
+
+    memories.forEach(memory => {
+
+        entries +=
+
+            "<p>" +
+
+            "\"" +
+            memory.value +
+            "\"" +
+
+            "</p>";
+
+    });
+
+
+    if (memories.length === 0) {
+
+        entries =
+            "<p>\"I don't have anything written down yet.\"</p>";
+
+    }
+
+
     return "📖 Pip carefully opens the Chronicle." +
-        
+
         "<br><br>" +
-        
-        "He gently turns a few pages." +
-        
+
+        "He gently turns through the pages." +
+
         "<br><br>" +
-        
-        "📝 <strong>Latest Entry</strong>" +
-        
+
+        "📝 <strong>Chronicle Entries</strong>" +
+
         "<br><br>" +
-        
-        "\"" + latestEntry + "\"" +
-        
-        "<br><br>" +
-        
+
+        entries +
+
+        "<br>" +
+
         "🐿️ He smiles proudly." +
-        
+
         "<br><br>" +
-        
-        "\"I thought this one was worth writing down.\"" +
-        
+
+        "\"I thought these were worth writing down.\"" +
+
         "<br><br>" +
-        
+
         "📚 He carefully closes the Chronicle.";
-    
+
+}
+
+function showMemorySearch(memories) {
+
+    let entries = "";
+
+
+    memories.forEach(memory => {
+
+        entries +=
+
+            "<p>" +
+
+            "\"" +
+            memory.value +
+            "\"" +
+
+            "</p>";
+
+    });
+
+
+    return "🐿️ Pip thinks for a moment." +
+
+        "<br><br>" +
+
+        "📖 He flips through the Chronicle." +
+
+        "<br><br>" +
+
+        entries +
+
+        "<br>" +
+
+        "\"That's what I remember about that.\"";
+
 }
 
 function looksLikeANote(message) {

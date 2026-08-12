@@ -436,7 +436,12 @@ discoveryMemory =
 
 rememberLongTerm(
     "greyhaven_old_harbour_damage",
-    discoveryMemory
+    discoveryMemory,
+    {
+        topic: "old_harbour",
+        type: "discovery",
+        importance: 5
+    }
 );
 
     document.getElementById("story").innerHTML = `
@@ -514,9 +519,13 @@ function searchShoreline() {
     // Determine what the player discovers
 
     let outcome = "";
+let discoveryMemory = "";
 
 
     if (roll === 20) {
+
+discoveryMemory =
+    "The player discovered a trail beginning at the waterline where something had dragged itself ashore. The trail led away from the water and disappeared between two large rocks.";
 
         outcome = `
 
@@ -550,6 +559,9 @@ function searchShoreline() {
 
     else if (roll >= 15) {
 
+discoveryMemory =
+    "The player discovered a strange leathery fragment among the debris on the Greyhaven shoreline and noticed something glinting beneath the wet sand nearby.";
+
         outcome = `
 
             <p>
@@ -569,6 +581,9 @@ function searchShoreline() {
     }
 
     else if (roll >= 8) {
+
+discoveryMemory =
+    "The player found a badly damaged length of old rope beneath the wet sand on the Greyhaven shoreline. The damage did not appear to be entirely natural.";
 
         outcome = `
 
@@ -604,6 +619,19 @@ function searchShoreline() {
 
     }
 
+    if (discoveryMemory) {
+
+        rememberLongTerm(
+            "greyhaven_shoreline_search_" + roll,
+            discoveryMemory,
+            {
+                topic: "shoreline",
+                type: "discovery",
+                importance: 3
+            }
+        );
+
+    }
 
     // Show Pip's dice roll and the discovery together
 
@@ -649,9 +677,14 @@ function examineShorelineMaterial() {
         "A strange leathery fragment was found on the Greyhaven shoreline. It is thin but unusually tough, covered in fine ridges, darker and damp underneath, and appears to have been torn from a living creature.";
 
     rememberLongTerm(
-        "greyhaven_strange_material",
-        discoveryMemory
-    );
+    "greyhaven_strange_material",
+    discoveryMemory,
+    {
+        topic: "shoreline",
+        type: "discovery",
+        importance: 4
+    }
+);
 
     const outcome = `
 
@@ -727,9 +760,14 @@ function digOutShorelineObject() {
     old_iron_dagger_acquired = true;
 
     rememberLongTerm(
-        "greyhaven_old_iron_dagger",
-        "The player uncovered an old iron dagger beneath the wet sand on the Greyhaven shoreline. The blade is heavily weathered but surprisingly intact, and the handle is wrapped in faded black leather."
-    );
+    "greyhaven_old_iron_dagger",
+    "The player uncovered an old iron dagger beneath the wet sand on the Greyhaven shoreline. The blade is heavily weathered but surprisingly intact, and the handle is wrapped in faded black leather.",
+    {
+        topic: "shoreline",
+        type: "item",
+        importance: 4
+    }
+);
 
     document.getElementById("story").innerHTML += `
 
@@ -786,9 +824,14 @@ function searchBetweenRocks() {
     let old_harbour_key_acquired = true;
 
     rememberLongTerm(
-        "greyhaven_old_harbour_key",
-        "The player found a small iron key between the rocks on the Greyhaven shoreline. It is badly corroded but still intact. A tiny brass tag attached to it bears the number 7."
-    );
+    "greyhaven_old_harbour_key",
+    "The player found a small iron key between the rocks on the Greyhaven shoreline. It is badly corroded but still intact. A tiny brass tag attached to it bears the number 7.",
+    {
+        topic: "shoreline",
+        type: "item",
+        importance: 4
+    }
+);
 
     document.getElementById("story").innerHTML += `
 

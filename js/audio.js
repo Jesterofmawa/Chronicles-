@@ -1,4 +1,6 @@
 let frontEndMusic = null;
+let pipOhSound = null;
+
 
 function startFrontEndMusic() {
 
@@ -57,5 +59,27 @@ function fadeOutFrontEndMusic(duration = 1800) {
     }
 
     requestAnimationFrame(fade);
+
+}
+
+function playPipOh() {
+
+    if (!pipOhSound) {
+
+        pipOhSound = new Audio(
+            "assets/audio/Oh.mp3"
+        );
+
+        pipOhSound.volume = 0.5;
+
+    }
+
+    pipOhSound.currentTime = 0;
+
+    pipOhSound.play().catch(error => {
+
+        console.log("Pip sound could not play:", error);
+
+    });
 
 }

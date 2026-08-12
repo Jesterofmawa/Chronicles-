@@ -1,3 +1,29 @@
+function resetStoryScroll() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+}
+
+const storyElement = document.getElementById("story");
+
+if (storyElement) {
+
+    const storyObserver = new MutationObserver(() => {
+
+        resetStoryScroll();
+
+    });
+
+    storyObserver.observe(storyElement, {
+        childList: true,
+        subtree: true
+    });
+
+}
+
 function startStory() {
 
 setPipLocation("greyhaven");
