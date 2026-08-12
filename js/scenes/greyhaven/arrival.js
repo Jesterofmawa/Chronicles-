@@ -470,6 +470,17 @@ function searchShoreline() {
     const diceRoll = createPipRoll("1d20");
     const roll = diceRoll.result.total;
 
+rememberLongTerm(
+    "greyhaven_strange_material_discovered",
+    "The player discovered a strange, dark, leathery fragment tangled among the debris on the Greyhaven shoreline. They did not yet know what it was.",
+    {
+        topic: "shoreline",
+        type: "discovery",
+        importance: 3,
+        pip: "Oh, we did find that strange leathery fragment on the shoreline. It was tangled up among the debris. We didn't know what it was at the time."
+    }
+);
+
     // The leathery material is now guaranteed.
     // The roll determines what else is discovered.
     window.shorelineObjectVisible = roll >= 15;
@@ -742,13 +753,14 @@ function examineShorelineMaterial() {
         "A strange leathery fragment was found on the Greyhaven shoreline. It is thin but unusually tough, covered in fine ridges, darker and damp underneath, and appears to have been torn from a living creature.";
 
     rememberLongTerm(
-    "greyhaven_strange_material",
+    "greyhaven_strange_material_examined",
     discoveryMemory,
     {
         topic: "shoreline",
         type: "discovery",
-        importance: 4
-    }
+        importance: 4,
+    pip: "Oh, that strange leathery fragment? I remember that one. It wasn't leather, but it felt almost like it. Those tiny ridges were very odd... and the underside was still warm. Whatever it came from was alive."
+}
 );
 
     const outcome = `
