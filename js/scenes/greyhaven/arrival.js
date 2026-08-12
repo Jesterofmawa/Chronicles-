@@ -1,5 +1,7 @@
 let old_harbour_damage_examined = false;
 
+let shoreline_searched = false;
+
 let oldHarbourDiscovery = "";
 
 let old_iron_dagger_acquired = false;
@@ -228,12 +230,39 @@ function examineOldHarbour(returning = false) {
         </div>
     `;
 
+    if (old_harbour_damage_examined && shoreline_searched) {
+
+    showChoices([
+        "🐿️ Ask Pip",
+        "↩️ Leave the Old Harbour"
+    ]);
+
+} else if (old_harbour_damage_examined) {
+
+    showChoices([
+        "🌊 Search the Shoreline",
+        "🐿️ Ask Pip",
+        "↩️ Leave the Old Harbour"
+    ]);
+
+} else if (shoreline_searched) {
+
+    showChoices([
+        "🔎 Investigate the Damage",
+        "🐿️ Ask Pip",
+        "↩️ Leave the Old Harbour"
+    ]);
+
+} else {
+
     showChoices([
         "🔎 Investigate the Damage",
         "🌊 Search the Shoreline",
         "🐿️ Ask Pip",
         "↩️ Leave the Old Harbour"
     ]);
+
+}
 
 }
 
@@ -466,6 +495,8 @@ rememberLongTerm(
 function searchShoreline() {
 
     pausePipObservations();
+
+shoreline_searched = true;
 
     const diceRoll = createPipRoll("1d20");
     const roll = diceRoll.result.total;
