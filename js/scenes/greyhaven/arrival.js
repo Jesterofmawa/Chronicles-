@@ -1,3 +1,5 @@
+let old_harbour_visited = false;
+
 let old_harbour_damage_examined = false;
 
 let shoreline_searched = false;
@@ -38,8 +40,7 @@ function startGreyhaven() {
   
   showChoices([
     "👀 Look Around",
-    "🚪 Enter Greyhaven",
-    "📖 Talk with Pip"
+    "🚪 Enter Greyhaven"
   ]);
   
   startPipObservations();
@@ -176,15 +177,35 @@ document.getElementById("story").innerHTML = `
 
 `;
 
+    if (returning) {
+
     showChoices([
-        "⚓ Examine the Old Harbour",
+        "🚪 Enter Greyhaven",
+        "🐿️ Ask Pip about the ruins"
+    ]);
+
+} else if (old_harbour_visited) {
+
+    showChoices([
+        "🚪 Enter Greyhaven",
+        "🐿️ Ask Pip about the ruins"
+    ]);
+
+} else {
+
+    showChoices([
+        "⚓ Go to the Old Harbour",
         "🚪 Enter Greyhaven",
         "🐿️ Ask Pip about the ruins"
     ]);
 
 }
 
+}
+
 function examineOldHarbour(returning = false) {
+    
+    old_harbour_visited = true;
     
         let harbourDescription;
 
