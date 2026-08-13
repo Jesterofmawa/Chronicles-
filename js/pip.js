@@ -138,61 +138,77 @@ return null;
 }
 
 function showChronicle() {
-
+    
     const memories = recallStoryMemories();
-
-
+    
     let entries = "";
-
-
+    
     memories.forEach(memory => {
-
+        
         entries +=
-
+            
             "<p>" +
-
+            
             "\"" +
-            memory.value +
+            (memory.pip || memory.value) +
             "\"" +
-
+            
             "</p>";
-
+        
     });
-
-
+    
+    
     if (memories.length === 0) {
-
+        
         entries =
             "<p>\"I don't have anything written down yet.\"</p>";
+        
+    }
+    
+    
+    return `
+        <div id="chronicleEntry">
+
+            <p>
+                📖 Pip carefully opens the Chronicle.
+            </p>
+
+            <p>
+                He gently turns through the pages.
+            </p>
+
+            <p>
+                📝 <strong>Chronicle Entries</strong>
+            </p>
+
+            ${entries}
+
+            <p>
+                🐿️ He smiles proudly.
+            </p>
+
+            <p>
+                "I thought these were worth writing down."
+            </p>
+
+            <button onclick="closeChronicle()">
+                Close Chronicle
+            </button>
+
+        </div>
+    `;
+    
+}
+
+function closeChronicle() {
+
+    const chronicle = document.getElementById("chronicleEntry");
+
+    if (chronicle) {
+
+        chronicle.remove();
 
     }
-
-
-    return "📖 Pip carefully opens the Chronicle." +
-
-        "<br><br>" +
-
-        "He gently turns through the pages." +
-
-        "<br><br>" +
-
-        "📝 <strong>Chronicle Entries</strong>" +
-
-        "<br><br>" +
-
-        entries +
-
-        "<br>" +
-
-        "🐿️ He smiles proudly." +
-
-        "<br><br>" +
-
-        "\"I thought these were worth writing down.\"" +
-
-        "<br><br>" +
-
-        "📚 He carefully closes the Chronicle.";
 
 }
 

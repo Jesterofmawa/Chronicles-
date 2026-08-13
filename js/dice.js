@@ -39,6 +39,38 @@ function rollD20() {
 
 let attack = rollD20();
 
+const diceRollDescriptions = [
+
+    // Normal rolls
+
+    "The dice tumble smoothly, rolling until they come to rest.",
+    "The dice bounce lightly before settling into place.",
+    "The dice roll in steady arcs, gradually slowing to a stop.",
+    "The dice tumble end over end before falling still.",
+    "The dice roll cleanly, their edges clicking softly as they settle.",
+    "The dice bounce once or twice, then come to rest.",
+    "The dice tumble across the surface, slowing with each rotation.",
+    "The dice roll steadily before finally coming to a stop.",
+    "The dice spin and tumble, then settle into their final positions.",
+    "The dice roll naturally, each one slowing before coming to rest.",
+
+    // Clumsy rolls
+
+    "The dice wobble and tumble awkwardly, bumping into one another.",
+    "The dice roll unevenly, veering off in awkward little directions.",
+    "The dice bounce and wobble before finally settling.",
+    "The dice tumble clumsily, spinning far longer than they should.",
+    "The dice skitter and stumble across the surface, coming to rest at odd angles."
+
+];
+
+function randomDiceRollDescription() {
+
+    return diceRollDescriptions[
+        Math.floor(Math.random() * diceRollDescriptions.length)
+    ];
+
+}
 
 function createPipRoll(expression, modifier = 0) {
 
@@ -49,7 +81,7 @@ function createPipRoll(expression, modifier = 0) {
 
 ${randomRollMessage()}
 
-<p>🎲 <strong>The dice tumble across the table...</strong></p>
+<p>🎲 <strong>${randomDiceRollDescription()}</strong></p>
 
 <p><strong>Roll:</strong> ${expression}</p>
 
@@ -80,7 +112,7 @@ function pipRoll(sides, modifier = 0) {
 
 ${randomRollMessage()}
 
-<p>🎲 <strong>The dice tumble across the table...</strong></p>
+<p>🎲 <strong>${randomDiceRollDescription()}</strong></p>
 
 <p><strong>Roll:</strong> ${sides}</p>
 

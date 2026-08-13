@@ -650,3 +650,28 @@ animation: storyOpeningFadeIn 1.5s ease forwards;
     }
 
 }
+
+#chronicleEntry button {
+
+    margin-top: 10px;
+
+    padding: 9px 18px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+
+    color: #4b3925;
+    background: #eee1bd;
+
+    border: 1px solid #c5ae78;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}
+
+#chronicleEntry button:hover {
+
+    background: #e5d4a9;
+
+}

@@ -46,67 +46,135 @@ function startGreyhaven() {
   
 }
 
-function lookAroundGreyhaven() {
+function lookAroundGreyhaven(returning = false) {
 
-    document.getElementById("story").innerHTML = `
-        <div class="story-panel">
+    let greyhavenDescription;
 
-            <p>
-                You pause before entering Greyhaven and take a closer look at the town.
-            </p>
+if (returning) {
+    
+    greyhavenDescription = `
 
-            <p>
-                From here, the harbour is easier to see.
-            </p>
+        <p>
+            You make your way back towards Greyhaven.
+        </p>
 
-            <p>
-                The docks stretch along the waterfront, crowded with fishing boats and small merchant vessels.
-            </p>
+        <p>
+            The town looks different now that you've seen what lies beyond its harbour.
+        </p>
 
-            <p>
-                But beyond them, something else catches your attention.
-            </p>
+        <p>
+            The streets are still busy, but you find yourself noticing things you hadn't before.
+        </p>
 
-            <p>
-                An older section of harbour extends into the water.
-                <br>
-                Or what remains of it.
-            </p>
+        <p>
+            Fishermen move between the docks.
+        </p>
 
-            <p>
-                Broken timbers jut from the waves. A length of stone pier has collapsed into the shallows, and several old posts lean at impossible angles beneath the weight of years.
-            </p>
+        <p>
+            Merchants haul crates towards the waterfront.
+        </p>
 
-            <p>
-                The newer harbour seems to have simply grown around it.
-            </p>
+        <p>
+            Doors open and close as people go about their business.
+        </p>
 
-            <p>
-                Nobody appears to be working there.
-            </p>
+        <p>
+            Somewhere nearby, someone laughs.
+        </p>
 
-            <p>
-                Nobody appears to have bothered removing it either.
-            </p>
+        <p>
+            For a moment, Greyhaven seems almost ordinary.
+        </p>
 
-            <p>
-                The old pier is considerably larger than the harbour Greyhaven has today.
-            </p>
+        <p>
+            Then your eyes drift towards the rooftops.
+        </p>
 
-            <p>
-                Whatever happened to it, it must have been significant.
-            </p>
+        <p>
+            The lighthouse is still there.
+        </p>
 
-            <p>
-                The wind carries the sound of the water striking the ruined timbers.
-            </p>
+        <p>
+            Dark.
+        </p>
 
-            <p>
-                Then silence.
-            </p>
+        <p>
+            Watching over the town.
+        </p>
 
-        </div>
     `;
+    
+} else {
+    
+    greyhavenDescription = `
+
+        <p>
+            You pause before entering Greyhaven and take a closer look at the town.
+        </p>
+
+        <p>
+            From here, the harbour is easier to see.
+        </p>
+
+        <p>
+            The docks stretch along the waterfront, crowded with fishing boats and small merchant vessels.
+        </p>
+
+        <p>
+            But beyond them, something else catches your attention.
+        </p>
+
+        <p>
+            An older section of harbour extends into the water.
+            <br>
+            Or what remains of it.
+        </p>
+
+        <p>
+            Broken timbers jut from the waves. A length of stone pier has collapsed into the shallows, and several old posts lean at impossible angles beneath the weight of years.
+        </p>
+
+        <p>
+            The newer harbour seems to have simply grown around it.
+        </p>
+
+        <p>
+            Nobody appears to be working there.
+        </p>
+
+        <p>
+            Nobody appears to have bothered removing it either.
+        </p>
+
+        <p>
+            The old pier is considerably larger than the harbour Greyhaven has today.
+        </p>
+
+        <p>
+            Whatever happened to it, it must have been significant.
+        </p>
+
+        <p>
+            The wind carries the sound of the water striking the ruined timbers.
+        </p>
+
+        <p>
+            Then silence.
+        </p>
+
+    `;
+    
+}
+
+document.getElementById("story").innerHTML = `
+
+    <div class="story-panel">
+
+        ${greyhavenDescription}
+
+    </div>
+
+`;
 
     showChoices([
         "⚓ Examine the Old Harbour",
@@ -518,6 +586,8 @@ rememberLongTerm(
 
     document.getElementById("story").innerHTML = `
 
+    <div class="story-panel">
+
         <p>
             You leave the old stonework behind and follow the shoreline away from the ruined harbour.
         </p>
@@ -554,7 +624,9 @@ rememberLongTerm(
             If there's anything worth finding here, you'll need to look carefully.
         </p>
 
-    `;
+    </div>
+
+`;
 
 
     let outcome = "";

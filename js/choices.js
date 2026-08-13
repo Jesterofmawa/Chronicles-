@@ -126,7 +126,7 @@ if (choice === "↩️ Leave the Shoreline") {
 
     resumePipObservations();
 
-    lookAroundGreyhaven();
+    lookAroundGreyhaven(true);
 
     return;
 
