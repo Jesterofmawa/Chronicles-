@@ -119,6 +119,14 @@ if (choice === "↩️ Leave the Shoreline") {
 
 }
 
+if (choice === "↩️ Back to the Old Harbour") {
+    
+    examineOldHarbour(true);
+    
+    return;
+    
+}
+
     if (choice === "↩️ Leave the Old Harbour") {
 
     resumePipObservations();

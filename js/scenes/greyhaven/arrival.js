@@ -8,6 +8,10 @@ let oldHarbourDiscovery = "";
 
 let old_iron_dagger_acquired = false;
 
+let shoreline_material_examined = false;
+
+let shoreline_rocks_searched = false;
+
 function startGreyhaven() {
   
   document.getElementById("story").innerHTML = `
@@ -575,9 +579,8 @@ rememberLongTerm(
 `;
 
     showChoices([
-        "🐿️ Ask Pip",
-        "↩️ Leave the Old Harbour"
-    ]);
+    "↩️ Back to the Old Harbour"
+]);
 
 }
 
@@ -838,11 +841,20 @@ rememberLongTerm(
 
         document.getElementById("choices").innerHTML = "";
 
-        showChoices([
-            "🔎 Examine the Material",
-            "🔍 Search Between the Rocks",
-            "↩️ Leave It"
-        ]);
+        if (shoreline_rocks_searched) {
+
+    showChoices([
+        "↩️ Back to the Old Harbour"
+    ]);
+
+} else {
+
+    showChoices([
+        "🔍 Search Between the Rocks",
+        "↩️ Back to the Old Harbour"
+    ]);
+
+}
 
     }
 
@@ -850,28 +862,51 @@ rememberLongTerm(
 
         document.getElementById("choices").innerHTML = "";
 
-        showChoices([
-            "🔎 Examine the Material",
-            "🗡️ Dig Out the Object",
-            "↩️ Leave It"
-        ]);
+        if (shoreline_material_examined) {
+    
+    showChoices([
+        "🗡️ Dig Out the Object",
+        "↩️ Back to the Old Harbour"
+    ]);
+    
+} else {
+    
+    showChoices([
+        "🔎 Examine the Material",
+        "🗡️ Dig Out the Object",
+        "↩️ Back to the Old Harbour"
+    ]);
+    
+}
 
     }
 
     else {
-
-        document.getElementById("choices").innerHTML = "";
-
+    
+    document.getElementById("choices").innerHTML = "";
+    
+    if (shoreline_material_examined) {
+        
+        showChoices([
+            "↩️ Back to the Old Harbour"
+        ]);
+        
+    } else {
+        
         showChoices([
             "🔎 Examine the Material",
-            "↩️ Leave It"
+            "↩️ Back to the Old Harbour"
         ]);
+        
+    }
+    
+}
 
     }
 
-}
-
 function examineShorelineMaterial() {
+
+shoreline_material_examined = true;
 
     const discoveryMemory =
         "A strange leathery fragment was found on the Greyhaven shoreline. It is thin but unusually tough, covered in fine ridges, darker and damp underneath, and appears to have been torn from a living creature.";
@@ -953,13 +988,13 @@ function examineShorelineMaterial() {
 
     showChoices([
         "🗡️ Dig Out the Object",
-        "↩️ Leave It"
+        "↩️ Back to the Old Harbour"
     ]);
 
 } else {
 
     showChoices([
-        "↩️ Leave It"
+        "↩️ Back to the Old Harbour"
     ]);
 
 }
@@ -1027,12 +1062,14 @@ function digOutShorelineObject() {
 
     showChoices([
     "🎒 Take the Dagger",
-    "↩️ Leave the Shoreline"
+    "↩️ Back to the Old Harbour"
 ]);
 
 }
 
 function searchBetweenRocks() {
+
+shoreline_rocks_searched = true;
 
     let old_harbour_key_acquired = true;
 
