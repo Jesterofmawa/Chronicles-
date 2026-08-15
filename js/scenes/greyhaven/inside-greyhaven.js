@@ -150,3 +150,70 @@ function lookAroundHarbour() {
     ]);
 
 }
+
+function visitShipSupplyShop() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The shop is smaller than you expected.
+            </p>
+
+            <p>
+                Coils of rope hang from hooks outside, alongside fishing nets, lanterns and bundles of canvas.
+            </p>
+
+            <p>
+                Inside, the walls are crowded with shelves and racks of equipment.
+            </p>
+
+            <p>
+                Everything has a practical purpose.
+            </p>
+
+            <p>
+                Nothing appears particularly new.
+            </p>
+
+            <p>
+                Behind the counter stands a woman in her late thirties, dark hair tied back with a faded blue strip of cloth.
+            </p>
+
+            <p>
+                A leather apron is covered in scratches, stains and what looks suspiciously like dried salt.
+            </p>
+
+            <p>
+                She is carefully arranging a collection of brass fittings.
+            </p>
+
+            <p>
+                She glances up.
+            </p>
+
+            <p>
+                "Looking for something useful, or just looking?"
+            </p>
+
+            <p>
+                She gives you a small smile.
+            </p>
+
+            <p>
+                "Either's fine. Just don't lean on the counter. It has opinions."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🪝 Browse Equipment",
+        "🏮 Browse Supplies",
+        "💬 Talk to Myra",
+        "↩️ Leave the Shop"
+    ]);
+
+}

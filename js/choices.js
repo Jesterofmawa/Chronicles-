@@ -5,7 +5,7 @@ function showChoices(choices) {
     for (let i = 0; i < choices.length; i++) {
 
         html += `
-<button onclick="choose('${choices[i]}')">
+<button onclick="choose(this.textContent.trim())">
     ${choices[i]}
 </button>
 `;
@@ -148,6 +148,14 @@ if (choice === "🧭 Look Around") {
 if (choice === "↩️ Back to the Harbour") {
 
     enterInsideGreyhaven();
+
+    return;
+
+}
+
+if (choice === "🪝 Visit the Ship's Supply Shop") {
+
+    visitShipSupplyShop();
 
     return;
 
