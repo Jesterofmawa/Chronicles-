@@ -120,18 +120,34 @@ if (choice === "↩️ Leave the Shoreline") {
 }
 
 if (choice === "↩️ Back to the Old Harbour") {
-    
+
     examineOldHarbour(true);
-    
+
     return;
-    
+
 }
 
-    if (choice === "↩️ Leave the Old Harbour") {
+if (choice === "↩️ Leave the Old Harbour") {
 
     resumePipObservations();
 
     lookAroundGreyhaven(true);
+
+    return;
+
+}
+
+if (choice === "🧭 Look Around") {
+
+    lookAroundHarbour();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Harbour") {
+
+    enterInsideGreyhaven();
 
     return;
 

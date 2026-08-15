@@ -360,25 +360,9 @@ function examineOldHarbour(returning = false) {
 }
 
 function enterGreyhaven() {
-  
-  setPipLocation("greyhaven");
-  
-  document.getElementById("story").innerHTML = `
-        <div class="story-panel">
 
-            <p>
-                You make your way toward the town.
-            </p>
+    enterInsideGreyhaven();
 
-            <p>
-                Greyhaven waits below.
-            </p>
-
-        </div>
-    `;
-  
-  document.getElementById("choices").innerHTML = "";
-  
 }
 
 function investigateOldHarbourDamage() {
