@@ -169,4 +169,108 @@ if (choice === "💬 Talk to Myra") {
 
 }
 
+if (choice === "👤 Do you run this place?") {
+
+    myraRunsTheShop();
+
+    return;
+
+}
+
+if (choice === "🏘️ Have you always lived in Greyhaven?") {
+
+    myraLivedInGreyhaven();
+
+    return;
+
+}
+
+if (choice === "👤 What happened to your father?") {
+
+    myraFather();
+
+    return;
+
+}
+
+if (choice === "🔘 Ask about the buttons") {
+
+    myraButtons();
+
+    return;
+
+}
+
+if (choice === "↩️ Ask something else") {
+
+    myraConversation();
+
+    return;
+
+}
+
+if (choice === "🪝 What do you sell?") {
+
+    myraSells();
+
+    return;
+
+}
+
+if (choice === "🛒 Ask what she recommends") {
+
+    myraRecommendations();
+
+    return;
+
+}
+
+if (choice === "🏮 Ask about the lanterns") {
+
+    myraLanterns();
+
+    return;
+
+}
+
+if (choice === "🪢 Ask about the rope") {
+
+    myraRope();
+
+    return;
+
+}
+
+if (choice === "🎣 Ask about fishing equipment") {
+
+    myraFishingGear();
+
+    return;
+
+}
+
+if (choice === "↩️ That's all for now") {
+
+    visitShipSupplyShop();
+
+    return;
+
+}
+
+if (choice === "🪝 Browse Equipment") {
+
+    browseEquipment();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Shop") {
+
+    visitShipSupplyShop();
+
+    return;
+
+}
+
 }
