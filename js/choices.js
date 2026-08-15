@@ -161,4 +161,12 @@ if (choice === "🪝 Visit the Ship's Supply Shop") {
 
 }
 
+if (choice === "💬 Talk to Myra") {
+
+    talkToMyra();
+
+    return;
+
+}
+
 }

@@ -217,3 +217,47 @@ function visitShipSupplyShop() {
     ]);
 
 }
+
+function talkToMyra() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Myra sets down the brass fittings she has been sorting.
+            </p>
+
+            <p>
+                "Go on, then. Ask away."
+            </p>
+
+            <p>
+                She leans against the counter.
+            </p>
+
+            <p>
+                "Though if you're about to ask whether I've got anything that'll make you look important, I'm afraid you're out of luck."
+            </p>
+
+            <p>
+                She glances around the shop.
+            </p>
+
+            <p>
+                "Most things in here are designed to keep people alive. Looking important is extra."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "👤 Do you run this place?",
+        "🪝 What do you sell?",
+        "🔘 What's with the buttons?",
+        "⚓ Have you lived in Greyhaven long?",
+        "↩️ That's all for now"
+    ]);
+
+}
