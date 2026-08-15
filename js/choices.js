@@ -273,4 +273,12 @@ if (choice === "↩️ Back to the Shop") {
 
 }
 
+if (choice === "🏮 Browse Supplies") {
+
+    browseSupplies();
+
+    return;
+
+}
+
 }

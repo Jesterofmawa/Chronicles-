@@ -865,4 +865,38 @@ function browseEquipment() {
     ]);
 
 }
+
+function browseSupplies() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Myra points towards another set of shelves.
+            </p>
+
+            <p>
+                "Supplies are over there."
+            </p>
+
+            <p>
+                "Nothing fancy. Just things people tend to wish they'd packed after they've already left town."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛢️ Lamp Oil — 2 silver",
+        "🍞 Travel Rations — 3 silver",
+        "🩹 Basic First Aid Kit — 5 silver",
+        "🧵 Repair Thread & Canvas — 3 silver",
+        "🪝 Spare Hooks & Line — 2 silver",
+        "🧂 Salt Packet — 1 silver",
+        "↩️ Back to the Shop"
+    ]);
+
+}
     
