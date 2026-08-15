@@ -675,3 +675,30 @@ animation: storyOpeningFadeIn 1.5s ease forwards;
     background: #e5d4a9;
 
 }
+
+#gameTools {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+#gameTools button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+#inventoryPanel {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    z-index: 2000;
+
+    background: rgba(248, 244, 232, 1);
+}
