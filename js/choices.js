@@ -281,4 +281,150 @@ if (choice === "🏮 Browse Supplies") {
 
 }
 
+if (choice === "🪢 Rope — 5 silver") {
+
+    buyRope();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Equipment") {
+
+    browseEquipment();
+
+    return;
+
+}
+
+if (choice === "🎒 Open Inventory") {
+
+    openInventory();
+
+    return;
+
+}
+
+if (playerSilver < 5) {
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You don't have enough silver for that.
+            </p>
+
+            <p>
+                Myra gives you an apologetic shrug.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Equipment"
+    ]);
+
+    return;
+
+}
+
+if (choice === "🏮 Storm Lantern — 8 silver") {
+
+    buyStormLantern();
+
+    return;
+
+}
+
+if (choice === "🧰 Sailor's Tool Kit — 12 silver") {
+
+    buySailorToolKit();
+
+    return;
+
+}
+
+if (choice === "🎣 Fishing Kit — 6 silver") {
+
+    buyFishingKit();
+
+    return;
+
+}
+
+if (choice === "🧤 Work Gloves — 3 silver") {
+
+    buyWorkGloves();
+
+    return;
+
+}
+
+if (choice === "🪝 Bent Grappling Hook — 15 silver") {
+
+    buyGrapplingHook();
+
+    return;
+
+}
+
+if (choice === "🛢️ Lamp Oil — 2 silver") {
+
+    buyLampOil();
+
+    return;
+
+}
+
+if (choice === "🍞 Travel Rations — 3 silver") {
+
+    buyTravelRations();
+
+    return;
+
+}
+
+if (choice === "🩹 Basic First Aid Kit — 5 silver") {
+
+    buyFirstAidKit();
+
+    return;
+
+}
+
+if (choice === "🧵 Repair Thread & Canvas — 3 silver") {
+
+    buyRepairSupplies();
+
+    return;
+
+}
+
+if (choice === "🪝 Spare Hooks & Line — 2 silver") {
+
+    buySpareHooks();
+
+    return;
+
+}
+
+if (choice === "🧂 Salt Packet — 1 silver") {
+
+    buySalt();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Supplies") {
+
+    browseSupplies();
+
+    return;
+
+}
+
 }
