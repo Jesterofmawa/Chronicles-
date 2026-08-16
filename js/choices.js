@@ -465,6 +465,14 @@ if (choice === "↩️ Leave the Stall") {
 
 }
 
+if (choice === "💬 Talk to Bram") {
+
+    talkToBram();
+
+    return;
+
+}
+
 if (choice === "🏘️ Ask about Greyhaven") {
 
     askBramAboutGreyhaven();
@@ -646,6 +654,230 @@ if (choice === "🧵 Basic Repair Kit — 4 silver") {
 if (choice === "🧂 Salt — 1 silver") {
 
     buyBramSalt();
+
+    return;
+
+}
+
+if (choice === "👩 Visit Sella's Stall") {
+
+    visitSellaStall();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave Sella's Stall") {
+
+    visitDocksideTraders();
+
+    return;
+
+}
+
+if (choice === "🌍 Ask about her travels") {
+
+    sellaTravels();
+
+    return;
+
+}
+
+if (choice === "🗺️ Ask about places she's visited") {
+
+    sellaPlaces();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Sella's Travels") {
+
+    sellaTravels();
+
+    return;
+
+}
+
+if (choice === "🚢 Ask about the ships she travels with") {
+
+    sellaShips();
+
+    return;
+
+}
+
+if (choice === "🗣️ Ask what she's heard") {
+
+    sellaRumours();
+
+    return;
+
+}
+
+if (choice === "⚓ Ask about the old harbour") {
+
+    sellaOldHarbour();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Sella's Rumours") {
+
+    sellaRumours();
+
+    return;
+
+}
+
+if (choice === "📦 Ask about missing cargo") {
+
+    sellaMissingCargo();
+
+    return;
+
+}
+
+if (choice === "🔔 Ask about the bells") {
+
+    sellaBells();
+
+    return;
+
+}
+
+if (choice === "💬 Talk to Sella") {
+
+    talkToSella();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Sella") {
+
+    visitSellaStall();
+
+    return;
+
+}
+
+if (choice === "🛒 What do you sell?") {
+
+    sellaSells();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Sella") {
+
+    talkToSella();
+
+    return;
+
+}
+
+if (choice === "🌍 Why do you travel?") {
+
+    sellaWhyTravels();
+
+    return;
+
+}
+
+if (choice === "🏘️ What do you think of Greyhaven?") {
+
+    sellaGreyhavenOpinion();
+
+    return;
+
+}
+
+if (choice === "🛒 Browse Sella's Goods") {
+
+    browseSellaGoods();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Sella's Stall") {
+
+    visitSellaStall();
+
+    return;
+
+}
+
+if (choice === "🕯️ Scented Travel Candle — 3 silver") {
+
+    buySellaTravelCandle();
+
+    return;
+
+}
+
+if (choice === "🧭 Pocket Compass — 18 silver") {
+
+    buySellaCompass();
+
+    return;
+
+}
+
+if (choice === "🧵 Fine Thread & Needle — 16 silver") {
+
+    buySellaThread();
+
+    return;
+
+}
+
+if (choice === "🍵 Dried Traveller's Tea — 9 silver") {
+
+    buySellaTea();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Sella's Goods") {
+
+    browseSellaGoods();
+
+    return;
+
+}
+
+if (choice === "🪙 Foreign Coin — 12 silver") {
+
+    buySellaForeignCoin();
+
+    return;
+
+}
+
+if (choice === "🧿 Carved Luck Charm — 13 silver") {
+
+    buySellaLuckCharm();
+
+    return;
+
+}
+
+if (choice === "🗺️ Unmarked Map Fragment — 26 silver") {
+
+    buySellaMapFragment();
+
+    return;
+
+}
+
+if (choice === "❓ Sealed Little Box — 15 silver") {
+
+    buySellaSealedBox();
 
     return;
 

@@ -1554,3 +1554,865 @@ function browseBramGoods() {
     ]);
 
 }
+
+function talkToBram() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram studies you for a moment.
+            </p>
+
+            <p>
+                "You don't look like you're here to buy rope."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Most people who ask questions aren't."
+            </p>
+
+            <p>
+                He leans against the counter.
+            </p>
+
+            <p>
+                "So."
+            </p>
+
+            <p>
+                "What is it you actually want to know?"
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚓ Ask about the harbour",
+        "🏘️ Ask about Greyhaven",
+        "🌊 Ask about the sea",
+        "👀 Ask what Bram thinks of strangers",
+        "↩️ Back to Bram"
+    ]);
+
+}
+
+function visitSellaStall() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella's stall is almost impossible to take in at once.
+            </p>
+
+            <p>
+                Coloured fabrics hang from the awning, small bottles catch the light and unfamiliar trinkets cover almost every available surface.
+            </p>
+
+            <p>
+                Some things are clearly useful.
+            </p>
+
+            <p>
+                Others are difficult to identify.
+            </p>
+
+            <p>
+                A woman in a weathered travelling coat sits behind the counter.
+            </p>
+
+            <p>
+                Several rings glint on her fingers as she sorts through a collection of small coins.
+            </p>
+
+            <p>
+                She looks up as you approach.
+            </p>
+
+            <p>
+                Her eyes briefly travel over you.
+            </p>
+
+            <p>
+                Then she smiles.
+            </p>
+
+            <p>
+                "You don't look like you're from Greyhaven."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "That's either very interesting or very unfortunate."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛒 Browse Sella's Goods",
+        "💬 Talk to Sella",
+        "🌍 Ask about her travels",
+        "🗣️ Ask what she's heard",
+        "↩️ Leave Sella's Stall"
+    ]);
+
+}
+
+function sellaTravels() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella smiles.
+            </p>
+
+            <p>
+                "My travels?"
+            </p>
+
+            <p>
+                She glances around her stall.
+            </p>
+
+            <p>
+                "Most of these things have travelled farther than some people I know."
+            </p>
+
+            <p>
+                She laughs softly.
+            </p>
+
+            <p>
+                "I've been north, south and further east than I usually admit."
+            </p>
+
+            <p>
+                "Ports, islands, little villages that barely appear on maps."
+            </p>
+
+            <p>
+                "You learn something everywhere."
+            </p>
+
+            <p>
+                She taps one of the unfamiliar coins on the counter.
+            </p>
+
+            <p>
+                "Though sometimes what you learn is that the person selling you a map had never been there either."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🗺️ Ask about places she's visited",
+        "🚢 Ask about the ships she travels with",
+        "↩️ Back to Sella"
+    ]);
+
+}
+
+function sellaPlaces() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Places?"
+            </p>
+
+            <p>
+                Sella thinks for a moment.
+            </p>
+
+            <p>
+                "There's a little island called Merrow's Rest."
+            </p>
+
+            <p>
+                "Beautiful place."
+            </p>
+
+            <p>
+                "Terrible wine."
+            </p>
+
+            <p>
+                She considers another memory.
+            </p>
+
+            <p>
+                "There's also Greyhook."
+            </p>
+
+            <p>
+                "Ugly little port. Excellent food."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "And somewhere beyond the eastern waters there's a city built almost entirely on bridges."
+            </p>
+
+            <p>
+                "Never found it myself."
+            </p>
+
+            <p>
+                "Three different captains swear it's real."
+            </p>
+
+            <p>
+                She shrugs.
+            </p>
+
+            <p>
+                "Three different captains also swear they saw a sea serpent."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Travels"
+    ]);
+
+}
+
+function sellaShips() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella leans back slightly.
+            </p>
+
+            <p>
+                "Ships?"
+            </p>
+
+            <p>
+                "Never trust a ship that looks too comfortable."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "I've travelled on merchant vessels, fishing boats, ferries and one particularly unfortunate vessel that the captain insisted was still seaworthy."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "It wasn't."
+            </p>
+
+            <p>
+                "These days I prefer ships with captains who know the difference between confidence and optimism."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Travels"
+    ]);
+
+}
+
+function sellaRumours() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella's smile changes.
+            </p>
+
+            <p>
+                "Ah."
+            </p>
+
+            <p>
+                "Now that's a dangerous question."
+            </p>
+
+            <p>
+                She glances towards the other stalls.
+            </p>
+
+            <p>
+                "Travellers hear things."
+            </p>
+
+            <p>
+                "Some are true."
+            </p>
+
+            <p>
+                "Some aren't."
+            </p>
+
+            <p>
+                "Most become something in between by the time they reach the next port."
+            </p>
+
+            <p>
+                She lowers her voice.
+            </p>
+
+            <p>
+                "I've heard sailors talking about ships that refuse to enter the old harbour."
+            </p>
+
+            <p>
+                "I've heard merchants complain about cargo going missing."
+            </p>
+
+            <p>
+                "And I've heard someone claim that the bells on the water sometimes ring when there are no ships nearby."
+            </p>
+
+            <p>
+                She raises an eyebrow.
+            </p>
+
+            <p>
+                "That last one's probably nonsense."
+            </p>
+
+            <p>
+                "Probably."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚓ Ask about the old harbour",
+        "📦 Ask about missing cargo",
+        "🔔 Ask about the bells",
+        "↩️ Back to Sella"
+    ]);
+
+}
+
+function sellaOldHarbour() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella's expression becomes more thoughtful.
+            </p>
+
+            <p>
+                "The old harbour?"
+            </p>
+
+            <p>
+                "I've never been inside it."
+            </p>
+
+            <p>
+                "I've seen the ruins, though."
+            </p>
+
+            <p>
+                "Most sailors I know avoid it."
+            </p>
+
+            <p>
+                She shrugs.
+            </p>
+
+            <p>
+                "Some say the place is unstable."
+            </p>
+
+            <p>
+                "Others say it's cursed."
+            </p>
+
+            <p>
+                "Personally, I think sailors enjoy having something to blame when they don't want to explain themselves."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Still..."
+            </p>
+
+            <p>
+                "I wouldn't go wandering around there after dark."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Rumours"
+    ]);
+
+}
+
+function sellaMissingCargo() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Missing cargo?"
+            </p>
+
+            <p>
+                Sella shrugs.
+            </p>
+
+            <p>
+                "Cargo goes missing everywhere."
+            </p>
+
+            <p>
+                "Bad manifests. Bad bookkeeping. Bad dockworkers."
+            </p>
+
+            <p>
+                She counts them off on her fingers.
+            </p>
+
+            <p>
+                "Sometimes bad luck."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "But apparently there's been more of it here lately."
+            </p>
+
+            <p>
+                "Small things mostly."
+            </p>
+
+            <p>
+                "Tools. Supplies. Personal belongings."
+            </p>
+
+            <p>
+                She gives you a knowing look.
+            </p>
+
+            <p>
+                "Nothing worth making a fuss over."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Rumours"
+    ]);
+
+}
+
+function sellaBells() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella's smile fades slightly.
+            </p>
+
+            <p>
+                "The bells?"
+            </p>
+
+            <p>
+                "That's one I've heard before."
+            </p>
+
+            <p>
+                She looks towards the harbour.
+            </p>
+
+            <p>
+                "A sailor told me he heard one ringing from somewhere out beyond the old harbour."
+            </p>
+
+            <p>
+                "He swore there was nothing there."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "Another sailor told me the same thing."
+            </p>
+
+            <p>
+                "Different ship."
+            </p>
+
+            <p>
+                "Different year."
+            </p>
+
+            <p>
+                Sella gives a small shrug.
+            </p>
+
+            <p>
+                "Could be coincidence."
+            </p>
+
+            <p>
+                "Could be the same story getting passed around."
+            </p>
+
+            <p>
+                She looks at you.
+            </p>
+
+            <p>
+                "Or perhaps there really is a bell out there."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Rumours"
+    ]);
+
+}
+
+function talkToSella() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella sets aside the coins she has been sorting.
+            </p>
+
+            <p>
+                "Go on."
+            </p>
+
+            <p>
+                "I'm listening."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Though if you're about to ask whether everything I sell is genuine..."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "Define genuine."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛒 What do you sell?",
+        "🌍 Why do you travel?",
+        "🏘️ What do you think of Greyhaven?",
+        "↩️ Back to Sella"
+    ]);
+
+}
+
+function sellaSells() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella glances over the collection of goods surrounding her.
+            </p>
+
+            <p>
+                "A little bit of everything."
+            </p>
+
+            <p>
+                She gestures towards the stall.
+            </p>
+
+            <p>
+                "Things people need."
+            </p>
+
+            <p>
+                "Things people want."
+            </p>
+
+            <p>
+                "And occasionally things people didn't know they needed until they saw them."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Mostly things I've picked up on my travels."
+            </p>
+
+            <p>
+                "If it looks interesting and I can carry it, I'll probably sell it."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella"
+    ]);
+
+}
+
+function sellaWhyTravels() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella leans back against the stall.
+            </p>
+
+            <p>
+                "Why?"
+            </p>
+
+            <p>
+                She considers the question.
+            </p>
+
+            <p>
+                "I suppose I've never been very good at staying in one place."
+            </p>
+
+            <p>
+                "There's always another road."
+            </p>
+
+            <p>
+                "Another ship."
+            </p>
+
+            <p>
+                "Another town with something I've never seen before."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "And if I can make a little silver while I'm doing it, all the better."
+            </p>
+
+            <p>
+                "Besides..."
+            </p>
+
+            <p>
+                She glances towards the harbour.
+            </p>
+
+            <p>
+                "Staying anywhere too long means people start expecting you to behave sensibly."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella"
+    ]);
+
+}
+
+function sellaGreyhavenOpinion() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella looks out towards the harbour.
+            </p>
+
+            <p>
+                "Greyhaven?"
+            </p>
+
+            <p>
+                She smiles faintly.
+            </p>
+
+            <p>
+                "It's a strange place."
+            </p>
+
+            <p>
+                "Not the strangest I've seen."
+            </p>
+
+            <p>
+                "But it's trying."
+            </p>
+
+            <p>
+                She gestures towards the town.
+            </p>
+
+            <p>
+                "Most ports are loud. Busy. Always trying to prove they're important."
+            </p>
+
+            <p>
+                "Greyhaven doesn't seem to care quite as much."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "There's something about it."
+            </p>
+
+            <p>
+                "Hard to explain."
+            </p>
+
+            <p>
+                She shrugs.
+            </p>
+
+            <p>
+                "Perhaps it's just the weather."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella"
+    ]);
+
+}
+
+function browseSellaGoods() {
+
+    activeShop = "sella";
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella spreads one hand across the assortment of goods surrounding her.
+            </p>
+
+            <p>
+                "Nothing here was made in Greyhaven."
+            </p>
+
+            <p>
+                She picks up a small carved charm.
+            </p>
+
+            <p>
+                "Some of it wasn't even made anywhere I've heard of."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "That's what makes it interesting."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🪙 Foreign Coin — 12 silver",
+        "🧿 Carved Luck Charm — 13 silver",
+        "🕯️ Scented Travel Candle — 3 silver",
+        "🧭 Pocket Compass — 18 silver",
+        "🧵 Fine Thread & Needle — 16 silver",
+        "🍵 Dried Traveller's Tea — 9 silver",
+        "🗺️ Unmarked Map Fragment — 26 silver",
+        "❓ Sealed Little Box — 15 silver",
+        "↩️ Back to Sella"
+    ]);
+
+}

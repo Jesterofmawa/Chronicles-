@@ -48,8 +48,9 @@ function openInventory() {
     }
 
     const equipment = playerInventory.filter(item => item.category === "equipment");
-    const supplies = playerInventory.filter(item => item.category === "supplies");
-    const keyItems = playerInventory.filter(item => item.category === "key");
+const supplies = playerInventory.filter(item => item.category === "supplies");
+const unusual = playerInventory.filter(item => item.category === "unusual");
+const keyItems = playerInventory.filter(item => item.category === "key");
 
     function buildItemList(items) {
 
@@ -86,6 +87,10 @@ function openInventory() {
             <h3>Supplies</h3>
 
             ${buildItemList(supplies)}
+
+<h3>Unusual</h3>
+
+            ${buildItemList(unusual)}
 
             <h3>Key Items</h3>
 
@@ -1472,6 +1477,670 @@ function buyBramSalt() {
 
     showChoices([
         "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+function buySellaTravelCandle() {
+
+    if (playerSilver < 3) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella gives you an understanding smile.
+                </p>
+
+                <p>
+                    "Perhaps next time."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(3);
+
+    addItem("scented_travel_candle", "Scented Travel Candle", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella carefully wraps the candle in a scrap of cloth.
+            </p>
+
+            <p>
+                "Three silver."
+            </p>
+
+            <p>
+                "It smells like cedar and something I can't quite place."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Makes long journeys considerably more pleasant."
+            </p>
+
+            <p>
+                The Scented Travel Candle is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaCompass() {
+
+    if (playerSilver < 18) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella glances at the compass.
+                </p>
+
+                <p>
+                    "It's a lovely thing."
+                </p>
+
+                <p>
+                    "Perhaps when you've got the silver to match."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(18);
+
+    addItem("pocket_compass", "Pocket Compass", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella places the small compass in your hand.
+            </p>
+
+            <p>
+                The brass casing is worn but carefully polished.
+            </p>
+
+            <p>
+                "Eighteen silver."
+            </p>
+
+            <p>
+                "Been with me for years."
+            </p>
+
+            <p>
+                She pauses.
+            </p>
+
+            <p>
+                "Still points north, which is more than I can say for some captains I've travelled with."
+            </p>
+
+            <p>
+                The Pocket Compass is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaThread() {
+
+    if (playerSilver < 16) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella gives you a sympathetic shrug.
+                </p>
+
+                <p>
+                    "It's good thread."
+                </p>
+
+                <p>
+                    "Unfortunately, good things rarely come cheaply."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(16);
+
+    addItem("fine_thread_needle", "Fine Thread & Needle", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella produces a neatly wrapped bundle of fine thread and a slender needle.
+            </p>
+
+            <p>
+                "Sixteen silver."
+            </p>
+
+            <p>
+                "Made in a place where apparently even thread has standards."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "You'll notice the difference."
+            </p>
+
+            <p>
+                The Fine Thread & Needle is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaTea() {
+
+    if (playerSilver < 9) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella gives you a sympathetic smile.
+                </p>
+
+                <p>
+                    "It's tea, not treasure."
+                </p>
+
+                <p>
+                    She pauses.
+                </p>
+
+                <p>
+                    "Though some people would argue otherwise."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(9);
+
+    addItem("travellers_tea", "Dried Traveller's Tea", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella scoops a small bundle of dried leaves into a paper packet.
+            </p>
+
+            <p>
+                "Nine silver."
+            </p>
+
+            <p>
+                "A little bitter."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Good for keeping you awake on a long road."
+            </p>
+
+            <p>
+                The Dried Traveller's Tea is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaForeignCoin() {
+
+    if (playerSilver < 12) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella glances at the coin.
+                </p>
+
+                <p>
+                    "Perhaps another time."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(12);
+
+    addItem("foreign_coin", "Foreign Coin", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella picks up the unusual coin and places it carefully in your hand.
+            </p>
+
+            <p>
+                The metal is unfamiliar, and the markings on its surface mean nothing to you.
+            </p>
+
+            <p>
+                "Twelve silver."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Worth considerably less where it came from."
+            </p>
+
+            <p>
+                "That's how these things work."
+            </p>
+
+            <p>
+                The Foreign Coin is added to your unusual items.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaLuckCharm() {
+
+    if (playerSilver < 13) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella gives the charm an approving glance.
+                </p>
+
+                <p>
+                    "It's not going anywhere."
+                </p>
+
+                <p>
+                    "Come back when you've got the silver."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(13);
+
+    addItem("carved_luck_charm", "Carved Luck Charm", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella lifts the small carved charm from its hook.
+            </p>
+
+            <p>
+                It is worn smooth in places, though the markings carved into it remain surprisingly sharp.
+            </p>
+
+            <p>
+                "Thirteen silver."
+            </p>
+
+            <p>
+                "Supposed to bring luck."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "Supposed to."
+            </p>
+
+            <p>
+                The Carved Luck Charm is added to your unusual items.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaMapFragment() {
+
+    if (playerSilver < 26) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella glances at the map fragment.
+                </p>
+
+                <p>
+                    "It's expensive."
+                </p>
+
+                <p>
+                    She shrugs.
+                </p>
+
+                <p>
+                    "So is knowing where you're going."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(26);
+
+    addItem("unmarked_map_fragment", "Unmarked Map Fragment", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella carefully unfolds the fragment.
+            </p>
+
+            <p>
+                The parchment is old and faded.
+            </p>
+
+            <p>
+                No names or markings identify the place it depicts.
+            </p>
+
+            <p>
+                "Twenty-six silver."
+            </p>
+
+            <p>
+                She watches you study it.
+            </p>
+
+            <p>
+                "Don't ask me where it leads."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "If I knew, I'd have charged more."
+            </p>
+
+            <p>
+                The Unmarked Map Fragment is added to your unusual items.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
+    ]);
+
+}
+
+function buySellaSealedBox() {
+
+    if (playerSilver < 15) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Sella taps the little box.
+                </p>
+
+                <p>
+                    "You'll have to wonder about it for a while longer."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Sella's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(15);
+
+    addItem("sealed_little_box", "Sealed Little Box", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Sella places the little box on the counter.
+            </p>
+
+            <p>
+                It is small enough to fit comfortably in your palm.
+            </p>
+
+            <p>
+                There is no visible keyhole.
+            </p>
+
+            <p>
+                "Fifteen silver."
+            </p>
+
+            <p>
+                You turn it over in your hands.
+            </p>
+
+            <p>
+                Sella watches you.
+            </p>
+
+            <p>
+                "Yes."
+            </p>
+
+            <p>
+                "It's sealed."
+            </p>
+
+            <p>
+                She smiles.
+            </p>
+
+            <p>
+                "That's generally why I call it that."
+            </p>
+
+            <p>
+                The Sealed Little Box is added to your unusual items.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Sella's Goods"
     ]);
 
 }
