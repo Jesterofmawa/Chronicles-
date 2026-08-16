@@ -47,21 +47,19 @@ function openInventory() {
         return;
     }
 
-    let inventoryHTML = "";
+    const equipment = playerInventory.filter(item => item.category === "equipment");
+    const supplies = playerInventory.filter(item => item.category === "supplies");
+    const keyItems = playerInventory.filter(item => item.category === "key");
 
-    if (playerInventory.length === 0) {
+    function buildItemList(items) {
 
-        inventoryHTML = `
-            <p>
-                <em>Your inventory is empty.</em>
-            </p>
-        `;
+        if (items.length === 0) {
+            return `<p><em>None</em></p>`;
+        }
 
-    } else {
-
-        inventoryHTML = `
+        return `
             <ul>
-                ${playerInventory.map(item => `
+                ${items.map(item => `
                     <li>
                         ${item.name} ×${item.quantity}
                     </li>
@@ -81,7 +79,17 @@ function openInventory() {
                 <strong>Money:</strong> ${playerSilver} silver
             </p>
 
-            ${inventoryHTML}
+            <h3>Equipment</h3>
+
+            ${buildItemList(equipment)}
+
+            <h3>Supplies</h3>
+
+            ${buildItemList(supplies)}
+
+            <h3>Key Items</h3>
+
+            ${buildItemList(keyItems)}
 
             <button onclick="closeInventory()">
                 ✕ Close
@@ -933,6 +941,537 @@ function buySalt() {
 
     showChoices([
         "↩️ Back to Supplies"
+    ]);
+
+}
+
+function buyBramRope() {
+
+    if (playerSilver < 4) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(4);
+
+    addItem("rope", "Rope", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram cuts a length of rope from one of the coils behind him.
+            </p>
+
+            <p>
+                "Four silver."
+            </p>
+
+            <p>
+                He hands it across the counter.
+            </p>
+
+            <p>
+                "Good rope. It'll do what rope's supposed to do."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+function buySimpleToolSet() {
+
+    if (playerSilver < 8) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(8);
+
+    addItem("simple_tool_set", "Simple Tool Set", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram places a small wooden case on the counter.
+            </p>
+
+            <p>
+                "Eight silver."
+            </p>
+
+            <p>
+                "Nothing fancy. Hammer, pliers, screwdriver and a few bits that tend to disappear when you need them."
+            </p>
+
+            <p>
+                The Simple Tool Set is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+function buyHeavyWorkGloves() {
+
+    if (playerSilver < 3) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(3);
+
+    addItem("heavy_work_gloves", "Heavy Work Gloves", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram picks up a pair of thick leather gloves.
+            </p>
+
+            <p>
+                "Three silver."
+            </p>
+
+            <p>
+                He turns them over once before handing them to you.
+            </p>
+
+            <p>
+                "These'll last longer than your hands will complain."
+            </p>
+
+            <p>
+                The Heavy Work Gloves are added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+function buyUtilityKnife() {
+
+    if (playerSilver < 6) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(6);
+
+    addItem("utility_knife", "Utility Knife", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram takes a small folding knife from beneath the counter.
+            </p>
+
+            <p>
+                "Six silver."
+            </p>
+
+            <p>
+                "Useful thing to have."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Just don't use it on anything that belongs to me."
+            </p>
+
+            <p>
+                The Utility Knife is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+function buyBramTravelRations() {
+
+    if (playerSilver < 3) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(3);
+
+    addItem("travel_rations", "Travel Rations", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram reaches beneath the counter and produces a neatly wrapped bundle.
+            </p>
+
+            <p>
+                "Three silver."
+            </p>
+
+            <p>
+                "Nothing exciting. That's usually a good thing when it comes to food."
+            </p>
+
+            <p>
+                The Travel Rations are added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+
+function buyBramLampOil() {
+
+    if (playerSilver < 2) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(2);
+
+    addItem("lamp_oil", "Lamp Oil", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram takes a small bottle of oil from the shelf.
+            </p>
+
+            <p>
+                "Two silver."
+            </p>
+
+            <p>
+                "Keep the stopper tight."
+            </p>
+
+            <p>
+                The Lamp Oil is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+
+function buyBasicRepairKit() {
+
+    if (playerSilver < 4) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(4);
+
+    addItem("basic_repair_kit", "Basic Repair Kit", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram places a small repair kit on the counter.
+            </p>
+
+            <p>
+                "Four silver."
+            </p>
+
+            <p>
+                "Thread, patches, needles and a few bits of twine."
+            </p>
+
+            <p>
+                He gives the kit a tap.
+            </p>
+
+            <p>
+                "Nothing complicated."
+            </p>
+
+            <p>
+                "That's why it works."
+            </p>
+
+            <p>
+                The Basic Repair Kit is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
+    ]);
+
+}
+
+
+function buyBramSalt() {
+
+    if (playerSilver < 1) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Bram gives you a matter-of-fact shrug.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Bram's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(1);
+
+    addItem("salt_packet", "Salt Packet", "supplies");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Bram slides a small packet across the counter.
+            </p>
+
+            <p>
+                "One silver."
+            </p>
+
+            <p>
+                "It's salt."
+            </p>
+
+            <p>
+                He looks at you.
+            </p>
+
+            <p>
+                "Not much more to say about it."
+            </p>
+
+            <p>
+                The Salt Packet is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram's Goods"
     ]);
 
 }

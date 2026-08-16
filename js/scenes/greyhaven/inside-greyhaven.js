@@ -900,3 +900,657 @@ function browseSupplies() {
 
 }
 
+function visitDocksideTraders() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You follow the waterfront towards the cluster of canvas awnings.
+            </p>
+
+            <p>
+                The sound of the harbour fades slightly beneath the constant murmur of traders and customers.
+            </p>
+
+            <p>
+                Goods are piled beneath the awnings, stacked in crates, hung from hooks and spread across rough wooden tables.
+            </p>
+
+            <p>
+                Three stalls immediately catch your attention.
+            </p>
+
+            <p>
+                The first is remarkably orderly.
+            </p>
+
+            <p>
+                Everything has been arranged neatly, with a handwritten price board hanging behind a broad-shouldered man with a greying beard.
+            </p>
+
+            <p>
+                The second is far more colourful.
+            </p>
+
+            <p>
+                Fabrics, bottles and unfamiliar trinkets hang from every available surface.
+            </p>
+
+            <p>
+                A woman in a weathered travelling coat watches the passing crowds with an amused smile.
+            </p>
+
+            <p>
+                The third stall appears to have been constructed from whatever pieces of wood its owner could find.
+            </p>
+
+            <p>
+                Crates are stacked at odd angles beneath a patched canvas sheet.
+            </p>
+
+            <p>
+                A young man is currently halfway inside one of them.
+            </p>
+
+            <p>
+                He emerges holding something you can't quite identify.
+            </p>
+
+            <p>
+                He looks at it.
+            </p>
+
+            <p>
+                Then at you.
+            </p>
+
+            <p>
+                Then quickly puts it back.
+            </p>
+
+            <p>
+                There are three traders here.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🧔 Visit Bram's Stall",
+        "👩 Visit Sella's Stall",
+        "🧑‍🦱 Visit Tovin's Stall",
+        "↩️ Leave the Traders"
+    ]);
+
+}
+
+function visitBramStall() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram's stall is exactly as orderly as it looked from the walkway.
+            </p>
+
+            <p>
+                Everything has a place.
+            </p>
+
+            <p>
+                Wooden crates are stacked neatly beneath the awning, while smaller goods have been arranged in rows across the counter.
+            </p>
+
+            <p>
+                A handwritten price board hangs behind the stall.
+            </p>
+
+            <p>
+                Behind it stands the broad-shouldered merchant you noticed earlier.
+            </p>
+
+            <p>
+                His greying beard is neatly trimmed, though his weathered face suggests he's spent considerably more time outdoors than in.
+            </p>
+
+            <p>
+                A small brass bell sits on the counter.
+            </p>
+
+            <p>
+                You can't immediately see any reason for it to be there.
+            </p>
+
+            <p>
+                Bram notices you looking at it.
+            </p>
+
+            <p>
+                "Don't."
+            </p>
+
+            <p>
+                He goes back to arranging a row of small tools.
+            </p>
+
+            <p>
+                After a moment, he looks up.
+            </p>
+
+            <p>
+                "Buying something?"
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+    "🛒 Browse Bram's Goods",
+    "💬 Talk to Bram",
+    "🏘️ Ask about Greyhaven",
+    "🔔 Ask about the Bell",
+    "↩️ Leave the Stall"
+]);
+
+}
+
+function askBramAboutGreyhaven() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram folds his arms.
+            </p>
+
+            <p>
+                "Greyhaven?"
+            </p>
+
+            <p>
+                He looks out across the harbour.
+            </p>
+
+            <p>
+                "I've been here most of my life."
+            </p>
+
+            <p>
+                "Seen the town change. Seen people come and go."
+            </p>
+
+            <p>
+                He gives a small shrug.
+            </p>
+
+            <p>
+                "If you want to know something about Greyhaven, I might know."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Might."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚓ Ask about the harbour",
+        "🏘️ Ask about the town",
+        "👥 Ask about the locals",
+        "🌊 Ask about strange things he's seen",
+        "↩️ Back to Bram"
+    ]);
+
+}
+
+function bramHarbourKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram glances towards the harbour.
+            </p>
+
+            <p>
+                "What about it?"
+            </p>
+
+            <p>
+                He rests both hands on the counter.
+            </p>
+
+            <p>
+                "Been here longer than most of the buildings."
+            </p>
+
+            <p>
+                "The old harbour used to be further along the coast."
+            </p>
+
+            <p>
+                He points vaguely towards the ruins.
+            </p>
+
+            <p>
+                "Storm took most of it."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Or fire."
+            </p>
+
+            <p>
+                He scratches his beard.
+            </p>
+
+            <p>
+                "Could've been both."
+            </p>
+
+            <p>
+                "Either way, the town built this one afterwards."
+            </p>
+
+            <p>
+                Bram looks back towards the water.
+            </p>
+
+            <p>
+                "New harbour's been here ever since."
+            </p>
+
+            <p>
+                "Never had much trouble with it."
+            </p>
+
+            <p>
+                He pauses again.
+            </p>
+
+            <p>
+                "Not much."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Greyhaven Questions"
+    ]);
+
+}
+
+function bramTownKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram looks past you towards the streets climbing away from the harbour.
+            </p>
+
+            <p>
+                "Town's changed."
+            </p>
+
+            <p>
+                "Used to be smaller."
+            </p>
+
+            <p>
+                He gestures vaguely inland.
+            </p>
+
+            <p>
+                "Most of the older buildings are up that way."
+            </p>
+
+            <p>
+                "Market square's been there forever."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Or nearly forever."
+            </p>
+
+            <p>
+                "There was a fire once."
+            </p>
+
+            <p>
+                "Big one."
+            </p>
+
+            <p>
+                "Rebuilt most of the centre afterwards."
+            </p>
+
+            <p>
+                Bram shrugs.
+            </p>
+
+            <p>
+                "You can still tell which buildings survived."
+            </p>
+
+            <p>
+                He considers this for a moment.
+            </p>
+
+            <p>
+                "At least, I think you can."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Greyhaven Questions"
+    ]);
+
+}
+
+function bramLocalKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram gives a short laugh.
+            </p>
+
+            <p>
+                "Locals?"
+            </p>
+
+            <p>
+                "That's a dangerous question."
+            </p>
+
+            <p>
+                He leans against the counter.
+            </p>
+
+            <p>
+                "Everyone knows everyone here."
+            </p>
+
+            <p>
+                "Or thinks they do."
+            </p>
+
+            <p>
+                "Fishermen know the sailors. Sailors know the merchants. Merchants know everyone else's business."
+            </p>
+
+            <p>
+                He shakes his head.
+            </p>
+
+            <p>
+                "Best way to learn about someone is to ask somebody who doesn't like them."
+            </p>
+
+            <p>
+                "You'll get a completely different story."
+            </p>
+
+            <p>
+                Bram smiles.
+            </p>
+
+            <p>
+                "Usually more interesting, too."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Greyhaven Questions"
+    ]);
+
+}
+
+function bramStrangeKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram's expression changes slightly.
+            </p>
+
+            <p>
+                "Strange things?"
+            </p>
+
+            <p>
+                He looks towards the water.
+            </p>
+
+            <p>
+                "Depends what you mean by strange."
+            </p>
+
+            <p>
+                "Ships disappearing isn't strange."
+            </p>
+
+            <p>
+                "Storms aren't strange."
+            </p>
+
+            <p>
+                "People hearing voices when they've had too much rum isn't strange."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "But there was that one winter..."
+            </p>
+
+            <p>
+                Bram falls quiet for a moment.
+            </p>
+
+            <p>
+                "Fog came in."
+            </p>
+
+            <p>
+                "Stayed for three days."
+            </p>
+
+            <p>
+                "Couldn't see ten feet past the end of the dock."
+            </p>
+
+            <p>
+                He rubs his beard.
+            </p>
+
+            <p>
+                "People said they heard bells out on the water."
+            </p>
+
+            <p>
+                "Probably a buoy."
+            </p>
+
+            <p>
+                He looks towards the harbour.
+            </p>
+
+            <p>
+                "Probably."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Greyhaven Questions"
+    ]);
+
+}
+
+function bramBell() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You glance towards the brass bell on the counter.
+            </p>
+
+            <p>
+                "That?"
+            </p>
+
+            <p>
+                Bram looks at it.
+            </p>
+
+            <p>
+                "Old thing."
+            </p>
+
+            <p>
+                He picks it up.
+            </p>
+
+            <p>
+                "Had it years."
+            </p>
+
+            <p>
+                He turns it over in his hand.
+            </p>
+
+            <p>
+                "Can't remember where it came from."
+            </p>
+
+            <p>
+                He puts it back down.
+            </p>
+
+            <p>
+                "Doesn't work properly anyway."
+            </p>
+
+            <p>
+                You notice there is no visible clapper inside it.
+            </p>
+
+            <p>
+                Bram notices you looking.
+            </p>
+
+            <p>
+                "Don't."
+            </p>
+
+            <p>
+                He goes back to arranging his tools.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bram"
+    ]);
+
+}
+
+function browseBramGoods() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Bram gestures towards the neatly arranged shelves.
+            </p>
+
+            <p>
+                "Everything here is useful."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "That's generally the point."
+            </p>
+
+            <p>
+                "If you want something decorative, try Sella."
+            </p>
+
+            <p>
+                "If you want something questionable, try Tovin."
+            </p>
+
+            <p>
+                He nods towards his shelves.
+            </p>
+
+            <p>
+                "If you want something that works, you're in the right place."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🪢 Basic Rope — 4 silver",
+        "🧰 Simple Tool Set — 8 silver",
+        "🧤 Heavy Work Gloves — 3 silver",
+        "🔪 Utility Knife — 6 silver",
+        "🍞 Travel Rations — 3 silver",
+        "🛢️ Lamp Oil — 2 silver",
+        "🧵 Basic Repair Kit — 4 silver",
+        "🧂 Salt — 1 silver",
+        "↩️ Back to Bram"
+    ]);
+
+}

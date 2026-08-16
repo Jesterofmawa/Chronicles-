@@ -1,3 +1,5 @@
+let activeShop = null;
+
 function showChoices(choices) {
 
     let html = "";
@@ -259,6 +261,8 @@ if (choice === "↩️ That's all for now") {
 
 if (choice === "🪝 Browse Equipment") {
 
+activeShop = "myra";
+
     browseEquipment();
 
     return;
@@ -274,6 +278,8 @@ if (choice === "↩️ Back to the Shop") {
 }
 
 if (choice === "🏮 Browse Supplies") {
+
+activeShop = "myra";
 
     browseSupplies();
 
@@ -371,7 +377,7 @@ if (choice === "🪝 Bent Grappling Hook — 15 silver") {
 
 }
 
-if (choice === "🛢️ Lamp Oil — 2 silver") {
+if (activeShop === "myra" && choice === "🛢️ Lamp Oil — 2 silver") {
 
     buyLampOil();
 
@@ -379,7 +385,7 @@ if (choice === "🛢️ Lamp Oil — 2 silver") {
 
 }
 
-if (choice === "🍞 Travel Rations — 3 silver") {
+if (activeShop === "myra" && choice === "🍞 Travel Rations — 3 silver") {
 
     buyTravelRations();
 
@@ -411,7 +417,7 @@ if (choice === "🪝 Spare Hooks & Line — 2 silver") {
 
 }
 
-if (choice === "🧂 Salt Packet — 1 silver") {
+if (activeShop === "myra" && choice === "🧂 Salt Packet — 1 silver") {
 
     buySalt();
 
@@ -422,6 +428,224 @@ if (choice === "🧂 Salt Packet — 1 silver") {
 if (choice === "↩️ Back to Supplies") {
 
     browseSupplies();
+
+    return;
+
+}
+
+if (choice === "🛒 Browse the Dockside Traders") {
+
+    visitDocksideTraders();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Traders") {
+
+    lookAroundHarbour(true);
+
+    return;
+
+}
+
+if (choice === "🧔 Visit Bram's Stall") {
+
+    visitBramStall();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Stall") {
+
+    visitDocksideTraders();
+
+    return;
+
+}
+
+if (choice === "🏘️ Ask about Greyhaven") {
+
+    askBramAboutGreyhaven();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Greyhaven Questions") {
+
+    askBramAboutGreyhaven();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Bram") {
+
+    visitBramStall();
+
+    return;
+
+}
+
+if (choice === "⚓ Ask about the harbour") {
+
+    bramHarbourKnowledge();
+
+    return;
+
+}
+
+if (choice === "🏘️ Ask about the town") {
+
+    bramTownKnowledge();
+
+    return;
+
+}
+
+if (choice === "👥 Ask about the locals") {
+
+    bramLocalKnowledge();
+
+    return;
+
+}
+
+if (choice === "🌊 Ask about strange things he's seen") {
+
+    bramStrangeKnowledge();
+
+    return;
+
+}
+
+if (choice === "🔔 Ask about the Bell") {
+
+    bramBell();
+
+    return;
+
+}
+
+if (choice === "🛒 Browse Bram's Goods") {
+
+    browseBramGoods();
+
+activeShop = "bram";
+
+    return;
+
+}
+
+if (choice === "🪢 Basic Rope — 4 silver") {
+
+    buyBramRope();
+
+    return;
+
+}
+
+if (choice === "🧰 Simple Tool Set — 8 silver") {
+
+    buySimpleToolSet();
+
+    return;
+
+}
+
+if (choice === "🧤 Heavy Work Gloves — 3 silver") {
+
+    buyHeavyWorkGloves();
+
+    return;
+
+}
+
+if (choice === "🔪 Utility Knife — 6 silver") {
+
+    buyUtilityKnife();
+
+    return;
+
+}
+
+if (activeShop === "bram" && choice === "🍞 Travel Rations — 3 silver") {
+
+    buyBramTravelRations();
+
+    return;
+
+}
+
+if (activeShop === "bram" && choice === "🛢️ Lamp Oil — 2 silver") {
+
+    buyBramLampOil();
+
+    return;
+
+}
+
+if (choice === "🧵 Basic Repair Kit — 4 silver") {
+
+    buyBasicRepairKit();
+
+    return;
+
+}
+
+if (choice === "🧂 Salt — 1 silver") {
+
+    buyBramSalt();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Bram's Goods") {
+
+    browseBramGoods();
+
+    return;
+
+}
+
+if (choice === "🍞 Travel Rations — 3 silver") {
+
+    if (activeShop === "bram") {
+        buyBramTravelRations();
+    } else {
+        buyTravelRations();
+    }
+
+    return;
+
+}
+
+if (choice === "🛢️ Lamp Oil — 2 silver") {
+
+    if (activeShop === "bram") {
+        buyBramLampOil();
+    } else {
+        buyLampOil();
+    }
+
+    return;
+
+}
+
+if (choice === "🧵 Basic Repair Kit — 4 silver") {
+
+    buyBasicRepairKit();
+
+    return;
+
+}
+
+if (choice === "🧂 Salt — 1 silver") {
+
+    buyBramSalt();
 
     return;
 
