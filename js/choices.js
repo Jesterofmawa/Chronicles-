@@ -505,6 +505,126 @@ if (choice === "⚓ Ask about the harbour") {
 
 }
 
+if (choice === "⚓ Ask Tovin about the harbour") {
+
+    tovinHarbourKnowledge();
+
+    return;
+
+}
+
+if (choice === "👀 Ask what he means") {
+
+    tovinWhatHeMeans();
+
+    return;
+
+}
+
+if (choice === "🌊 Ask about the water") {
+
+    tovinWaterKnowledge();
+
+    return;
+
+}
+
+if (choice === "⚓ Ask Tovin about the old harbour") {
+
+    tovinOldHarbourKnowledge();
+
+    return;
+
+}
+
+if (choice === "👀 Ask Tovin what shouldn't be touched") {
+
+    tovinWhatShouldntBeTouched();
+
+    return;
+
+}
+
+if (choice === "💰 Ask Tovin what he has found there") {
+
+    tovinWhatHeFound();
+
+    return;
+
+}
+
+if (choice === "👀 Ask Tovin about the mark") {
+
+    tovinAboutTheMark();
+
+    return;
+
+}
+
+if (choice === "🧑‍🦱 Ask Tovin about something else") {
+
+    talkToTovin();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Tovin") {
+
+    visitTovinStall();
+
+    return;
+
+}
+
+if (choice === "🧭 Ask about his travels") {
+
+    tovinTravels();
+
+    return;
+
+}
+
+if (choice === "👀 Ask Tovin where he's been") {
+
+    tovinWhereHesBeen();
+
+    return;
+
+}
+
+if (choice === "💰 Ask where he gets his goods") {
+
+    tovinWhereHeGetsGoods();
+
+    return;
+
+}
+
+if (choice === "👀 Ask Tovin what he means by that") {
+
+    tovinWhatHeMeansByThat();
+
+    return;
+
+}
+
+if (choice === "👀 Ask about his strangest find") {
+
+    tovinStrangestFind();
+
+    return;
+
+}
+
+if (choice === "👀 Ask what happens when someone knocks back") {
+
+    tovinWhatHappensWhenKnockingBack();
+
+    return;
+
+}
+
 if (choice === "🏘️ Ask about the town") {
 
     bramTownKnowledge();
@@ -878,6 +998,22 @@ if (choice === "🗺️ Unmarked Map Fragment — 26 silver") {
 if (choice === "❓ Sealed Little Box — 15 silver") {
 
     buySellaSealedBox();
+
+    return;
+
+}
+
+if (choice === "🧑‍🦱 Visit Tovin's Stall") {
+
+    visitTovinStall();
+
+    return;
+
+}
+
+if (choice === "💬 Talk to Tovin") {
+
+    talkToTovin();
 
     return;
 

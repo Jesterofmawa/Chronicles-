@@ -2416,3 +2416,1054 @@ function browseSellaGoods() {
     ]);
 
 }
+
+function visitTovinStall() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin's stall looks less like a shop and more like someone emptied the contents of a shipwreck onto a table.
+            </p>
+
+            <p>
+                Bits of rope lie beside rusted tools.
+            </p>
+
+            <p>
+                Broken buckles, cracked bottles, old coins and pieces of things you cannot immediately identify are arranged in loose piles.
+            </p>
+
+            <p>
+                Some items are polished.
+            </p>
+
+            <p>
+                Others still have salt crusted into their edges.
+            </p>
+
+            <p>
+                The young man behind the stall catches you looking.
+            </p>
+
+            <p>
+                He grins.
+            </p>
+
+            <p>
+                "Everything's perfectly legitimate."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Mostly."
+            </p>
+
+            <p>
+                He gestures proudly at the collection.
+            </p>
+
+            <p>
+                "Found, traded, recovered..."
+            </p>
+
+            <p>
+                "Depends how you define found."
+            </p>
+
+        </div>
+
+    `;
+
+    tovinStallMenu();
+
+}
+
+function tovinStallMenu() {
+
+    showChoices([
+        "🛒 Browse Tovin's Goods",
+        "💬 Talk to Tovin",
+        "⚓ Ask where he gets his things",
+        "👀 Ask about his strangest find",
+        "↩️ Leave the Stall"
+    ]);
+
+}
+
+function talkToTovin() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin gives you a quick once-over.
+            </p>
+
+            <p>
+                "You're definitely not from around here."
+            </p>
+
+            <p>
+                He leans forward slightly.
+            </p>
+
+            <p>
+                "Which means you've probably got money."
+            </p>
+
+            <p>
+                He grins.
+            </p>
+
+            <p>
+                "Good news."
+            </p>
+
+            <p>
+                "I've got things you probably don't need."
+            </p>
+
+            <p>
+                He taps one finger against the stall.
+            </p>
+
+            <p>
+                "But you might want them anyway."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚓ Ask Tovin about the harbour",
+        "🧭 Ask about his travels",
+        "💰 Ask where he gets his goods",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinTravels() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin smiles.
+            </p>
+
+            <p>
+                "Travels?"
+            </p>
+
+            <p>
+                "Oh, I've been places."
+            </p>
+
+            <p>
+                He gestures towards the collection of junk surrounding him.
+            </p>
+
+            <p>
+                "Most of this didn't come from Greyhaven."
+            </p>
+
+            <p>
+                "I've worked aboard fishing boats. Merchant ships too."
+            </p>
+
+            <p>
+                "I've slept in ports where the buildings lean so badly you have to walk uphill just to stand straight."
+            </p>
+
+            <p>
+                He laughs.
+            </p>
+
+            <p>
+                "Best thing about travelling is you get to see how other places solve problems."
+            </p>
+
+            <p>
+                "Worst thing is discovering how many different ways there are to get robbed."
+            </p>
+
+            <p>
+                Tovin shrugs.
+            </p>
+
+            <p>
+                "Greyhaven's home, though."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "👀 Ask Tovin where he's been",
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhereHesBeen() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin scratches his chin.
+            </p>
+
+            <p>
+                "Let's see..."
+            </p>
+
+            <p>
+                "I started out along the northern coast. Little fishing villages mostly."
+            </p>
+
+            <p>
+                "That's where I learned boats."
+            </p>
+
+            <p>
+                He smiles.
+            </p>
+
+            <p>
+                "Then I spent a few years running cargo between the bigger ports."
+            </p>
+
+            <p>
+                "That's where I learned that something doesn't have to be useful to be valuable."
+            </p>
+
+            <p>
+                He glances over the collection of oddities on his stall.
+            </p>
+
+            <p>
+                "After that..."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Well, I've been further than most people around here."
+            </p>
+
+            <p>
+                Tovin gives you a crooked smile.
+            </p>
+
+            <p>
+                "Some places are better left off a map."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhereHeGetsGoods() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin looks down at his stall.
+            </p>
+
+            <p>
+                "Bit of everywhere."
+            </p>
+
+            <p>
+                He picks up a rusted brass fitting and turns it between his fingers.
+            </p>
+
+            <p>
+                "Some things I buy."
+            </p>
+
+            <p>
+                "Some things I trade for."
+            </p>
+
+            <p>
+                "Some things people don't want anymore."
+            </p>
+
+            <p>
+                He puts the fitting back.
+            </p>
+
+            <p>
+                "And some things..."
+            </p>
+
+            <p>
+                Tovin pauses.
+            </p>
+
+            <p>
+                "...I find."
+            </p>
+
+            <p>
+                He gives you an innocent smile.
+            </p>
+
+            <p>
+                "Nothing wrong with finding things."
+            </p>
+
+            <p>
+                "It's what you do with them afterwards that matters."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "👀 Ask Tovin what he means by that",
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinHarbourKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin glances towards the harbour.
+            </p>
+
+            <p>
+                "The harbour?"
+            </p>
+
+            <p>
+                He scratches his chin.
+            </p>
+
+            <p>
+                "Depends what you mean by the harbour."
+            </p>
+
+            <p>
+                "The bit everyone sees? Ships, fish, sailors shouting at each other?"
+            </p>
+
+            <p>
+                He shrugs.
+            </p>
+
+            <p>
+                "That's just the harbour."
+            </p>
+
+            <p>
+                His expression changes slightly.
+            </p>
+
+            <p>
+                "But there's plenty around here that sailors don't talk about."
+            </p>
+
+            <p>
+                He lowers his voice.
+            </p>
+
+            <p>
+                "Especially after dark."
+            </p>
+
+            <p>
+                Tovin looks back towards his stall.
+            </p>
+
+            <p>
+                "Then again..."
+            </p>
+
+            <p>
+                "I make my living finding things people don't talk about."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "👀 Ask what he means",
+        "🌊 Ask about the water",
+        "⚓ Ask Tovin about the old harbour",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhatHeMeans() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin gives you a sideways look.
+            </p>
+
+            <p>
+                "You know."
+            </p>
+
+            <p>
+                He gestures vaguely towards the water.
+            </p>
+
+            <p>
+                "Things that wash up where they shouldn't."
+            </p>
+
+            <p>
+                "Cargo that disappears between one dock and the next."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "And things that sailors swear they saw..."
+            </p>
+
+            <p>
+                "...until someone asks them to describe exactly what it was."
+            </p>
+
+            <p>
+                Tovin gives a small shrug.
+            </p>
+
+            <p>
+                "People see strange things at sea."
+            </p>
+
+            <p>
+                "Usually they blame the fog."
+            </p>
+
+            <p>
+                He grins.
+            </p>
+
+            <p>
+                "Fog gets blamed for an awful lot around here."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🌊 Ask about the water",
+        "⚓ Ask Tovin about the old harbour",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWaterKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin looks out across the harbour.
+            </p>
+
+            <p>
+                "The water's never been right."
+            </p>
+
+            <p>
+                He says it casually, almost as though he's commenting on the weather.
+            </p>
+
+            <p>
+                "Sometimes it'll go still when there isn't a breath of wind."
+            </p>
+
+            <p>
+                "Other times you'll hear knocking against the hulls."
+            </p>
+
+            <p>
+                He taps his fingers against the stall.
+            </p>
+
+            <p>
+                "Three knocks."
+            </p>
+
+            <p>
+                "Always three."
+            </p>
+
+            <p>
+                Tovin glances towards the water again.
+            </p>
+
+            <p>
+                "Old sailors say you shouldn't knock back."
+            </p>
+
+            <p>
+                He smiles.
+            </p>
+
+            <p>
+                "I've never been very good at listening to old sailors."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚓ Ask Tovin about the old harbour",
+        "👀 Ask what happens when someone knocks back",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinOldHarbourKnowledge() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin's grin fades a little.
+            </p>
+
+            <p>
+                "The old harbour?"
+            </p>
+
+            <p>
+                He glances towards the docks before answering.
+            </p>
+
+            <p>
+                "That's where the good stuff comes from."
+            </p>
+
+            <p>
+                He catches your expression.
+            </p>
+
+            <p>
+                "Not that I'd recommend going poking around there."
+            </p>
+
+            <p>
+                "Most of it isn't worth much."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "And some of it probably shouldn't be touched."
+            </p>
+
+            <p>
+                Tovin looks back at you.
+            </p>
+
+            <p>
+                "People still find things there, though."
+            </p>
+
+            <p>
+                "Things that shouldn't be there."
+            </p>
+
+            <p>
+                He gives you a crooked smile.
+            </p>
+
+            <p>
+                "That's about all I'll say."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "👀 Ask Tovin what shouldn't be touched",
+        "💰 Ask Tovin what he has found there",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhatShouldntBeTouched() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin studies you for a moment.
+            </p>
+
+            <p>
+                "You really do like asking questions."
+            </p>
+
+            <p>
+                He reaches beneath the counter and pulls out a small, rusted metal box.
+            </p>
+
+            <p>
+                He doesn't open it.
+            </p>
+
+            <p>
+                "Found this once."
+            </p>
+
+            <p>
+                "Old harbour. Half buried beneath the boards."
+            </p>
+
+            <p>
+                He turns it over in his hands.
+            </p>
+
+            <p>
+                "Never managed to open it."
+            </p>
+
+            <p>
+                Tovin's smile disappears.
+            </p>
+
+            <p>
+                "Didn't really want to."
+            </p>
+
+            <p>
+                He puts the box back beneath the counter.
+            </p>
+
+            <p>
+                "Some things are better left shut."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Ask Tovin what he has found there",
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhatHeFound() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin thinks for a moment.
+            </p>
+
+            <p>
+                "Bits of wreckage mostly."
+            </p>
+
+            <p>
+                "Coins. Cargo hooks. A few tools."
+            </p>
+
+            <p>
+                He shrugs.
+            </p>
+
+            <p>
+                "Nothing particularly exciting."
+            </p>
+
+            <p>
+                Then he hesitates.
+            </p>
+
+            <p>
+                "There was one thing."
+            </p>
+
+            <p>
+                His eyes flick towards the harbour.
+            </p>
+
+            <p>
+                "A piece of wood."
+            </p>
+
+            <p>
+                "Black as coal, but it didn't burn."
+            </p>
+
+            <p>
+                "Had a mark carved into it."
+            </p>
+
+            <p>
+                Tovin rubs his thumb across his palm.
+            </p>
+
+            <p>
+                "I sold it."
+            </p>
+
+            <p>
+                He gives you a sheepish smile.
+            </p>
+
+            <p>
+                "Probably shouldn't have."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "👀 Ask Tovin about the mark",
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinAboutTheMark() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "The mark?"
+            </p>
+
+            <p>
+                Tovin frowns, trying to remember.
+            </p>
+
+            <p>
+                "It was strange."
+            </p>
+
+            <p>
+                "Three lines, I think."
+            </p>
+
+            <p>
+                He traces an invisible shape on the counter with one finger.
+            </p>
+
+            <p>
+                "Or maybe three waves."
+            </p>
+
+            <p>
+                He shakes his head.
+            </p>
+
+            <p>
+                "Can't quite remember."
+            </p>
+
+            <p>
+                Tovin looks towards the harbour.
+            </p>
+
+            <p>
+                "Whoever bought it seemed to know what it meant, though."
+            </p>
+
+            <p>
+                He shrugs.
+            </p>
+
+            <p>
+                "That's all I know."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhatHeMeansByThat() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin raises an eyebrow.
+            </p>
+
+            <p>
+                "You mean the things I find?"
+            </p>
+
+            <p>
+                He smiles.
+            </p>
+
+            <p>
+                "Old wrecks. Abandoned sheds. Cargo that gets left behind."
+            </p>
+
+            <p>
+                "Places people don't bother looking anymore."
+            </p>
+
+            <p>
+                He leans against the stall.
+            </p>
+
+            <p>
+                "You'd be surprised what people throw away."
+            </p>
+
+            <p>
+                "Sometimes it's because they don't want it."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Sometimes it's because they don't know what they've got."
+            </p>
+
+            <p>
+                Tovin gives you a knowing grin.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinStrangestFind() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin's grin fades.
+            </p>
+
+            <p>
+                "Strangest?"
+            </p>
+
+            <p>
+                He thinks for a moment.
+            </p>
+
+            <p>
+                "There was a bell."
+            </p>
+
+            <p>
+                He reaches beneath the counter and produces a small brass bell.
+            </p>
+
+            <p>
+                It is old.
+            </p>
+
+            <p>
+                Far older than anything else on the stall.
+            </p>
+
+            <p>
+                "Found it tangled in some old fishing line."
+            </p>
+
+            <p>
+                Tovin turns it over in his hand.
+            </p>
+
+            <p>
+                "No clapper."
+            </p>
+
+            <p>
+                "Still rang."
+            </p>
+
+            <p>
+                He looks at you.
+            </p>
+
+            <p>
+                "Didn't make a sound."
+            </p>
+
+            <p>
+                Tovin puts the bell carefully back beneath the counter.
+            </p>
+
+            <p>
+                "Just..."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Made everything else go quiet."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
+
+function tovinWhatHappensWhenKnockingBack() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin's smile disappears.
+            </p>
+
+            <p>
+                "Nothing."
+            </p>
+
+            <p>
+                He waits a moment.
+            </p>
+
+            <p>
+                "Usually."
+            </p>
+
+            <p>
+                He lowers his voice.
+            </p>
+
+            <p>
+                "But once, I heard someone knock back."
+            </p>
+
+            <p>
+                "Three knocks."
+            </p>
+
+            <p>
+                Then three more came from underneath the water.
+            </p>
+
+            <p>
+                Tovin looks towards the harbour.
+            </p>
+
+            <p>
+                "Nobody was standing there."
+            </p>
+
+            <p>
+                He rubs his arms.
+            </p>
+
+            <p>
+                "The sailor who heard it wouldn't go near the docks again."
+            </p>
+
+            <p>
+                Tovin shrugs.
+            </p>
+
+            <p>
+                "Can't say I blame him."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🧑‍🦱 Ask Tovin about something else",
+        "↩️ Back to Tovin"
+    ]);
+
+}
