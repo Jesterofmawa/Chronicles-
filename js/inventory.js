@@ -2144,3 +2144,489 @@ function buySellaSealedBox() {
     ]);
 
 }
+
+function buyTovinSword() {
+
+    if (playerSilver < 90) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Tovin looks at the sword.
+                </p>
+
+                <p>
+                    "Ninety silver."
+                </p>
+
+                <p>
+                    He gives you a sympathetic smile.
+                </p>
+
+                <p>
+                    "I did warn you it was special."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Tovin's Goods"
+        ]);
+
+        return;
+
+    }
+
+    removeSilver(90);
+
+    addItem("ornate_sealed_sword", "Ornate Sword in Sealed Scabbard", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin carefully wraps the sword in a length of old cloth before handing it over.
+            </p>
+
+            <p>
+                "Ninety silver."
+            </p>
+
+            <p>
+                He watches you struggle slightly with its weight.
+            </p>
+
+            <p>
+                "Worth every coin."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Probably."
+            </p>
+
+            <p>
+                The Ornate Sword in Sealed Scabbard is added to your belongings.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function buyTovinSpyglass() {
+
+    if (playerSilver < 34) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Tovin looks at the spyglass.
+                </p>
+
+                <p>
+                    "Thirty-four silver."
+                </p>
+
+                <p>
+                    "It's a very good spyglass."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(34);
+
+    addItem("barnacled_spyglass", "Barnacled Brass Spyglass", "equipment");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You hand over the silver and take the spyglass.
+            </p>
+
+            <p>
+                Tovin gives you a satisfied nod.
+            </p>
+
+            <p>
+                "Thirty-four silver well spent."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}
+
+
+function buyTovinKey() {
+
+    if (playerSilver < 28) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for that.
+                </p>
+
+                <p>
+                    Tovin shrugs.
+                </p>
+
+                <p>
+                    "Someone'll buy it eventually."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(28);
+
+    addItem("unknown_harbour_key", "Key with No Known Lock", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You hand over the silver and take the old key.
+            </p>
+
+            <p>
+                Tovin pockets the coins with a grin.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}
+
+
+function buyTovinJournal() {
+
+    if (playerSilver < 32) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for the journal.
+                </p>
+
+                <p>
+                    Tovin shrugs.
+                </p>
+
+                <p>
+                    "Probably just as well. It's mostly ruined."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(32);
+
+    addItem("waterlogged_captains_journal", "Waterlogged Captain's Journal", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You take the waterlogged journal.
+            </p>
+
+            <p>
+                Tovin counts the silver before tucking it away.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}
+
+
+function buyTovinBlackSand() {
+
+    if (playerSilver < 24) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for the bottle.
+                </p>
+
+                <p>
+                    Tovin looks genuinely disappointed.
+                </p>
+
+                <p>
+                    "It's very unusual sand."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(24);
+
+    addItem("bottle_of_black_sand", "Bottle of Black Sand", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You take the small bottle.
+            </p>
+
+            <p>
+                The black sand shifts slowly inside.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}
+
+
+function buyTovinMedal() {
+
+    if (playerSilver < 27) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for the medal.
+                </p>
+
+                <p>
+                    Tovin shrugs.
+                </p>
+
+                <p>
+                    "Still going to be here."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(27);
+
+    addItem("corroded_naval_medal", "Corroded Naval Medal", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You take the corroded medal.
+            </p>
+
+            <p>
+                Tovin gives you a satisfied smile.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}
+
+
+function buyTovinDie() {
+
+    if (playerSilver < 19) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for the die.
+                </p>
+
+                <p>
+                    Tovin rolls it once across the counter.
+                </p>
+
+                <p>
+                    "Shame."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(19);
+
+    addItem("carved_bone_die", "Carved Bone Die", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You take the carved bone die.
+            </p>
+
+            <p>
+                Tovin pockets the silver.
+            </p>
+
+            <p>
+                "Lucky choice."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}
+
+
+function buyTovinBell() {
+
+    if (playerSilver < 45) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You don't have enough silver for the bell.
+                </p>
+
+                <p>
+                    Tovin looks disappointed.
+                </p>
+
+                <p>
+                    "It's very quiet."
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices(["↩️ Back to Tovin's Goods"]);
+
+        return;
+
+    }
+
+    removeSilver(45);
+
+    addItem("silent_brass_bell", "Silent Brass Bell", "unusual");
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <p>
+                You hand over the silver and take the silent bell.
+            </p>
+
+            <p>
+                Tovin watches you carefully.
+            </p>
+
+            <p>
+                "Don't lose that."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices(["↩️ Back to Tovin's Goods"]);
+
+}

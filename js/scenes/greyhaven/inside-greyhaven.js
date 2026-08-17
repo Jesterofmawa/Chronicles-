@@ -2483,12 +2483,186 @@ function visitTovinStall() {
 
 }
 
+function browseTovinGoods() {
+
+    activeShop = "tovin";
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin spreads his hands across the assortment of objects covering the stall.
+            </p>
+
+            <p>
+                "Everything here has a story."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Most of them are probably true."
+            </p>
+
+            <p>
+                He picks up a battered brass spyglass.
+            </p>
+
+            <p>
+                "Some things are useful."
+            </p>
+
+            <p>
+                He puts it down and gestures towards the stranger objects.
+            </p>
+
+            <p>
+                "Some things are interesting."
+            </p>
+
+            <p>
+                His eyes settle on the ornate sword in its scabbard.
+            </p>
+
+            <p>
+                "And some things..."
+            </p>
+
+            <p>
+                "...are worth far more than they look."
+            </p>
+
+            <p>
+                He smiles.
+            </p>
+
+            <p>
+                "Or at least that's what I'm charging."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚔️ Ornate Sword in Sealed Scabbard — 90 silver",
+        "🔭 Barnacled Brass Spyglass — 34 silver",
+        "🗝️ Key with No Known Lock — 28 silver",
+        "📖 Waterlogged Captain's Journal — 32 silver",
+        "🫙 Bottle of Black Sand — 24 silver",
+        "🏅 Corroded Naval Medal — 27 silver",
+        "🎲 Carved Bone Die — 19 silver",
+        "🔔 Silent Brass Bell — 45 silver",
+        "↩️ Back to Tovin's Stall"
+    ]);
+
+}
+
+function inspectTovinSword() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin carefully lifts the sword from beneath the stall.
+            </p>
+
+            <p>
+                Even in its worn condition, the scabbard is beautiful.
+            </p>
+
+            <p>
+                Intricate silverwork winds around dark, weathered leather, while faded blue enamel catches the light along its edges.
+            </p>
+
+            <p>
+                The pommel is equally ornate.
+            </p>
+
+            <p>
+                But there is something strange about it.
+            </p>
+
+            <p>
+                There is no obvious mechanism holding the blade in place.
+            </p>
+
+            <p>
+                Tovin grips the hilt.
+            </p>
+
+            <p>
+                "Can't draw it."
+            </p>
+
+            <p>
+                He gives the sword another determined tug.
+            </p>
+
+            <p>
+                Nothing.
+            </p>
+
+            <p>
+                "Tried everything."
+            </p>
+
+            <p>
+                He looks at you.
+            </p>
+
+            <p>
+                "Oil. Heat. A blacksmith. More oil."
+            </p>
+
+            <p>
+                He shrugs.
+            </p>
+
+            <p>
+                "Didn't move."
+            </p>
+
+            <p>
+                Tovin carefully returns it to the stall.
+            </p>
+
+            <p>
+                "So..."
+            </p>
+
+            <p>
+                "Either it's magical, cursed, or very expensive."
+            </p>
+
+            <p>
+                He smiles.
+            </p>
+
+            <p>
+                "Fortunately, I don't need to know which."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the sword — 90 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
 function tovinStallMenu() {
 
     showChoices([
         "🛒 Browse Tovin's Goods",
         "💬 Talk to Tovin",
-        "⚓ Ask where he gets his things",
         "👀 Ask about his strangest find",
         "↩️ Leave the Stall"
     ]);
@@ -3464,6 +3638,325 @@ function tovinWhatHappensWhenKnockingBack() {
     showChoices([
         "🧑‍🦱 Ask Tovin about something else",
         "↩️ Back to Tovin"
+    ]);
+
+}
+
+function inspectTovinSpyglass() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin picks up a battered brass spyglass.
+            </p>
+
+            <p>
+                Salt stains cover the metal and one of the lenses is slightly cloudy.
+            </p>
+
+            <p>
+                "Still works."
+            </p>
+
+            <p>
+                He peers through it towards the harbour.
+            </p>
+
+            <p>
+                "Mostly."
+            </p>
+
+            <p>
+                He lowers it.
+            </p>
+
+            <p>
+                "Thirty-four silver."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the spyglass — 34 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function inspectTovinKey() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin places a small iron key in your palm.
+            </p>
+
+            <p>
+                It is old and heavily worn.
+            </p>
+
+            <p>
+                A strange symbol has been scratched into the bow.
+            </p>
+
+            <p>
+                "Found it near the old harbour."
+            </p>
+
+            <p>
+                He shrugs.
+            </p>
+
+            <p>
+                "Never found the lock."
+            </p>
+
+            <p>
+                "Twenty-eight silver."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the key — 28 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function inspectTovinJournal() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin produces a swollen leather journal.
+            </p>
+
+            <p>
+                The pages are warped from seawater and several have stuck together.
+            </p>
+
+            <p>
+                "Captain's journal."
+            </p>
+
+            <p>
+                He taps the cover.
+            </p>
+
+            <p>
+                "Most of it's ruined."
+            </p>
+
+            <p>
+                He grins.
+            </p>
+
+            <p>
+                "But ruined things are usually cheaper."
+            </p>
+
+            <p>
+                "Thirty-two silver."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the journal — 32 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function inspectTovinBlackSand() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                A small glass bottle sits among Tovin's other curiosities.
+            </p>
+
+            <p>
+                Inside is a layer of fine black sand.
+            </p>
+
+            <p>
+                "Found it in a wreck."
+            </p>
+
+            <p>
+                Tovin shakes the bottle gently.
+            </p>
+
+            <p>
+                The sand slides slowly across the glass.
+            </p>
+
+            <p>
+                "Never seen sand quite like it."
+            </p>
+
+            <p>
+                "Twenty-four silver."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the black sand — 24 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function inspectTovinMedal() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin holds up a heavily corroded metal medal.
+            </p>
+
+            <p>
+                Most of the markings have been worn away.
+            </p>
+
+            <p>
+                "Naval, I think."
+            </p>
+
+            <p>
+                He turns it over.
+            </p>
+
+            <p>
+                "Old, anyway."
+            </p>
+
+            <p>
+                "Twenty-seven silver."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the medal — 27 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function inspectTovinDie() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin rolls a small carved bone die across the counter.
+            </p>
+
+            <p>
+                It is beautifully made, though the markings are unlike any dice you've seen before.
+            </p>
+
+            <p>
+                "Lucky."
+            </p>
+
+            <p>
+                He nods confidently.
+            </p>
+
+            <p>
+                "Probably."
+            </p>
+
+            <p>
+                "Nineteen silver."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the bone die — 19 silver",
+        "↩️ Back to Tovin's Goods"
+    ]);
+
+}
+
+function inspectTovinBell() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Tovin reaches beneath the counter and produces a small brass bell.
+            </p>
+
+            <p>
+                You recognise it from his story.
+            </p>
+
+            <p>
+                There is no clapper inside.
+            </p>
+
+            <p>
+                The metal is dark with age and faintly tarnished.
+            </p>
+
+            <p>
+                Tovin gives it a gentle shake.
+            </p>
+
+            <p>
+                Nothing.
+            </p>
+
+            <p>
+                "Forty-five silver."
+            </p>
+
+            <p>
+                He smiles.
+            </p>
+
+            <p>
+                "Best bell I've ever owned."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Buy the bell — 45 silver",
+        "↩️ Back to Tovin's Goods"
     ]);
 
 }

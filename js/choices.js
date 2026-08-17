@@ -1019,4 +1019,148 @@ if (choice === "💬 Talk to Tovin") {
 
 }
 
+if (choice === "🛒 Browse Tovin's Goods") {
+
+    browseTovinGoods();
+
+    return;
+
+}
+
+if (choice === "⚔️ Ornate Sword in Sealed Scabbard — 90 silver") {
+
+    inspectTovinSword();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the sword — 90 silver") {
+
+    buyTovinSword();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Tovin's Goods") {
+
+    browseTovinGoods();
+
+    return;
+
+}
+
+if (choice === "🔭 Barnacled Brass Spyglass — 34 silver") {
+
+    inspectTovinSpyglass();
+
+    return;
+
+}
+
+if (choice === "🗝️ Key with No Known Lock — 28 silver") {
+
+    inspectTovinKey();
+
+    return;
+
+}
+
+if (choice === "📖 Waterlogged Captain's Journal — 32 silver") {
+
+    inspectTovinJournal();
+
+    return;
+
+}
+
+if (choice === "🫙 Bottle of Black Sand — 24 silver") {
+
+    inspectTovinBlackSand();
+
+    return;
+
+}
+
+if (choice === "🏅 Corroded Naval Medal — 27 silver") {
+
+    inspectTovinMedal();
+
+    return;
+
+}
+
+if (choice === "🎲 Carved Bone Die — 19 silver") {
+
+    inspectTovinDie();
+
+    return;
+
+}
+
+if (choice === "🔔 Silent Brass Bell — 45 silver") {
+
+    inspectTovinBell();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the spyglass — 34 silver") {
+
+    buyTovinSpyglass();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the key — 28 silver") {
+
+    buyTovinKey();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the journal — 32 silver") {
+
+    buyTovinJournal();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the black sand — 24 silver") {
+
+    buyTovinBlackSand();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the medal — 27 silver") {
+
+    buyTovinMedal();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the bone die — 19 silver") {
+
+    buyTovinDie();
+
+    return;
+
+}
+
+if (choice === "💰 Buy the bell — 45 silver") {
+
+    buyTovinBell();
+
+    return;
+
+}
+
 }
