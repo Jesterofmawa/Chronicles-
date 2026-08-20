@@ -1,0 +1,98 @@
+<div id="titleScreen">
+
+    <h1>CHRONICLES</h1>
+
+    <p class="tagline">
+        Every story begins<br>
+        with a single step.
+    </p>
+
+    <button onclick="beginGame()">
+        Begin
+    </button>
+
+</div>
+
+<div id="pipIntro" style="display:none;">
+    
+    <div class="pip-roll">
+        
+        <h2>🐿️ Pip</h2>
+
+<div id="dialogueText"></div>
+
+<button id="continueButton" onclick="nextDialogue()">
+    Next
+</button>
+    
+</div>
+
+<div id="game" style="display:none;">
+    
+    
+    
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chronicles</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+
+    <h1>Chronicles</h1>
+
+<input
+    type="text"
+    id="memoryInput"
+    placeholder="Teach Pip something...">
+
+<button onclick="teachPip()">
+    Talk with Pip
+</button>
+
+<button onclick="testRoll('2d6')">
+    Roll Test
+</button>
+
+<button onclick="showChoices([
+'Attack',
+'Talk',
+'Search',
+'Run'
+])">
+    Test Choices
+</button>
+
+<button onclick="startStory()">
+    Start Story
+</button>
+
+<div id="story"></div>
+
+<div id="pip"></div>
+
+<div id="choices"></div>
+
+<script src="js/memory.js"></script>
+<script src="js/social.js"></script>
+<script src="js/knowledge.js"></script>
+<script src="js/chronicle.js"></script>
+<script src="js/library.js"></script>
+<script src="js/pip.js"></script>
+<script src="js/script.js"></script>
+<script src="js/title.js"></script>
+</body>
+<script src="js/rollmessages.js"></script>
+<script src="js/dice.js"></script>
+<script src="js/choices.js"></script>
+<script src="js/story.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/pipIntro.js"></script>
+<script src="js/title.js"></script>
+
+</html>
+

@@ -1,0 +1,120 @@
+{
+    "_library": {
+
+        "name": "The Great Library",
+
+        "version": "1.0",
+
+        "books": 4
+
+    },
+
+
+    "dragons": {
+
+        "title": "Dragons",
+
+        "category": "Creatures",
+
+        "path": "creatures/dragons.md",
+
+        "aliases": [
+            "dragon",
+            "drake",
+            "wyrm"
+        ]
+
+    },
+
+    "pirate": {
+
+        "title": "Pirates",
+
+        "category": "People",
+
+        "path": "people/pirate.md",
+
+        "aliases": [
+            "pirates",
+            "corsair",
+            "buccaneer"
+        ],
+        
+        "contains": [
+            "the age before the tide",
+            "first free captains",
+            "pirate code",
+            "black flags",
+            "black sails",
+            "captain vane",
+            "the crew without names",
+            "hidden ports",
+            "seas treasures",
+            "sea monsters",
+            "taverns of pirates",
+            "songs of the sea",
+            "the legacy of pirates"
+            ]
+            
+
+    },
+
+    "squirrel": {
+
+        "title": "Squirrels",
+
+        "category": "Creatures",
+
+        "path": "creatures/squirrel.md",
+
+        "aliases": [
+            "squirrels"
+        ]
+
+    }
+
+,
+"greyhaven": {
+
+    "title": "Greyhaven",
+
+    "category": "Places",
+
+    "path": "places/greyhaven.md",
+
+    "aliases": [
+        "greyhaven",
+        "grey haven",
+        "port"
+    ],
+    
+    "contains": [
+        "harbour",
+        "bellwatch church",
+        "old lighthouse",
+        "fishermans row",
+        "salt market",
+        "bent anchor tavern",
+        "widows bluff",
+        "black gull docks",
+        "founding",
+        "geography",
+        "climate",
+        "architecture",
+        "economy",
+        "government",
+        "religion",
+        "laws of greyhaven",
+        "festivals",
+        "storm eve",
+        "local superstitions",
+        "famous figures",
+        "creatures of the bay",
+        "sea beyond",
+        "the people of greyhaven",
+        "greatest secret"
+        ]
+
+}
+
+}

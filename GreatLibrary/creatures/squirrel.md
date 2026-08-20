@@ -1,0 +1,1 @@
+Squirrels are surprisingly clever climbers and excellent at remembering where they hide food.

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chronicles</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div id="titleScreen">
+
+    <h1>CHRONICLES</h1>
+
+    <p class="tagline">
+        Every story begins<br>
+        with a single step.
+    </p>
+
+    <button onclick="beginGame()">
+        Begin
+    </button>
+
+</div>
+
+<div id="mainMenu" style="display:none;">
+    
+    <div class="menu-panel">
+        
+        <h2>Chronicles</h2>
+        
+        <button onclick="startNewGame()">
+            New Game
+        </button>
+        
+        <button onclick="showFutureFeature('Continue')">
+            Continue
+        </button>
+        
+        <button onclick="showFutureFeature('Player Sheet')">
+            Player Sheet
+        </button>
+        
+        <button onclick="showFutureFeature('Inventory')">
+            Inventory
+        </button>
+        
+        <button onclick="showFutureFeature('Options')">
+            Options
+        </button>
+        
+    </div>
+    
+</div>
+
+<div id="futureFeatureScreen" style="display:none;">
+
+    <div class="menu-panel">
+
+        <h2 id="futureFeatureTitle">
+            Coming Soon
+        </h2>
+
+        <p>
+            This feature will be added during a future update.
+        </p>
+
+        <button onclick="returnToMenu()">
+            Back
+        </button>
+
+    </div>
+
+</div>
+
+<div id="storyOpening" style="display:none;">
+
+    <div class="story-opening-text">
+        Every story starts with just one step.
+    </div>
+
+</div>
+
+<div id="pipIntro" style="display:none;">
+
+    <div class="pip-roll">
+
+<img
+    id="pipWriting"
+    src="images/pip-writing.png"
+    alt="Pip writing in his journal"
+    class="pip-writing">
+
+<img
+    id="pipPortrait"
+    src="images/pip.png"
+    alt="Pip"
+    class="pip-portrait"
+style="display:none;">
+
+<img
+    id="storytellerPortrait"
+    src="images/storyteller-forward.png"
+    alt="The Storyteller"
+    class="storyteller-portrait"
+    style="display:none;">
+
+<h2 id="pipName" class="pip-name" style="display:none;">Pip</h2>
+
+        <div id="dialogueText"></div>
+
+        <button id="continueButton" onclick="nextDialogue()">
+            Next
+        </button>
+
+    </div>
+
+</div>
+
+
+    <div id="game" style="display:none;">
+
+    <h1>Chronicles</h1>
+
+
+    <!-- ========================= -->
+    <!-- STORY -->
+    <!-- ========================= -->
+
+    <div id="story"></div>
+
+
+    <!-- ========================= -->
+    <!-- PIP -->
+    <!-- ========================= -->
+
+    <div id="pip"></div>
+
+
+    <!-- ========================= -->
+    <!-- PIP CHAT -->
+    <!-- ========================= -->
+
+    <div id="pipChat" style="display:none;">
+
+        <input
+            type="text"
+            id="pipChatInput"
+            placeholder="Talk to Pip...">
+
+        <button onclick="sendPipMessage()">
+            Send
+        </button>
+
+        <button onclick="closePipChat()">
+            Close
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PLAYER CHOICES -->
+    <!-- ========================= -->
+
+    <div id="choices"></div>
+    
+    <div id="gameTools">
+
+    <button onclick="openInventory()">
+        🎒 Inventory
+    </button>
+
+    <button onclick="openCharacterSheet()">
+        📜 Character
+    </button>
+
+</div>
+
+
+    <!-- ========================= -->
+    <!-- DEVELOPER / TEST TOOLS -->
+    <!-- ========================= -->
+
+    <div id="developerTools">
+
+        <input
+            type="text"
+            id="memoryInput"
+            placeholder="Teach Pip something...">
+
+        <button onclick="teachPip()">
+            Talk with Pip
+        </button>
+
+        <button onclick="testRoll('2d6')">
+            Roll Test
+        </button>
+
+        <button onclick="showChoices([
+            'Attack',
+            'Talk',
+            'Search',
+            'Run'
+        ])">
+            Test Choices
+        </button>
+
+        <button onclick="startStory()">
+            Start Story
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Chronicles JavaScript: load order intentionally preserved. Keep content/data separate from engine systems. -->
+
+<script src="js/systems/memory.js"></script>
+
+<script src="js/pip/social.js"></script>
+
+<script src="js/pip/knowledge.js"></script>
+
+<script src="js/pip/chronicle.js"></script>
+
+<script src="js/library/library.js"></script>
+
+<script src="js/pip/pip.js"></script>
+
+<script src="js/pip/comments/observations.js"></script>
+
+<script src="js/pip/comments/townGreyhaven.js"></script>
+
+<script src="js/pip/pipComments.js"></script>
+
+<script src="js/scenes/greyhaven/arrival.js"></script>
+
+<script src="js/scenes/greyhaven/inside-greyhaven.js"></script>
+
+<script src="js/core/script.js"></script>
+
+<script src="js/systems/rollmessages.js"></script>
+
+<script src="js/systems/dice.js"></script>
+
+<script src="js/core/choices.js"></script>
+
+<script src="js/core/story.js"></script>
+
+<script src="js/core/dialogue.js"></script>
+
+<script src="js/pip/pipIntro.js"></script>
+
+<script src="js/systems/audio.js"></script>
+
+<script src="js/core/title.js"></script>
+
+<script src="js/systems/inventory.js"></script>
+
+</body>
+
+</html>
