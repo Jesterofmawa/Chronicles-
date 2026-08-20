@@ -4173,3 +4173,55 @@ function visitBentAnchor() {
     ]);
 
 }
+
+function talkToFisherman() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You approach one of the fishermen working near the harbour.
+            </p>
+
+            <p>
+                The conversation has yet to be written.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Greyhaven"
+    ]);
+
+}
+
+function lookForHarbourmaster() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You make your way towards the harbourmaster's office.
+            </p>
+
+            <p>
+                The harbourmaster is not here.
+            </p>
+
+            <p>
+                This scene has yet to be written.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Greyhaven"
+    ]);
+
+}

@@ -1275,4 +1275,28 @@ if (choice === "↩️ Back to Explore the Streets") {
 
 }
 
+if (choice === "🧔 Talk to a Fisherman") {
+
+    talkToFisherman();
+
+    return;
+
+}
+
+if (choice === "📚 Look for the Harbourmaster") {
+
+    lookForHarbourmaster();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Greyhaven") {
+
+    enterInsideGreyhaven();
+
+    return;
+
+}
+
 }
