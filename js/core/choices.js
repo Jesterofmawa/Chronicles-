@@ -1275,6 +1275,4 @@ if (choice === "↩️ Back to Explore the Streets") {
 
 }
 
-
-
 }
