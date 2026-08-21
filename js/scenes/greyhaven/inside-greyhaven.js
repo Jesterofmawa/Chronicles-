@@ -106,9 +106,10 @@ function exploreGreyhaven() {
     `;
 
     showChoices([
-        "🏘️ Explore the Streets",
-        "↩️ Return to Greyhaven"
-    ]);
+    "🏘️ Explore the Streets",
+    "🌊 Head towards the Beach",
+    "↩️ Return to Greyhaven"
+]);
 
 }
 
@@ -4076,7 +4077,7 @@ function visitSaltMarket() {
 
 
 function visitBellwatchChurch() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -4086,7 +4087,29 @@ function visitBellwatchChurch() {
             </p>
 
             <p>
-                This part of Greyhaven has yet to be explored.
+                The church has yet to be fully explored.
+            </p>
+
+        </div>
+
+    `;
+    
+    showChoices([
+        "👀 Look Around the Church",
+        "📜 Search for the Old Records",
+        "↩️ Leave Bellwatch Church"
+    ]);
+    
+}
+
+function lookAroundBellwatchChurch() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The interior of Bellwatch Church has yet to be explored.
             </p>
 
         </div>
@@ -4094,7 +4117,28 @@ function visitBellwatchChurch() {
     `;
 
     showChoices([
-        "↩️ Back to Explore the Streets"
+        "↩️ Back to Bellwatch Church"
+    ]);
+
+}
+
+
+function searchForOldRecords() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The old records have yet to be explored.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Bellwatch Church"
     ]);
 
 }
@@ -4149,33 +4193,8 @@ function visitBlackGullDocks() {
 
 }
 
-
-function visitBentAnchor() {
-
-    document.getElementById("story").innerHTML = `
-
-        <div class="story-panel">
-
-            <p>
-                The Bent Anchor stands somewhere among the older streets of Greyhaven.
-            </p>
-
-            <p>
-                This part of Greyhaven has yet to be explored.
-            </p>
-
-        </div>
-
-    `;
-
-    showChoices([
-        "↩️ Back to Explore the Streets"
-    ]);
-
-}
-
 function talkToFisherman() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -4185,21 +4204,29 @@ function talkToFisherman() {
             </p>
 
             <p>
-                The conversation has yet to be written.
+                He pauses from his work and looks you over.
+            </p>
+
+            <p>
+                There are plenty of things you could ask him about.
             </p>
 
         </div>
 
     `;
-
+    
     showChoices([
-        "↩️ Back to Greyhaven"
+        "🗣️ Speak with the Fisherman",
+        "🏘️ Ask the Fisherman about Greyhaven",
+        "⚓ Ask the Fisherman about the Old Harbour",
+        "🌊 Ask the Fisherman about the Sea",
+        "↩️ Leave the Fisherman"
     ]);
-
+    
 }
 
 function lookForHarbourmaster() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -4209,11 +4236,35 @@ function lookForHarbourmaster() {
             </p>
 
             <p>
-                The harbourmaster is not here.
+                The office is empty.
             </p>
 
             <p>
-                This scene has yet to be written.
+                The harbourmaster is nowhere to be found.
+            </p>
+
+        </div>
+
+    `;
+    
+    showChoices([
+        "↩️ Back to Greyhaven"
+    ]);
+    
+}
+
+function visitFishMarket() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fish market occupies a busy stretch of the harbour, where the day's catch is brought ashore.
+            </p>
+
+            <p>
+                The fish market has yet to be explored.
             </p>
 
         </div>
@@ -4221,7 +4272,273 @@ function lookForHarbourmaster() {
     `;
 
     showChoices([
-        "↩️ Back to Greyhaven"
+        "↩️ Back to the Harbour"
+    ]);
+
+}
+
+function visitCharts() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Charts of Greyhaven and the surrounding waters are spread across a section of the harbour.
+            </p>
+
+            <p>
+                The charts have yet to be explored.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Harbour"
+    ]);
+
+}
+
+function visitHarbourmastersOffice() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The Harbourmaster's Office stands overlooking the working harbour.
+            </p>
+
+            <p>
+                Charts, ledgers and shipping records cover the walls and shelves.
+            </p>
+
+            <p>
+                The office appears to be unattended.
+            </p>
+
+            <p>
+                The harbourmaster is nowhere to be found.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Harbour"
+    ]);
+
+}
+
+function visitBentAnchor() {
+    
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The Bent Anchor is one of Greyhaven's older taverns.
+            </p>
+
+            <p>
+                The tavern is yet to be explored.
+            </p>
+
+        </div>
+
+    `;
+    
+    showChoices([
+        "👀 Look Around the Tavern",
+        "🗣️ Talk to the Innkeeper",
+        "🍺 Talk to the Patrons",
+        "↩️ Leave the Tavern"
+    ]);
+    
+}
+
+function headTowardsBeach() {
+    
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The road descends towards the coast.
+            </p>
+
+            <p>
+                Greyhaven falls behind you as the sound of the sea grows louder.
+            </p>
+
+            <p>
+                Ahead lies a broad stretch of rocky beach.
+            </p>
+
+        </div>
+
+    `;
+    
+    showChoices([
+        "👀 Explore the Beach",
+        "🔎 Investigate the Area",
+        "🪨 Explore the Rocks",
+        "🗼 Follow the Coast",
+        "↩️ Return to Greyhaven"
+    ]);
+    
+}
+
+
+
+function lookAroundBentAnchor() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The tavern's interior has yet to be explored.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Tavern"
+    ]);
+
+}
+
+
+function talkToInnkeeper() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The innkeeper has yet to be introduced.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Tavern"
+    ]);
+
+}
+
+
+function talkToTavernPatrons() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The tavern patrons have yet to be introduced.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Tavern"
+    ]);
+
+}
+
+function speakWithFisherman() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fisherman listens.
+            </p>
+
+            <p>
+                His conversation has yet to be written.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Fisherman"
+    ]);
+
+}
+
+
+function askFishermanAboutGreyhaven() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fisherman has yet to answer questions about Greyhaven.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Fisherman"
+    ]);
+
+}
+
+
+function askFishermanAboutOldHarbour() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fisherman has yet to answer questions about the Old Harbour.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Fisherman"
+    ]);
+
+}
+
+
+function askFishermanAboutTheSea() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fisherman has yet to answer questions about the sea.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Fisherman"
     ]);
 
 }

@@ -1299,4 +1299,260 @@ if (choice === "↩️ Back to Greyhaven") {
 
 }
 
+if (choice === "🐟 Visit the Fish Market") {
+
+    visitFishMarket();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Harbour") {
+
+    lookAroundHarbour();
+
+    return;
+
+}
+
+if (choice === "🧭 Look at the Charts") {
+
+    visitCharts();
+
+    return;
+
+}
+
+if (choice === "📚 Visit the Harbourmaster's Office") {
+
+    visitHarbourmastersOffice();
+
+    return;
+
+}
+
+if (choice === "🍺 The Bent Anchor") {
+
+    visitBentAnchor();
+
+    return;
+
+}
+
+if (choice === "🌊 Head towards the Beach") {
+
+    headTowardsBeach();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Explore Greyhaven") {
+
+    exploreGreyhaven();
+
+    return;
+
+}
+
+if (choice === "🎒 Take the Dagger") {
+
+    addItem("old_iron_dagger", "Old Iron Dagger", "equipment");
+
+    showChoices([
+        "↩️ Back to the Old Harbour"
+    ]);
+
+    return;
+
+}
+
+if (choice === "🎒 Take the Key") {
+
+    addItem("old_harbour_key", "Old Harbour Key", "unusual");
+
+    showChoices([
+        "↩️ Back to the Old Harbour"
+    ]);
+
+    return;
+
+}
+
+if (choice === "↩️ Leave Greyhaven") {
+
+    startGreyhaven();
+
+    return;
+
+}
+
+if (choice === "👀 Look Around the Tavern") {
+
+    lookAroundBentAnchor();
+
+    return;
+
+}
+
+if (choice === "🗣️ Talk to the Innkeeper") {
+
+    talkToInnkeeper();
+
+    return;
+
+}
+
+if (choice === "🍺 Talk to the Patrons") {
+
+    talkToTavernPatrons();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Tavern") {
+
+    visitBentAnchor();
+
+    return;
+
+}
+
+if (choice === "🗣️ Speak with the Fisherman") {
+
+    speakWithFisherman();
+
+    return;
+
+}
+
+if (choice === "⚓ Ask the Fisherman about the Old Harbour") {
+
+    askFishermanAboutOldHarbour();
+
+    return;
+
+}
+
+if (choice === "🏘️ Ask the Fisherman about Greyhaven") {
+
+    askFishermanAboutGreyhaven();
+
+    return;
+
+}
+
+if (choice === "🌊 Ask the Fisherman about the Sea") {
+
+    askFishermanAboutTheSea();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Fisherman") {
+
+    talkToFisherman();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Fisherman") {
+
+    startGreyhaven();
+
+    return;
+
+}
+
+if (choice === "👀 Look Around the Church") {
+
+    lookAroundBellwatchChurch();
+
+    return;
+
+}
+
+if (choice === "📜 Search for the Old Records") {
+
+    searchForOldRecords();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Bellwatch Church") {
+
+    visitBellwatchChurch();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave Bellwatch Church") {
+
+    exploreGreyhavenStreets();
+
+    return;
+
+}
+
+if (choice === "👀 Explore the Beach") {
+
+    exploreGreyhavenBeach();
+
+    return;
+
+}
+
+if (choice === "🔎 Investigate the Area") {
+
+    investigateBeachArea();
+
+    return;
+
+}
+
+if (choice === "🪨 Explore the Rocks") {
+
+    exploreBeachRocks();
+
+    return;
+
+}
+
+if (choice === "🗼 Follow the Coast") {
+
+   followCoastToLighthouse();
+
+    return;
+
+}
+
+if (choice === "👀 Explore the Beach") {
+
+    exploreGreyhavenBeach();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Beach") {
+
+    headTowardsBeach();
+
+    return;
+
+}
+
+if (choice === "🔎 Investigate the Area") {
+
+    investigateBeachArea();
+
+    return;
+
+}
+
 }
