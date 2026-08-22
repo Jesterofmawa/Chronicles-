@@ -23,7 +23,9 @@ let playerEquipment = {
     weapon: {
     id: "short_sword",
     name: "Short Sword",
-    effect: null
+    damage: "1d6",
+    effect: null,
+    equipSlot: "weapon"
 },
 
     offhand: null
@@ -50,7 +52,14 @@ const equipmentSlots = {
 
 };
 
-function addItem(id, name, category, identified = true, equipSlot = null) {
+function addItem(
+    id,
+    name,
+    category,
+    identified = true,
+    equipSlot = null,
+    damage = null
+) {
 
     const existingItem = playerInventory.find(item => item.id === id);
 
@@ -66,7 +75,8 @@ function addItem(id, name, category, identified = true, equipSlot = null) {
             category: category,
             quantity: 1,
             identified: identified,
-            equipSlot: equipSlot
+            equipSlot: equipSlot,
+            damage: damage
         });
 
     }
@@ -177,7 +187,8 @@ function equipItem(itemId, slot) {
     id: item.id,
     name: item.name,
     effect: item.effect || null,
-    equipSlot: item.equipSlot || null
+    equipSlot: item.equipSlot || null,
+    damage: item.damage || null
 };
     
     return true;
@@ -244,22 +255,22 @@ function replaceEquipment(itemId, slot) {
     
     // Return the old item to inventory.
     addItem(
-        oldItem.id,
-        oldItem.name,
-        "equipment",
-        true,
-        oldItem.equipSlot || null
-    );
+    oldItem.id,
+    oldItem.name,
+    "equipment",
+    true,
+    oldItem.equipSlot || null,
+    oldItem.damage || null
+);
     
     // Equip the new item.
     playerEquipment[slot] = {
-        
-        id: item.id,
-        name: item.name,
-        effect: item.effect || null,
-        equipSlot: item.equipSlot || null
-        
-    };
+    id: item.id,
+    name: item.name,
+    effect: item.effect || null,
+    equipSlot: item.equipSlot || null,
+    damage: item.damage || null
+};
     
     return true;
     
@@ -280,12 +291,13 @@ function unequipItem(slot) {
     }
     
     addItem(
-        equippedItem.id,
-        equippedItem.name,
-        "equipment",
-        true,
-        equippedItem.equipSlot || null
-    );
+    equippedItem.id,
+    equippedItem.name,
+    "equipment",
+    true,
+    equippedItem.equipSlot || null,
+    equippedItem.damage || null
+);
     
     playerEquipment[slot] = null;
     
@@ -3184,5 +3196,20 @@ function closeCharacterSheet() {
         panel.remove();
 
     }
+
+}
+
+// TEMPORARY TEST — REMOVE AFTER COMBAT TEST
+
+if (!hasItem("test_axe")) {
+
+    addItem(
+        "test_axe",
+        "Test Axe",
+        "equipment",
+        true,
+        "weapon",
+        "1d10"
+    );
 
 }

@@ -151,6 +151,26 @@ function startCombat(enemies) {
 
 pausePipObservations();
 
+    // =====================================
+    // GET EQUIPPED WEAPON
+    // =====================================
+
+    if (playerEquipment.weapon) {
+
+        combatPlayer.weapon = {
+            ...playerEquipment.weapon
+        };
+
+    } else {
+
+        combatPlayer.weapon = {
+            id: "unarmed",
+            name: "Unarmed",
+            damage: "1d4"
+        };
+
+    }
+
     combatActive = true;
     combatResult = null;
 
@@ -1066,8 +1086,9 @@ const pipReaction =
                 <h2>⚔️ Attack Roll</h2>
 
                 <p>
-                    You attack <strong>${enemy.name}</strong>.
-                </p>
+    You attack <strong>${enemy.name}</strong>
+    with your <strong>${combatPlayer.weapon.name}</strong>.
+</p>
 
                 ${attackRoll.html}
 
@@ -1116,9 +1137,10 @@ const pipReaction =
 
                 <h2>⚔️ Attack Roll</h2>
 
-                <p>
-                    You attack <strong>${enemy.name}</strong>.
-                </p>
+<p>
+    You attack <strong>${enemy.name}</strong>
+    with your <strong>${combatPlayer.weapon.name}</strong>.
+</p>
 
                 ${attackRoll.html}
 
@@ -1166,8 +1188,9 @@ ${pipReaction}
             <h2>⚔️ Attack Roll</h2>
 
             <p>
-                You attack <strong>${enemy.name}</strong>.
-            </p>
+    You attack <strong>${enemy.name}</strong>
+    with your <strong>${combatPlayer.weapon.name}</strong>.
+</p>
 
             ${attackRoll.html}
 
@@ -1357,14 +1380,27 @@ function resolvePlayerDamage() {
     }
 
 
-    let damageExpression = "1d6";
+    let damageExpression =
+    combatPlayer.weapon.damage || "1d6";
 
 
     if (currentAttack.critical) {
-
-        damageExpression = "2d6";
-
+    
+    const match = damageExpression.match(
+        /^(\d+)d(\d+)$/
+    );
+    
+    if (match) {
+        
+        const diceCount = Number(match[1]);
+        const diceSize = match[2];
+        
+        damageExpression =
+            `${diceCount * 2}d${diceSize}`;
+        
     }
+    
+}
 
 
     const damageRoll = createPipRoll(damageExpression);
