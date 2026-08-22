@@ -480,3 +480,13 @@ function remember(key, value, type) {
     }
 
 }
+
+// =========================
+// CHECK LONG-TERM MEMORY
+// =========================
+
+function hasLongTermMemory(key) {
+
+    return longTerm[key] !== undefined;
+
+}

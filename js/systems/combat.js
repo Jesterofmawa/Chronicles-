@@ -28,6 +28,14 @@ let combatResult = null;
 
 let playerDefending = false;
 
+let combatPipReactions = {
+    criticalHit: false,
+    criticalFailure: false,
+    heavyDamage: false,
+    creatureDesperate: false,
+    playerBadlyWounded: false
+};
+
 let currentAttack = {
     enemy: null,
     attackRoll: null,
@@ -69,10 +77,89 @@ function createGreyhavenSeaCreature() {
 
 }
 
+// =====================================
+// PIP — GREYHAVEN SEA CREATURE
+// =====================================
+
+function getGreyhavenCreaturePipComment() {
+
+    if (
+        hasLongTermMemory(
+            "greyhaven_strange_material_discovered"
+        )
+    ) {
+
+        return `
+
+            <div class="story-panel">
+
+                <p>
+                    🐿️ <strong>Pip stares at the creature.</strong>
+                </p>
+
+                <p>
+                    "Wait..."
+                </p>
+
+                <p>
+                    His ears flatten.
+                </p>
+
+                <p>
+                    "That skin."
+                </p>
+
+                <p>
+                    "We've seen that before."
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div class="story-panel">
+
+            <p>
+                🐿️ <strong>Pip goes very quiet.</strong>
+            </p>
+
+            <p>
+                His eyes follow the creature.
+            </p>
+
+            <p>
+                "That's... not a fish."
+            </p>
+
+            <p>
+                "I don't think it's supposed to be here."
+            </p>
+
+        </div>
+
+    `;
+
+}
+
 function startCombat(enemies) {
+
+pausePipObservations();
 
     combatActive = true;
     combatResult = null;
+
+combatPipReactions = {
+    criticalHit: false,
+    criticalFailure: false,
+    heavyDamage: false,
+    creatureDesperate: false,
+    playerBadlyWounded: false
+};
 
 combatEncounter = enemies.map(enemy => ({
     ...enemy
@@ -191,25 +278,33 @@ function showInitiativeResults() {
 
     document.getElementById("story").innerHTML = `
 
-        <div class="story-panel">
+    <div class="story-panel">
 
-            <h2>⚔️ Combat Begins</h2>
+        <h2>⚔️ Combat Begins</h2>
 
-            <p>
-                Initiative is rolled.
-            </p>
+        <p>
+            Initiative is rolled.
+        </p>
 
-            ${initiativeText}
+        ${initiativeText}
 
-            <p>
-                <strong>
-                    ${combatTurnOrder[0].name} goes first.
-                </strong>
-            </p>
+        <p>
+            <strong>
+                ${combatTurnOrder[0].name} goes first.
+            </strong>
+        </p>
 
-        </div>
+    </div>
 
-    `;
+    ${
+        combatEnemies.some(
+            enemy => enemy.id === "greyhaven_sea_creature"
+        )
+        ? getGreyhavenCreaturePipComment()
+        : ""
+    }
+
+`;
 
 
     showChoices([
@@ -627,16 +722,25 @@ function enemyDamageRoll() {
 
     }
 
+combatPlayer.hp -= damage;
 
-    combatPlayer.hp -= damage;
+if (combatPlayer.hp < 0) {
 
+    combatPlayer.hp = 0;
 
-    if (combatPlayer.hp < 0) {
+}
 
-        combatPlayer.hp = 0;
+let pipWoundedReaction = "";
 
-    }
+if (
+    combatPlayer.hp > 0 &&
+    combatPlayer.hp <= Math.floor(combatPlayer.maxHp * 0.25)
+) {
 
+    pipWoundedReaction =
+        getCombatPipReaction("playerBadlyWounded");
+
+}
 
     document.getElementById("story").innerHTML = `
 
@@ -676,6 +780,8 @@ function enemyDamageRoll() {
             </p>
 
         </div>
+
+${pipWoundedReaction}
 
     `;
 
@@ -775,6 +881,9 @@ function playerAttack() {
 
         currentAttack.result = "critical_failure";
 
+const pipReaction =
+    getCombatPipReaction("criticalFailure");
+
         document.getElementById("story").innerHTML = `
 
             <div class="story-panel">
@@ -801,6 +910,8 @@ function playerAttack() {
 
             </div>
 
+${pipReaction}
+
         `;
 
         showChoices([
@@ -820,6 +931,9 @@ function playerAttack() {
 
         currentAttack.result = "critical_hit";
         currentAttack.critical = true;
+
+const pipReaction =
+    getCombatPipReaction("criticalHit");
 
         document.getElementById("story").innerHTML = `
 
@@ -850,6 +964,8 @@ function playerAttack() {
                 </p>
 
             </div>
+
+${pipReaction}
 
         `;
 
@@ -1106,6 +1222,15 @@ function resolvePlayerDamage() {
         enemy.currentHp = 0;
 
     }
+    
+    let pipHeavyDamageReaction = "";
+
+if (currentAttack.damage >= 5) {
+
+    pipHeavyDamageReaction =
+        getCombatPipReaction("heavyDamage");
+
+}
 
 
     // =====================================
@@ -1163,6 +1288,8 @@ function resolvePlayerDamage() {
             </p>
 
         </div>
+
+${pipHeavyDamageReaction}
 
     `;
 
@@ -1753,5 +1880,118 @@ function useCombatFirstAidKit() {
         advanceCombatTurn();
 
     }, COMBAT_DELAY);
+
+}
+
+// =====================================
+// PIP — COMBAT REACTIONS
+// =====================================
+
+function getCombatPipReaction(type) {
+
+    if (combatPipReactions[type]) {
+
+        return "";
+
+    }
+
+    combatPipReactions[type] = true;
+
+
+    if (type === "criticalHit") {
+
+        return `
+
+            <div class="story-panel">
+
+                <p>
+                    🐿️ <strong>Pip:</strong>
+                    "Ha! Yes!"
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (type === "criticalFailure") {
+
+        return `
+
+            <div class="story-panel">
+
+                <p>
+                    🐿️ <strong>Pip:</strong>
+                    "...Oh."
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (type === "heavyDamage") {
+
+        return `
+
+            <div class="story-panel">
+
+                <p>
+                    🐿️ <strong>Pip:</strong>
+                    "Oh. That definitely hurt it."
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (type === "creatureDesperate") {
+
+        return `
+
+            <div class="story-panel">
+
+                <p>
+                    🐿️ <strong>Pip:</strong>
+                    "It's getting desperate."
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (type === "playerBadlyWounded") {
+
+        return `
+
+            <div class="story-panel">
+
+                <p>
+                    🐿️ <strong>Pip:</strong>
+                    "You're hurt."
+                </p>
+
+                <p>
+                    "Really hurt."
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    return "";
 
 }
