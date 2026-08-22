@@ -1,0 +1,1730 @@
+const COMBAT_DELAY = 3000;
+
+// =====================================
+// CHRONICLES COMBAT SYSTEM
+// =====================================
+
+// Combat state
+
+let combatActive = false;
+
+let combatPlayer = {
+    name: "Player",
+    hp: 20,
+    maxHp: 20,
+    weapon: {
+        id: "standard_sword",
+        name: "Standard Sword",
+        damage: "1d6"
+    }
+};
+
+let combatEnemies = [];
+let combatEncounter = [];
+let combatTurnOrder = [];
+let combatTurnIndex = 0;
+
+let combatResult = null;
+
+let playerDefending = false;
+
+let currentAttack = {
+    enemy: null,
+    attackRoll: null,
+    defenceRoll: null,
+    damageRoll: null,
+    result: null,
+    damage: 0,
+    critical: false
+};
+
+// =====================================
+// START COMBAT
+// =====================================
+
+function startCombat(enemies) {
+
+    combatActive = true;
+    combatResult = null;
+
+combatEncounter = enemies.map(enemy => ({
+    ...enemy
+}));
+
+    combatPlayer.hp = combatPlayer.maxHp;
+
+    combatEnemies = enemies.map(enemy => ({
+        ...enemy,
+        currentHp: enemy.maxHp,
+        defeated: false,
+        initiative: null
+    }));
+
+    combatTurnOrder = [];
+    combatTurnIndex = 0;
+
+    rollCombatInitiative();
+
+}
+
+
+// =====================================
+// INITIATIVE
+// =====================================
+
+function rollCombatInitiative() {
+
+    let initiativeResults = [];
+
+    // Player initiative
+
+    const playerRoll = createPipRoll("1d20");
+
+    initiativeResults.push({
+        type: "player",
+        name: combatPlayer.name,
+        roll: playerRoll.result.total
+    });
+
+
+    // Enemy initiative
+
+    combatEnemies.forEach((enemy, index) => {
+
+        const enemyRoll = createPipRoll("1d20");
+
+        enemy.initiative = enemyRoll.result.total;
+
+        initiativeResults.push({
+            type: "enemy",
+            index: index,
+            name: enemy.name,
+            roll: enemyRoll.result.total
+        });
+
+    });
+
+
+    // Check for ties
+
+    const rollValues = initiativeResults.map(result => result.roll);
+
+    const duplicateRolls = rollValues.filter(
+        (roll, index) => rollValues.indexOf(roll) !== index
+    );
+
+
+    // If there is an initiative tie, roll again.
+
+    if (duplicateRolls.length > 0) {
+
+        rollCombatInitiative();
+
+        return;
+
+    }
+
+
+    // Sort highest initiative first.
+
+    initiativeResults.sort((a, b) => b.roll - a.roll);
+
+    combatTurnOrder = initiativeResults;
+
+    combatTurnIndex = 0;
+
+    showInitiativeResults();
+
+}
+
+
+// =====================================
+// SHOW INITIATIVE
+// =====================================
+
+function showInitiativeResults() {
+
+    let initiativeText = "";
+
+    combatTurnOrder.forEach((combatant, index) => {
+
+        initiativeText += `
+
+            <p>
+                <strong>
+                    ${index + 1}. ${combatant.name}
+                </strong>
+                — Initiative: ${combatant.roll}
+            </p>
+
+        `;
+
+    });
+
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>⚔️ Combat Begins</h2>
+
+            <p>
+                Initiative is rolled.
+            </p>
+
+            ${initiativeText}
+
+            <p>
+                <strong>
+                    ${combatTurnOrder[0].name} goes first.
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+
+    showChoices([
+        "▶️ Begin Combat"
+    ]);
+
+}
+
+// =====================================
+// BEGIN COMBAT TURN
+// =====================================
+
+function beginCombatTurn() {
+
+    const currentCombatant = combatTurnOrder[combatTurnIndex];
+
+    if (currentCombatant.type === "player") {
+
+        showPlayerCombatTurn();
+
+    } else {
+
+        showEnemyCombatTurn();
+
+    }
+
+}
+
+// =====================================
+// PLAYER COMBAT TURN
+// =====================================
+
+function showPlayerCombatTurn() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>⚔️ Your Turn</h2>
+
+            <p>
+                You have the initiative.
+            </p>
+
+            <p>
+                <strong>
+                    HP: ${combatPlayer.hp} / ${combatPlayer.maxHp}
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚔️ Attack",
+        "🛡️ Defend",
+        "🎒 Inventory",
+        "🏃 Flee"
+    ]);
+
+}
+
+// =====================================
+// ENEMY COMBAT TURN
+// =====================================
+
+function showEnemyCombatTurn() {
+
+document.getElementById("choices").innerHTML = "";
+
+    const enemy = combatEnemies[combatTurnOrder[combatTurnIndex].index];
+
+    if (!enemy || enemy.defeated) {
+
+        advanceCombatTurn();
+
+        return;
+
+    }
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>⚔️ ${enemy.name}</h2>
+
+            <p>
+                <strong>${enemy.name} prepares to attack.</strong>
+            </p>
+
+            <p>
+                HP: ${enemy.currentHp} / ${enemy.maxHp}
+            </p>
+
+        </div>
+
+    `;
+
+    setTimeout(() => {
+
+        enemyAttackRoll();
+
+    }, COMBAT_DELAY);
+
+}
+
+
+// =====================================
+// ENEMY ATTACK ROLL
+// =====================================
+
+function enemyAttackRoll() {
+
+    const enemy = combatEnemies[combatTurnOrder[combatTurnIndex].index];
+
+    if (!enemy || enemy.defeated) {
+
+        advanceCombatTurn();
+
+        return;
+
+    }
+
+    const result = rollDice("1d20");
+
+    enemy.currentAttackRoll = result.total;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>⚔️ Enemy Attack Roll</h2>
+
+            <p>
+                <strong>${enemy.name} attacks.</strong>
+            </p>
+
+            <p>
+                🎲 <strong>Attack Roll — d20</strong>
+            </p>
+
+            <p>
+                <strong>${result.total}</strong>
+            </p>
+
+        </div>
+
+    `;
+
+    setTimeout(() => {
+
+        enemyDefenceRoll();
+
+    }, COMBAT_DELAY);
+
+}
+
+
+// =====================================
+// PLAYER DEFENCE AGAINST ENEMY
+// =====================================
+
+function enemyDefenceRoll() {
+
+    const enemy = combatEnemies[combatTurnOrder[combatTurnIndex].index];
+
+    if (!enemy || enemy.defeated) {
+
+        advanceCombatTurn();
+
+        return;
+
+    }
+
+    let result;
+
+if (playerDefending) {
+
+    result = rollDice("2d20");
+
+    enemy.playerDefenceRoll = Math.max(
+        ...result.rolls
+    );
+
+} else {
+
+    result = rollDice("1d20");
+
+    enemy.playerDefenceRoll = result.total;
+
+}
+
+    let outcome = "";
+
+
+    // =====================================
+    // NATURAL 1
+    // =====================================
+
+    if (result.total === 1) {
+
+        outcome = `
+
+            <p>
+                <strong>💀 Critical Failure!</strong>
+            </p>
+
+            <p>
+                Your defence fails completely.
+            </p>
+
+        `;
+
+        enemy.attackResult = "hit";
+
+    }
+
+
+    // =====================================
+    // NATURAL 20
+    // =====================================
+
+    else if (result.total === 20) {
+
+        outcome = `
+
+            <p>
+                <strong>🌟 Critical Defence!</strong>
+            </p>
+
+            <p>
+                You successfully avoid the attack.
+            </p>
+
+        `;
+
+        enemy.attackResult = "miss";
+
+    }
+
+
+    // =====================================
+    // PLAYER WINS
+    // =====================================
+
+    else if (result.total > enemy.currentAttackRoll) {
+
+        outcome = `
+
+            <p>
+                <strong>🛡️ Defence succeeds!</strong>
+            </p>
+
+            <p>
+                You avoid the attack.
+            </p>
+
+        `;
+
+        enemy.attackResult = "miss";
+
+    }
+
+
+    // =====================================
+    // TIE
+    // =====================================
+
+    else if (result.total === enemy.currentAttackRoll) {
+
+        outcome = `
+
+            <p>
+                <strong>⚔️ The rolls are tied.</strong>
+            </p>
+
+            <p>
+                The attack connects, but only partially.
+            </p>
+
+            <p>
+                Half damage will be dealt.
+            </p>
+
+        `;
+
+        enemy.attackResult = "half_hit";
+
+    }
+
+
+    // =====================================
+    // ENEMY WINS
+    // =====================================
+
+    else {
+
+        outcome = `
+
+            <p>
+                <strong>❌ Defence fails.</strong>
+            </p>
+
+            <p>
+                ${enemy.name}'s attack gets through.
+            </p>
+
+        `;
+
+        enemy.attackResult = "hit";
+
+    }
+
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🛡️ Defence Roll</h2>
+
+            <p>
+    🎲 <strong>
+        Defence Roll — ${playerDefending ? "2d20" : "d20"}
+    </strong>
+</p>
+
+<p>
+    <strong>
+        Rolls: ${result.rolls.join(", ")}
+    </strong>
+</p>
+
+<p>
+    <strong>
+        Defence Result: ${enemy.playerDefenceRoll}
+    </strong>
+</p>
+
+${
+    playerDefending
+    ? `
+        <p>
+            You take the higher of the two rolls.
+        </p>
+    `
+    : ""
+}
+
+            ${outcome}
+
+        </div>
+
+    `;
+
+
+    // =====================================
+    // DEFENCE SUCCESSFUL
+    // =====================================
+
+    if (enemy.attackResult === "miss") {
+
+        setTimeout(() => {
+
+            finishEnemyTurn();
+
+        }, COMBAT_DELAY);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // ATTACK CONNECTED
+    // =====================================
+
+    setTimeout(() => {
+
+        enemyDamageRoll();
+
+    }, COMBAT_DELAY);
+
+}
+
+
+// =====================================
+// ENEMY DAMAGE ROLL
+// =====================================
+
+function enemyDamageRoll() {
+
+    const enemy = combatEnemies[combatTurnOrder[combatTurnIndex].index];
+
+    if (!enemy || enemy.defeated) {
+
+        advanceCombatTurn();
+
+        return;
+
+    }
+
+    const result = rollDice("1d6");
+
+    let damage = result.total;
+
+
+    // =====================================
+    // HALF DAMAGE ON TIE
+    // =====================================
+
+    if (enemy.attackResult === "half_hit") {
+
+        damage = Math.floor(damage / 2);
+
+    }
+
+
+    combatPlayer.hp -= damage;
+
+
+    if (combatPlayer.hp < 0) {
+
+        combatPlayer.hp = 0;
+
+    }
+
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>💥 Damage</h2>
+
+            <p>
+                🎲 <strong>Damage Roll — d6</strong>
+            </p>
+
+            <p>
+                <strong>${result.total}</strong>
+            </p>
+
+            ${
+                enemy.attackResult === "half_hit"
+                ? `
+                    <p>
+                        Half damage is applied.
+                    </p>
+                `
+                : ""
+            }
+
+            <p>
+                <strong>
+                    You take ${damage} damage.
+                </strong>
+            </p>
+
+            <p>
+                <strong>
+                    Your HP:
+                    ${combatPlayer.hp} / ${combatPlayer.maxHp}
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+
+    // =====================================
+    // PLAYER DEFEATED
+    // =====================================
+
+    if (combatPlayer.hp <= 0) {
+
+        setTimeout(() => {
+
+            showDefeatScreen();
+
+        }, COMBAT_DELAY);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // FINISH ENEMY TURN
+    // =====================================
+
+    setTimeout(() => {
+
+        finishEnemyTurn();
+
+    }, COMBAT_DELAY);
+
+}
+
+
+// =====================================
+// FINISH ENEMY TURN
+// =====================================
+function finishEnemyTurn() {
+
+    playerDefending = false;
+
+    advanceCombatTurn();
+
+}
+
+// =====================================
+// PLAYER ATTACK
+// =====================================
+
+// =====================================
+// PLAYER ATTACK
+// =====================================
+
+// =====================================
+// PLAYER ATTACK
+// =====================================
+
+function playerAttack() {
+
+    // Find the first living enemy.
+    // Target selection will be expanded when
+    // multiple enemies are introduced.
+
+    const enemy = combatEnemies.find(enemy => !enemy.defeated);
+
+    if (!enemy) {
+
+        return;
+
+    }
+
+    currentAttack = {
+        enemy: enemy,
+        attackRoll: null,
+        defenceRoll: null,
+        damageRoll: null,
+        result: null,
+        damage: 0,
+        critical: false
+    };
+
+
+    // =====================================
+    // ATTACK ROLL
+    // =====================================
+
+    const attackRoll = createPipRoll("1d20");
+
+    currentAttack.attackRoll = attackRoll.result.total;
+
+
+    // =====================================
+    // NATURAL 1
+    // =====================================
+
+    if (currentAttack.attackRoll === 1) {
+
+        currentAttack.result = "critical_failure";
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>⚔️ Attack Roll</h2>
+
+                <p>
+                    You attack <strong>${enemy.name}</strong>.
+                </p>
+
+                ${attackRoll.html}
+
+                <p>
+                    <strong>Your Attack Roll: 1</strong>
+                </p>
+
+                <p>
+                    <strong>💀 Critical Failure!</strong>
+                </p>
+
+                <p>
+                    Your attack misses completely.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "▶️ End Turn"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // NATURAL 20
+    // =====================================
+
+    if (currentAttack.attackRoll === 20) {
+
+        currentAttack.result = "critical_hit";
+        currentAttack.critical = true;
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>⚔️ Attack Roll</h2>
+
+                <p>
+                    You attack <strong>${enemy.name}</strong>.
+                </p>
+
+                ${attackRoll.html}
+
+                <p>
+                    <strong>Your Attack Roll: 20</strong>
+                </p>
+
+                <p>
+                    <strong>🌟 Critical Hit!</strong>
+                </p>
+
+                <p>
+                    Your attack automatically hits.
+                </p>
+
+                <p>
+                    Your critical damage will be rolled separately.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "▶️ Roll Critical Damage"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // NORMAL ATTACK
+    // =====================================
+
+    currentAttack.result = "awaiting_defence";
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>⚔️ Attack Roll</h2>
+
+            <p>
+                You attack <strong>${enemy.name}</strong>.
+            </p>
+
+            ${attackRoll.html}
+
+            <p>
+                <strong>
+                    Your Attack Roll: ${currentAttack.attackRoll}
+                </strong>
+            </p>
+
+            <p>
+                The attack roll is complete.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "▶️ Continue"
+    ]);
+
+}
+
+// =====================================
+// PLAYER ATTACK — DEFENCE ROLL
+// =====================================
+
+function resolvePlayerDefence() {
+
+    const enemy = currentAttack.enemy;
+
+    if (!enemy) {
+
+        return;
+
+    }
+
+
+    const defenceRoll = createPipRoll("1d20");
+
+    currentAttack.defenceRoll = defenceRoll.result.total;
+
+
+    // =====================================
+    // ATTACKER WINS
+    // =====================================
+
+    if (currentAttack.attackRoll > currentAttack.defenceRoll) {
+
+        currentAttack.result = "hit";
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>🛡️ Defence Roll</h2>
+
+                ${defenceRoll.html}
+
+                <p>
+                    <strong>
+                        ${enemy.name}'s Defence Roll:
+                        ${currentAttack.defenceRoll}
+                    </strong>
+                </p>
+
+                <p>
+                    <strong>⚔️ Hit!</strong>
+                </p>
+
+                <p>
+                    Your attack breaks through the defence.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "▶️ Roll Damage"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // TIE
+    // =====================================
+
+    if (currentAttack.attackRoll === currentAttack.defenceRoll) {
+
+        currentAttack.result = "half_hit";
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>🛡️ Defence Roll</h2>
+
+                ${defenceRoll.html}
+
+                <p>
+                    <strong>
+                        ${enemy.name}'s Defence Roll:
+                        ${currentAttack.defenceRoll}
+                    </strong>
+                </p>
+
+                <p>
+                    <strong>⚔️ The rolls are tied.</strong>
+                </p>
+
+                <p>
+                    Your attack connects, but only partially.
+                </p>
+
+                <p>
+                    Half damage will be dealt.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "▶️ Roll Damage"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // DEFENDER WINS
+    // =====================================
+
+    currentAttack.result = "miss";
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🛡️ Defence Roll</h2>
+
+            ${defenceRoll.html}
+
+            <p>
+                <strong>
+                    ${enemy.name}'s Defence Roll:
+                    ${currentAttack.defenceRoll}
+                </strong>
+            </p>
+
+            <p>
+                <strong>❌ Miss!</strong>
+            </p>
+
+            <p>
+                The defence holds.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "▶️ End Turn"
+    ]);
+
+}
+
+// =====================================
+// PLAYER ATTACK — DAMAGE ROLL
+// =====================================
+
+function resolvePlayerDamage() {
+
+    const enemy = currentAttack.enemy;
+
+    if (!enemy) {
+
+        return;
+
+    }
+
+
+    let damageExpression = "1d6";
+
+
+    if (currentAttack.critical) {
+
+        damageExpression = "2d6";
+
+    }
+
+
+    const damageRoll = createPipRoll(damageExpression);
+
+    currentAttack.damageRoll = damageRoll.result.total;
+
+
+    // =====================================
+    // CALCULATE DAMAGE
+    // =====================================
+
+    if (currentAttack.result === "half_hit") {
+
+        currentAttack.damage = Math.floor(
+            currentAttack.damageRoll / 2
+        );
+
+    } else {
+
+        currentAttack.damage = currentAttack.damageRoll;
+
+    }
+
+
+    enemy.currentHp -= currentAttack.damage;
+
+
+    if (enemy.currentHp < 0) {
+
+        enemy.currentHp = 0;
+
+    }
+
+
+    // =====================================
+    // CHECK DEFEAT
+    // =====================================
+
+    if (enemy.currentHp <= 0) {
+
+        enemy.currentHp = 0;
+        enemy.defeated = true;
+
+    }
+
+
+    // =====================================
+    // DISPLAY DAMAGE
+    // =====================================
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>💥 Damage Roll</h2>
+
+            ${damageRoll.html}
+
+            <p>
+                <strong>
+                    Damage Roll: ${currentAttack.damageRoll}
+                </strong>
+            </p>
+
+            ${
+                currentAttack.result === "half_hit"
+                ? `
+                    <p>
+                        Half damage is applied.
+                    </p>
+                `
+                : ""
+            }
+
+            <p>
+                <strong>
+                    ${enemy.name} takes
+                    ${currentAttack.damage} damage.
+                </strong>
+            </p>
+
+            <p>
+                <strong>
+                    ${enemy.name} HP:
+                    ${enemy.currentHp} / ${enemy.maxHp}
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+
+    // =====================================
+    // ENEMY DEFEATED
+    // =====================================
+
+    if (enemy.defeated) {
+
+        showChoices([
+            "🏆 Victory"
+        ]);
+
+        return;
+
+    }
+
+
+    showChoices([
+        "▶️ End Turn"
+    ]);
+
+}
+
+// =====================================
+// ADVANCE COMBAT TURN
+// =====================================
+
+function advanceCombatTurn() {
+
+    combatTurnIndex++;
+
+    // End of the current round.
+    // Start again from the first combatant.
+
+    if (combatTurnIndex >= combatTurnOrder.length) {
+
+        combatTurnIndex = 0;
+
+    }
+
+    beginCombatTurn();
+
+}
+
+// =====================================
+// VICTORY
+// =====================================
+
+function showVictoryScreen() {
+
+    combatActive = false;
+    combatResult = "victory";
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🏆 Victory</h2>
+
+            <p>
+                The enemy has been defeated.
+            </p>
+
+            <p>
+                You remain standing.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Return to the Beach"
+    ]);
+
+}
+
+// =====================================
+// DEFEAT
+// =====================================
+
+function showDefeatScreen() {
+
+    combatActive = false;
+    combatResult = "defeat";
+    playerDefending = false;
+
+
+    // =====================================
+    // CALCULATE SILVER LOSS
+    // =====================================
+
+    const lossPercentage =
+        Math.floor(Math.random() * 6) + 5;
+
+    let silverLost =
+        Math.floor(playerSilver * (lossPercentage / 100));
+
+
+    // If the player has silver but the percentage
+    // would result in zero, take at least 1 silver.
+
+    if (playerSilver > 0 && silverLost < 1) {
+
+        silverLost = 1;
+
+    }
+
+
+    removeSilver(silverLost);
+
+
+    // =====================================
+    // REMEMBER THE DEFEAT
+    // =====================================
+
+    const enemyNames = combatEnemies
+        .map(enemy => enemy.name)
+        .join(", ");
+
+    rememberLongTerm(
+        "combat_defeat_" + Date.now(),
+        `The player was defeated in combat against ${enemyNames}. They lost ${silverLost} silver afterwards.`,
+        {
+            topic: "combat",
+            type: "defeat",
+            importance: 3,
+            pip: `We didn't exactly cover ourselves in glory there. We were defeated by ${enemyNames}.`
+        }
+    );
+
+
+    // =====================================
+    // DISPLAY DEFEAT
+    // =====================================
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>💀 Defeated</h2>
+
+            <p>
+                The fight ends badly.
+            </p>
+
+            <p>
+                Bruised and battered, you are forced to retreat.
+            </p>
+
+            ${
+                silverLost > 0
+                ? `
+                    <p>
+                        In the aftermath, you lose
+                        <strong>${silverLost} silver</strong>.
+                    </p>
+                `
+                : `
+                    <p>
+                        You have no silver to lose.
+                    </p>
+                `
+            }
+
+            <p>
+                <em>
+                    Pip quietly makes a note in the Chronicle.
+                </em>
+            </p>
+
+        </div>
+
+    `;
+
+
+    showChoices([
+        "🔄 Retry"
+    ]);
+
+}
+
+// =====================================
+// RETRY COMBAT
+// =====================================
+
+function retryCombat() {
+
+    combatActive = false;
+    playerDefending = false;
+
+    currentAttack = {
+        enemy: null,
+        attackRoll: null,
+        defenceRoll: null,
+        damageRoll: null,
+        result: null,
+        damage: 0,
+        critical: false
+    };
+
+
+    startCombat(combatEncounter);
+
+}
+
+// =====================================
+// PLAYER DEFEND
+// =====================================
+
+function playerDefend() {
+
+    playerDefending = true;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🛡️ Defensive Stance</h2>
+
+            <p>
+                You steady yourself and prepare for the enemy's attack.
+            </p>
+
+            <p>
+                Your next defence roll will use <strong>2d20</strong>,
+                taking the higher result.
+            </p>
+
+        </div>
+
+    `;
+
+    // End the player's turn automatically.
+
+    setTimeout(() => {
+
+        advanceCombatTurn();
+
+    }, COMBAT_DELAY);
+
+}
+
+// =====================================
+// ATTEMPT FLEE
+// =====================================
+
+function attemptFlee() {
+
+    const enemy = combatEnemies.find(enemy => !enemy.defeated);
+
+    if (!enemy) {
+
+        return;
+
+    }
+
+    const fleeDifficulty = enemy.fleeDifficulty ?? 10;
+
+    const fleeRoll = createPipRoll("1d20");
+
+    const roll = fleeRoll.result.total;
+
+    let escaped = false;
+
+
+    // =====================================
+    // NATURAL 1
+    // =====================================
+
+    if (roll === 1) {
+
+        escaped = false;
+
+    }
+
+
+    // =====================================
+    // NATURAL 20
+    // =====================================
+
+    else if (roll === 20) {
+
+        escaped = true;
+
+    }
+
+
+    // =====================================
+    // NORMAL RESULT
+    // =====================================
+
+    else if (roll >= fleeDifficulty) {
+
+        escaped = true;
+
+    }
+
+
+    // =====================================
+    // DISPLAY RESULT
+    // =====================================
+
+    if (escaped) {
+
+        combatActive = false;
+        combatResult = "fled";
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>🏃 Escape</h2>
+
+                ${fleeRoll.html}
+
+                <p>
+                    <strong>
+                        Flee Roll: ${roll}
+                    </strong>
+                </p>
+
+                <p>
+                    You find an opening and break away from the fight.
+                </p>
+
+                <p>
+                    <strong>You escaped!</strong>
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Return to the Beach"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // FAILED FLEE
+    // =====================================
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🏃 Escape</h2>
+
+            ${fleeRoll.html}
+
+            <p>
+                <strong>
+                    Flee Roll: ${roll}
+                </strong>
+            </p>
+
+            <p>
+                <strong>❌ You fail to escape.</strong>
+            </p>
+
+            <p>
+                The creature cuts off your escape.
+            </p>
+
+        </div>
+
+    `;
+
+
+    setTimeout(() => {
+
+        advanceCombatTurn();
+
+    }, COMBAT_DELAY);
+
+}
+
+// =====================================
+// COMBAT INVENTORY
+// =====================================
+
+function combatInventory() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🎒 Inventory</h2>
+
+            <p>
+                <strong>
+                    HP: ${combatPlayer.hp} / ${combatPlayer.maxHp}
+                </strong>
+            </p>
+
+            <h3>Usable in Combat</h3>
+
+            <div id="combatInventoryItems"></div>
+
+        </div>
+
+    `;
+
+    const inventoryContainer =
+        document.getElementById("combatInventoryItems");
+
+    const firstAid =
+        playerInventory.find(item => item.id === "first_aid_kit");
+
+
+    if (firstAid && firstAid.quantity > 0) {
+
+        inventoryContainer.innerHTML += `
+
+            <p>
+                <strong>
+                    Basic First Aid Kit ×${firstAid.quantity}
+                </strong>
+            </p>
+
+            <p>
+                Restores 5 HP.
+            </p>
+
+        `;
+
+        showChoices([
+            "❤️ Use First Aid Kit",
+            "↩️ Back to Combat"
+        ]);
+
+        return;
+
+    }
+
+
+    inventoryContainer.innerHTML += `
+
+        <p>
+            <em>
+                You have nothing that can currently be used in combat.
+            </em>
+        </p>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Combat"
+    ]);
+
+}
+
+// =====================================
+// USE FIRST AID KIT
+// =====================================
+
+function useCombatFirstAidKit() {
+
+    const firstAid =
+        playerInventory.find(item => item.id === "first_aid_kit");
+
+    if (!firstAid || firstAid.quantity <= 0) {
+
+        combatInventory();
+
+        return;
+
+    }
+
+
+    // =====================================
+    // FULL HEALTH
+    // =====================================
+
+    if (combatPlayer.hp >= combatPlayer.maxHp) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>❤️ First Aid Kit</h2>
+
+                <p>
+                    You are already at full health.
+                </p>
+
+                <p>
+                    You don't need to use the kit yet.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Combat"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // HEAL
+    // =====================================
+
+    const oldHp = combatPlayer.hp;
+
+    const healingAmount = 5;
+
+    combatPlayer.hp = Math.min(
+        combatPlayer.hp + healingAmount,
+        combatPlayer.maxHp
+    );
+
+    const actualHealing =
+        combatPlayer.hp - oldHp;
+
+
+    // =====================================
+    // CONSUME ITEM
+    // =====================================
+
+    firstAid.quantity--;
+
+    if (firstAid.quantity <= 0) {
+
+        const index =
+            playerInventory.indexOf(firstAid);
+
+        if (index !== -1) {
+
+            playerInventory.splice(index, 1);
+
+        }
+
+    }
+
+
+    // =====================================
+    // DISPLAY RESULT
+    // =====================================
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>❤️ First Aid Kit</h2>
+
+            <p>
+                You use the First Aid Kit.
+            </p>
+
+            <p>
+                You recover
+                <strong>${actualHealing} HP</strong>.
+            </p>
+
+            <p>
+                <strong>
+                    HP: ${combatPlayer.hp} / ${combatPlayer.maxHp}
+                </strong>
+            </p>
+
+            <p>
+                The First Aid Kit has been used.
+            </p>
+
+        </div>
+
+    `;
+
+
+    // =====================================
+    // END PLAYER TURN
+    // =====================================
+
+    setTimeout(() => {
+
+        advanceCombatTurn();
+
+    }, COMBAT_DELAY);
+
+}

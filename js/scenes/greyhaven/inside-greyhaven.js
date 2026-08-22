@@ -4392,8 +4392,6 @@ function headTowardsBeach() {
     
 }
 
-
-
 function lookAroundBentAnchor() {
 
     document.getElementById("story").innerHTML = `

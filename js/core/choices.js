@@ -1531,14 +1531,6 @@ if (choice === "🗼 Follow the Coast") {
 
 }
 
-if (choice === "👀 Explore the Beach") {
-
-    exploreGreyhavenBeach();
-
-    return;
-
-}
-
 if (choice === "↩️ Back to the Beach") {
 
     headTowardsBeach();
@@ -1547,9 +1539,208 @@ if (choice === "↩️ Back to the Beach") {
 
 }
 
-if (choice === "🔎 Investigate the Area") {
+if (choice === "👀 Watch the Beach") {
 
-    investigateBeachArea();
+    watchGreyhavenBeach();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Explore the Beach") {
+
+    exploreGreyhavenBeach();
+
+    return;
+
+}
+
+if (choice === "🪶 Investigate the Disturbed Feathers") {
+
+    investigateDisturbedFeathers();
+
+    return;
+
+}
+
+if (choice === "🪵 Investigate the Washed-Up Debris") {
+
+    investigateWashedUpDebris();
+
+    return;
+
+}
+
+if (choice === "🌊 Observe the Sea") {
+
+    observeGreyhavenSea();
+
+    return;
+
+}
+
+if (choice === "🐦 Watch the Gulls") {
+
+    watchGreyhavenGulls();
+
+    return;
+
+}
+
+if (choice === "🔎 Investigate What Frightened the Gulls") {
+
+    investigateGullDisturbance();
+
+    return;
+
+}
+
+if (choice === "👁️ Look Closer") {
+
+    lookCloserAtCreature();
+
+    return;
+
+}
+
+if (choice === "▶️ Begin Combat") {
+
+    beginCombatTurn();
+
+    return;
+
+}
+
+if (choice === "⚔️ Attack") {
+
+    playerAttack();
+
+    return;
+
+}
+
+if (choice === "🛡️ Defend") {
+
+    playerDefend();
+
+    return;
+
+}
+
+if (choice === "🎒 Inventory") {
+
+    combatInventory();
+
+    return;
+
+}
+
+if (choice === "❤️ Use First Aid Kit") {
+
+    useCombatFirstAidKit();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Combat") {
+
+    showPlayerCombatTurn();
+
+    return;
+
+}
+
+if (choice === "🏃 Flee") {
+
+    attemptFlee();
+
+    return;
+
+}
+
+if (choice === "⚔️ Fight") {
+
+    startCombat([
+    {
+        id: "test_enemy",
+        name: "Training Dummy",
+        maxHp: 10,
+        fleeDifficulty: 10
+    }
+]);
+
+    return;
+
+}
+
+if (choice === "▶️ Continue") {
+
+    resolvePlayerDefence();
+
+    return;
+
+}
+
+if (choice === "▶️ Roll Damage") {
+
+    resolvePlayerDamage();
+
+    return;
+
+}
+
+if (choice === "▶️ Roll Critical Damage") {
+
+    resolvePlayerDamage();
+
+    return;
+
+}
+
+if (choice === "▶️ End Turn") {
+
+    advanceCombatTurn();
+
+    return;
+
+}
+
+if (choice === "🏆 Victory") {
+
+    showVictoryScreen();
+
+    return;
+
+}
+
+if (choice === "↩️ Return to the Beach") {
+
+    exploreGreyhavenBeach();
+
+    return;
+
+}
+
+if (choice === "🛡️ Defend") {
+
+    playerDefend();
+
+    return;
+
+}
+
+if (choice === "🏃 Flee") {
+
+    attemptFlee();
+
+    return;
+
+}
+
+if (choice === "🔄 Retry") {
+
+    retryCombat();
 
     return;
 
