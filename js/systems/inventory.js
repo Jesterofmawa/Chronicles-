@@ -21,9 +21,10 @@ let playerEquipment = {
     jewellery2: null,
 
     weapon: {
-        id: "standard_sword",
-        name: "Standard Sword"
-    },
+    id: "short_sword",
+    name: "Short Sword",
+    effect: null
+},
 
     offhand: null
 
@@ -74,6 +75,17 @@ function addItem(id, name, category, identified = true) {
 function hasItem(id) {
 
     return playerInventory.some(item => item.id === id);
+
+}
+
+if (!hasItem("short_sword")) {
+
+    addItem(
+        "short_sword",
+        "Short Sword",
+        "equipment",
+        true
+    );
 
 }
 
@@ -299,48 +311,50 @@ const keyItems = playerInventory.filter(item => item.category === "key");
                 ${items.map(item => `
     <li>
 
+    <div class="inventory-item-row">
+
         <strong>
             ${item.name} ×${item.quantity}
         </strong>
 
         ${
-            item.description
-            ? `
-                <br>
-                <em>
-                    ${item.description}
-                </em>
-            `
-            : ""
-        }
+    item.category === "equipment" && item.identified ?
+        `
+        <button
+            onclick="showEquipOptions('${item.id}')"
+        >
+            ⚔️ Equip
+        </button>
+    ` :
+        ""
+}
 
-        ${
-            item.effect
-            ? `
-                <br>
-                <strong>
-                    Effect: ${item.effect}
-                </strong>
-            `
-            : ""
-        }
+    </div>
 
-        ${
-            item.category === "equipment" &&
-            item.identified === true
-            ? `
-                <br><br>
+    ${
+        item.description
+        ? `
+            <br>
+            <em>
+                ${item.description}
+            </em>
+        `
+        : ""
+    }
 
-                <button
-                    onclick="showEquipOptions('${item.id}')"
-                >
-                    ⚔️ Equip
-                </button>
-            `
-            : ""
-        }
+    ${
+        item.effect
+        ? `
+            <br>
+            <strong>
+                Effect: ${item.effect}
+            </strong>
+        `
+        : ""
+    }
 
-    </li>
+</li>
+
 `).join("")}
             </ul>
         `;
@@ -2990,7 +3004,7 @@ function getEquipmentName(slot) {
 
     if (!playerEquipment[slot]) {
 
-        return "<em>Empty</em>";
+        return "";
 
     }
 

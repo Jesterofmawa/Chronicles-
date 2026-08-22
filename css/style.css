@@ -717,3 +717,10 @@ animation: storyOpeningFadeIn 1.5s ease forwards;
 
     background: rgba(248, 244, 232, 1);
 }
+
+.inventory-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
