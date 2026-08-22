@@ -1726,12 +1726,143 @@ function visitSellaStall() {
 
     `;
 
+    let sellaChoices = [
+    "🛒 Browse Sella's Goods",
+    "💬 Talk to Sella",
+    "🌍 Ask about her travels",
+    "🗣️ Ask what she's heard"
+];
+
+const strangeRing = playerInventory.find(
+    item =>
+        item.id === "strange_ring" &&
+        item.identified !== true
+);
+
+if (strangeRing) {
+
+    sellaChoices.push(
+        "💍 Ask Sella to appraise the Strange Ring"
+    );
+
+}
+
+sellaChoices.push(
+    "↩️ Leave Sella's Stall"
+);
+
+showChoices(sellaChoices);
+
+}
+
+// =====================================
+// SELLA — APPRAISE STRANGE RING
+// =====================================
+
+function appraiseStrangeRing() {
+
+    const ring = playerInventory.find(
+        item =>
+            item.id === "strange_ring" &&
+            item.identified !== true
+    );
+
+    if (!ring) {
+
+        visitSellaStall();
+
+        return;
+
+    }
+
+
+    identifyItem(
+    "strange_ring",
+    "Ring of Slight Edge",
+    "A faint glow seems to linger beneath its surface.",
+    "+1 Attack while worn"
+);
+
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Sella takes the ring from you.
+            </p>
+
+            <p>
+                She turns it slowly between her fingers.
+            </p>
+
+            <p>
+                The faint glow catches the light.
+            </p>
+
+            <p>
+                Her expression changes.
+            </p>
+
+            <p>
+                "Well now..."
+            </p>
+
+            <p>
+                She examines the ring more closely.
+            </p>
+
+            <p>
+                "That's not ordinary silverwork."
+            </p>
+
+            <p>
+                She looks back at you.
+            </p>
+
+            <p>
+                "There's an enchantment on it."
+            </p>
+
+            <p>
+                Sella hands the ring back.
+            </p>
+
+            <p>
+                "Nothing dramatic."
+            </p>
+
+            <p>
+                "But whoever made it knew what they were doing."
+            </p>
+
+            <p>
+                "Wear it."
+            </p>
+
+            <p>
+                "You'll find your strikes land a little more surely."
+            </p>
+
+            <p>
+                <strong>
+                    💍 The ring has been identified as the Ring of Slight Edge.
+                </strong>
+            </p>
+
+            <p>
+                <strong>
+                    Effect: +1 Attack while worn.
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+
     showChoices([
-        "🛒 Browse Sella's Goods",
-        "💬 Talk to Sella",
-        "🌍 Ask about her travels",
-        "🗣️ Ask what she's heard",
-        "↩️ Leave Sella's Stall"
+        "↩️ Back to Sella's Stall"
     ]);
 
 }

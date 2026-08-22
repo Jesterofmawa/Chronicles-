@@ -1,6 +1,11 @@
 let activeShop = null;
 
+let currentChoices = [];
+let previousChoices = [];
+
 function showChoices(choices) {
+
+currentChoices = [...choices];
 
     let html = "";
 
@@ -931,6 +936,14 @@ if (choice === "🛒 Browse Sella's Goods") {
 
 }
 
+if (choice === "💍 Ask Sella to appraise the Strange Ring") {
+
+    appraiseStrangeRing();
+
+    return;
+
+}
+
 if (choice === "↩️ Back to Sella's Stall") {
 
     visitSellaStall();
@@ -1587,12 +1600,10 @@ if (choice === "🐦 Watch the Gulls") {
 
 }
 
-if (choice === "🔎 Investigate What Frightened the Gulls") {
-
+if (choice === "🔎 Investigate What Frightened the Gulls")
+{
     investigateGullDisturbance();
-
     return;
-
 }
 
 if (choice === "👁️ Look Closer") {
@@ -1638,6 +1649,14 @@ if (choice === "🎒 Inventory") {
 if (choice === "❤️ Use First Aid Kit") {
 
     useCombatFirstAidKit();
+
+    return;
+
+}
+
+if (choice === "❤️ Use Greater First Aid Kit") {
+
+    useCombatGreaterFirstAidKit();
 
     return;
 
@@ -1709,6 +1728,14 @@ if (choice === "🏆 Victory") {
 
 }
 
+if (choice === "🔎 Search the Creature") {
+
+    searchGreyhavenSeaCreature();
+
+    return;
+
+}
+
 if (choice === "↩️ Return to the Beach") {
 
     exploreGreyhavenBeach();
@@ -1741,6 +1768,55 @@ if (choice === "🔄 Retry") {
 
 }
 
+if (choice === "💍 Equip Ring in Jewellery 1") {
+    
+    if (
+        equipItem(
+            "strange_ring",
+            "jewellery1"
+        )
+    ) {
+        
+        openCharacterSheet();
+        
+    }
+    
+    return;
+    
+}
 
+if (choice === "💍 Equip Ring in Jewellery 2") {
+
+    if (
+        equipItem(
+            "strange_ring",
+            "jewellery2"
+        )
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+
+}
+
+if (choice === "✖️ Cancel") {
+
+    const panel =
+        document.getElementById("equipOptionsPanel");
+
+    if (panel) {
+
+        panel.remove();
+
+    }
+
+    showChoices(previousChoices);
+
+    return;
+
+}
 
 }

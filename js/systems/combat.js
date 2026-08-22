@@ -65,7 +65,7 @@ function createGreyhavenSeaCreature() {
 
         maxHp: 18,
 
-        fleeDifficulty: 13,
+        fleeDifficulty: 16,
 
         description: `
             A tall, hunched figure emerges from the shallows.
@@ -430,7 +430,7 @@ function attemptEnemyFlee(enemy) {
     // SUCCESSFUL ESCAPE
     // =====================================
 
-    if (fleeRoll.total >= 10) {
+    if (fleeRoll.total >= enemy.fleeDifficulty) {
 
         combatActive = false;
         combatResult = "escaped";
@@ -1515,6 +1515,10 @@ function advanceCombatTurn() {
 // VICTORY
 // =====================================
 
+// =====================================
+// VICTORY
+// =====================================
+
 function showVictoryScreen() {
 
     combatActive = false;
@@ -1527,16 +1531,312 @@ function showVictoryScreen() {
             <h2>🏆 Victory</h2>
 
             <p>
-                The enemy has been defeated.
+                The creature lies motionless in the shallows.
             </p>
 
             <p>
                 You remain standing.
             </p>
 
+            <p>
+                Something about the creature still feels wrong.
+            </p>
+
         </div>
 
     `;
+
+    showChoices([
+        "🔎 Search the Creature",
+        "↩️ Return to the Beach"
+    ]);
+
+}
+
+// =====================================
+// SEARCH DEFEATED SEA CREATURE
+// =====================================
+
+function searchGreyhavenSeaCreature() {
+
+    // =====================================
+    // PREVENT REPEATED SEARCHING
+    // =====================================
+
+    if (hasLongTermMemory("greyhaven_sea_creature_searched")) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>🔎 Search the Creature</h2>
+
+                <p>
+                    You search the creature again.
+                </p>
+
+                <p>
+                    There is nothing more to find.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Return to the Beach"
+        ]);
+
+        return;
+
+    }
+
+
+    // =====================================
+    // SEARCH ROLL
+    // =====================================
+
+    const searchRoll = createPipRoll("1d20");
+    const roll = searchRoll.result.total;
+
+    let silverFound = 0;
+    let foundRing = false;
+    let foundBoneToken = false;
+    let foundGreaterKits = false;
+
+
+    // =====================================
+    // 1–4
+    // =====================================
+
+    if (roll <= 4) {
+
+        silverFound =
+            Math.floor(Math.random() * 4) + 6;
+
+    }
+
+
+    // =====================================
+    // 5–9
+    // =====================================
+
+    else if (roll <= 9) {
+
+        silverFound =
+            Math.floor(Math.random() * 4) + 6;
+
+        foundRing = true;
+
+    }
+
+
+    // =====================================
+    // 10–14
+    // =====================================
+
+    else if (roll <= 14) {
+
+        silverFound =
+            Math.floor(Math.random() * 6) + 15;
+
+        foundRing = true;
+
+    }
+
+
+    // =====================================
+    // 15–19
+    // =====================================
+
+    else if (roll < 20) {
+
+        silverFound =
+            Math.floor(Math.random() * 6) + 15;
+
+        foundBoneToken = true;
+
+    }
+
+
+    // =====================================
+    // NATURAL 20
+    // =====================================
+
+    else {
+
+        silverFound =
+            Math.floor(Math.random() * 6) + 15;
+
+        foundBoneToken = true;
+        foundGreaterKits = true;
+
+    }
+
+
+    // =====================================
+    // ADD SILVER
+    // =====================================
+
+    addSilver(silverFound);
+
+
+    // =====================================
+    // ADD RING
+    // =====================================
+
+    if (foundRing) {
+
+        addItem(
+            "strange_ring",
+            "Strange Ring",
+            "equipment",
+            false
+        );
+
+    }
+
+
+    // =====================================
+    // ADD BONE TOKEN
+    // =====================================
+
+    if (foundBoneToken) {
+
+        addItem(
+            "blackened_bone_token",
+            "Blackened Bone Token",
+            "unusual"
+        );
+
+    }
+
+
+    // =====================================
+    // ADD GREATER FIRST AID KITS
+    // =====================================
+
+    if (foundGreaterKits) {
+
+        addItem(
+            "greater_first_aid_kit",
+            "Greater First Aid Kit",
+            "supplies"
+        );
+
+        addItem(
+            "greater_first_aid_kit",
+            "Greater First Aid Kit",
+            "supplies"
+        );
+
+    }
+
+
+    // =====================================
+    // REMEMBER SEARCH
+    // =====================================
+
+    rememberLongTerm(
+        "greyhaven_sea_creature_searched",
+        "The player searched the defeated sea creature and recovered items from it.",
+        {
+            topic: "greyhaven",
+            type: "creature_search",
+            importance: 3,
+            pip: "We already searched that creature. There wasn't anything more to find."
+        }
+    );
+
+
+    // =====================================
+    // BUILD RESULT
+    // =====================================
+
+    let discoveries = `
+
+        <p>
+            🪙 <strong>${silverFound} silver added to your bag.</strong>
+        </p>
+
+    `;
+
+
+    if (foundRing) {
+
+        discoveries += `
+
+            <p>
+                💍 <strong>Strange Ring added to your bag.</strong>
+            </p>
+
+            <p>
+                The ring gives off a faint, almost imperceptible glow.
+            </p>
+
+            <p>
+                You have no idea what it does.
+            </p>
+
+        `;
+
+    }
+
+
+    if (foundBoneToken) {
+
+        discoveries += `
+
+            <p>
+                🦴 <strong>Blackened Bone Token added to your bag.</strong>
+            </p>
+
+            <p>
+                A strange mark has been carved into its surface.
+            </p>
+
+        `;
+
+    }
+
+
+    if (foundGreaterKits) {
+
+        discoveries += `
+
+            <p>
+                🧰 <strong>2 Greater First Aid Kits added to your bag.</strong>
+            </p>
+
+            <p>
+                Each kit can restore 15 HP when used.
+            </p>
+
+        `;
+
+    }
+
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🔎 Search the Creature</h2>
+
+            ${searchRoll.html}
+
+            <p>
+                <strong>
+                    Search Roll: ${roll}
+                </strong>
+            </p>
+
+            ${discoveries}
+
+        </div>
+
+    `;
+
 
     showChoices([
         "↩️ Return to the Beach"
@@ -1881,6 +2181,30 @@ function combatInventory() {
     const firstAid =
         playerInventory.find(item => item.id === "first_aid_kit");
 
+if (greaterFirstAid && greaterFirstAid.quantity > 0) {
+
+    inventoryContainer.innerHTML += `
+
+        <p>
+            <strong>
+                Greater First Aid Kit ×${greaterFirstAid.quantity}
+            </strong>
+        </p>
+
+        <p>
+            Restores 15 HP.
+        </p>
+
+    `;
+
+    showChoices([
+        "❤️ Use Greater First Aid Kit",
+        "↩️ Back to Combat"
+    ]);
+
+    return;
+
+}
 
     if (firstAid && firstAid.quantity > 0) {
 
@@ -1895,6 +2219,11 @@ function combatInventory() {
             <p>
                 Restores 5 HP.
             </p>
+
+const greaterFirstAid =
+    playerInventory.find(
+        item => item.id === "greater_first_aid_kit"
+    );
 
         `;
 
@@ -2055,6 +2384,125 @@ function useCombatFirstAidKit() {
         advanceCombatTurn();
 
     }, COMBAT_DELAY);
+
+}
+
+// =====================================
+// USE GREATER FIRST AID KIT
+// =====================================
+
+function useCombatGreaterFirstAidKit() {
+
+    const greaterFirstAid =
+        playerInventory.find(
+            item => item.id === "greater_first_aid_kit"
+        );
+
+    if (
+        !greaterFirstAid ||
+        greaterFirstAid.quantity <= 0
+    ) {
+
+        combatInventory();
+
+        return;
+
+    }
+
+
+    // =====================================
+    // FULL HEALTH
+    // =====================================
+
+    if (combatPlayer.hp >= combatPlayer.maxHp) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>🧰 Greater First Aid Kit</h2>
+
+                <p>
+                    You are already at full health.
+                </p>
+
+                <p>
+                    You don't need to use the kit yet.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Combat"
+        ]);
+
+        return;
+
+    }
+
+
+    const previousHp = combatPlayer.hp;
+
+
+    combatPlayer.hp += 15;
+
+
+    if (combatPlayer.hp > combatPlayer.maxHp) {
+
+        combatPlayer.hp = combatPlayer.maxHp;
+
+    }
+
+
+    greaterFirstAid.quantity -= 1;
+
+
+    if (greaterFirstAid.quantity <= 0) {
+
+        const index =
+            playerInventory.indexOf(greaterFirstAid);
+
+        playerInventory.splice(index, 1);
+
+    }
+
+
+    const healing =
+        combatPlayer.hp - previousHp;
+
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🧰 Greater First Aid Kit</h2>
+
+            <p>
+                You use the Greater First Aid Kit.
+            </p>
+
+            <p>
+                You recover
+                <strong>${healing} HP</strong>.
+            </p>
+
+            <p>
+                <strong>
+                    HP:
+                    ${combatPlayer.hp} / ${combatPlayer.maxHp}
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+
+    showChoices([
+        "▶️ End Turn"
+    ]);
 
 }
 

@@ -2,7 +2,54 @@ let playerSilver = 50;
 
 let playerInventory = [];
 
-function addItem(id, name, category) {
+// =====================================
+// PLAYER EQUIPMENT
+// =====================================
+
+let playerEquipment = {
+
+    head: null,
+
+    body: null,
+
+    arms: null,
+
+    legs: null,
+
+    jewellery1: null,
+
+    jewellery2: null,
+
+    weapon: {
+        id: "standard_sword",
+        name: "Standard Sword"
+    },
+
+    offhand: null
+
+};
+
+const equipmentSlots = {
+
+    head: "🪖 Head",
+
+    body: "🛡️ Body",
+
+    arms: "🧤 Arms / Hands",
+
+    legs: "👢 Legs",
+
+    jewellery1: "💍 Jewellery 1",
+
+    jewellery2: "💍 Jewellery 2",
+
+    weapon: "⚔️ Weapon",
+
+    offhand: "🛡️ Offhand"
+
+};
+
+function addItem(id, name, category, identified = true) {
 
     const existingItem = playerInventory.find(item => item.id === id);
 
@@ -16,7 +63,8 @@ function addItem(id, name, category) {
             id: id,
             name: name,
             category: category,
-            quantity: 1
+            quantity: 1,
+            identified: identified
         });
 
     }
@@ -26,6 +74,134 @@ function addItem(id, name, category) {
 function hasItem(id) {
 
     return playerInventory.some(item => item.id === id);
+
+}
+
+function identifyItem(id, newName, description, effect) {
+
+    const item = playerInventory.find(item => item.id === id);
+
+    if (!item) {
+
+        return false;
+
+    }
+
+    item.identified = true;
+    item.name = newName;
+    item.description = description;
+    item.effect = effect;
+
+    return true;
+
+}
+
+// =====================================
+// EQUIP ITEM
+// =====================================
+
+function equipItem(itemId, slot) {
+    
+    const item = playerInventory.find(
+        item => item.id === itemId
+    );
+    
+    if (!item) {
+        
+        return false;
+        
+    }
+    
+    if (!item.identified) {
+        
+        return false;
+        
+    }
+    
+    if (!equipmentSlots[slot]) {
+        
+        return false;
+        
+    }
+    
+    // =====================================
+    // PREVENT DUPLICATE EQUIPMENT
+    // =====================================
+    
+    const alreadyEquipped = Object.entries(playerEquipment)
+        .some(([equippedSlot, equippedItem]) => {
+            
+            return (
+                equippedSlot !== slot &&
+                equippedItem &&
+                equippedItem.id === item.id
+            );
+            
+        });
+    
+    if (alreadyEquipped) {
+        
+        return false;
+        
+    }
+    
+    // =====================================
+    // EQUIP ITEM
+    // =====================================
+    
+    playerEquipment[slot] = {
+        
+        id: item.id,
+        name: item.name,
+        effect: item.effect || null
+        
+    };
+    
+    return true;
+    
+}
+
+// =====================================
+// UNEQUIP ITEM
+// =====================================
+
+function unequipItem(slot) {
+
+    if (!playerEquipment[slot]) {
+
+        return false;
+
+    }
+
+    playerEquipment[slot] = null;
+
+    return true;
+
+}
+
+// =====================================
+// EQUIPMENT ATTACK BONUS
+// =====================================
+
+function getEquipmentAttackBonus() {
+
+    let bonus = 0;
+
+    Object.values(playerEquipment).forEach(item => {
+
+        if (!item) {
+            return;
+        }
+
+        if (item.effect === "+1 Attack while worn") {
+
+            bonus += 1;
+
+        }
+
+    });
+
+    return bonus;
 
 }
 
@@ -41,6 +217,63 @@ function getItemQuantity(id) {
 
 }
 
+// EQUIPMENT OPTIONS
+// =====================================
+
+function showEquipOptions(itemId) {
+
+    const item = playerInventory.find(
+        item => item.id === itemId
+    );
+
+    if (!item) {
+
+        return;
+
+    }
+
+    let choices = [];
+
+
+    if (item.id === "strange_ring") {
+
+        choices.push(
+            "💍 Equip Ring in Jewellery 1"
+        );
+
+        choices.push(
+            "💍 Equip Ring in Jewellery 2"
+        );
+
+    }
+
+previousChoices = [...currentChoices];
+
+choices.push(
+    "✖️ Cancel"
+);
+
+closeInventory();
+
+    document.getElementById("story").innerHTML += `
+
+    <div id="equipOptionsPanel" class="story-panel">
+
+            <h3>⚔️ Equip ${item.name}</h3>
+
+            <p>
+                Choose where you want to equip it.
+            </p>
+
+        </div>
+
+    `;
+
+
+    showChoices(choices);
+
+}
+
 function openInventory() {
 
     if (document.getElementById("inventoryPanel")) {
@@ -52,6 +285,9 @@ const supplies = playerInventory.filter(item => item.category === "supplies");
 const unusual = playerInventory.filter(item => item.category === "unusual");
 const keyItems = playerInventory.filter(item => item.category === "key");
 
+// =====================================
+
+
     function buildItemList(items) {
 
         if (items.length === 0) {
@@ -61,10 +297,51 @@ const keyItems = playerInventory.filter(item => item.category === "key");
         return `
             <ul>
                 ${items.map(item => `
-                    <li>
-                        ${item.name} ×${item.quantity}
-                    </li>
-                `).join("")}
+    <li>
+
+        <strong>
+            ${item.name} ×${item.quantity}
+        </strong>
+
+        ${
+            item.description
+            ? `
+                <br>
+                <em>
+                    ${item.description}
+                </em>
+            `
+            : ""
+        }
+
+        ${
+            item.effect
+            ? `
+                <br>
+                <strong>
+                    Effect: ${item.effect}
+                </strong>
+            `
+            : ""
+        }
+
+        ${
+            item.category === "equipment" &&
+            item.identified === true
+            ? `
+                <br><br>
+
+                <button
+                    onclick="showEquipOptions('${item.id}')"
+                >
+                    ⚔️ Equip
+                </button>
+            `
+            : ""
+        }
+
+    </li>
+`).join("")}
             </ul>
         `;
 
@@ -2348,7 +2625,6 @@ function buyTovinKey() {
 
 }
 
-
 function buyTovinJournal() {
 
     if (playerSilver < 32) {
@@ -2630,3 +2906,125 @@ function buyTovinBell() {
     showChoices(["↩️ Back to Tovin's Goods"]);
 
 }
+
+// =====================================
+// CHARACTER SHEET
+// =====================================
+
+function openCharacterSheet() {
+    
+    if (document.getElementById("characterPanel")) {
+        return;
+    }
+    
+    const attackBonus = getEquipmentAttackBonus();
+    
+    const finalAttack = 0 + attackBonus;
+    
+    document.getElementById("story").innerHTML += `
+
+        <div id="characterPanel" class="story-panel">
+
+            <h2>📜 Character</h2>
+
+            <h3>⚔️ Statistics</h3>
+
+            <p>
+                <strong>Attack:</strong>
+                ${finalAttack}
+            </p>
+
+            <h3>🛡️ Equipment</h3>
+
+            <p>
+                🪖 <strong>Head:</strong>
+                ${getEquipmentName("head")}
+            </p>
+
+            <p>
+                🛡️ <strong>Body:</strong>
+                ${getEquipmentName("body")}
+            </p>
+
+            <p>
+                🧤 <strong>Arms / Hands:</strong>
+                ${getEquipmentName("arms")}
+            </p>
+
+            <p>
+                👢 <strong>Legs:</strong>
+                ${getEquipmentName("legs")}
+            </p>
+
+            <p>
+                💍 <strong>Jewellery 1:</strong>
+                ${getEquipmentName("jewellery1")}
+            </p>
+
+            <p>
+                💍 <strong>Jewellery 2:</strong>
+                ${getEquipmentName("jewellery2")}
+            </p>
+
+            <p>
+                ⚔️ <strong>Weapon:</strong>
+                ${getEquipmentName("weapon")}
+            </p>
+
+            <p>
+                🛡️ <strong>Offhand:</strong>
+                ${getEquipmentName("offhand")}
+            </p>
+
+            <button onclick="closeCharacterSheet()">
+                ✕ Close
+            </button>
+
+        </div>
+
+    `;
+    
+}
+
+function getEquipmentName(slot) {
+
+    if (!playerEquipment[slot]) {
+
+        return "<em>Empty</em>";
+
+    }
+
+    return playerEquipment[slot].name;
+
+}
+
+function closeCharacterSheet() {
+
+    const panel =
+        document.getElementById("characterPanel");
+
+    if (panel) {
+
+        panel.remove();
+
+    }
+
+}
+
+function addTestRing() {
+
+    if (!hasItem("strange_ring")) {
+
+        addItem(
+            "strange_ring",
+            "Strange Ring",
+            "equipment",
+            false
+        );
+
+    }
+
+}
+
+// TEMPORARY TEST — REMOVE AFTER APPRAISAL TEST
+addTestRing();

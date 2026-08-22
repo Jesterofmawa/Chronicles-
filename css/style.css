@@ -705,3 +705,15 @@ animation: storyOpeningFadeIn 1.5s ease forwards;
 
     background: rgba(248, 244, 232, 1);
 }
+
+#characterPanel {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    z-index: 2000;
+
+    background: rgba(248, 244, 232, 1);
+}
