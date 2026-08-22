@@ -33,7 +33,8 @@ let combatPipReactions = {
     criticalFailure: false,
     heavyDamage: false,
     creatureDesperate: false,
-    playerBadlyWounded: false
+    playerBadlyWounded: false,
+    creatureFleeing: false
 };
 
 let currentAttack = {
@@ -158,7 +159,8 @@ combatPipReactions = {
     criticalFailure: false,
     heavyDamage: false,
     creatureDesperate: false,
-    playerBadlyWounded: false
+    playerBadlyWounded: false,
+    creatureFleeing: false
 };
 
 combatEncounter = enemies.map(enemy => ({
@@ -412,6 +414,159 @@ document.getElementById("choices").innerHTML = "";
 
 }
 
+// =====================================
+// ENEMY FLEE CHECK
+// =====================================
+
+function attemptEnemyFlee(enemy) {
+
+    const fleeRoll = rollDice("1d20");
+
+    let pipReaction =
+        getCombatPipReaction("creatureFleeing");
+
+
+    // =====================================
+    // SUCCESSFUL ESCAPE
+    // =====================================
+
+    if (fleeRoll.total >= 10) {
+
+        combatActive = false;
+        combatResult = "escaped";
+        playerDefending = false;
+
+
+        rememberLongTerm(
+            "greyhaven_sea_creature_escaped_" + Date.now(),
+            "The unknown sea creature was badly wounded during the Greyhaven shoreline encounter and escaped back into the sea.",
+            {
+                topic: "greyhaven",
+                type: "creature_escape",
+                importance: 3,
+                pip: "It got away from us at Greyhaven. I don't think that was the last we've seen of it."
+            }
+        );
+
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>🌊 The Creature Escapes</h2>
+
+                <p>
+                    The creature staggers backwards.
+                </p>
+
+                <p>
+                    Its dark eyes flick towards the sea.
+                </p>
+
+                <p>
+                    Then it turns and scrambles towards the shallows.
+                </p>
+
+                <p>
+                    It disappears beneath the water.
+                </p>
+
+            </div>
+
+            <div class="story-panel">
+
+                <p>
+                    🎲 <strong>Flee Roll — d20</strong>
+                </p>
+
+                <p>
+                    <strong>${fleeRoll.total}</strong>
+                </p>
+
+                ${
+                    fleeRoll.total === 20
+                    ? `
+                        <p>
+                            <strong>🌟 Desperate Escape!</strong>
+                        </p>
+
+                        <p>
+                            The creature vanishes into the water before you can react.
+                        </p>
+                    `
+                    : `
+                        <p>
+                            The creature escapes into the sea.
+                        </p>
+                    `
+                }
+
+            </div>
+
+            ${pipReaction}
+
+        `;
+
+
+        showChoices([
+            "↩️ Return to the Beach"
+        ]);
+
+        return true;
+
+    }
+
+
+    // =====================================
+    // FAILED ESCAPE
+    // =====================================
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🌊 The Creature Hesitates</h2>
+
+            <p>
+                The creature looks towards the sea.
+            </p>
+
+            <p>
+                For a moment, it seems ready to flee.
+            </p>
+
+            <p>
+                Then it turns back towards you.
+            </p>
+
+            <p>
+                It refuses to give up.
+            </p>
+
+        </div>
+
+        <div class="story-panel">
+
+            <p>
+                🎲 <strong>Flee Roll — d20</strong>
+            </p>
+
+            <p>
+                <strong>${fleeRoll.total}</strong>
+            </p>
+
+            <p>
+                The creature remains and continues the fight.
+            </p>
+
+        </div>
+
+    `;
+
+
+    return false;
+
+}
 
 // =====================================
 // ENEMY ATTACK ROLL
@@ -428,6 +583,26 @@ function enemyAttackRoll() {
         return;
 
     }
+
+// =====================================
+// BADLY WOUNDED CREATURE MAY FLEE
+// =====================================
+
+if (
+    enemy.id === "greyhaven_sea_creature" &&
+    enemy.currentHp > 0 &&
+    enemy.currentHp <= 5
+) {
+
+    const escaped = attemptEnemyFlee(enemy);
+
+    if (escaped) {
+
+        return;
+
+    }
+
+}
 
     const result = rollDice("1d20");
 
@@ -1991,6 +2166,22 @@ function getCombatPipReaction(type) {
 
     }
 
+if (type === "creatureFleeing") {
+
+    return `
+
+        <div class="story-panel">
+
+            <p>
+                🐿️ <strong>Pip:</strong>
+                "I don't think we've seen the last of it."
+            </p>
+
+        </div>
+
+    `;
+
+}
 
     return "";
 
