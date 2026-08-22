@@ -50,7 +50,7 @@ const equipmentSlots = {
 
 };
 
-function addItem(id, name, category, identified = true) {
+function addItem(id, name, category, identified = true, equipSlot = null) {
 
     const existingItem = playerInventory.find(item => item.id === id);
 
@@ -65,7 +65,8 @@ function addItem(id, name, category, identified = true) {
             name: name,
             category: category,
             quantity: 1,
-            identified: identified
+            identified: identified,
+            equipSlot: equipSlot
         });
 
     }
@@ -78,14 +79,34 @@ function hasItem(id) {
 
 }
 
-if (!hasItem("short_sword")) {
+// The player starts with the Short Sword equipped.
+// It should not also appear in inventory.
 
-    addItem(
-        "short_sword",
-        "Short Sword",
-        "equipment",
-        true
+function removeItem(id) {
+
+    const item = playerInventory.find(
+        item => item.id === id
     );
+
+    if (!item) {
+
+        return false;
+
+    }
+
+    if (item.quantity > 1) {
+
+        item.quantity -= 1;
+
+    } else {
+
+        playerInventory = playerInventory.filter(
+            item => item.id !== id
+        );
+
+    }
+
+    return true;
 
 }
 
@@ -119,6 +140,56 @@ function equipItem(itemId, slot) {
     );
     
     if (!item) {
+        return false;
+    }
+    
+    if (!item.identified) {
+        return false;
+    }
+    
+    if (!equipmentSlots[slot]) {
+        return false;
+    }
+    
+    // Prevent the same physical item
+    // being equipped in two slots.
+    const alreadyEquipped = Object.entries(playerEquipment)
+        .some(([equippedSlot, equippedItem]) => {
+            
+            return (
+                equippedSlot !== slot &&
+                equippedItem &&
+                equippedItem.id === item.id
+            );
+            
+        });
+    
+    if (alreadyEquipped) {
+        return false;
+    }
+    
+    // Do not silently replace existing equipment.
+    if (playerEquipment[slot]) {
+        return false;
+    }
+    
+    playerEquipment[slot] = {
+    id: item.id,
+    name: item.name,
+    effect: item.effect || null,
+    equipSlot: item.equipSlot || null
+};
+    
+    return true;
+}
+
+function replaceEquipment(itemId, slot) {
+    
+    const item = playerInventory.find(
+        item => item.id === itemId
+    );
+    
+    if (!item) {
         
         return false;
         
@@ -135,10 +206,6 @@ function equipItem(itemId, slot) {
         return false;
         
     }
-    
-    // =====================================
-    // PREVENT DUPLICATE EQUIPMENT
-    // =====================================
     
     const alreadyEquipped = Object.entries(playerEquipment)
         .some(([equippedSlot, equippedItem]) => {
@@ -157,15 +224,40 @@ function equipItem(itemId, slot) {
         
     }
     
-    // =====================================
-    // EQUIP ITEM
-    // =====================================
+    const oldItem = playerEquipment[slot];
     
+    if (!oldItem) {
+        
+        return equipItem(
+            itemId,
+            slot
+        );
+        
+    }
+    
+    // Remove the new item from inventory.
+    if (!removeItem(item.id)) {
+        
+        return false;
+        
+    }
+    
+    // Return the old item to inventory.
+    addItem(
+        oldItem.id,
+        oldItem.name,
+        "equipment",
+        true,
+        oldItem.equipSlot || null
+    );
+    
+    // Equip the new item.
     playerEquipment[slot] = {
         
         id: item.id,
         name: item.name,
-        effect: item.effect || null
+        effect: item.effect || null,
+        equipSlot: item.equipSlot || null
         
     };
     
@@ -178,17 +270,27 @@ function equipItem(itemId, slot) {
 // =====================================
 
 function unequipItem(slot) {
-
-    if (!playerEquipment[slot]) {
-
+    
+    const equippedItem = playerEquipment[slot];
+    
+    if (!equippedItem) {
+        
         return false;
-
+        
     }
-
+    
+    addItem(
+        equippedItem.id,
+        equippedItem.name,
+        "equipment",
+        true,
+        equippedItem.equipSlot || null
+    );
+    
     playerEquipment[slot] = null;
-
+    
     return true;
-
+    
 }
 
 // =====================================
@@ -244,32 +346,93 @@ function showEquipOptions(itemId) {
 
     }
 
-    let choices = [];
+    if (!item.identified) {
 
-
-    if (item.id === "strange_ring") {
-
-        choices.push(
-            "💍 Equip Ring in Jewellery 1"
-        );
-
-        choices.push(
-            "💍 Equip Ring in Jewellery 2"
-        );
+        return;
 
     }
 
-previousChoices = [...currentChoices];
+    let choices = [];
 
-choices.push(
-    "✖️ Cancel"
-);
+    // =====================================
+    // WEAPONS
+    // =====================================
 
-closeInventory();
+    if (item.equipSlot === "weapon") {
+    
+    if (playerEquipment.weapon) {
+        
+        choices.push(
+            `⚔️ Replace ${playerEquipment.weapon.name} with ${item.name}`
+        );
+        
+    } else {
+        
+        choices.push(
+            `⚔️ Equip ${item.name} as Weapon`
+        );
+        
+    }
+    
+}
+
+    // =====================================
+    // JEWELLERY
+    // =====================================
+
+    if (item.equipSlot === "jewellery") {
+    
+    if (playerEquipment.jewellery1) {
+        
+        choices.push(
+            `💍 Replace ${playerEquipment.jewellery1.name} with ${item.name} in Jewellery 1`
+        );
+        
+    } else {
+        
+        choices.push(
+            `💍 Equip ${item.name} in Jewellery 1`
+        );
+        
+    }
+    
+    if (playerEquipment.jewellery2) {
+        
+        choices.push(
+            `💍 Replace ${playerEquipment.jewellery2.name} with ${item.name} in Jewellery 2`
+        );
+        
+    } else {
+        
+        choices.push(
+            `💍 Equip ${item.name} in Jewellery 2`
+        );
+        
+    }
+    
+}
+
+    // =====================================
+    // NO VALID SLOT
+    // =====================================
+
+    if (choices.length === 0) {
+
+        return;
+
+    }
+
+    previousChoices = [...currentChoices];
+
+    choices.push(
+        "✖️ Cancel"
+    );
+
+    closeInventory();
 
     document.getElementById("story").innerHTML += `
 
-    <div id="equipOptionsPanel" class="story-panel">
+        <div id="equipOptionsPanel" class="story-panel">
 
             <h3>⚔️ Equip ${item.name}</h3>
 
@@ -280,7 +443,6 @@ closeInventory();
         </div>
 
     `;
-
 
     showChoices(choices);
 
@@ -3024,21 +3186,3 @@ function closeCharacterSheet() {
     }
 
 }
-
-function addTestRing() {
-
-    if (!hasItem("strange_ring")) {
-
-        addItem(
-            "strange_ring",
-            "Strange Ring",
-            "equipment",
-            false
-        );
-
-    }
-
-}
-
-// TEMPORARY TEST — REMOVE AFTER APPRAISAL TEST
-addTestRing();

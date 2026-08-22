@@ -1768,16 +1768,31 @@ if (choice === "🔄 Retry") {
 
 }
 
-if (choice === "💍 Equip Ring in Jewellery 1") {
+if (choice.startsWith("⚔️ Replace ") && choice.includes(" with ")) {
     
-    if (
-        equipItem(
-            "strange_ring",
-            "jewellery1"
-        )
-    ) {
+    const match = choice.match(
+        /^⚔️ Replace (.+) with (.+)$/
+    );
+    
+    if (match) {
         
-        openCharacterSheet();
+        const newItemName = match[2];
+        
+        const item = playerInventory.find(
+            item => item.name === newItemName
+        );
+        
+        if (
+            item &&
+            replaceEquipment(
+                item.id,
+                "weapon"
+            )
+        ) {
+            
+            openCharacterSheet();
+            
+        }
         
     }
     
@@ -1785,11 +1800,182 @@ if (choice === "💍 Equip Ring in Jewellery 1") {
     
 }
 
-if (choice === "💍 Equip Ring in Jewellery 2") {
+if (choice.startsWith("💍 Replace ") && choice.includes(" in Jewellery 1")) {
+
+    const match = choice.match(
+        /^💍 Replace (.+) with (.+) in Jewellery 1$/
+    );
+
+    if (match) {
+
+        const newItemName = match[2];
+
+        const item = playerInventory.find(
+            item => item.name === newItemName
+        );
+
+        if (
+            item &&
+            replaceEquipment(
+                item.id,
+                "jewellery1"
+            )
+        ) {
+
+            openCharacterSheet();
+
+        }
+
+    }
+
+    return;
+
+}
+
+
+
+if (choice.startsWith("⚔️ Equip ") && choice.endsWith(" as Weapon")) {
+
+    const itemName = choice
+        .replace("⚔️ Equip ", "")
+        .replace(" as Weapon", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
 
     if (
+        item &&
         equipItem(
-            "strange_ring",
+            item.id,
+            "weapon"
+        )
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+
+}
+
+if (
+    choice.startsWith("💍 Replace ") &&
+    choice.includes(" in Jewellery 1")
+) {
+    
+    const match = choice.match(
+        /^💍 Replace (.+) with (.+) in Jewellery 1$/
+    );
+    
+    if (match) {
+        
+        const newItemName = match[2];
+        
+        const item = playerInventory.find(
+            item => item.name === newItemName
+        );
+        
+        if (
+            item &&
+            replaceEquipment(
+                item.id,
+                "jewellery1"
+            )
+        ) {
+            
+            openCharacterSheet();
+            
+        }
+        
+    }
+    
+    return;
+    
+}
+
+if (
+    choice.startsWith("💍 Equip ") &&
+    choice.includes(" in Jewellery 1")
+) {
+
+    const itemName = choice
+        .replace("💍 Equip ", "")
+        .replace(" in Jewellery 1", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(
+            item.id,
+            "jewellery1"
+        )
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+
+}
+
+if (
+    choice.startsWith("💍 Replace ") &&
+    choice.includes(" in Jewellery 2")
+) {
+    
+    const match = choice.match(
+        /^💍 Replace (.+) with (.+) in Jewellery 2$/
+    );
+    
+    if (match) {
+        
+        const newItemName = match[2];
+        
+        const item = playerInventory.find(
+            item => item.name === newItemName
+        );
+        
+        if (
+            item &&
+            replaceEquipment(
+                item.id,
+                "jewellery2"
+            )
+        ) {
+            
+            openCharacterSheet();
+            
+        }
+        
+    }
+    
+    return;
+    
+}
+
+if (
+    choice.startsWith("💍 Equip ") &&
+    choice.includes(" in Jewellery 2")
+) {
+
+    const itemName = choice
+        .replace("💍 Equip ", "")
+        .replace(" in Jewellery 2", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(
+            item.id,
             "jewellery2"
         )
     ) {
