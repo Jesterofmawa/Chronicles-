@@ -3198,18 +3198,3 @@ function closeCharacterSheet() {
     }
 
 }
-
-// TEMPORARY TEST — REMOVE AFTER COMBAT TEST
-
-if (!hasItem("test_axe")) {
-
-    addItem(
-        "test_axe",
-        "Test Axe",
-        "equipment",
-        true,
-        "weapon",
-        "1d10"
-    );
-
-}

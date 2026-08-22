@@ -1065,14 +1065,21 @@ function playerAttack() {
 
     const attackRoll = createPipRoll("1d20");
 
-    currentAttack.attackRoll = attackRoll.result.total;
+const rawAttackRoll = attackRoll.result.total;
+
+const attackBonus = getEquipmentAttackBonus();
+
+currentAttack.rawAttackRoll = rawAttackRoll;
+currentAttack.attackBonus = attackBonus;
+currentAttack.attackRoll =
+    rawAttackRoll + attackBonus;
 
 
     // =====================================
     // NATURAL 1
     // =====================================
 
-    if (currentAttack.attackRoll === 1) {
+    if (currentAttack.rawAttackRoll === 1) {
 
         currentAttack.result = "critical_failure";
 
@@ -1093,7 +1100,9 @@ const pipReaction =
                 ${attackRoll.html}
 
                 <p>
-                    <strong>Your Attack Roll: 1</strong>
+                    <strong>
+    Your Attack Roll: 1
+</strong>
                 </p>
 
                 <p>
@@ -1123,7 +1132,7 @@ ${pipReaction}
     // NATURAL 20
     // =====================================
 
-    if (currentAttack.attackRoll === 20) {
+    if (currentAttack.rawAttackRoll === 20) {
 
         currentAttack.result = "critical_hit";
         currentAttack.critical = true;
@@ -1196,8 +1205,14 @@ ${pipReaction}
 
             <p>
                 <strong>
-                    Your Attack Roll: ${currentAttack.attackRoll}
-                </strong>
+    Your Attack Roll:
+    ${currentAttack.rawAttackRoll}
+    ${currentAttack.attackBonus > 0
+        ? `+ ${currentAttack.attackBonus}`
+        : ""}
+    =
+    ${currentAttack.attackRoll}
+</strong>
             </p>
 
             <p>
