@@ -876,27 +876,63 @@ function investigateGullDisturbance() {
 
         outcome = `
 
-            <p>
-                You approach the water and study the shallows.
-            </p>
+    <p>
+        You approach the water and study the shallows.
+    </p>
 
-            <p>
-                For a moment, you see nothing.
-            </p>
+    <p>
+        For a moment, you see nothing.
+    </p>
 
-            <p>
-                Then something moves beneath the surface.
-            </p>
+    <p>
+        Then something moves beneath the surface.
+    </p>
 
-            <p>
-                Before you can make sense of it, the water erupts.
-            </p>
+    <p>
+        It is too large to be a fish.
+    </p>
 
-            <p>
-                Something is coming towards you.
-            </p>
+    <p>
+        The water suddenly erupts.
+    </p>
 
-        `;
+    <p>
+        Something pulls itself from the shallows.
+    </p>
+
+    <p>
+        It is tall, but hunched, its movements awkward on solid ground.
+    </p>
+
+    <p>
+        Dark, leathery skin clings wetly to its body.
+    </p>
+
+    <p>
+        Long arms hang almost to its knees, ending in webbed hands.
+    </p>
+
+    <p>
+        Its head lifts.
+    </p>
+
+    <p>
+        Two large, dark eyes fix upon you.
+    </p>
+
+    <p>
+        Beneath its jaw, three narrow slits open and close.
+    </p>
+
+    <p>
+        It makes a wet, clicking sound.
+    </p>
+
+    <p>
+        Then it moves towards you.
+    </p>
+
+`;
 
         choices.push("⚔️ Fight");
 
@@ -910,27 +946,59 @@ function investigateGullDisturbance() {
 
         outcome = `
 
-            <p>
-                You watch the shallows carefully.
-            </p>
+    <p>
+        You watch the shallows carefully.
+    </p>
 
-            <p>
-                Something moves beneath the water.
-            </p>
+    <p>
+        Something moves beneath the water.
+    </p>
 
-            <p>
-                It is too large to be a fish.
-            </p>
+    <p>
+        It is too large to be a fish.
+    </p>
 
-            <p>
-                Before you can get a better look, the water suddenly churns.
-            </p>
+    <p>
+        The water churns.
+    </p>
 
-            <p>
-                Whatever is beneath it is moving towards the shore.
-            </p>
+    <p>
+        A figure rises from beneath the surface.
+    </p>
 
-        `;
+    <p>
+        For a moment, you can only stare.
+    </p>
+
+    <p>
+        It has the shape of a person, but nothing else about it seems right.
+    </p>
+
+    <p>
+        Its skin is dark and leathery, glistening with seawater.
+    </p>
+
+    <p>
+        Its arms are unnaturally long.
+    </p>
+
+    <p>
+        Webbing stretches between its fingers.
+    </p>
+
+    <p>
+        Three narrow slits open beneath its jaw.
+    </p>
+
+    <p>
+        Its black eyes settle upon you.
+    </p>
+
+    <p>
+        Then it comes ashore.
+    </p>
+
+`;
 
         choices.push("⚔️ Fight");
 

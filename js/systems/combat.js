@@ -42,6 +42,33 @@ let currentAttack = {
 // START COMBAT
 // =====================================
 
+// =====================================
+// GREYHAVEN SEA CREATURE
+// =====================================
+
+function createGreyhavenSeaCreature() {
+
+    return {
+
+        id: "greyhaven_sea_creature",
+
+        name: "Unknown Sea Creature",
+
+        maxHp: 18,
+
+        fleeDifficulty: 13,
+
+        description: `
+            A tall, hunched figure emerges from the shallows.
+            Its skin is dark and leathery, slick with seawater.
+            Long arms hang almost to its knees, ending in webbed hands.
+            Its large, dark eyes reflect the light as it watches you.
+        `
+
+    };
+
+}
+
 function startCombat(enemies) {
 
     combatActive = true;

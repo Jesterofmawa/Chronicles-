@@ -1662,13 +1662,8 @@ if (choice === "🏃 Flee") {
 if (choice === "⚔️ Fight") {
 
     startCombat([
-    {
-        id: "test_enemy",
-        name: "Training Dummy",
-        maxHp: 10,
-        fleeDifficulty: 10
-    }
-]);
+        createGreyhavenSeaCreature()
+    ]);
 
     return;
 
