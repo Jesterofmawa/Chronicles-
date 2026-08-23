@@ -1440,9 +1440,9 @@ if (choice === "🗣️ Speak with the Fisherman") {
 
 }
 
-if (choice === "⚓ Ask the Fisherman about the Old Harbour") {
+if (choice === "🎣 Ask the Fisherman about the harbour") {
 
-    askFishermanAboutOldHarbour();
+    askFishermanAboutHarbour();
 
     return;
 
@@ -1456,9 +1456,33 @@ if (choice === "🏘️ Ask the Fisherman about Greyhaven") {
 
 }
 
-if (choice === "🌊 Ask the Fisherman about the Sea") {
+if (choice === "🌊 Ask the Fisherman about the sea") {
 
     askFishermanAboutTheSea();
+
+    return;
+
+}
+
+if (choice === "🏚️ Ask the Fisherman about the old harbour") {
+
+    askFishermanAboutOldHarbour();
+
+    return;
+
+}
+
+if (choice === "🐟 Ask the Fisherman about fishing around Greyhaven") {
+
+    askFishermanAboutFishing();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Fisherman Questions") {
+
+    showFishermanTopics();
 
     return;
 
@@ -1474,7 +1498,15 @@ if (choice === "↩️ Back to the Fisherman") {
 
 if (choice === "↩️ Leave the Fisherman") {
 
-    startGreyhaven();
+    enterInsideGreyhaven();
+
+    return;
+
+}
+
+if (choice === "❓ Ask What sort of wrong things?") {
+
+    askFishermanAboutWrongThings();
 
     return;
 
@@ -1986,7 +2018,7 @@ if (
 
     return;
 
-}
+}fis
 
 if (choice === "✖️ Cancel") {
 

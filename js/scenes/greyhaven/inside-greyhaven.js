@@ -1,3 +1,9 @@
+let fisherman_general_conversation_complete = false;
+let fishermanAskedHarbour = false;
+let fishermanAskedSea = false;
+let fishermanAskedOldHarbour = false;
+let fishermanAskedFishing = false;
+
 function enterInsideGreyhaven() {
   
   setPipLocation("greyhaven");
@@ -4348,9 +4354,6 @@ function talkToFisherman() {
     
     showChoices([
         "🗣️ Speak with the Fisherman",
-        "🏘️ Ask the Fisherman about Greyhaven",
-        "⚓ Ask the Fisherman about the Old Harbour",
-        "🌊 Ask the Fisherman about the Sea",
         "↩️ Leave the Fisherman"
     ]);
     
@@ -4586,38 +4589,116 @@ function talkToTavernPatrons() {
 }
 
 function speakWithFisherman() {
-
+    
+    fisherman_general_conversation_complete = true;
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
+            <h2>🎣 The Fisherman</h2>
+
             <p>
-                The fisherman listens.
+                The fisherman gives you a sideways glance as you approach.
             </p>
 
             <p>
-                His conversation has yet to be written.
+                His hands are thick with old scars, his coat smells faintly
+                of salt and fish, and a length of fishing line is being
+                repaired between his fingers.
+            </p>
+
+            <p>
+                He looks you over for a moment.
+            </p>
+
+            <p>
+                "Yer not from Greyhaven."
+            </p>
+
+            <p>
+                It isn't quite a question.
+            </p>
+
+            <p>
+                "What brings ya down t' the harbour?"
             </p>
 
         </div>
 
     `;
-
-    showChoices([
-        "↩️ Back to the Fisherman"
-    ]);
+    
+    showFishermanTopics();
 
 }
 
 
-function askFishermanAboutGreyhaven() {
+function showFishermanTopics() {
+
+    const choices = [];
+
+    if (!fishermanAskedHarbour) {
+        choices.push("🎣 Ask the Fisherman about the harbour");
+    }
+
+    if (!fishermanAskedSea) {
+        choices.push("🌊 Ask the Fisherman about the sea");
+    }
+
+    if (!fishermanAskedOldHarbour) {
+        choices.push("🏚️ Ask the Fisherman about the old harbour");
+    }
+
+    if (!fishermanAskedFishing) {
+        choices.push("🐟 Ask the Fisherman about fishing around Greyhaven");
+    }
+
+    choices.push("↩️ Leave the Fisherman");
+
+    showChoices(choices);
+}
+
+function askFishermanAboutHarbour() {
+    
+    fishermanAskedHarbour = true;
 
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
+            <h2>🎣 The Fisherman</h2>
+
             <p>
-                The fisherman has yet to answer questions about Greyhaven.
+                "Harbour?"
+            </p>
+
+            <p>
+                He gives a short laugh.
+            </p>
+
+            <p>
+                "Bit of a mess, innit?"
+            </p>
+
+            <p>
+                He gestures towards the docks.
+            </p>
+
+            <p>
+                "Always has been, more or less. Ships come in,
+                ships go out. Fish come in, fish go out."
+            </p>
+
+            <p>
+    "Sometimes the wrong things come in."
+</p>
+
+            <p>
+                He returns his attention to the line in his hands.
+            </p>
+
+            <p>
+                "Nothin' unusual about that."
             </p>
 
         </div>
@@ -4625,20 +4706,90 @@ function askFishermanAboutGreyhaven() {
     `;
 
     showChoices([
-        "↩️ Back to the Fisherman"
-    ]);
+    "↩️ Back to Fisherman Questions"
+]);
+
+}
+
+function askFishermanAboutWrongThings() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🎣 The Fisherman</h2>
+
+            <p>
+                "Rubbish mostly. Dead things sometimes."
+            </p>
+
+            <p>
+                He gives a small shrug.
+            </p>
+
+            <p>
+                "Don't worry. Usually dead already."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+    "↩️ Back to Fisherman Questions"
+]);
 
 }
 
 
 function askFishermanAboutOldHarbour() {
 
+    fishermanAskedOldHarbour = true;
+
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
+            <h2>🎣 The Fisherman</h2>
+
             <p>
-                The fisherman has yet to answer questions about the Old Harbour.
+                The fisherman's hands pause on the line.
+            </p>
+
+            <p>
+                "Old harbour?"
+            </p>
+
+            <p>
+                He glances towards the far end of the coast.
+            </p>
+
+            <p>
+                "Ain't much left of it."
+            </p>
+
+            <p>
+                He pulls the line tight between his fingers.
+            </p>
+
+            <p>
+                "Used t' be bigger than this place."
+            </p>
+
+            <p>
+                A moment passes.
+            </p>
+
+            <p>
+                "Storm took it."
+            </p>
+
+            <p>
+                His eyes return to his work.
+            </p>
+
+            <p>
+                "Long time ago now."
             </p>
 
         </div>
@@ -4646,7 +4797,7 @@ function askFishermanAboutOldHarbour() {
     `;
 
     showChoices([
-        "↩️ Back to the Fisherman"
+        "↩️ Back to Fisherman Questions"
     ]);
 
 }
@@ -4654,12 +4805,44 @@ function askFishermanAboutOldHarbour() {
 
 function askFishermanAboutTheSea() {
 
+    fishermanAskedSea = true;
+
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
+            <h2>🎣 The Fisherman</h2>
+
             <p>
-                The fisherman has yet to answer questions about the sea.
+                The fisherman looks out across the water.
+            </p>
+
+            <p>
+                "Sea's the sea."
+            </p>
+
+            <p>
+                He spits over the side of the dock.
+            </p>
+
+            <p>
+                "Looks calm when it wants t'. Looks angry when it don't."
+            </p>
+
+            <p>
+                He shrugs.
+            </p>
+
+            <p>
+                "Ya learn t' respect it."
+            </p>
+
+            <p>
+                His eyes linger on the horizon.
+            </p>
+
+            <p>
+                "Especially round ere."
             </p>
 
         </div>
@@ -4667,7 +4850,67 @@ function askFishermanAboutTheSea() {
     `;
 
     showChoices([
-        "↩️ Back to the Fisherman"
+        "↩️ Back to Fisherman Questions"
+    ]);
+
+}
+
+function askFishermanAboutFishing() {
+
+    fishermanAskedFishing = true;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🎣 The Fisherman</h2>
+
+            <p>
+                He gives a quiet snort.
+            </p>
+
+            <p>
+                "Fishin'?"
+            </p>
+
+            <p>
+                He holds up the line he's been repairing.
+            </p>
+
+            <p>
+                "Plenty o' fish out there."
+            </p>
+
+            <p>
+                He nods towards the water.
+            </p>
+
+            <p>
+                "Though they ain't always where they oughta be."
+            </p>
+
+            <p>
+                He lowers his voice slightly.
+            </p>
+
+            <p>
+                "Best stay clear o' the rocks when the tide turns."
+            </p>
+
+            <p>
+                He returns to his work.
+            </p>
+
+            <p>
+                "Sea don't forgive careless folk."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Fisherman Questions"
     ]);
 
 }
