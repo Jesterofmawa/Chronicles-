@@ -64,6 +64,7 @@ function createGreyhavenSeaCreature() {
         name: "Unknown Sea Creature",
         maxHp: 18,
         fleeDifficulty: 16,
+        attack: "1d20",
         damage: "1d6",
 
         description: `
@@ -623,7 +624,9 @@ if (
 
 }
 
-    const result = rollDice("1d20");
+    const result = rollDice(
+    enemy.attack || "1d20"
+);
 
     enemy.currentAttackRoll = result.total;
 
@@ -638,7 +641,9 @@ if (
             </p>
 
             <p>
-                🎲 <strong>Attack Roll — d20</strong>
+🎲 <strong>
+    Attack Roll — ${enemy.attack || "1d20"}
+</strong>
             </p>
 
             <p>
