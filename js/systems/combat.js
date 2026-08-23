@@ -629,6 +629,8 @@ if (
 );
 
     enemy.currentAttackRoll = result.total;
+    
+    enemy.criticalAttack = (result.total === 20);
 
     document.getElementById("story").innerHTML = `
 
@@ -640,15 +642,25 @@ if (
                 <strong>${enemy.name} attacks.</strong>
             </p>
 
-            <p>
-🎲 <strong>
-    Attack Roll — ${enemy.attack || "1d20"}
-</strong>
-            </p>
+            ${
+    enemy.criticalAttack
+    ? `
+        <p>
+            <strong>🌟 Critical Hit!</strong>
+        </p>
+    `
+    : ""
+}
 
-            <p>
-                <strong>${result.total}</strong>
-            </p>
+<p>
+    🎲 <strong>
+        Attack Roll — ${enemy.attack || "1d20"}
+    </strong>
+</p>
+
+<p>
+    <strong>${result.total}</strong>
+</p>
 
         </div>
 
@@ -906,11 +918,32 @@ function enemyDamageRoll() {
 
     }
 
-    const result = rollDice(
-    enemy.damage || "1d6"
+    let damageExpression =
+    enemy.damage || "1d6";
+
+if (enemy.criticalAttack) {
+
+    const match = damageExpression.match(
+        /^(\d+)d(\d+)$/
+    );
+
+    if (match) {
+
+        const diceCount = Number(match[1]);
+        const diceSize = match[2];
+
+        damageExpression =
+            `${diceCount * 2}d${diceSize}`;
+
+    }
+
+}
+
+const result = rollDice(
+    damageExpression
 );
 
-    let damage = result.total;
+let damage = result.total;
 
 
     // =====================================
@@ -951,9 +984,19 @@ if (
 
             <p>
                 🎲 <strong>
-    Damage Roll — ${enemy.damage || "1d6"}
+    Damage Roll — ${damageExpression}
 </strong>
             </p>
+
+${
+    enemy.criticalAttack
+    ? `
+        <p>
+            <strong>🌟 Critical Hit!</strong>
+        </p>
+    `
+    : ""
+}
 
             <p>
                 <strong>${result.total}</strong>
