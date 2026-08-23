@@ -1344,6 +1344,62 @@ if (choice === "📚 Visit the Harbourmaster's Office") {
 
 }
 
+if (choice === "👀 Look Around the Harbourmaster's Office") {
+
+    lookAroundHarbourmastersOffice();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Office") {
+
+    visitHarbourmastersOffice();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Office") {
+
+    enterInsideGreyhaven();
+
+    return;
+
+}
+
+if (choice === "🗃️ Examine the Desk") {
+
+    examineHarbourmasterDesk();
+
+    return;
+
+}
+
+if (choice === "🗃️ Examine the Unlabelled Drawer") {
+
+    examineHarbourmasterDrawer();
+
+    return;
+
+}
+
+if (choice === "🔐 Attempt to Unlock the Drawer") {
+
+    attemptHarbourmasterDrawerLock();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave It Alone") {
+
+    lookAroundHarbourmastersOffice();
+
+    return;
+
+}
+
 if (choice === "🍺 The Bent Anchor") {
 
     visitBentAnchor();
@@ -1498,7 +1554,7 @@ if (choice === "↩️ Back to the Fisherman") {
 
 if (choice === "↩️ Leave the Fisherman") {
 
-    enterInsideGreyhaven();
+    lookAroundHarbour();
 
     return;
 
@@ -2032,6 +2088,14 @@ if (choice === "✖️ Cancel") {
     }
 
     showChoices(previousChoices);
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Office") {
+
+    visitHarbourmastersOffice();
 
     return;
 

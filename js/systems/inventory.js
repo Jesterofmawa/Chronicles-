@@ -139,6 +139,80 @@ function identifyItem(id, newName, description, effect) {
 
 }
 
+function addLockPickSet() {
+
+    const existingSet = playerInventory.find(
+        item => item.id === "basic_lock_pick_set"
+    );
+
+    if (existingSet) {
+        return;
+    }
+
+    playerInventory.push({
+        id: "basic_lock_pick_set",
+        name: "Basic Lock Pick Set",
+        category: "equipment",
+        quantity: 1,
+        identified: true,
+        equipSlot: null,
+        damage: null,
+        picks: 1,
+        equipable: false
+    });
+
+}
+
+function addLockPick() {
+    
+    const lockPickSet = playerInventory.find(
+        item => item.id === "basic_lock_pick_set"
+    );
+    
+    if (!lockPickSet) {
+        return false;
+    }
+    
+    if (typeof lockPickSet.picks !== "number") {
+        lockPickSet.picks = 0;
+    }
+    
+    lockPickSet.picks += 1;
+    
+    return true;
+    
+}
+
+function getLockPickCount() {
+
+    const lockPickSet = playerInventory.find(
+        item => item.id === "basic_lock_pick_set"
+    );
+
+    if (!lockPickSet) {
+        return 0;
+    }
+
+    return lockPickSet.picks;
+
+}
+
+function useLockPick() {
+
+    const lockPickSet = playerInventory.find(
+        item => item.id === "basic_lock_pick_set"
+    );
+
+    if (!lockPickSet || lockPickSet.picks <= 0) {
+        return false;
+    }
+
+    lockPickSet.picks -= 1;
+
+    return true;
+
+}
+
 // =====================================
 // EQUIP ITEM
 // =====================================
@@ -481,57 +555,75 @@ const keyItems = playerInventory.filter(item => item.category === "key");
         }
 
         return `
-            <ul>
-                ${items.map(item => `
-    <li>
+    <ul>
+        ${items.map(item => `
+            <li>
 
-    <div class="inventory-item-row">
+                <div class="inventory-item-row">
 
-        <strong>
-            ${item.name} ×${item.quantity}
-        </strong>
+                    <strong>
+                        ${item.name} ×${item.quantity}
+                    </strong>
 
-        ${
-    item.category === "equipment" && item.identified ?
-        `
-        <button
-            onclick="showEquipOptions('${item.id}')"
-        >
-            ⚔️ Equip
-        </button>
-    ` :
-        ""
-}
+                    ${
+                        item.id === "basic_lock_pick_set"
+                            ?
+                            `<div style="margin-left: 20px;">
+                                Picks: ${item.picks}
+                            </div>`
+                            :
+                            ""
+                    }
 
-    </div>
+                    ${
+                        item.category === "equipment" &&
+                        item.identified &&
+                        item.equipable !== false
+                            ?
+                            `
+                            <button
+                                onclick="showEquipOptions('${item.id}')"
+                            >
+                                ⚔️ Equip
+                            </button>
+                            `
+                            :
+                            ""
+                    }
 
-    ${
-        item.description
-        ? `
-            <br>
-            <em>
-                ${item.description}
-            </em>
-        `
-        : ""
-    }
+                </div>
 
-    ${
-        item.effect
-        ? `
-            <br>
-            <strong>
-                Effect: ${item.effect}
-            </strong>
-        `
-        : ""
-    }
+                ${
+                    item.description
+                        ?
+                        `
+                        <br>
+                        <em>
+                            ${item.description}
+                        </em>
+                        `
+                        :
+                        ""
+                }
 
-</li>
+                ${
+                    item.effect
+                        ?
+                        `
+                        <br>
+                        <strong>
+                            Effect: ${item.effect}
+                        </strong>
+                        `
+                        :
+                        ""
+                }
 
-`).join("")}
-            </ul>
-        `;
+            </li>
+
+        `).join("")}
+    </ul>
+`;
 
     }
 
@@ -3198,3 +3290,5 @@ function closeCharacterSheet() {
     }
 
 }
+
+addLockPickSet();

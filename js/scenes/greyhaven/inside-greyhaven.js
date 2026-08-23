@@ -3,6 +3,7 @@ let fishermanAskedHarbour = false;
 let fishermanAskedSea = false;
 let fishermanAskedOldHarbour = false;
 let fishermanAskedFishing = false;
+let harbourmasterDrawerOpened = false;
 
 function enterInsideGreyhaven() {
   
@@ -81,8 +82,6 @@ function enterInsideGreyhaven() {
   showChoices([
     "🧭 Explore Greyhaven",
     "⚓ Explore the Harbour",
-    "🧔 Talk to a Fisherman",
-    "📚 Look for the Harbourmaster",
     "🐿️ Ask Pip",
     "↩️ Leave Greyhaven"
 ]);
@@ -216,6 +215,7 @@ function lookAroundHarbour() {
         "🛒 Browse the Dockside Traders",
         "🐟 Visit the Fish Market",
         "🧭 Look at the Charts",
+        "🧔 Talk to a Fisherman",
         "📚 Visit the Harbourmaster's Office",
         "↩️ Back to the Harbour"
     ]);
@@ -4442,19 +4442,31 @@ function visitHarbourmastersOffice() {
         <div class="story-panel">
 
             <p>
-                The Harbourmaster's Office stands overlooking the working harbour.
+                The Harbourmaster's Office is smaller than you expected.
             </p>
 
             <p>
-                Charts, ledgers and shipping records cover the walls and shelves.
+                A broad wooden desk occupies most of the room, its surface crowded with ledgers, loose papers and a half-empty ink pot.
             </p>
 
             <p>
-                The office appears to be unattended.
+                Charts of Greyhaven and the surrounding waters cover one wall, some pinned over older charts beneath them.
             </p>
 
             <p>
-                The harbourmaster is nowhere to be found.
+                A narrow window looks out towards the harbour.
+            </p>
+
+            <p>
+                The chair behind the desk is empty, though it has been pulled back slightly as if someone left it only recently.
+            </p>
+
+            <p>
+                Beside the papers sits a cup of tea, long since gone cold.
+            </p>
+
+            <p>
+                There is no sign of the Harbourmaster.
             </p>
 
         </div>
@@ -4462,7 +4474,279 @@ function visitHarbourmastersOffice() {
     `;
 
     showChoices([
-        "↩️ Back to the Harbour"
+    "👀 Look Around the Harbourmaster's Office",
+    "↩️ Leave the Office"
+]);
+
+}
+
+function lookAroundHarbourmastersOffice() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You take a closer look around the office.
+            </p>
+
+            <p>
+                Most of what you find is exactly what you'd expect from a working harbour office.
+            </p>
+
+            <p>
+                Shipping ledgers, cargo records and harbour permits fill the shelves.
+            </p>
+
+            <p>
+                Several older charts have been pinned beneath newer ones, their edges still visible around the sides.
+            </p>
+
+            <p>
+                One section of shelving, however, catches your attention.
+            </p>
+
+            <p>
+                Several older ledgers appear to be missing.
+            </p>
+
+            <p>
+                Dust outlines the spaces where they once stood.
+            </p>
+
+            <p>
+                Whatever was here, it was removed deliberately.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🗃️ Examine the Desk",
+        "🗺️ Examine the Charts",
+        "📚 Examine the Shelves",
+        "↩️ Back to the Office"
+    ]);
+
+}
+
+function examineHarbourmasterDesk() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The desk is well used, its surface crowded with the ordinary business of running a harbour.
+            </p>
+
+            <p>
+                Cargo manifests, shipping permits and recent correspondence lie in untidy stacks.
+            </p>
+
+            <p>
+                An ink pot sits beside a half-used sheet of paper.
+            </p>
+
+            <p>
+                Most of it is routine harbour business.
+            </p>
+
+            <p>
+                But one drawer catches your attention.
+            </p>
+
+            <p>
+                It is closed.
+            </p>
+
+            <p>
+                Unlike the rest of the desk, the wood around it is almost completely free of dust.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🗃️ Examine the Unlabelled Drawer",
+        "↩️ Back to Office"
+    ]);
+
+}
+
+function examineHarbourmasterDrawer() {
+
+    pausePipObservations();
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You examine the unlabelled drawer more closely.
+            </p>
+
+            <p>
+                There is no obvious keyhole.
+            </p>
+
+            <p>
+                Instead, a small brass catch sits beneath the handle.
+            </p>
+
+            <p>
+                It is old, but the mechanism appears to be intact.
+            </p>
+
+            ${
+                harbourmasterDrawerOpened
+                    ?
+                    `
+                    <p>
+                        The drawer is already open.
+                    </p>
+
+                    <p>
+                        Whatever was kept inside has yet to reveal all of its secrets.
+                    </p>
+                        `
+                        :
+                        `
+                        <p>
+                            You could probably pick it, if you had the right tools.
+                        </p>
+                        `
+            }
+
+        </div>
+
+    `;
+
+    if (harbourmasterDrawerOpened) {
+
+        showChoices([
+            "↩️ Back to the Office"
+        ]);
+
+        return;
+    }
+
+    if (getLockPickCount() > 0) {
+
+        showChoices([
+            "🔐 Attempt to Unlock the Drawer",
+            "↩️ Leave It Alone"
+        ]);
+
+    } else {
+
+        showChoices([
+            "↩️ Leave It Alone"
+        ]);
+
+    }
+
+}
+
+function attemptHarbourmasterDrawerLock() {
+
+    if (getLockPickCount() <= 0) {
+
+        examineHarbourmasterDrawer();
+
+        return;
+
+    }
+
+    useLockPick();
+
+    const diceRoll = createPipRoll("1d12");
+    const roll = diceRoll.result.total;
+
+    let outcome = "";
+
+    if (roll <= 5) {
+
+        outcome = `
+
+            <p>
+                The pick slips against the mechanism.
+            </p>
+
+            <p>
+                You try to feel your way past the catch, but the lock refuses to give.
+            </p>
+
+            <p>
+                The drawer remains firmly locked.
+            </p>
+
+            <p>
+                The pick has been bent beyond use.
+            </p>
+
+            <p>
+                <strong>Lock Pick Result: ${roll}</strong>
+            </p>
+
+            <p>
+                ❌ <strong>Unsuccessful.</strong>
+            </p>
+
+        `;
+
+    } else {
+
+        harbourmasterDrawerOpened = true;
+
+        outcome = `
+
+            <p>
+                You work the pick gently against the mechanism.
+            </p>
+
+            <p>
+                For a moment, nothing happens.
+            </p>
+
+            <p>
+                Then comes a quiet <em>click</em>.
+            </p>
+
+            <p>
+                The drawer slides open.
+            </p>
+
+            <p>
+                <strong>Lock Pick Result: ${roll}</strong>
+            </p>
+
+            <p>
+                🔓 <strong>The drawer opens.</strong>
+            </p>
+
+        `;
+
+    }
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>🔐 Lock Picking</h2>
+
+            ${diceRoll.html}
+
+            ${outcome}
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Office"
     ]);
 
 }
