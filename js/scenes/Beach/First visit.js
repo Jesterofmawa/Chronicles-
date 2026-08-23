@@ -1,5 +1,6 @@
 let beach_feathers_searched = false;
 let beach_debris_searched = false;
+let gull_investigation_complete = false;
 
 function exploreGreyhavenBeach() {
     
@@ -25,13 +26,23 @@ function exploreGreyhavenBeach() {
 
     `;
     
-    showChoices([
-        "👀 Watch the Beach",
-        "🌊 Observe the Sea",
-        "🐦 Watch the Gulls",
-        "🔎 Search the Sand",
-        "↩️ Back to the Beach"
-    ]);
+    let choices = [
+    "👀 Watch the Beach",
+    "🌊 Observe the Sea"
+];
+
+if (!gull_investigation_complete) {
+
+    choices.push("🐦 Watch the Gulls");
+
+}
+
+choices.push(
+    "🔎 Search the Sand",
+    "↩️ Back to the Beach"
+);
+
+showChoices(choices);
     
 }
 
@@ -836,6 +847,8 @@ function watchGreyhavenGulls() {
 }
 
 function investigateGullDisturbance() {
+
+    gull_investigation_complete = true;
 
     const diceRoll = createPipRoll("1d20");
     const roll = diceRoll.result.total;
