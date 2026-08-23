@@ -59,13 +59,12 @@ function createGreyhavenSeaCreature() {
 
     return {
 
-        id: "greyhaven_sea_creature",
-
+        id:
+        "greyhaven_sea_creature",
         name: "Unknown Sea Creature",
-
         maxHp: 18,
-
         fleeDifficulty: 16,
+        damage: "1d6",
 
         description: `
             A tall, hunched figure emerges from the shallows.
@@ -902,7 +901,9 @@ function enemyDamageRoll() {
 
     }
 
-    const result = rollDice("1d6");
+    const result = rollDice(
+    enemy.damage || "1d6"
+);
 
     let damage = result.total;
 
@@ -944,7 +945,9 @@ if (
             <h2>💥 Damage</h2>
 
             <p>
-                🎲 <strong>Damage Roll — d6</strong>
+                🎲 <strong>
+    Damage Roll — ${enemy.damage || "1d6"}
+</strong>
             </p>
 
             <p>
@@ -2205,7 +2208,7 @@ function attemptFlee() {
 // =====================================
 
 function combatInventory() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -2225,83 +2228,129 @@ function combatInventory() {
         </div>
 
     `;
-
+    
     const inventoryContainer =
         document.getElementById("combatInventoryItems");
-
+    
     const firstAid =
-        playerInventory.find(item => item.id === "first_aid_kit");
-
-if (greaterFirstAid && greaterFirstAid.quantity > 0) {
-
-    inventoryContainer.innerHTML += `
-
-        <p>
-            <strong>
-                Greater First Aid Kit ×${greaterFirstAid.quantity}
-            </strong>
-        </p>
-
-        <p>
-            Restores 15 HP.
-        </p>
-
-    `;
-
-    showChoices([
-        "❤️ Use Greater First Aid Kit",
-        "↩️ Back to Combat"
-    ]);
-
-    return;
-
-}
-
+        playerInventory.find(
+            item => item.id === "first_aid_kit"
+        );
+    
+    const greaterFirstAid =
+        playerInventory.find(
+            item => item.id === "greater_first_aid_kit"
+        );
+    
+    
+    // =====================================
+    // BASIC FIRST AID KIT
+    // =====================================
+    
     if (firstAid && firstAid.quantity > 0) {
-
+        
         inventoryContainer.innerHTML += `
 
-            <p>
-                <strong>
-                    Basic First Aid Kit ×${firstAid.quantity}
-                </strong>
-            </p>
+            <div class="inventory-item-row">
 
-            <p>
-                Restores 5 HP.
-            </p>
+                <div>
 
-const greaterFirstAid =
-    playerInventory.find(
-        item => item.id === "greater_first_aid_kit"
-    );
+                    <p>
+                        <strong>
+                            Basic First Aid Kit ×${firstAid.quantity}
+                        </strong>
+                    </p>
+
+                    <p>
+                        Restores 5 HP.
+                    </p>
+
+                </div>
+
+                <button
+                    onclick="choose('❤️ Use First Aid Kit')"
+                >
+                    ❤️ Use First Aid Kit
+                </button>
+
+            </div>
 
         `;
-
-        showChoices([
-            "❤️ Use First Aid Kit",
-            "↩️ Back to Combat"
-        ]);
-
-        return;
-
+        
     }
+    
+    
+    // =====================================
+    // GREATER FIRST AID KIT
+    // =====================================
+    
+    if (
+        greaterFirstAid &&
+        greaterFirstAid.quantity > 0
+    ) {
+        
+        inventoryContainer.innerHTML += `
 
+            <div class="inventory-item-row">
 
-    inventoryContainer.innerHTML += `
+                <div>
 
-        <p>
-            <em>
-                You have nothing that can currently be used in combat.
-            </em>
-        </p>
+                    <p>
+                        <strong>
+                            Greater First Aid Kit ×${greaterFirstAid.quantity}
+                        </strong>
+                    </p>
 
-    `;
+                    <p>
+                        Restores 15 HP.
+                    </p>
 
+                </div>
+
+                <button
+                    onclick="choose('❤️ Use Greater First Aid Kit')"
+                >
+                    ❤️ Use Greater First Aid Kit
+                </button>
+
+            </div>
+
+        `;
+        
+    }
+    
+    
+    // =====================================
+    // NOTHING USABLE
+    // =====================================
+    
+    if (
+        (!firstAid || firstAid.quantity <= 0) &&
+        (!greaterFirstAid || greaterFirstAid.quantity <= 0)
+    ) {
+        
+        inventoryContainer.innerHTML = `
+
+            <p>
+                <em>
+                    You have nothing that can currently
+                    be used in combat.
+                </em>
+            </p>
+
+        `;
+        
+    }
+    
+    
+    // =====================================
+    // BACK TO COMBAT
+    // =====================================
+    
     showChoices([
         "↩️ Back to Combat"
     ]);
-
+    
 }
 
 // =====================================
