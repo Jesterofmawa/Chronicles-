@@ -4,6 +4,8 @@ let fishermanAskedSea = false;
 let fishermanAskedOldHarbour = false;
 let fishermanAskedFishing = false;
 let harbourmasterDrawerOpened = false;
+let harbourmasterLetterFound = false;
+let harbourmasterExitHintGiven = false;
 
 function enterInsideGreyhaven() {
   
@@ -4412,17 +4414,71 @@ function visitFishMarket() {
 }
 
 function visitCharts() {
+    
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                A narrow shop occupies one of the quieter corners of the harbour.
+            </p>
+
+            <p>
+                Charts and maps cover almost every available surface, some neatly rolled and stacked while others lie open beneath small weights.
+            </p>
+
+            <p>
+                The smell of old paper, ink and salt fills the little shop.
+            </p>
+
+            <p>
+                A faded sign above the doorway reads:
+            </p>
+
+            <p>
+                <strong>CHARTS &amp; COASTAL MAPS</strong>
+            </p>
+
+            <p>
+                Several charts catch your attention.
+            </p>
+
+        </div>
+
+    `;
+    
+    showChoices([
+        "🗺️ Study the Current Harbour Chart",
+        "🏚️ Study the Old Harbour Chart",
+        "↩️ Leave the Charts"
+    ]);
+    
+}
+
+function studyCurrentHarbourChart() {
 
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
             <p>
-                Charts of Greyhaven and the surrounding waters are spread across a section of the harbour.
+                You unroll a chart showing Greyhaven and the surrounding waters.
             </p>
 
             <p>
-                The charts have yet to be explored.
+                The working harbour is marked clearly, with the main berths and channels carefully noted.
+            </p>
+
+            <p>
+                Beyond it, the coastline curves around towards the lighthouse.
+            </p>
+
+            <p>
+                The waters immediately around Greyhaven are marked with the usual warnings about rocks, shallows and shifting currents.
+            </p>
+
+            <p>
+                Nothing about the chart seems particularly unusual.
             </p>
 
         </div>
@@ -4430,7 +4486,61 @@ function visitCharts() {
     `;
 
     showChoices([
-        "↩️ Back to the Harbour"
+        "↩️ Back to the Charts"
+    ]);
+
+}
+
+function studyOldHarbourChart() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Beneath several newer charts you find an older one.
+            </p>
+
+            <p>
+                The paper is yellowed and brittle around the edges.
+            </p>
+
+            <p>
+                It shows Greyhaven as it once was.
+            </p>
+
+            <p>
+                The old harbour stretches much farther along the waterfront than the working harbour does today.
+            </p>
+
+            <p>
+                Several old buildings and berths are marked along the shoreline.
+            </p>
+
+            <p>
+                Further out, the lighthouse is clearly marked.
+            </p>
+
+            <p>
+                Someone has written a short note beside the old harbour in faded ink:
+            </p>
+
+            <p>
+                <em>
+                    Abandoned after the storm.
+                </em>
+            </p>
+
+            <p>
+                The date beneath it has almost completely faded away.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Charts"
     ]);
 
 }
@@ -4703,29 +4813,29 @@ function attemptHarbourmasterDrawerLock() {
 
         outcome = `
 
-            <p>
-                You work the pick gently against the mechanism.
-            </p>
+    <p>
+        You work the pick gently against the mechanism.
+    </p>
 
-            <p>
-                For a moment, nothing happens.
-            </p>
+    <p>
+        For a moment, nothing happens.
+    </p>
 
-            <p>
-                Then comes a quiet <em>click</em>.
-            </p>
+    <p>
+        Then comes a quiet <em>click</em>.
+    </p>
 
-            <p>
-                The drawer slides open.
-            </p>
+    <p>
+        The drawer slides open.
+    </p>
 
-            <p>
-                <strong>Lock Pick Result: ${roll}</strong>
-            </p>
+    <p>
+        <strong>Lock Pick Result: ${roll}</strong>
+    </p>
 
-            <p>
-                🔓 <strong>The drawer opens.</strong>
-            </p>
+    <p>
+        🔓 <strong>The drawer opens.</strong>
+    </p>
 
         `;
 
@@ -4745,8 +4855,519 @@ function attemptHarbourmasterDrawerLock() {
 
     `;
 
+    if (harbourmasterDrawerOpened) {
+
+    showChoices([
+        "📜 Read the Letter",
+        "↩️ Back to the Office"
+    ]);
+
+} else {
+
     showChoices([
         "↩️ Back to the Office"
+    ]);
+
+}
+
+}
+
+function readHarbourmasterLetter() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>📜 An Old Letter</h2>
+
+            <p>
+                Beneath the dust and grime, you find an old folded letter.
+            </p>
+
+            <p>
+                The paper is stained and badly worn. Several sections have been blurred beyond recognition.
+            </p>
+
+            <p>
+                <em>
+                    Larry,
+                </em>
+            </p>
+
+            <p>
+                I don't know when this will reach you, but I wanted you to know that I am well.
+            </p>
+
+            <p>
+                The light came on last night.
+            </p>
+
+            <p>
+                Then all hell broke loose in the harbour.
+            </p>
+
+            <p>
+                <em>
+                    [Several lines have been badly smudged and cannot be read.]
+                </em>
+            </p>
+
+            <p>
+                Much of the old harbour is gone. I've never seen such damage.
+            </p>
+
+            <p>
+                <em>
+                    [The next few lines are almost completely unreadable.]
+                </em>
+            </p>
+
+            <p>
+                I have been asked to sail with a crew aboard the
+                <em>[illegible]</em>.
+            </p>
+
+            <p>
+                We are bound for <em>[illegible]</em>.
+            </p>
+
+            <p>
+                I hope to be home soon.
+            </p>
+
+            <p>
+                Keep safe, lad.
+            </p>
+
+            <p>
+                <strong>Father</strong>
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Office"
+    ]);
+
+}
+
+function examineHarbourmasterCharts() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You study the charts covering the wall.
+            </p>
+
+            <p>
+                Most show the working harbour as it is today, with berths, channels and the usual hazards marked in faded ink.
+            </p>
+
+            <p>
+                Beneath them, however, are several much older charts.
+            </p>
+
+            <p>
+                One has been marked:
+            </p>
+
+            <p>
+                <strong>OLD HARBOUR — ABANDONED</strong>
+            </p>
+
+            <p>
+                The old waterfront is clearly marked in greater detail than the newer harbour.
+            </p>
+
+            <p>
+                Several berths are crossed through with heavy lines.
+            </p>
+
+            <p>
+                Someone has added a simple note in the margin:
+            </p>
+
+            <p>
+                <em>
+                    Do not berth here.
+                </em>
+            </p>
+
+            <p>
+                The ink is old.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Office"
+    ]);
+
+}
+
+
+function examineHarbourmasterShelves() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You examine the shelves more carefully.
+            </p>
+
+            <p>
+                Most of the records are mundane harbour business.
+            </p>
+
+            <p>
+                Cargo manifests. Shipping permits. Berthing records. Vessel registrations.
+            </p>
+
+            <p>
+                Everything is arranged by year, though not particularly neatly.
+            </p>
+
+            <p>
+                Further along, the records become older.
+            </p>
+
+            <p>
+                Then you notice the gaps.
+            </p>
+
+            <p>
+                Several spaces between the older ledgers are completely free of dust.
+            </p>
+
+            <p>
+                Whatever once stood there was removed relatively recently.
+            </p>
+
+            <p>
+                There are no labels explaining what is missing.
+            </p>
+
+            <p>
+                Just empty shelves.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Office"
+    ]);
+
+}
+
+function leaveHarbourmastersOffice() {
+
+    if (
+        fisherman_general_conversation_complete &&
+        !harbourmasterExitHintGiven
+    ) {
+
+        harbourmasterExitHintGiven = true;
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <p>
+                    You step out of the Harbourmaster's Office.
+                </p>
+
+                <p>
+                    You have barely made it a few steps when someone calls after you.
+                </p>
+
+                <h2>🎣 The Fisherman</h2>
+
+                <p>
+                    "You lookin' for Larry?"
+                </p>
+
+                <p>
+                    The fisherman from the docks has caught up with you.
+                </p>
+
+                <p>
+                    He lowers his voice slightly.
+                </p>
+
+                <p>
+                    "Saw 'im headin' to the Bent Anchor a few hours past."
+                </p>
+
+                <p>
+                    He shrugs.
+                </p>
+
+                <p>
+                    "Might wanna check he's still there."
+                </p>
+
+                <p>
+                    With that, he turns back towards the harbour.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "➡️ Continue into Greyhaven"
+        ]);
+
+        return;
+    }
+
+    enterInsideGreyhaven();
+
+}
+
+function visitFishMarket() {
+
+    pausePipObservations();
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fish market is already in full swing.
+            </p>
+
+            <p>
+                Fishmongers shout prices over one another while knives flash through scales and bone.
+                Crates of the morning's catch are stacked along the quay.
+            </p>
+
+            <p>
+                The sharp smell of salt, fish and old rope hangs heavily in the air.
+            </p>
+
+            <p>
+                Gulls circle overhead, occasionally diving towards scraps thrown onto the paving.
+            </p>
+
+            <p>
+                Despite the bustle, something about the catch seems a little... poor.
+            </p>
+
+            <p>
+                Several stalls have noticeably smaller hauls than you might expect from a harbour this busy.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🐟 Speak with a Fishmonger",
+        "👀 Look at the Catch",
+        "↩️ Leave the Fish Market"
+    ]);
+
+}
+
+function speakWithFishmonger() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You approach one of the fishmongers.
+            </p>
+
+            <p>
+                They barely look up from the fish they are cleaning.
+            </p>
+
+            <p>
+                "If you're buyin', say so. If you're just gawpin', don't stand there."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+    "🐟 Ask the Fishmonger about the day's catch",
+    "🌊 Ask the Fishmonger about the sea",
+    "⚓ Ask the Fishmonger about the harbour",
+    "↩️ Back to the Fish Market"
+]);
+
+}
+
+function askFishmongerAboutCatch() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Ain't much to talk about."
+            </p>
+
+            <p>
+                The fishmonger gestures towards the day's catch.
+            </p>
+
+            <p>
+                "Been a poor haul."
+            </p>
+
+            <p>
+                "Should've been twice this much."
+            </p>
+
+            <p>
+                They shrug and return to their work.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Fishmonger"
+    ]);
+
+}
+
+
+function askFishmongerAboutSea() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The fishmonger pauses for a moment.
+            </p>
+
+            <p>
+                "Sea's been odd."
+            </p>
+
+            <p>
+                They glance towards the water.
+            </p>
+
+            <p>
+                "Fish ain't comin' in like they should."
+            </p>
+
+            <p>
+                "Could be the weather. Could be the season."
+            </p>
+
+            <p>
+                A shrug.
+            </p>
+
+            <p>
+                "Could be nothin'."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Fishmonger"
+    ]);
+
+}
+
+
+function askFishmongerAboutHarbour() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Harbour's been strange lately."
+            </p>
+
+            <p>
+                The fishmonger glances towards the docks.
+            </p>
+
+            <p>
+                "Not just the catch."
+            </p>
+
+            <p>
+                "Folks've been keeping closer to shore."
+            </p>
+
+            <p>
+                They shake their head.
+            </p>
+
+            <p>
+                "Don't ask me why. I just sell fish."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Fishmonger"
+    ]);
+
+}
+
+function lookAtFishMarketCatch() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You look over the morning's catch.
+            </p>
+
+            <p>
+                Most of it is ordinary enough. Cod, haddock, and a few smaller fish you don't recognise.
+            </p>
+
+            <p>
+                But there aren't many of them.
+            </p>
+
+            <p>
+                For a harbour this busy, the day's catch seems surprisingly thin.
+            </p>
+
+            <p>
+                One fishmonger notices you looking.
+            </p>
+
+            <p>
+                "Been like that for days."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to the Fish Market"
     ]);
 
 }

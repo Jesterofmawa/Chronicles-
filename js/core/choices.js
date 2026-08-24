@@ -1336,6 +1336,38 @@ if (choice === "🧭 Look at the Charts") {
 
 }
 
+if (choice === "🗺️ Study the Current Harbour Chart") {
+
+    studyCurrentHarbourChart();
+
+    return;
+
+}
+
+if (choice === "🏚️ Study the Old Harbour Chart") {
+
+    studyOldHarbourChart();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Charts") {
+
+    lookAroundHarbour();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Charts") {
+
+    visitCharts();
+
+    return;
+
+}
+
 if (choice === "📚 Visit the Harbourmaster's Office") {
 
     visitHarbourmastersOffice();
@@ -1361,6 +1393,14 @@ if (choice === "↩️ Back to the Office") {
 }
 
 if (choice === "↩️ Leave the Office") {
+    
+    leaveHarbourmastersOffice();
+    
+    return;
+    
+}
+
+if (choice === "➡️ Continue into Greyhaven") {
 
     enterInsideGreyhaven();
 
@@ -1395,6 +1435,70 @@ if (choice === "🔐 Attempt to Unlock the Drawer") {
 if (choice === "↩️ Leave It Alone") {
 
     lookAroundHarbourmastersOffice();
+
+    return;
+
+}
+
+if (choice === "🐟 Speak with a Fishmonger") {
+
+    speakWithFishmonger();
+
+    return;
+
+}
+
+if (choice === "👀 Look at the Catch") {
+
+    lookAtFishMarketCatch();
+
+    return;
+
+}
+
+if (choice === "🐟 Ask the Fishmonger about the day's catch") {
+
+    askFishmongerAboutCatch();
+
+    return;
+
+}
+
+if (choice === "🌊 Ask the Fishmonger about the sea") {
+
+    askFishmongerAboutSea();
+
+    return;
+
+}
+
+if (choice === "⚓ Ask the Fishmonger about the harbour") {
+
+    askFishmongerAboutHarbour();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Fishmonger") {
+
+    speakWithFishmonger();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Fish Market") {
+
+    visitFishMarket();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Fish Market") {
+
+    enterInsideGreyhaven();
 
     return;
 
@@ -2074,7 +2178,7 @@ if (
 
     return;
 
-}fis
+}
 
 if (choice === "✖️ Cancel") {
 
@@ -2096,6 +2200,30 @@ if (choice === "✖️ Cancel") {
 if (choice === "↩️ Back to Office") {
 
     visitHarbourmastersOffice();
+
+    return;
+
+}
+
+if (choice === "📜 Read the Letter") {
+
+    readHarbourmasterLetter();
+
+    return;
+
+}
+
+if (choice === "🗺️ Examine the Charts") {
+
+    examineHarbourmasterCharts();
+
+    return;
+
+}
+
+if (choice === "📚 Examine the Shelves") {
+
+    examineHarbourmasterShelves();
 
     return;
 
