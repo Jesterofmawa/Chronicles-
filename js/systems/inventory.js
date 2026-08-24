@@ -52,6 +52,99 @@ const equipmentSlots = {
 
 };
 
+const weaponDefinitions = {
+
+    dagger: {
+        id: "dagger",
+        name: "Simple Dagger",
+        category: "equipment",
+        equipSlot: "weapon",
+        damage: "1d4",
+        price: 15,
+        description: "A plain but dependable dagger. Small enough to conceal and light enough to keep close at hand."
+    },
+
+    spear: {
+        id: "spear",
+        name: "Spear",
+        category: "equipment",
+        equipSlot: "weapon",
+        damage: "1d6",
+        twoHandedDamage: "1d8",
+        price: 25,
+        description: "A sturdy ash-wood spear tipped with a simple iron head. Practical, reliable, and well suited to keeping an enemy at reach."
+    },
+
+    hand_axe: {
+        id: "hand_axe",
+        name: "Hand Axe",
+        category: "equipment",
+        equipSlot: "weapon",
+        damage: "1d6",
+        price: 30,
+        description: "A compact iron-headed axe built for the hand. Useful both as a weapon and for the more practical problems of life on the road."
+    },
+
+    short_sword: {
+        id: "short_sword",
+        name: "Short Sword",
+        category: "equipment",
+        equipSlot: "weapon",
+        damage: "1d6",
+        price: 35,
+        description: "A balanced blade favoured by sailors, guards, and anyone who expects a fight in cramped quarters."
+    },
+
+    long_sword: {
+        id: "long_sword",
+        name: "Long Sword",
+        category: "equipment",
+        equipSlot: "weapon",
+        damage: "1d8",
+        twoHandedDamage: "1d10",
+        price: 60,
+        description: "A longer, heavier blade requiring more room to wield. It can be handled with one hand, but truly comes into its own when given both."
+    },
+
+    fine_cutlass: {
+        id: "fine_cutlass",
+        name: "Fine Cutlass",
+        category: "equipment",
+        equipSlot: "weapon",
+        damage: "2d8",
+        price: 75,
+        description: "A beautifully balanced cutlass of superior quality. The curved blade is finely finished, the grip wrapped in well-worn leather."
+    }
+
+};
+
+function addWeaponFromDefinition(weapon) {
+
+    const existingItem = playerInventory.find(
+        item => item.id === weapon.id
+    );
+
+    if (existingItem) {
+
+        existingItem.quantity += 1;
+
+    } else {
+
+        playerInventory.push({
+            id: weapon.id,
+            name: weapon.name,
+            category: weapon.category,
+            quantity: 1,
+            identified: true,
+            equipSlot: weapon.equipSlot,
+            damage: weapon.damage,
+            twoHandedDamage: weapon.twoHandedDamage || null
+        });
+
+    }
+
+}
+
 function addItem(
     id,
     name,
@@ -262,7 +355,8 @@ function equipItem(itemId, slot) {
     name: item.name,
     effect: item.effect || null,
     equipSlot: item.equipSlot || null,
-    damage: item.damage || null
+    damage: item.damage || null,
+    twoHandedDamage: item.twoHandedDamage || null
 };
     
     return true;
@@ -343,7 +437,8 @@ function replaceEquipment(itemId, slot) {
     name: item.name,
     effect: item.effect || null,
     equipSlot: item.equipSlot || null,
-    damage: item.damage || null
+    damage: item.damage || null,
+    twoHandedDamage: item.twoHandedDamage || null
 };
     
     return true;

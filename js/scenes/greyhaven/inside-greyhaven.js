@@ -5912,3 +5912,236 @@ function lookAroundOldStreets() {
     ]);
 
 }
+
+function visitSwordAndAnchor() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The ring of hammer against steel reaches you before you reach the doorway.
+            </p>
+
+            <p>
+                Heat rolls into the street from the open front of the smithy, carrying the smell of coal, sweat and hot metal.
+            </p>
+
+            <p>
+                An iron sign hangs above the entrance:
+            </p>
+
+            <p>
+                <strong>THE SWORD &amp; ANCHOR</strong>
+            </p>
+
+            <p>
+                <em>Ironwork • Arms • Repairs</em>
+            </p>
+
+            <p>
+                Inside, weapons hang alongside tools, chains, hinges and all manner of other ironwork.
+            </p>
+
+            <p>
+                Behind the forge, a broad-shouldered smith works steadily at a glowing piece of metal.
+            </p>
+
+            <p>
+                Without looking up, he says:
+            </p>
+
+            <p>
+                "If you're after something sharp, you're in the right place."
+            </p>
+
+            <p>
+                A pause.
+            </p>
+
+            <p>
+                "If you're after cheap, you're somewhere else."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚔️ Browse Weapons",
+        "💰 Sell Weapons",
+        "🔨 Ask about Repairs",
+        "💬 Speak with the Smith",
+        "↩️ Leave the Smithy"
+    ]);
+
+}
+
+function browseSwordAndAnchorWeapons() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You look over the weapons displayed around the smithy.
+            </p>
+
+            <p>
+                Nothing here looks decorative. Every blade, axe and spear has been made to be used.
+            </p>
+
+            <p>
+                The smith glances over from the forge.
+            </p>
+
+            <p>
+                "Take your time."
+            </p>
+
+            <p>
+                "Steel's expensive. Regretting a purchase is even more so."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🗡️ Simple Dagger — 15 silver",
+        "🗡️ Spear — 25 silver",
+        "🪓 Hand Axe — 30 silver",
+        "⚔️ Short Sword — 35 silver",
+        "⚔️ Long Sword — 60 silver",
+        "🏴‍☠️ Fine Cutlass — 75 silver",
+        "↩️ Back to The Sword & Anchor"
+    ]);
+
+}
+
+function inspectSwordAndAnchorWeapon(weaponId) {
+
+    const weapon = weaponDefinitions[weaponId];
+
+    if (!weapon) {
+        return;
+    }
+
+    let damageText = weapon.damage || "—";
+
+    if (weapon.twoHandedDamage) {
+        damageText += ` one-handed / ${weapon.twoHandedDamage} two-handed`;
+    }
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>${weapon.name}</h2>
+
+            <p>
+                ${weapon.description}
+            </p>
+
+            <p>
+                <strong>Damage:</strong> ${damageText}
+            </p>
+
+            <p>
+                <strong>Price:</strong> ${weapon.price} silver
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        `💰 Buy ${weapon.name}`,
+        "↩️ Back to Weapons"
+    ]);
+
+}
+
+function purchaseSwordAndAnchorWeapon(weaponId) {
+
+    const weapon = weaponDefinitions[weaponId];
+
+    if (!weapon) {
+        return;
+    }
+
+    if (playerSilver < weapon.price) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>Can't Afford It</h2>
+
+                <p>
+                    You check your silver, then look back at the ${weapon.name}.
+                </p>
+
+                <p>
+                    The price remains stubbornly unchanged.
+                </p>
+
+                <p>
+                    <strong>Price:</strong> ${weapon.price} silver
+                </p>
+
+                <p>
+                    <strong>You have:</strong> ${playerSilver} silver
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Weapons"
+        ]);
+
+        return;
+    }
+
+    playerSilver -= weapon.price;
+
+    addWeaponFromDefinition(weapon);
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>Purchase Complete</h2>
+
+            <p>
+                You hand over ${weapon.price} silver.
+            </p>
+
+            <p>
+                The smith takes the ${weapon.name} from its display.
+            </p>
+
+            <p>
+                "Good choice."
+            </p>
+
+            <p>
+                <strong>${weapon.name} added to your inventory.</strong>
+            </p>
+
+            <p>
+                <strong>Silver remaining:</strong> ${playerSilver}
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚔️ Continue Shopping",
+        "↩️ Leave the Smithy"
+    ]);
+
+}

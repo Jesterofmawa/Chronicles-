@@ -1815,8 +1815,24 @@ if (choice === "▶️ Begin Combat") {
 }
 
 if (choice === "⚔️ Attack") {
+    
+    choosePlayerAttackGrip();
+    
+    return;
+    
+}
 
-    playerAttack();
+if (choice.startsWith("⚔️ One-Handed Attack")) {
+
+    beginPlayerAttackWithGrip("one-handed");
+
+    return;
+
+}
+
+if (choice.startsWith("👐 Two-Handed Attack")) {
+
+    beginPlayerAttackWithGrip("two-handed");
 
     return;
 
@@ -2256,6 +2272,89 @@ if (choice === "↩️ Back to Wander the Old Streets") {
 if (choice === "↩️ Return to Explore the Streets") {
 
     exploreGreyhavenStreets();
+
+    return;
+
+}
+
+if (choice === "⚔️ Visit The Sword and Anchor") {
+
+    visitSwordAndAnchor();
+
+    return;
+
+}
+
+if (choice === "⚔️ Browse Weapons") {
+
+    browseSwordAndAnchorWeapons();
+
+    return;
+
+}
+
+if (choice === "🗡️ Simple Dagger — 15 silver") {
+    inspectSwordAndAnchorWeapon("dagger");
+    return;
+}
+
+if (choice === "🗡️ Spear — 25 silver") {
+    inspectSwordAndAnchorWeapon("spear");
+    return;
+}
+
+if (choice === "🪓 Hand Axe — 30 silver") {
+    inspectSwordAndAnchorWeapon("hand_axe");
+    return;
+}
+
+if (choice === "⚔️ Short Sword — 35 silver") {
+    inspectSwordAndAnchorWeapon("short_sword");
+    return;
+}
+
+if (choice === "⚔️ Long Sword — 60 silver") {
+    inspectSwordAndAnchorWeapon("long_sword");
+    return;
+}
+
+if (choice === "🏴‍☠️ Fine Cutlass — 75 silver") {
+    inspectSwordAndAnchorWeapon("fine_cutlass");
+    return;
+}
+
+if (choice === "↩️ Back to Weapons") {
+    browseSwordAndAnchorWeapons();
+    return;
+}
+
+if (choice === "💰 Buy Spear") {
+
+    purchaseSwordAndAnchorWeapon("spear");
+
+    return;
+
+}
+
+if (choice === "⚔️ Continue Shopping") {
+
+    browseSwordAndAnchorWeapons();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to The Sword & Anchor") {
+
+    visitSwordAndAnchor();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Smithy") {
+
+    wanderOldStreets();
 
     return;
 

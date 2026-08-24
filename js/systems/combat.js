@@ -1085,6 +1085,60 @@ function finishEnemyTurn() {
 // PLAYER ATTACK
 // =====================================
 
+function choosePlayerAttackGrip() {
+
+    const weapon = combatPlayer.weapon;
+
+    if (!weapon) {
+        playerAttack();
+        return;
+    }
+
+    // Weapons without a two-handed option
+    // go straight into the attack.
+    if (!weapon.twoHandedDamage) {
+
+        weaponGrip = "one-handed";
+
+        playerAttack();
+
+        return;
+
+    }
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>⚔️ Choose Your Grip</h2>
+
+            <p>
+                You ready your <strong>${weapon.name}</strong>.
+            </p>
+
+            <p>
+                How do you want to wield it?
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        `⚔️ One-Handed Attack — ${weapon.damage}`,
+        `👐 Two-Handed Attack — ${weapon.twoHandedDamage}`
+    ]);
+
+}
+
+function beginPlayerAttackWithGrip(grip) {
+
+    weaponGrip = grip;
+
+    playerAttack();
+
+}
+
 function playerAttack() {
 
     // Find the first living enemy.
@@ -1447,7 +1501,10 @@ function resolvePlayerDamage() {
 
 
     let damageExpression =
-    combatPlayer.weapon.damage || "1d6";
+    getWeaponDamage(
+        combatPlayer.weapon,
+        weaponGrip
+    );
 
 
     if (currentAttack.critical) {
