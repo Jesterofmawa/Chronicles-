@@ -2229,4 +2229,36 @@ if (choice === "📚 Examine the Shelves") {
 
 }
 
+if (choice === "🏘️ Wander the Old Streets") {
+
+    wanderOldStreets();
+
+    return;
+
+}
+
+if (choice === "👀 Look Around the Old Streets") {
+
+    lookAroundOldStreets();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Wander the Old Streets") {
+
+    wanderOldStreets();
+
+    return;
+
+}
+
+if (choice === "↩️ Return to Explore the Streets") {
+
+    exploreGreyhavenStreets();
+
+    return;
+
+}
+
 }

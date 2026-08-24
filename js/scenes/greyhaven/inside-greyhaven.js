@@ -143,6 +143,7 @@ function exploreGreyhavenStreets() {
     `;
 
     showChoices([
+        "🏘️ Wander the Old Streets",
         "🎣 Fisherman's Row",
         "🧂 Salt Market",
         "⛪ Bellwatch Church",
@@ -5816,6 +5817,98 @@ function askFishermanAboutFishing() {
 
     showChoices([
         "↩️ Back to Fisherman Questions"
+    ]);
+
+}
+
+function wanderOldStreets() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You wander deeper into Greyhaven, leaving the busier streets behind.
+            </p>
+
+            <p>
+                The buildings here are older. Some lean against one another as though they've been standing too long to bother keeping straight.
+            </p>
+
+            <p>
+                Narrow alleys disappear between weathered stone walls, while faded signs hang above shopfronts that have clearly served the town for generations.
+            </p>
+
+            <p>
+                A few locals go about their business, paying little attention to you.
+            </p>
+
+            <p>
+                Somewhere nearby, a hammer rings against metal.
+            </p>
+
+            <p>
+                Further along, you spot several established businesses lining the street.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "⚔️ Visit The Sword and Anchor",
+        "🛡️ Visit The Padded Cuirass",
+        "👀 Look Around the Old Streets",
+        "↩️ Return to Explore the Streets"
+    ]);
+
+}
+
+function lookAroundOldStreets() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You take a moment to look around.
+            </p>
+
+            <p>
+                The street bears the marks of generations of use.
+                Stone steps have been worn smooth, doorways repaired and repaired again.
+            </p>
+
+            <p>
+                An old plaque is fixed to one wall, its lettering almost completely weathered away.
+            </p>
+
+            <p>
+                You can just make out:
+            </p>
+
+            <p>
+                <strong>GREYHAVEN — ESTABLISHED...</strong>
+            </p>
+
+            <p>
+                The rest has been lost to time.
+            </p>
+
+            <p>
+                Somewhere further down the street, a bell sounds once.
+            </p>
+
+            <p>
+                Then the town carries on as though nothing happened.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Wander the Old Streets"
     ]);
 
 }
