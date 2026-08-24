@@ -151,7 +151,8 @@ function addItem(
     category,
     identified = true,
     equipSlot = null,
-    damage = null
+    damage = null,
+    twoHandedDamage = null
 ) {
 
     const existingItem = playerInventory.find(item => item.id === id);
@@ -169,7 +170,8 @@ function addItem(
             quantity: 1,
             identified: identified,
             equipSlot: equipSlot,
-            damage: damage
+            damage: damage,
+            twoHandedDamage: twoHandedDamage
         });
 
     }
@@ -312,6 +314,10 @@ function useLockPick() {
 
 function equipItem(itemId, slot) {
     
+    if (typeof combatActive !== "undefined" && combatActive) {
+    return false;
+}
+    
     const item = playerInventory.find(
         item => item.id === itemId
     );
@@ -363,6 +369,14 @@ function equipItem(itemId, slot) {
 }
 
 function replaceEquipment(itemId, slot) {
+    
+    if (typeof combatActive !== "undefined" && combatActive) {
+        return false;
+    }
+    
+    if (typeof combatActive !== "undefined" && combatActive) {
+    return false;
+}
     
     const item = playerInventory.find(
         item => item.id === itemId
@@ -428,7 +442,8 @@ function replaceEquipment(itemId, slot) {
     "equipment",
     true,
     oldItem.equipSlot || null,
-    oldItem.damage || null
+    oldItem.damage || null,
+    oldItem.twoHandedDamage || null
 );
     
     // Equip the new item.
@@ -451,6 +466,10 @@ function replaceEquipment(itemId, slot) {
 
 function unequipItem(slot) {
     
+    if (typeof combatActive !== "undefined" && combatActive) {
+        return false;
+    }
+    
     const equippedItem = playerEquipment[slot];
     
     if (!equippedItem) {
@@ -465,7 +484,8 @@ function unequipItem(slot) {
     "equipment",
     true,
     equippedItem.equipSlot || null,
-    equippedItem.damage || null
+    equippedItem.damage || null,
+    equippedItem.twoHandedDamage || null
 );
     
     playerEquipment[slot] = null;
@@ -516,6 +536,35 @@ function getItemQuantity(id) {
 // =====================================
 
 function showEquipOptions(itemId) {
+    
+    if (typeof combatActive !== "undefined" && combatActive) {
+
+    closeInventory();
+
+    document.getElementById("story").innerHTML += `
+
+        <div class="story-panel">
+
+            <h3>🔒 Equipment Locked</h3>
+
+            <p>
+                You cannot change your equipment during combat.
+            </p>
+
+            <p>
+                You must finish the fight before changing your gear.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Combat"
+    ]);
+
+    return;
+}
 
     const item = playerInventory.find(
         item => item.id === itemId
