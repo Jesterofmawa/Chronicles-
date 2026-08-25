@@ -6048,8 +6048,12 @@ function inspectSwordAndAnchorWeapon(weaponId) {
             </p>
 
             <p>
-                <strong>Price:</strong> ${weapon.price} silver
-            </p>
+    <strong>Price:</strong> ${weapon.price} silver
+</p>
+
+<p>
+    <strong>Sell value:</strong> ${Math.floor(weapon.price / 2)} silver
+</p>
 
         </div>
 
@@ -6142,6 +6146,400 @@ function purchaseSwordAndAnchorWeapon(weaponId) {
     showChoices([
         "⚔️ Continue Shopping",
         "↩️ Leave the Smithy"
+    ]);
+
+}
+
+function sellSwordAndAnchorWeapons() {
+
+    const sellableWeapons = playerInventory.filter(item => {
+
+        if (item.category !== "equipment") {
+            return false;
+        }
+
+        if (item.equipSlot !== "weapon") {
+            return false;
+        }
+
+        if (
+            playerEquipment.weapon &&
+            playerEquipment.weapon.id === item.id
+        ) {
+            return false;
+        }
+
+        return weaponDefinitions[item.id];
+    });
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The smith looks over the weapons you have brought.
+            </p>
+
+            <p>
+                "I'll buy good steel. Don't expect me to pay what I charge for it, though."
+            </p>
+
+        </div>
+
+    `;
+
+    if (sellableWeapons.length === 0) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You have no weapons the smith is willing to buy.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to The Sword & Anchor"
+        ]);
+
+        return;
+    }
+
+    const choices = sellableWeapons.map(item => {
+
+        const weapon = weaponDefinitions[item.id];
+
+        const sellPrice = Math.floor(weapon.price / 2);
+
+        return `💰 Sell ${weapon.name} — ${sellPrice} silver`;
+
+    });
+
+    choices.push("↩️ Back to The Sword & Anchor");
+
+    showChoices(choices);
+
+}
+
+function sellSwordAndAnchorWeapon(itemId) {
+
+    const inventoryItem = playerInventory.find(
+        item => item.id === itemId
+    );
+
+    const weapon = weaponDefinitions[itemId];
+
+    if (!inventoryItem || !weapon) {
+        return;
+    }
+
+    // Never allow the currently equipped weapon to be sold.
+    if (
+        playerEquipment.weapon &&
+        playerEquipment.weapon.id === itemId
+    ) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>Cannot Sell Equipped Weapon</h2>
+
+                <p>
+                    You cannot sell a weapon while it is equipped.
+                </p>
+
+                <p>
+                    Equip something else first.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Selling"
+        ]);
+
+        return;
+    }
+
+    const sellPrice = Math.floor(weapon.price / 2);
+
+    // Remove one copy from inventory.
+    if (inventoryItem.quantity > 1) {
+
+        inventoryItem.quantity -= 1;
+
+    } else {
+
+        const index = playerInventory.indexOf(inventoryItem);
+
+        playerInventory.splice(index, 1);
+
+    }
+
+    playerSilver += sellPrice;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>Weapon Sold</h2>
+
+            <p>
+                You hand over the ${weapon.name}.
+            </p>
+
+            <p>
+                The smith counts out ${sellPrice} silver.
+            </p>
+
+            <p>
+                <strong>Silver received:</strong> ${sellPrice}
+            </p>
+
+            <p>
+                <strong>Silver now:</strong> ${playerSilver}
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💰 Sell Another Weapon",
+        "↩️ Back to The Sword & Anchor"
+    ]);
+
+}
+
+function askSwordAndAnchorRepairs() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The smith wipes his hands on a leather apron and glances towards the weapons hanging along the wall.
+            </p>
+
+            <p>
+                "Steel doesn't stay sharp forever."
+            </p>
+
+            <p>
+                He picks up a battered blade from beneath the counter and runs a thumb carefully along its edge.
+            </p>
+
+            <p>
+                "A good weapon needs looking after. Sharpening. Straightening. Sometimes a little more than that."
+            </p>
+
+            <p>
+                He sets the blade down.
+            </p>
+
+            <p>
+                "Bring me something that's seen too much use, and I'll tell you what it needs."
+            </p>
+
+            <p>
+                His eyes flick towards the forge.
+            </p>
+
+            <p>
+                "Can't promise it'll always be cheap."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to The Sword & Anchor"
+    ]);
+
+}
+
+function speakWithHarlan() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The smith finally looks up from his work.
+            </p>
+
+            <p>
+                Up close, you notice the scars across his hands. Not fresh ones. The sort that have accumulated over years of working iron.
+            </p>
+
+            <p>
+                "You buying something, selling something, or just keeping me from my work?"
+            </p>
+
+            <p>
+                There's no real hostility in the question. If anything, there's the faintest hint of amusement behind it.
+            </p>
+
+            <p>
+                He sets his hammer down.
+            </p>
+
+            <p>
+                "Name's <strong>Harlan</strong>."
+            </p>
+
+            <p>
+                He nods towards the weapons lining the walls.
+            </p>
+
+            <p>
+                "I make most of what you see here. Fix what I can. Replace what I can't."
+            </p>
+
+            <p>
+                His eyes settle briefly on whatever weapon you're carrying.
+            </p>
+
+            <p>
+                "And before you ask, no, I don't make armour. That's Padded Cuirass business."
+            </p>
+
+            <p>
+                A pause.
+            </p>
+
+            <p>
+                "They've got their trade. I've got mine."
+            </p>
+
+            <p>
+                He picks his hammer back up.
+            </p>
+
+            <p>
+                "So. What is it?"
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "💬 Ask about his work",
+        "⚔️ Ask about the weapons",
+        "↩️ Back to The Sword & Anchor"
+    ]);
+
+}
+
+function harlanWork() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Harlan gives a short laugh.
+            </p>
+
+            <p>
+                "Work? You mean besides keeping half the town supplied with iron?"
+            </p>
+
+            <p>
+                He gestures towards the forge.
+            </p>
+
+            <p>
+                "Been doing this long enough that I can tell good steel from bad by the sound of the hammer."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Mostly."
+            </p>
+
+            <p>
+                He glances at you.
+            </p>
+
+            <p>
+                "Don't tell anyone I said otherwise."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Harlan"
+    ]);
+
+}
+
+function harlanWeapons() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Harlan looks towards the racks.
+            </p>
+
+            <p>
+                "Everything there has a purpose."
+            </p>
+
+            <p>
+                He points towards the spears.
+            </p>
+
+            <p>
+                "Reach."
+            </p>
+
+            <p>
+                Then the swords.
+            </p>
+
+            <p>
+                "Balance."
+            </p>
+
+            <p>
+                Finally, the cutlass.
+            </p>
+
+            <p>
+                "And that one's for people who like spending too much money."
+            </p>
+
+            <p>
+                There's a faint grin.
+            </p>
+
+            <p>
+                "Can't blame them. It's a fine blade."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Harlan"
     ]);
 
 }

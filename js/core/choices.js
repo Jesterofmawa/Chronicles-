@@ -2336,6 +2336,34 @@ if (choice === "💰 Buy Spear") {
 
 }
 
+if (choice === "💰 Buy Long Sword") {
+    
+    purchaseSwordAndAnchorWeapon("long_sword");
+    
+    return;
+}
+
+if (choice === "💰 Buy Fine Cutlass") {
+
+    purchaseSwordAndAnchorWeapon("fine_cutlass");
+
+    return;
+}
+
+if (choice === "💰 Buy Hand Axe") {
+
+    purchaseSwordAndAnchorWeapon("hand_axe");
+
+    return;
+}
+
+if (choice === "💰 Buy Simple Dagger") {
+
+    purchaseSwordAndAnchorWeapon("dagger");
+
+    return;
+}
+
 if (choice === "⚔️ Continue Shopping") {
 
     browseSwordAndAnchorWeapons();
@@ -2344,9 +2372,88 @@ if (choice === "⚔️ Continue Shopping") {
 
 }
 
+if (choice === "💰 Sell Weapons") {
+
+    sellSwordAndAnchorWeapons();
+
+    return;
+
+}
+
+if (choice === "💰 Sell Another Weapon") {
+
+    sellSwordAndAnchorWeapons();
+
+    return;
+}
+
+if (choice.startsWith("💰 Sell ")) {
+
+    const weaponName = choice
+        .replace("💰 Sell ", "")
+        .split(" — ")[0];
+
+    const weapon = Object.values(weaponDefinitions).find(
+        weapon => weapon.name === weaponName
+    );
+
+    if (weapon) {
+
+        sellSwordAndAnchorWeapon(weapon.id);
+
+    }
+
+    return;
+}
+
+if (choice === "↩️ Back to Selling") {
+
+    sellSwordAndAnchorWeapons();
+
+    return;
+}
+
+if (choice === "🔨 Ask about Repairs") {
+
+    askSwordAndAnchorRepairs();
+
+    return;
+}
+
 if (choice === "↩️ Back to The Sword & Anchor") {
 
     visitSwordAndAnchor();
+
+    return;
+
+}
+
+if (choice === "💬 Speak with the Smith") {
+
+    speakWithHarlan();
+
+    return;
+}
+
+if (choice === "💬 Ask about his work") {
+
+    harlanWork();
+
+    return;
+
+}
+
+if (choice === "⚔️ Ask about the weapons") {
+
+    harlanWeapons();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Harlan") {
+
+    speakWithHarlan();
 
     return;
 
