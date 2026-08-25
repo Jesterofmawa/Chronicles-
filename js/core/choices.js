@@ -2467,4 +2467,95 @@ if (choice === "↩️ Leave the Smithy") {
 
 }
 
+if (choice === "🛡️ Visit The Padded Cuirass") {
+
+    visitPaddedCuirassShop();
+
+    return;
+}
+
+if (choice === "↩️ Leave") {
+
+    wanderOldStreets();
+
+    return;
+}
+
+if (choice === "🛡️ Browse Armour") {
+
+    browsePaddedCuirassArmour();
+
+    return;
+}
+
+if (choice === "🪖 Padded Cap — 15 silver") {
+
+    inspectPaddedCuirassArmour("padded_cap");
+
+    return;
+}
+
+if (choice === "🛡️ Padded Cuirass — 30 silver") {
+
+    inspectPaddedCuirassArmour("padded_cuirass");
+
+    return;
+}
+
+if (choice === "🧤 Padded Bracers — 15 silver") {
+
+    inspectPaddedCuirassArmour("padded_bracers");
+
+    return;
+}
+
+if (choice === "👢 Padded Greaves — 20 silver") {
+
+    inspectPaddedCuirassArmour("padded_greaves");
+
+    return;
+}
+
+if (choice === "↩️ Back to Armour") {
+
+    browsePaddedCuirassArmour();
+
+    return;
+}
+
+if (choice === "↩️ Back to The Padded Cuirass") {
+
+    visitPaddedCuirassShop();
+
+    return;
+}
+
+if (choice === "🛡️ Browse Shields") {
+
+    browsePaddedCuirassShields();
+
+    return;
+}
+
+if (choice === "🛡️ Round Shield — 25 silver") {
+
+    inspectPaddedCuirassShield("round_shield");
+
+    return;
+}
+
+if (choice === "🛡️ Tall Shield — 40 silver") {
+
+    inspectPaddedCuirassShield("tall_shield");
+
+    return;
+}
+
+if (choice === "↩️ Back to Shields") {
+
+    browsePaddedCuirassShields();
+
+    return;
+}
+
 }

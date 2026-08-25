@@ -6543,3 +6543,200 @@ function harlanWeapons() {
     ]);
 
 }
+
+function visitPaddedCuirassShop() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                A painted sign hangs above the doorway, showing a padded cuirass stitched in thick leather.
+            </p>
+
+            <p>
+                Inside, the smell of treated leather, wool and oiled wood fills the air.
+            </p>
+
+            <p>
+                Armour hangs from wooden frames around the walls, while several shields rest against a rack near the counter.
+            </p>
+
+            <p>
+                Behind the counter, the shopkeeper looks up from her work.
+            </p>
+
+            <p>
+                "Looking for something to keep the sharp things out?"
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛡️ Browse Armour",
+        "🛡️ Browse Shields",
+        "💬 Speak with the Shopkeeper",
+        "↩️ Leave"
+    ]);
+
+}
+
+function browsePaddedCuirassArmour() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You look over the armour hanging around the shop.
+            </p>
+
+            <p>
+                Most of it is simple, practical protection. Nothing here is designed to turn you into a walking fortress.
+            </p>
+
+            <p>
+                The shopkeeper watches you examine the pieces.
+            </p>
+
+            <p>
+                "Light, comfortable, and better than wearing nothing."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🪖 Padded Cap — 15 silver",
+        "🛡️ Padded Cuirass — 30 silver",
+        "🧤 Padded Bracers — 15 silver",
+        "👢 Padded Greaves — 20 silver",
+        "↩️ Back to The Padded Cuirass"
+    ]);
+
+}
+
+function inspectPaddedCuirassArmour(armourId) {
+
+    const armour = armourDefinitions[armourId];
+
+    if (!armour) {
+        return;
+    }
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>${armour.name}</h2>
+
+            <p>
+                ${armour.description}
+            </p>
+
+            <p>
+                <strong>Protection:</strong> +${armour.protection}
+            </p>
+
+            <p>
+                <strong>Price:</strong> ${armour.price} silver
+            </p>
+
+            <p>
+                <strong>Sell value:</strong> ${Math.floor(armour.price / 2)} silver
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        `💰 Buy ${armour.name}`,
+        "↩️ Back to Armour"
+    ]);
+
+}
+
+function browsePaddedCuirassShields() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                A rack near the counter holds several shields of different sizes.
+            </p>
+
+            <p>
+                The smaller shields look light enough to move with easily, while the taller ones offer considerably more protection.
+            </p>
+
+            <p>
+                The shopkeeper gives the rack an approving glance.
+            </p>
+
+            <p>
+                "A shield won't stop you getting into trouble. It'll just give you a better chance of getting out of it."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛡️ Round Shield — 25 silver",
+        "🛡️ Tall Shield — 40 silver",
+        "↩️ Back to The Padded Cuirass"
+    ]);
+
+}
+
+function inspectPaddedCuirassShield(shieldId) {
+
+    const shield = armourDefinitions[shieldId];
+
+    if (!shield) {
+        return;
+    }
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>${shield.name}</h2>
+
+            <p>
+                ${shield.description}
+            </p>
+
+            <p>
+                <strong>Defence:</strong> +${shield.defenceBonus}
+            </p>
+
+            ${shield.attackModifier < 0 ? `
+                <p>
+                    <strong>Attack:</strong> ${shield.attackModifier}
+                </p>
+            ` : ""}
+
+            <p>
+                <strong>Price:</strong> ${shield.price} silver
+            </p>
+
+            <p>
+                <strong>Sell value:</strong> ${Math.floor(shield.price / 2)} silver
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        `💰 Buy ${shield.name}`,
+        "↩️ Back to Shields"
+    ]);
+
+}

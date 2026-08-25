@@ -152,7 +152,9 @@ function addItem(
     identified = true,
     equipSlot = null,
     damage = null,
-    twoHandedDamage = null
+    twoHandedDamage = null,
+    protection = null,
+    defenceBonus = null
 ) {
 
     const existingItem = playerInventory.find(item => item.id === id);
@@ -171,7 +173,8 @@ function addItem(
             identified: identified,
             equipSlot: equipSlot,
             damage: damage,
-            twoHandedDamage: twoHandedDamage
+            twoHandedDamage: twoHandedDamage,
+            protection: protection, defenceBonus: defenceBonus
         });
 
     }
@@ -362,17 +365,14 @@ function equipItem(itemId, slot) {
     effect: item.effect || null,
     equipSlot: item.equipSlot || null,
     damage: item.damage || null,
-    twoHandedDamage: item.twoHandedDamage || null
+    twoHandedDamage: item.twoHandedDamage || null, protection: item.protection || null,
+    defenceBonus: item.defenceBonus || null
 };
     
     return true;
 }
 
 function replaceEquipment(itemId, slot) {
-    
-    if (typeof combatActive !== "undefined" && combatActive) {
-        return false;
-    }
     
     if (typeof combatActive !== "undefined" && combatActive) {
     return false;
@@ -443,7 +443,9 @@ function replaceEquipment(itemId, slot) {
     true,
     oldItem.equipSlot || null,
     oldItem.damage || null,
-    oldItem.twoHandedDamage || null
+    oldItem.twoHandedDamage || null,
+    oldItem.protection || null,
+    oldItem.defenceBonus || null
 );
     
     // Equip the new item.
@@ -453,7 +455,9 @@ function replaceEquipment(itemId, slot) {
     effect: item.effect || null,
     equipSlot: item.equipSlot || null,
     damage: item.damage || null,
-    twoHandedDamage: item.twoHandedDamage || null
+    twoHandedDamage: item.twoHandedDamage || null,
+    protection: item.protection || null,
+    defenceBonus: item.defenceBonus || null
 };
     
     return true;
@@ -485,7 +489,9 @@ function unequipItem(slot) {
     true,
     equippedItem.equipSlot || null,
     equippedItem.damage || null,
-    equippedItem.twoHandedDamage || null
+    equippedItem.twoHandedDamage || null,
+    equippedItem.protection || null,
+    equippedItem.defenceBonus || null
 );
     
     playerEquipment[slot] = null;
