@@ -3483,7 +3483,12 @@ function openCharacterSheet() {
             <p>
                 <strong>Attack:</strong>
                 ${finalAttack}
-            </p>
+            </p
+            
+            <p>
+    <strong>Protection:</strong>
+    +${getPlayerProtection()}
+</p>
 
             <h3>🛡️ Equipment</h3>
 
