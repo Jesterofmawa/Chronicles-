@@ -154,7 +154,8 @@ function addItem(
     damage = null,
     twoHandedDamage = null,
     protection = null,
-    defenceBonus = null
+    defenceBonus = null,
+    attackModifier = null
 ) {
 
     const existingItem = playerInventory.find(item => item.id === id);
@@ -174,7 +175,8 @@ function addItem(
             equipSlot: equipSlot,
             damage: damage,
             twoHandedDamage: twoHandedDamage,
-            protection: protection, defenceBonus: defenceBonus
+            protection: protection, defenceBonus: defenceBonus,
+            attackModifier: attackModifier
         });
 
     }
@@ -365,11 +367,23 @@ function equipItem(itemId, slot) {
     effect: item.effect || null,
     equipSlot: item.equipSlot || null,
     damage: item.damage || null,
-    twoHandedDamage: item.twoHandedDamage || null, protection: item.protection || null,
-    defenceBonus: item.defenceBonus || null
+    twoHandedDamage: item.twoHandedDamage || null,
+    protection: item.protection || null,
+    defenceBonus: item.defenceBonus || null,
+    attackModifier: item.attackModifier || null
 };
-    
-    return true;
+
+// Remove the equipped item from inventory.
+if (!removeItem(item.id)) {
+
+    // Roll back the equipment change if removal fails.
+    playerEquipment[slot] = null;
+
+    return false;
+}
+
+return true;
+
 }
 
 function replaceEquipment(itemId, slot) {
@@ -445,7 +459,8 @@ function replaceEquipment(itemId, slot) {
     oldItem.damage || null,
     oldItem.twoHandedDamage || null,
     oldItem.protection || null,
-    oldItem.defenceBonus || null
+    oldItem.defenceBonus || null,
+    oldItem.attackModifier || null
 );
     
     // Equip the new item.
@@ -457,7 +472,8 @@ function replaceEquipment(itemId, slot) {
     damage: item.damage || null,
     twoHandedDamage: item.twoHandedDamage || null,
     protection: item.protection || null,
-    defenceBonus: item.defenceBonus || null
+    defenceBonus: item.defenceBonus || null,
+    attackModifier: item.attackModifier || null
 };
     
     return true;
@@ -491,7 +507,8 @@ function unequipItem(slot) {
     equippedItem.damage || null,
     equippedItem.twoHandedDamage || null,
     equippedItem.protection || null,
-    equippedItem.defenceBonus || null
+    equippedItem.defenceBonus || null,
+    equippedItem.attackModifier || null
 );
     
     playerEquipment[slot] = null;
@@ -519,6 +536,12 @@ function getEquipmentAttackBonus() {
             bonus += 1;
 
         }
+        
+        if (item.attackModifier) {
+
+    bonus += item.attackModifier;
+
+}
 
     });
 
@@ -646,6 +669,104 @@ function showEquipOptions(itemId) {
         
     }
     
+}
+
+// =====================================
+// ARMOUR
+// =====================================
+
+if (item.equipSlot === "head") {
+
+    if (playerEquipment.head) {
+
+        choices.push(
+            `🪖 Replace ${playerEquipment.head.name} with ${item.name} in Head`
+        );
+
+    } else {
+
+        choices.push(
+            `🪖 Equip ${item.name} in Head`
+        );
+
+    }
+
+}
+
+if (item.equipSlot === "body") {
+
+    if (playerEquipment.body) {
+
+        choices.push(
+            `🛡️ Replace ${playerEquipment.body.name} with ${item.name} in Body`
+        );
+
+    } else {
+
+        choices.push(
+            `🛡️ Equip ${item.name} in Body`
+        );
+
+    }
+
+}
+
+if (item.equipSlot === "arms") {
+
+    if (playerEquipment.arms) {
+
+        choices.push(
+            `🧤 Replace ${playerEquipment.arms.name} with ${item.name} in Arms / Hands`
+        );
+
+    } else {
+
+        choices.push(
+            `🧤 Equip ${item.name} in Arms / Hands`
+        );
+
+    }
+
+}
+
+if (item.equipSlot === "legs") {
+
+    if (playerEquipment.legs) {
+
+        choices.push(
+            `👢 Replace ${playerEquipment.legs.name} with ${item.name} in Legs`
+        );
+
+    } else {
+
+        choices.push(
+            `👢 Equip ${item.name} in Legs`
+        );
+
+    }
+
+}
+
+// =====================================
+// OFFHAND / SHIELDS
+// =====================================
+
+if (item.equipSlot === "offhand") {
+
+    if (playerEquipment.offhand) {
+
+        choices.push(
+            `🛡️ Replace ${playerEquipment.offhand.name} with ${item.name} in Offhand`
+        );
+
+    } else {
+
+        choices.push(
+            `🛡️ Equip ${item.name} in Offhand`
+        );
+
+    }
+
 }
 
     // =====================================

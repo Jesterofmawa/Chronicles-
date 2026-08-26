@@ -2040,7 +2040,276 @@ if (choice.startsWith("💍 Replace ") && choice.includes(" in Jewellery 1")) {
 
 }
 
+// =====================================
+// ARMOUR EQUIP
+// =====================================
 
+if (choice.startsWith("🪖 Equip ") && choice.endsWith(" in Head")) {
+
+    const itemName = choice
+        .replace("🪖 Equip ", "")
+        .replace(" in Head", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(item.id, "head")
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+}
+
+if (choice.startsWith("🛡️ Equip ") && choice.endsWith(" in Body")) {
+
+    const itemName = choice
+        .replace("🛡️ Equip ", "")
+        .replace(" in Body", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(item.id, "body")
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+}
+
+if (choice.startsWith("🧤 Equip ") && choice.endsWith(" in Arms / Hands")) {
+
+    const itemName = choice
+        .replace("🧤 Equip ", "")
+        .replace(" in Arms / Hands", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(item.id, "arms")
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+}
+
+if (choice.startsWith("👢 Equip ") && choice.endsWith(" in Legs")) {
+
+    const itemName = choice
+        .replace("👢 Equip ", "")
+        .replace(" in Legs", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(item.id, "legs")
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+}
+
+// =====================================
+// SHIELD / OFFHAND EQUIP
+// =====================================
+
+if (choice.startsWith("🛡️ Equip ") && choice.endsWith(" in Offhand")) {
+
+    const itemName = choice
+        .replace("🛡️ Equip ", "")
+        .replace(" in Offhand", "");
+
+    const item = playerInventory.find(
+        item => item.name === itemName
+    );
+
+    if (
+        item &&
+        equipItem(item.id, "offhand")
+    ) {
+
+        openCharacterSheet();
+
+    }
+
+    return;
+}
+
+// =====================================
+// ARMOUR REPLACEMENT
+// =====================================
+
+if (
+    choice.startsWith("🪖 Replace ") &&
+    choice.includes(" in Head")
+) {
+
+    const match = choice.match(
+        /^🪖 Replace (.+) with (.+) in Head$/
+    );
+
+    if (match) {
+
+        const item = playerInventory.find(
+            item => item.name === match[2]
+        );
+
+        if (
+            item &&
+            replaceEquipment(item.id, "head")
+        ) {
+
+            openCharacterSheet();
+
+        }
+
+    }
+
+    return;
+}
+
+if (
+    choice.startsWith("🛡️ Replace ") &&
+    choice.includes(" in Body")
+) {
+
+    const match = choice.match(
+        /^🛡️ Replace (.+) with (.+) in Body$/
+    );
+
+    if (match) {
+
+        const item = playerInventory.find(
+            item => item.name === match[2]
+        );
+
+        if (
+            item &&
+            replaceEquipment(item.id, "body")
+        ) {
+
+            openCharacterSheet();
+
+        }
+
+    }
+
+    return;
+}
+
+if (
+    choice.startsWith("🧤 Replace ") &&
+    choice.includes(" in Arms / Hands")
+) {
+
+    const match = choice.match(
+        /^🧤 Replace (.+) with (.+) in Arms \/ Hands$/
+    );
+
+    if (match) {
+
+        const item = playerInventory.find(
+            item => item.name === match[2]
+        );
+
+        if (
+            item &&
+            replaceEquipment(item.id, "arms")
+        ) {
+
+            openCharacterSheet();
+
+        }
+
+    }
+
+    return;
+}
+
+if (
+    choice.startsWith("👢 Replace ") &&
+    choice.includes(" in Legs")
+) {
+
+    const match = choice.match(
+        /^👢 Replace (.+) with (.+) in Legs$/
+    );
+
+    if (match) {
+
+        const item = playerInventory.find(
+            item => item.name === match[2]
+        );
+
+        if (
+            item &&
+            replaceEquipment(item.id, "legs")
+        ) {
+
+            openCharacterSheet();
+
+        }
+
+    }
+
+    return;
+}
+
+// =====================================
+// SHIELD / OFFHAND REPLACEMENT
+// =====================================
+
+if (
+    choice.startsWith("🛡️ Replace ") &&
+    choice.includes(" in Offhand")
+) {
+
+    const match = choice.match(
+        /^🛡️ Replace (.+) with (.+) in Offhand$/
+    );
+
+    if (match) {
+
+        const item = playerInventory.find(
+            item => item.name === match[2]
+        );
+
+        if (
+            item &&
+            replaceEquipment(item.id, "offhand")
+        ) {
+
+            openCharacterSheet();
+
+        }
+
+    }
+
+    return;
+}
 
 if (choice.startsWith("⚔️ Equip ") && choice.endsWith(" as Weapon")) {
 
@@ -2554,6 +2823,37 @@ if (choice === "🛡️ Tall Shield — 40 silver") {
 if (choice === "↩️ Back to Shields") {
 
     browsePaddedCuirassShields();
+
+    return;
+}
+
+if (choice.startsWith("💰 Buy ")) {
+
+    const itemName = choice.replace("💰 Buy ", "");
+
+    const item = Object.values(armourDefinitions).find(
+        item => item.name === itemName
+    );
+
+    if (item) {
+
+        purchasePaddedCuirassItem(item.id);
+
+    }
+
+    return;
+}
+
+if (choice === "🛡️ Continue Shopping") {
+
+    visitPaddedCuirassShop();
+
+    return;
+}
+
+if (choice === "↩️ Leave The Padded Cuirass") {
+
+    wanderOldStreets();
 
     return;
 }

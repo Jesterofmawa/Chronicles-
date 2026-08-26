@@ -6740,3 +6740,112 @@ function inspectPaddedCuirassShield(shieldId) {
     ]);
 
 }
+
+function purchasePaddedCuirassItem(itemId) {
+
+    const item = armourDefinitions[itemId];
+
+    if (!item) {
+        return;
+    }
+
+    if (playerSilver < item.price) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>Can't Afford It</h2>
+
+                <p>
+                    You check your silver, then look back at the ${item.name}.
+                </p>
+
+                <p>
+                    The price remains stubbornly unchanged.
+                </p>
+
+                <p>
+                    <strong>Price:</strong> ${item.price} silver
+                </p>
+
+                <p>
+                    <strong>You have:</strong> ${playerSilver} silver
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to The Padded Cuirass"
+        ]);
+
+        return;
+    }
+
+    playerSilver -= item.price;
+
+    addItem(
+        item.id,
+        item.name,
+        item.category,
+        true,
+        item.equipSlot,
+        null,
+        null,
+        item.protection || null,
+        item.defenceBonus || null,
+        item.attackModifier || null
+    );
+
+    const protectionText = item.protection
+        ? `<p><strong>Protection:</strong> +${item.protection}</p>`
+        : "";
+
+    const defenceText = item.defenceBonus
+        ? `<p><strong>Defence:</strong> +${item.defenceBonus}</p>`
+        : "";
+
+    const attackText = item.attackModifier
+        ? `<p><strong>Attack modifier:</strong> ${item.attackModifier}</p>`
+        : "";
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>Purchase Complete</h2>
+
+            <p>
+                You hand over ${item.price} silver.
+            </p>
+
+            <p>
+                The shopkeeper hands you the ${item.name}.
+            </p>
+
+            <p>
+                <strong>${item.name} added to your inventory.</strong>
+            </p>
+
+            ${protectionText}
+
+            ${defenceText}
+
+            ${attackText}
+
+            <p>
+                <strong>Silver remaining:</strong> ${playerSilver}
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛡️ Continue Shopping",
+        "↩️ Leave The Padded Cuirass"
+    ]);
+
+}

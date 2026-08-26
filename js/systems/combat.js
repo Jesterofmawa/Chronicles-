@@ -702,12 +702,19 @@ if (playerDefending) {
     );
 
 } else {
-
+    
     result = rollDice("1d20");
-
+    
     enemy.playerDefenceRoll = result.total;
-
+    
 }
+
+const defenceBonus = getPlayerDefenceBonus();
+
+enemy.playerDefenceBonus = defenceBonus;
+
+enemy.playerDefenceRoll =
+    enemy.playerDefenceRoll + defenceBonus;
 
     let outcome = "";
 
@@ -762,7 +769,7 @@ if (playerDefending) {
     // PLAYER WINS
     // =====================================
 
-    else if (result.total > enemy.currentAttackRoll) {
+    else if (enemy.playerDefenceRoll > enemy.currentAttackRoll) {
 
         outcome = `
 
@@ -785,7 +792,7 @@ if (playerDefending) {
     // TIE
     // =====================================
 
-    else if (result.total === enemy.currentAttackRoll) {
+    else if (enemy.playerDefenceRoll === enemy.currentAttackRoll) {
 
         outcome = `
 
@@ -851,7 +858,11 @@ if (playerDefending) {
 
 <p>
     <strong>
-        Defence Result: ${enemy.playerDefenceRoll}
+        Defence Result:
+${enemy.playerDefenceRoll - enemy.playerDefenceBonus},
+${enemy.playerDefenceBonus > 0 ? "+" : ""}${enemy.playerDefenceBonus}
+=
+${enemy.playerDefenceRoll}
     </strong>
 </p>
 
@@ -1124,10 +1135,20 @@ function choosePlayerAttackGrip() {
 
     `;
 
+    if (playerEquipment.offhand) {
+
+    showChoices([
+        `⚔️ One-Handed Attack — ${weapon.damage}`
+    ]);
+
+} else {
+
     showChoices([
         `⚔️ One-Handed Attack — ${weapon.damage}`,
         `👐 Two-Handed Attack — ${weapon.twoHandedDamage}`
     ]);
+
+}
 
 }
 
@@ -1311,12 +1332,10 @@ ${pipReaction}
             <p>
                 <strong>
     Your Attack Roll:
-    ${currentAttack.rawAttackRoll}
-    ${currentAttack.attackBonus > 0
-        ? `+ ${currentAttack.attackBonus}`
-        : ""}
-    =
-    ${currentAttack.attackRoll}
+${currentAttack.rawAttackRoll},
+${currentAttack.attackBonus > 0 ? "+" : ""}${currentAttack.attackBonus}
+=
+${currentAttack.attackRoll}
 </strong>
             </p>
 
