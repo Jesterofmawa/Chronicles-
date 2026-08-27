@@ -2649,9 +2649,36 @@ if (choice === "💰 Sell Weapons") {
 
 }
 
+if (choice === "🛡️ Sell Armour") {
+
+    sellArmour();
+
+    return;
+
+}
+
 if (choice === "💰 Sell Another Weapon") {
 
     sellSwordAndAnchorWeapons();
+
+    return;
+}
+
+if (choice.startsWith("💰 Sell ")) {
+
+    const armourName = choice
+        .replace("💰 Sell ", "")
+        .split(" — ")[0];
+
+    const armour = Object.values(armourDefinitions).find(
+        item => item.name === armourName
+    );
+
+    if (armour) {
+
+        sellArmourChoice(armour.id);
+
+    }
 
     return;
 }
@@ -2847,6 +2874,46 @@ if (choice.startsWith("💰 Buy ")) {
 if (choice === "🛡️ Continue Shopping") {
 
     visitPaddedCuirassShop();
+
+    return;
+}
+
+if (choice === "🛡️ Sell Armour") {
+
+    sellArmour();
+
+    return;
+}
+
+if (choice === "🛡️ Sell Another Armour") {
+
+    sellArmour();
+
+    return;
+}
+
+if (choice.startsWith("🛡️ ") && choice.includes(" silver")) {
+
+    const armourName = choice
+        .replace("🛡️ ", "")
+        .split(" — ")[0];
+
+    const armour = Object.values(armourDefinitions).find(
+        item => item.name === armourName
+    );
+
+    if (armour) {
+
+        sellArmourChoice(armour.id);
+
+    }
+
+    return;
+}
+
+if (choice === "↩️ Back to Selling Armour") {
+
+    sellArmour();
 
     return;
 }

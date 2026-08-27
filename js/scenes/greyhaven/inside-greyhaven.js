@@ -6575,11 +6575,12 @@ function visitPaddedCuirassShop() {
     `;
 
     showChoices([
-        "🛡️ Browse Armour",
-        "🛡️ Browse Shields",
-        "💬 Speak with the Shopkeeper",
-        "↩️ Leave"
-    ]);
+    "🛡️ Browse Armour",
+    "🛡️ Sell Armour",
+    "🛡️ Browse Shields",
+    "💬 Speak with the Shopkeeper",
+    "↩️ Leave"
+]);
 
 }
 
@@ -6846,6 +6847,188 @@ function purchasePaddedCuirassItem(itemId) {
     showChoices([
         "🛡️ Continue Shopping",
         "↩️ Leave The Padded Cuirass"
+    ]);
+
+}
+
+function sellArmour() {
+
+    const sellableArmour = playerInventory.filter(item => {
+
+        if (item.category !== "equipment") {
+            return false;
+        }
+
+        // Armour only. Shields use the offhand slot.
+        if (
+            item.equipSlot !== "head" &&
+            item.equipSlot !== "body" &&
+            item.equipSlot !== "arms" &&
+            item.equipSlot !== "legs"
+        ) {
+            return false;
+        }
+
+        if (!armourDefinitions[item.id]) {
+            return false;
+        }
+
+        // Never allow currently equipped armour to be sold.
+        const equippedItem = playerEquipment[item.equipSlot];
+
+        if (
+            equippedItem &&
+            equippedItem.id === item.id
+        ) {
+            return false;
+        }
+
+        return true;
+
+    });
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The shopkeeper looks over the armour you have brought.
+            </p>
+
+            <p>
+                "I'll take good armour off your hands. Don't expect me to pay what I charge for it, though."
+            </p>
+
+        </div>
+
+    `;
+
+    if (sellableArmour.length === 0) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You have no armour the shopkeeper is willing to buy.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to The Padded Cuirass"
+        ]);
+
+        return;
+    }
+
+    const choices = sellableArmour.map(item => {
+
+        const armour = armourDefinitions[item.id];
+
+        const sellPrice = Math.floor(armour.price / 2);
+
+        return `💰 Sell ${armour.name} — ${sellPrice} silver`;
+
+    });
+
+    choices.push("↩️ Back to The Padded Cuirass");
+
+    showChoices(choices);
+
+}
+
+function sellArmourChoice(itemId) {
+
+    const inventoryItem = playerInventory.find(
+        item => item.id === itemId
+    );
+
+    const armour = armourDefinitions[itemId];
+
+    if (!inventoryItem || !armour) {
+        return;
+    }
+
+    // Never allow equipped armour to be sold.
+    if (
+        playerEquipment[armour.equipSlot] &&
+        playerEquipment[armour.equipSlot].id === itemId
+    ) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>Cannot Sell Equipped Armour</h2>
+
+                <p>
+                    You cannot sell armour while it is equipped.
+                </p>
+
+                <p>
+                    Remove it from your equipment first.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Selling Armour"
+        ]);
+
+        return;
+    }
+
+    const sellPrice = Math.floor(armour.price / 2);
+
+    // Remove one copy from inventory.
+    if (inventoryItem.quantity > 1) {
+
+        inventoryItem.quantity -= 1;
+
+    } else {
+
+        const index = playerInventory.indexOf(inventoryItem);
+
+        playerInventory.splice(index, 1);
+
+    }
+
+    playerSilver += sellPrice;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>Armour Sold</h2>
+
+            <p>
+                You hand over the ${armour.name}.
+            </p>
+
+            <p>
+                The shopkeeper counts out ${sellPrice} silver.
+            </p>
+
+            <p>
+                <strong>Silver received:</strong> ${sellPrice}
+            </p>
+
+            <p>
+                <strong>Silver now:</strong> ${playerSilver}
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛡️ Sell Another Armour",
+        "↩️ Back to The Padded Cuirass"
     ]);
 
 }

@@ -1,4 +1,4 @@
-let playerSilver = 200;
+let playerSilver = 50;
 
 let playerInventory = [];
 
