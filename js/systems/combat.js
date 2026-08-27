@@ -966,6 +966,28 @@ let damage = result.total;
         damage = Math.floor(damage / 2);
 
     }
+    
+    const totalProtection = getPlayerProtection();
+
+const effectiveProtection = enemy.criticalAttack
+    ? Math.floor(totalProtection / 2)
+    : totalProtection;
+
+damage = Math.max(
+    0,
+    damage - effectiveProtection
+);
+
+let damageCalculation = `${result.total}, −${effectiveProtection} = ${damage}`;
+
+if (enemy.attackResult === "half_hit") {
+
+    const halfDamage = Math.floor(result.total / 2);
+
+    damageCalculation =
+        `${result.total}, halved to ${halfDamage}, −${effectiveProtection} = ${damage}`;
+
+}
 
 combatPlayer.hp -= damage;
 
@@ -1008,10 +1030,11 @@ ${
     `
     : ""
 }
-
-            <p>
-                <strong>${result.total}</strong>
-            </p>
+                <p>
+    <strong>
+        ${damageCalculation}
+    </strong>
+</p>
 
             ${
                 enemy.attackResult === "half_hit"
