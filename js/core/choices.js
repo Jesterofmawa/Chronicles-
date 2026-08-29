@@ -2657,6 +2657,42 @@ if (choice === "🛡️ Sell Armour") {
 
 }
 
+if (choice === "🏹 Sell Shields") {
+
+    sellShields();
+
+    return;
+
+}
+
+if (choice === "🏹 Sell Another Shield") {
+
+    sellShields();
+
+    return;
+
+}
+
+if (choice.startsWith("🏹 Sell ")) {
+
+    const shieldName = choice
+        .replace("🏹 Sell ", "")
+        .split(" — ")[0];
+
+    const shield = Object.values(armourDefinitions).find(
+        item => item.name === shieldName &&
+                item.equipSlot === "offhand"
+    );
+
+    if (shield) {
+
+        sellShieldChoice(shield.id);
+
+    }
+
+    return;
+}
+
 if (choice === "💰 Sell Another Weapon") {
 
     sellSwordAndAnchorWeapons();

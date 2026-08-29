@@ -6578,6 +6578,7 @@ function visitPaddedCuirassShop() {
     "🛡️ Browse Armour",
     "🛡️ Sell Armour",
     "🛡️ Browse Shields",
+    "🏹 Sell Shields",
     "💬 Speak with the Shopkeeper",
     "↩️ Leave"
 ]);
@@ -7028,6 +7029,183 @@ function sellArmourChoice(itemId) {
 
     showChoices([
         "🛡️ Sell Another Armour",
+        "↩️ Back to The Padded Cuirass"
+    ]);
+
+}
+
+function sellShields() {
+
+    const sellableShields = playerInventory.filter(item => {
+
+        if (item.category !== "equipment") {
+            return false;
+        }
+
+        // Shields use the offhand slot.
+        if (item.equipSlot !== "offhand") {
+            return false;
+        }
+
+        if (!armourDefinitions[item.id]) {
+            return false;
+        }
+
+        // Never allow the currently equipped shield to be sold.
+        const equippedShield = playerEquipment.offhand;
+
+        if (
+            equippedShield &&
+            equippedShield.id === item.id
+        ) {
+            return false;
+        }
+
+        return true;
+
+    });
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The shopkeeper looks over the shields you have brought.
+            </p>
+
+            <p>
+                "I'll take a good shield off your hands. Don't expect me to pay what I charge for it, though."
+            </p>
+
+        </div>
+
+    `;
+
+    if (sellableShields.length === 0) {
+
+        document.getElementById("story").innerHTML += `
+
+            <div class="story-panel">
+
+                <p>
+                    You have no shields the shopkeeper is willing to buy.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to The Padded Cuirass"
+        ]);
+
+        return;
+    }
+
+    const choices = sellableShields.map(item => {
+
+        const shield = armourDefinitions[item.id];
+
+        const sellPrice = Math.floor(shield.price / 2);
+
+        return `🏹 Sell ${shield.name} — ${sellPrice} silver`;
+
+    });
+
+    choices.push("↩️ Back to The Padded Cuirass");
+
+    showChoices(choices);
+
+}
+
+function sellShieldChoice(itemId) {
+
+    const inventoryItem = playerInventory.find(
+        item => item.id === itemId
+    );
+
+    const shield = armourDefinitions[itemId];
+
+    if (!inventoryItem || !shield) {
+        return;
+    }
+
+    // Never allow the equipped shield to be sold.
+    if (
+        playerEquipment.offhand &&
+        playerEquipment.offhand.id === itemId
+    ) {
+
+        document.getElementById("story").innerHTML = `
+
+            <div class="story-panel">
+
+                <h2>Cannot Sell Equipped Shield</h2>
+
+                <p>
+                    You cannot sell a shield while it is equipped.
+                </p>
+
+                <p>
+                    Remove it from your equipment first.
+                </p>
+
+            </div>
+
+        `;
+
+        showChoices([
+            "↩️ Back to Selling Shields"
+        ]);
+
+        return;
+    }
+
+    const sellPrice = Math.floor(shield.price / 2);
+
+    // Remove one copy from inventory.
+    if (inventoryItem.quantity > 1) {
+
+        inventoryItem.quantity -= 1;
+
+    } else {
+
+        const index = playerInventory.indexOf(inventoryItem);
+
+        playerInventory.splice(index, 1);
+
+    }
+
+    playerSilver += sellPrice;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <h2>Shield Sold</h2>
+
+            <p>
+                You hand over the ${shield.name}.
+            </p>
+
+            <p>
+                The shopkeeper counts out ${sellPrice} silver.
+            </p>
+
+            <p>
+                <strong>Silver received:</strong> ${sellPrice}
+            </p>
+
+            <p>
+                <strong>Silver now:</strong> ${playerSilver}
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🏹 Sell Another Shield",
         "↩️ Back to The Padded Cuirass"
     ]);
 
