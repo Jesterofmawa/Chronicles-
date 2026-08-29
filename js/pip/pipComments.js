@@ -205,29 +205,72 @@ const observation =
 function showPipObservation(
     observation
 ) {
-
+    
     const pip =
         document.getElementById("pip");
-
+    
     if (!pip) {
-
+        
         return;
-
+        
     }
-
-
+    
     pip.innerHTML = `
-        <div class="pip-roll">
-            <strong>🐿️ Pip</strong>
-            <br><br>
-            "${observation}"
-        </div>
-    `;
+        <div class="pip-observation">
 
+    <div class="pip-observation-character">
+
+        <img
+            src="images/pip-thoughtful.png"
+            alt="Pip"
+            class="pip-thoughtful"
+        >
+
+        <strong>Pip</strong>
+
+    </div>
+
+    <div class="pip-observation-text">
+        "${observation}"
+    </div>
+
+</div>
+    `;
+    
 }
 
 function setPipLocation(location) {
 
     pipCurrentLocation = location;
+
+}
+
+function triggerFishermansRowComment() {
+
+    if (
+        typeof fishermansRowComments === "undefined" ||
+        fishermansRowComments.length === 0
+    ) {
+
+        console.log(
+            "Fisherman's Row Pip comments are unavailable."
+        );
+
+        return;
+
+    }
+
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            fishermansRowComments.length
+        );
+
+    const comment =
+        fishermansRowComments[randomIndex];
+
+    showPipObservation(
+        comment
+    );
 
 }

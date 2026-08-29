@@ -1240,6 +1240,34 @@ if (choice === "🎣 Fisherman's Row") {
 
 }
 
+if (choice === "🐟 Watch the Fishers at Work") {
+
+    watchFishersAtWork();
+
+    return;
+}
+
+if (choice === "↩️ Back to Fisherman's Row") {
+
+    showFishermansRowMenu();
+
+    return;
+}
+
+if (choice === "🗣️ Listen to the Neighbours") {
+
+    listenToTheNeighbours();
+
+    return;
+}
+
+if (choice === "🛶 Investigate the Old Boathouse") {
+
+    investigateOldBoathouse();
+
+    return;
+}
+
 if (choice === "🧂 Salt Market") {
 
     visitSaltMarket();
@@ -1281,6 +1309,18 @@ if (choice === "🍺 The Bent Anchor") {
 }
 
 if (choice === "↩️ Back to Explore the Streets") {
+    
+    setPipLocation("greyhaven");
+    
+    const pip = document.getElementById("pip");
+
+if (pip) {
+
+    pip.innerHTML = "";
+
+}
+
+    resumePipObservations();
 
     exploreGreyhavenStreets();
 

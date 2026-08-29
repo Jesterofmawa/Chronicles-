@@ -4166,30 +4166,154 @@ function inspectTovinBell() {
 
 }
 
+function showFishermansRowMenu() {
+
+    showChoices([
+        "🐟 Watch the Fishers at Work",
+        "🗣️ Listen to the Neighbours",
+        "🛶 Investigate the Old Boathouse",
+        "↩️ Back to Explore the Streets"
+    ]);
+
+}
+
 function visitFishermansRow() {
+    
+    pausePipObservations();
+    
+    setPipLocation("fishermans_row");
+    
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Fisherman's Row lies ahead, where weather-beaten houses crowd close together against the sea.
+            </p>
+
+            <p>
+                Fishing nets hang from hooks and rails, while boots, crates and fishing equipment sit outside many of the doors.
+            </p>
+
+            <p>
+                Smoke rises from chimneys, carrying the smell of woodsmoke and fresh bread through the salt air.
+            </p>
+
+            <p>
+                People move between the houses with the easy familiarity of neighbours who have known one another for years.
+            </p>
+
+        </div>
+
+    `;
+    
+        triggerFishermansRowComment();
+
+    showFishermansRowMenu();
+
+}
+
+function watchFishersAtWork() {
 
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
             <p>
-                Fisherman's Row lies ahead, where weather-beaten houses crowd close to the street.
+                Along the Row, fishermen work among nets, ropes and wooden crates.
             </p>
 
             <p>
-                This part of Greyhaven has yet to be explored.
+                Some mend torn sections of netting while others sort the day's catch.
+            </p>
+
+            <p>
+                The work is steady and practiced. Little conversation is needed between people who have done the same jobs together for years.
             </p>
 
         </div>
 
     `;
 
+    triggerFishermansRowComment();
+
     showChoices([
-        "↩️ Back to Explore the Streets"
+        "↩️ Back to Fisherman's Row"
     ]);
 
 }
 
+function listenToTheNeighbours() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You slow your pace and listen to the conversations around you.
+            </p>
+
+            <p>
+                Voices drift from open doorways and across the narrow street.
+            </p>
+
+            <p>
+                Most of it is ordinary talk. Fishing. Repairs. Supper. Someone arguing about whose turn it is to mend the roof.
+            </p>
+
+            <p>
+                Nothing seems particularly important.
+            </p>
+
+            <p>
+                Somehow, that makes the place feel more alive.
+            </p>
+
+        </div>
+
+    `;
+
+    triggerFishermansRowComment();
+
+    showChoices([
+        "↩️ Back to Fisherman's Row"
+    ]);
+
+}
+
+function investigateOldBoathouse() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                At the far end of Fisherman's Row stands an old boathouse, its weathered boards faded by years of salt and sun.
+            </p>
+
+            <p>
+                The doors are secured with a heavy iron lock.
+            </p>
+
+            <p>
+                You see no sign that anyone has used the place recently.
+            </p>
+
+        </div>
+
+    `;
+
+    triggerFishermansRowComment();
+
+    showChoices([
+        "↩️ Back to Fisherman's Row"
+    ]);
+
+    // FUTURE QUEST INSIDE
+    // Mystery of the boat.
+    // Remove this note when the quest is designed.
+
+}
 
 function visitSaltMarket() {
 

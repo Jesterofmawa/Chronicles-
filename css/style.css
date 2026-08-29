@@ -724,3 +724,47 @@ animation: storyOpeningFadeIn 1.5s ease forwards;
     gap: 12px;
     flex-wrap: wrap;
 }
+
+.pip-observation {
+    margin-top: 20px;
+    padding: 12px;
+
+    border: 2px solid #d8c89a;
+    border-radius: 10px;
+
+    background: rgba(248, 244, 232, 0.72);
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.pip-observation-character {
+    width: 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.pip-thoughtful {
+    width: 60px;
+    height: 60px;
+
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.pip-observation-character strong {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.pip-observation-text {
+    flex: 1;
+
+    text-align: center;
+    font-size: 16px;
+}
