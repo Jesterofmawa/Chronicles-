@@ -7210,3 +7210,367 @@ function sellShieldChoice(itemId) {
     ]);
 
 }
+
+function talkToMara() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Mara looks up from the piece of leather she's working on.
+            </p>
+
+            <p>
+                "Something on your mind?"
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛡️ Ask about the shop",
+        "🔨 Ask about her work",
+        "⚔️ Ask about armour",
+        "🏹 Ask about shields",
+        "👤 Ask about Mara",
+        "↩️ Back to The Padded Cuirass"
+    ]);
+
+}
+
+function maraAskAboutShop() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Been here thirty-two years."
+            </p>
+
+            <p>
+                Mara glances around the room.
+            </p>
+
+            <p>
+                "Wasn't always called the Padded Cuirass. That was my father's name for it."
+            </p>
+
+            <p>
+                She taps the counter.
+            </p>
+
+            <p>
+                "I kept the name. People remember a good sign."
+            </p>
+
+            <p>
+                "And people remember where they bought something that stopped a sword."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🔨 Ask how she got into the trade",
+        "↩️ Back to Mara"
+    ]);
+
+}
+
+function maraAskHowSheStarted() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Mara gives a small shrug.
+            </p>
+
+            <p>
+                "My father taught me."
+            </p>
+
+            <p>
+                "He'd been making armour since before I was born. Started me on leatherwork when I was old enough to hold a needle."
+            </p>
+
+            <p>
+                She smiles faintly.
+            </p>
+
+            <p>
+                "Didn't much care for the sewing at first."
+            </p>
+
+            <p>
+                "Turns out I was better at it than I thought."
+            </p>
+
+            <p>
+                "Eventually I learned the metalwork too. Took over the shop when he couldn't manage it anymore."
+            </p>
+
+            <p>
+                "Never had much interest in doing anything else."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Mara"
+    ]);
+
+}
+
+function maraAskAboutWork() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Mara holds up the piece of leather she's been working on.
+            </p>
+
+            <p>
+                "This is the part nobody thinks about."
+            </p>
+
+            <p>
+                "Metal's impressive. Leather keeps it where it's supposed to be."
+            </p>
+
+            <p>
+                She gives the leather a final inspection.
+            </p>
+
+            <p>
+                "Good armour is mostly about the things you don't notice."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🛡️ Ask what makes good armour",
+        "🧵 Ask about repairs",
+        "↩️ Back to Mara"
+    ]);
+
+}
+
+function maraAskWhatMakesGoodArmour() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Depends what you're expecting to hit you."
+            </p>
+
+            <p>
+                Mara looks you up and down.
+            </p>
+
+            <p>
+                "And what you're expecting to do about it."
+            </p>
+
+            <p>
+                "There's no such thing as armour that's perfect for everything."
+            </p>
+
+            <p>
+                "Anyone who tells you otherwise is trying to sell you something."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Mara"
+    ]);
+
+}
+
+function maraAskAboutRepairs() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Repairs are half the job."
+            </p>
+
+            <p>
+                Mara turns the piece of leather over in her hands.
+            </p>
+
+            <p>
+                "A loose strap. A split seam. A buckle that's seen better days."
+            </p>
+
+            <p>
+                "Small problems become expensive ones if you ignore them."
+            </p>
+
+            <p>
+                She gives you a pointed look.
+            </p>
+
+            <p>
+                "Usually right after someone tells me they were 'just about to get it fixed'."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Mara"
+    ]);
+
+}
+
+function maraAskAboutArmour() {
+    
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Mara gestures towards the racks.
+            </p>
+
+            <p>
+                "Different armour suits different people."
+            </p>
+
+            <p>
+                "Some want protection. Some want freedom of movement. Most want both."
+            </p>
+
+            <p>
+                "You don't get both without making compromises."
+            </p>
+
+            <p>
+                She shrugs.
+            </p>
+
+            <p>
+                "That's why I keep different kinds."
+            </p>
+
+        </div>
+
+    `;
+    
+    showChoices([
+        "↩️ Back to Mara"
+    ]);
+    
+}
+
+function maraAskAboutShields() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                Mara reaches beneath the counter and produces a shield.
+            </p>
+
+            <p>
+                "People treat these like portable walls."
+            </p>
+
+            <p>
+                She knocks her knuckle against it.
+            </p>
+
+            <p>
+                "They're not."
+            </p>
+
+            <p>
+                "They're tools. You use them to control where the other fellow's weapon goes."
+            </p>
+
+            <p>
+                She puts the shield back.
+            </p>
+
+            <p>
+                "And preferably somewhere that isn't you."
+           </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Mara"
+    ]);
+
+}
+
+function maraAskAboutMara() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "Me?"
+            </p>
+
+            <p>
+                Mara raises an eyebrow.
+            </p>
+
+            <p>
+                "You're buying armour, not adopting me."
+            </p>
+
+            <p>
+                There's a brief smile.
+            </p>
+
+            <p>
+                "My father taught me the trade. I took over when he couldn't manage the shop anymore."
+            </p>
+
+            <p>
+                She looks around the room.
+            </p>
+
+            <p>
+                "Never had much interest in doing anything else."
+            </p>
+
+            <p>
+                "Some people need grand adventures. I was happy making sure they came back from theirs in one piece."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "↩️ Back to Mara"
+    ]);
+
+}

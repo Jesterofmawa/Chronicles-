@@ -2961,4 +2961,87 @@ if (choice === "↩️ Leave The Padded Cuirass") {
     return;
 }
 
+if (choice === "💬 Speak with the Shopkeeper") {
+
+    talkToMara();
+
+    return;
+}
+
+if (choice === "🛡️ Ask about the shop") {
+
+    maraAskAboutShop();
+
+    return;
+}
+
+if (choice === "↩️ Back to Mara") {
+
+    talkToMara();
+
+    return;
+}
+
+if (choice === "↩️ Back to The Padded Cuirass") {
+
+    visitPaddedCuirassShop();
+
+    return;
+}
+
+if (choice === "🔨 Ask how she got into the trade") {
+
+    maraAskHowSheStarted();
+
+    return;
+}
+
+if (choice === "🔨 Ask about her work") {
+
+    maraAskAboutWork();
+
+    return;
+}
+
+if (choice === "🛡️ Ask what makes good armour") {
+
+    maraAskWhatMakesGoodArmour();
+
+    return;
+}
+
+if (choice === "🧵 Ask about repairs") {
+
+    maraAskAboutRepairs();
+
+    return;
+}
+if (choice === "⚔️ Ask about armour") {
+    
+    maraAskAboutArmour();
+    
+    return;
+}
+
+if (choice === "⚔️ Ask about armour") {
+
+    maraAskAboutArmour();
+
+    return;
+}
+
+if (choice === "🏹 Ask about shields") {
+
+    maraAskAboutShields();
+
+    return;
+}
+
+if (choice === "👤 Ask about Mara") {
+
+    maraAskAboutMara();
+
+    return;
+}
+
 }
