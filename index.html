@@ -42,13 +42,9 @@
             Continue
         </button>
         
-        <button onclick="showFutureFeature('Player Sheet')">
-            Player Sheet
-        </button>
-        
-        <button onclick="showFutureFeature('Inventory')">
-            Inventory
-        </button>
+        <button onclick="openCharacterSheet()">
+    Character Sheet
+</button>
         
         <button onclick="showFutureFeature('Options')">
             Options
@@ -125,8 +121,6 @@ style="display:none;">
 
     <div id="game" style="display:none;">
 
-    <h1>Chronicles</h1>
-
 
     <!-- ========================= -->
     <!-- STORY -->
@@ -172,12 +166,8 @@ style="display:none;">
     
     <div id="gameTools">
 
-    <button onclick="openInventory()">
-        🎒 Inventory
-    </button>
-
     <button onclick="openCharacterSheet()">
-        📜 Character
+        Character Sheet
     </button>
 
 </div>
@@ -269,6 +259,8 @@ style="display:none;">
 <script src="js/core/title.js"></script>
 
 <script src="js/systems/inventory.js"></script>
+
+<script src="js/systems/character.js"></script>
 
 <script src="js/systems/weapon_systems.js"></script>
 

@@ -2822,40 +2822,52 @@ if (choice === "💰 Sell Another Weapon") {
 
 if (choice.startsWith("💰 Sell ")) {
 
-    const armourName = choice
+    const itemName = choice
         .replace("💰 Sell ", "")
         .split(" — ")[0];
 
-    const armour = Object.values(armourDefinitions).find(
-        item => item.name === armourName
-    );
 
-    if (armour) {
+    // =====================================
+    // CHECK WEAPONS
+    // =====================================
 
-        sellArmourChoice(armour.id);
+    const weapon =
+        Object.values(weaponDefinitions).find(
+            item => item.name === itemName
+        );
 
-    }
-
-    return;
-}
-
-if (choice.startsWith("💰 Sell ")) {
-
-    const weaponName = choice
-        .replace("💰 Sell ", "")
-        .split(" — ")[0];
-
-    const weapon = Object.values(weaponDefinitions).find(
-        weapon => weapon.name === weaponName
-    );
 
     if (weapon) {
 
-        sellSwordAndAnchorWeapon(weapon.id);
+        sellSwordAndAnchorWeapon(
+            weapon.id
+        );
+
+        return;
 
     }
 
-    return;
+
+    // =====================================
+    // CHECK ARMOUR
+    // =====================================
+
+    const armour =
+        Object.values(armourDefinitions).find(
+            item => item.name === itemName
+        );
+
+
+    if (armour) {
+
+        sellArmourChoice(
+            armour.id
+        );
+
+        return;
+
+    }
+
 }
 
 if (choice === "↩️ Back to Selling") {
