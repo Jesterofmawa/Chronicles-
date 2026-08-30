@@ -6,6 +6,7 @@ let fishermanAskedFishing = false;
 let harbourmasterDrawerOpened = false;
 let harbourmasterLetterFound = false;
 let harbourmasterExitHintGiven = false;
+let harbourmasterRecordsRevealed = false;
 
 function enterInsideGreyhaven() {
   
@@ -4604,7 +4605,9 @@ function triggerSaltMarketComment() {
 
 
 function visitBellwatchChurch() {
-    
+
+    pausePipObservations();
+
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -4614,19 +4617,39 @@ function visitBellwatchChurch() {
             </p>
 
             <p>
-                The church has yet to be fully explored.
+                Its old stone walls have weathered countless years of Greyhaven's storms.
+            </p>
+
+            <p>
+                A heavy bell hangs somewhere above you, though the church itself is quiet.
+            </p>
+
+            <p>
+                The place feels old.
             </p>
 
         </div>
 
     `;
-    
-    showChoices([
-        "👀 Look Around the Church",
-        "📜 Search for the Old Records",
+
+    const choices = [
+        "👀 Look Around the Church"
+    ];
+
+    if (harbourmasterRecordsRevealed) {
+
+        choices.push(
+            "📜 Search for the Old Records"
+        );
+
+    }
+
+    choices.push(
         "↩️ Leave Bellwatch Church"
-    ]);
-    
+    );
+
+    showChoices(choices);
+
 }
 
 function lookAroundBellwatchChurch() {
@@ -5771,20 +5794,260 @@ function visitBentAnchor() {
             </p>
 
             <p>
-                The tavern is yet to be explored.
+                Its timber walls are darkened by years of smoke, salt and spilled ale.
+            </p>
+
+            <p>
+                The tavern is warm and busy despite the weather outside.
+            </p>
+
+            <p>
+                Sailors occupy several of the tables, while locals gather around the bar and talk over the noise of the room.
             </p>
 
         </div>
 
     `;
     
-    showChoices([
+    const choices = [
         "👀 Look Around the Tavern",
         "🗣️ Talk to the Innkeeper",
-        "🍺 Talk to the Patrons",
-        "↩️ Leave the Tavern"
-    ]);
+        "🍺 Talk to the Patrons"
+    ];
     
+    if (harbourmasterExitHintGiven) {
+        
+        choices.push(
+            "⚓ Speak with the Harbourmaster"
+        );
+        
+    }
+    
+    choices.push(
+        "↩️ Leave the Tavern"
+    );
+    
+    showChoices(choices);
+    
+}
+
+function speakWithHarbourmaster() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You find the Harbourmaster sitting at the end of the bar, a half-finished drink resting beside him.
+            </p>
+
+            <p>
+                He looks up as you approach.
+            </p>
+
+            <p>
+                "You're the one asking questions about the old harbour."
+            </p>
+
+            <p>
+                He studies you for a moment before gesturing towards the empty chair opposite him.
+            </p>
+
+            <p>
+                "Sit, then."
+            </p>
+
+            <p>
+                "If you're determined to go poking around in old business, you may as well hear what I know."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🌊 Ask about the Old Harbour",
+        "📜 Ask about the old records",
+        "⚡ Ask what happened sixty years ago",
+        "↩️ End the Conversation"
+    ]);
+
+}
+
+function askHarbourmasterAboutOldHarbour() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "The old harbour was the heart of Greyhaven once."
+            </p>
+
+            <p>
+                The Harbourmaster looks towards the tavern window, though there is little to see beyond the rain.
+            </p>
+
+            <p>
+                "Then came the storm."
+            </p>
+
+            <p>
+                "By morning, the harbour was half destroyed. Ships smashed against the docks. Buildings were ruined."
+            </p>
+
+            <p>
+                "After that, nobody wanted to rebuild there."
+            </p>
+
+            <p>
+                He takes a drink.
+            </p>
+
+            <p>
+                "People say it was the storm."
+            </p>
+
+            <p>
+                "Maybe it was."
+            </p>
+
+            <p>
+                He doesn't sound convinced.
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "📜 Ask about the old records",
+        "⚡ Ask what happened sixty years ago",
+        "↩️ End the Conversation"
+    ]);
+
+}
+
+function askHarbourmasterWhatHappened() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The Harbourmaster is quiet for a moment.
+            </p>
+
+            <p>
+                "Sixty years ago, almost to the day."
+            </p>
+
+            <p>
+                "There was a terrible storm that night."
+            </p>
+
+            <p>
+                "Lightning struck the lighthouse."
+            </p>
+
+            <p>
+                "The keeper died."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "The harbour was wrecked at almost the same time."
+            </p>
+
+            <p>
+                "That's about all anyone can agree on."
+            </p>
+
+            <p>
+                "Some say the storm caused it all. Others swear they heard something out on the water."
+            </p>
+
+            <p>
+                He gives a small shrug.
+            </p>
+
+            <p>
+                "After sixty years, stories have a habit of becoming facts."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "📜 Ask about the old records",
+        "🌊 Ask about the Old Harbour",
+        "↩️ End the Conversation"
+    ]);
+
+}
+
+function askHarbourmasterAboutRecords() {
+
+    harbourmasterRecordsRevealed = true;
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "There are records."
+            </p>
+
+            <p>
+                The Harbourmaster leans back in his chair.
+            </p>
+
+            <p>
+                "Old harbour reports. Shipping logs. Damage reports. The lighthouse keeper's records."
+            </p>
+
+            <p>
+                "Not everything survived."
+            </p>
+
+            <p>
+                "And what did survive isn't exactly easy reading."
+            </p>
+
+            <p>
+                You ask where the records are kept.
+            </p>
+
+            <p>
+                "Bellwatch Church."
+            </p>
+
+            <p>
+                "The older town records were moved there years ago. Safer than keeping them in an office that's had more than its share of leaks."
+            </p>
+
+            <p>
+                He gives you a tired smile.
+            </p>
+
+            <p>
+                "If you're looking for answers about the old harbour, that's where I'd start."
+            </p>
+
+        </div>
+
+    `;
+
+    showChoices([
+        "🌊 Ask about the Old Harbour",
+        "⚡ Ask what happened sixty years ago",
+        "↩️ End the Conversation"
+    ]);
+
 }
 
 function headTowardsBeach() {

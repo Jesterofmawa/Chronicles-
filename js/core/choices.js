@@ -1356,6 +1356,38 @@ if (choice === "🍺 The Bent Anchor") {
 
 }
 
+if (choice === "⚓ Speak with the Harbourmaster") {
+
+    speakWithHarbourmaster();
+
+    return;
+
+}
+
+if (choice === "🌊 Ask about the Old Harbour") {
+
+    askHarbourmasterAboutOldHarbour();
+
+    return;
+
+}
+
+if (choice === "📜 Ask about the old records") {
+
+    askHarbourmasterAboutRecords();
+
+    return;
+
+}
+
+if (choice === "⚡ Ask what happened sixty years ago") {
+
+    askHarbourmasterWhatHappened();
+
+    return;
+
+}
+
 if (choice === "↩️ Back to Explore the Streets") {
     
     setPipLocation("greyhaven");
