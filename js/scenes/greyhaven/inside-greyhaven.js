@@ -4316,26 +4316,289 @@ function investigateOldBoathouse() {
 }
 
 function visitSaltMarket() {
+ 
+ /*
+ * DEVELOPER NOTE:
+ * 
+ * The Salt Market is currently a simple exploration location.
+ * 
+ * FUTURE DEVELOPMENT:
+ * The Salt Market will become a quest-giving location.
+ * Market traders and/or other NPCs should eventually be able
+ * to provide quests, rumours, leads and optional side content.
+ * 
+ * When quest systems are implemented, this location should be
+ * connected to the relevant quest state/flags so available
+ * quests can change based on the player's progress.
+ * 
+ * Do not remove the Market Trader interaction. It is intended
+ * to become one of the primary hooks for future quest content.
+ */
+    
+    pausePipObservations();
+    
+    setPipLocation("salt_market");
+    
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                The Salt Market is the busiest square in Greyhaven.
+            </p>
+
+            <p>
+                Stalls crowd the edges of the square, their awnings pulled tight against the coastal wind.
+            </p>
+
+            <p>
+                Fish, timber and bolts of cloth are stacked beside crates of imported goods.
+            </p>
+
+            <p>
+                The sharp smell of salt mixes with spices you've never encountered before.
+            </p>
+
+            <p>
+                Merchants call out prices while sailors argue over cargo and townsfolk weave between the stalls.
+            </p>
+
+            <p>
+                Somewhere nearby, someone is telling a story.
+            </p>
+
+            <p>
+                Judging by the small crowd gathered around them, it seems the story may be worth something.
+            </p>
+
+        </div>
+
+    `;
+    
+    triggerSaltMarketComment();
+    
+    showSaltMarketMenu();
+    
+}
+
+function showSaltMarketMenu() {
+
+    showChoices([
+        "🛒 Browse the Market Stalls",
+        "🌶️ Examine the Imported Goods",
+        "📖 Listen to the Storyteller",
+        "🗣️ Talk to a Market Trader",
+        "↩️ Back to Explore the Streets"
+    ]);
+
+}
+
+function browseSaltMarketStalls() {
 
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
             <p>
-                The Salt Market occupies a busy stretch of Greyhaven, filled with the smells and sounds of the coast.
+                You wander between the market stalls, taking in the variety of goods on display.
             </p>
 
             <p>
-                This part of Greyhaven has yet to be explored.
+                Fishmongers call out their prices beside merchants selling timber, cloth and tools brought in from inland.
+            </p>
+
+            <p>
+                Further along, sailors have laid out small curiosities gathered from distant ports.
+            </p>
+
+            <p>
+                Most are ordinary things.
+            </p>
+
+            <p>
+                A few are difficult to explain.
+            </p>
+
+            <p>
+                Nobody seems particularly concerned about the distinction.
             </p>
 
         </div>
 
     `;
 
+    triggerSaltMarketComment();
+
     showChoices([
-        "↩️ Back to Explore the Streets"
+        "↩️ Back to the Salt Market"
     ]);
+
+}
+
+
+function examineImportedGoods() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                One section of the market is devoted almost entirely to goods brought in by visiting ships.
+            </p>
+
+            <p>
+                Dried fruits, unfamiliar spices and brightly coloured cloth fill the tables.
+            </p>
+
+            <p>
+                Some of the merchants speak languages you've never heard before.
+            </p>
+
+            <p>
+                A small wooden box contains spices with a scent so strong that you can still smell them after stepping away.
+            </p>
+
+            <p>
+                Greyhaven may be remote, but the sea brings the wider world to its doorstep.
+            </p>
+
+        </div>
+
+    `;
+
+    triggerSaltMarketComment();
+
+    showChoices([
+        "↩️ Back to the Salt Market"
+    ]);
+
+}
+
+
+function listenToStoryteller() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You follow the sound of the storyteller's voice.
+            </p>
+
+            <p>
+                A weathered sailor stands on an overturned crate, surrounded by a small crowd.
+            </p>
+
+            <p>
+                He is telling a tale about a ship that vanished beyond the Grey Expanse and returned three years later with nobody aboard.
+            </p>
+
+            <p>
+                The audience listens intently.
+            </p>
+
+            <p>
+                You notice that several people have heard the story before.
+            </p>
+
+            <p>
+                Each time the sailor reaches the end, someone interrupts to correct a detail.
+            </p>
+
+            <p>
+                Apparently, even legends have arguments.
+            </p>
+
+        </div>
+
+    `;
+
+    triggerSaltMarketComment();
+
+    showChoices([
+        "↩️ Back to the Salt Market"
+    ]);
+
+}
+
+
+function talkToMarketTrader() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                You approach one of the traders and wait for a lull in the conversation.
+            </p>
+
+            <p>
+                The trader gives you a quick glance before returning to arranging a collection of small wooden boxes.
+            </p>
+
+            <p>
+                "Looking to buy, or just looking?"
+            </p>
+
+            <p>
+                When you explain that you're simply curious about Greyhaven, the trader gives a quiet laugh.
+            </p>
+
+            <p>
+                "Then you're in the right place."
+            </p>
+
+            <p>
+                "Everything comes through here eventually. Goods, sailors, rumours..."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Stories too."
+            </p>
+
+        </div>
+
+    `;
+
+    triggerSaltMarketComment();
+
+    showChoices([
+        "↩️ Back to the Salt Market"
+    ]);
+
+}
+
+function triggerSaltMarketComment() {
+
+    if (
+        typeof saltMarketComments === "undefined" ||
+        saltMarketComments.length === 0
+    ) {
+
+        console.log(
+            "Salt Market Pip comments are unavailable."
+        );
+
+        return;
+
+    }
+
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            saltMarketComments.length
+        );
+
+    const comment =
+        saltMarketComments[randomIndex];
+
+    showPipObservation(
+        comment
+    );
 
 }
 

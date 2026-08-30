@@ -1276,6 +1276,54 @@ if (choice === "🧂 Salt Market") {
 
 }
 
+if (choice === "🛒 Browse the Market Stalls") {
+
+    browseSaltMarketStalls();
+
+    return;
+
+}
+
+if (choice === "🌶️ Examine the Imported Goods") {
+
+    examineImportedGoods();
+
+    return;
+
+}
+
+if (choice === "📖 Listen to the Storyteller") {
+
+    listenToStoryteller();
+
+    return;
+
+}
+
+if (choice === "🗣️ Talk to a Market Trader") {
+
+    talkToMarketTrader();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to the Salt Market") {
+
+    visitSaltMarket();
+
+    return;
+
+}
+
+if (choice === "↩️ Back to Explore the Streets") {
+
+    lookAroundGreyhaven(true);
+
+    return;
+
+}
+
 if (choice === "⛪ Bellwatch Church") {
 
     visitBellwatchChurch();
