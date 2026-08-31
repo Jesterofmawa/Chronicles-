@@ -555,12 +555,31 @@ function getEquipmentAttackBonus() {
             bonus += 1;
 
         }
-        
+
         if (item.attackModifier) {
 
-    bonus += item.attackModifier;
+            bonus += item.attackModifier;
 
-}
+        }
+
+        // Weapon proficiency bonus
+        if (
+            item.equipSlot === "weapon" &&
+            item.familiarityGroup &&
+            playerCharacter &&
+            playerCharacter.familiarity &&
+            playerCharacter.familiarity.weapons
+        ) {
+
+            const familiarity =
+                playerCharacter.familiarity.weapons[
+                    item.familiarityGroup
+                ] || 0;
+
+            bonus +=
+                getProficiencyBonus(familiarity);
+
+        }
 
     });
 
