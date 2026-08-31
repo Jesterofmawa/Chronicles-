@@ -19,6 +19,56 @@ function getAttributeModifier(score) {
 
 }
 
+// =====================================
+// CHRONICLES PROFICIENCY
+// =====================================
+
+const proficiencyThresholds = {
+    trained: 10,
+    expert: 50
+};
+
+function getProficiencyLevel(familiarity) {
+
+    if (familiarity >= proficiencyThresholds.expert) {
+
+        return "Expert";
+
+    }
+
+    if (familiarity >= proficiencyThresholds.trained) {
+
+        return "Trained";
+
+    }
+
+    return "Untrained";
+
+}
+
+function getProficiencyBonus(familiarity) {
+
+    const level =
+        getProficiencyLevel(familiarity);
+
+
+    if (level === "Expert") {
+
+        return 4;
+
+    }
+
+
+    if (level === "Trained") {
+
+        return 2;
+
+    }
+
+
+    return 0;
+
+}
 
 // =====================================
 // CHARACTER DERIVED VALUES
