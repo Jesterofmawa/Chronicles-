@@ -230,7 +230,7 @@ function calculateCharacterValues() {
      */
 
     playerCharacter.maxVitality =
-        10 + enduranceMod;
+    8 + (enduranceMod * 2);
 
     playerCharacter.guard =
         10 +
