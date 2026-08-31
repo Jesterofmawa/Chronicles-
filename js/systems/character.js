@@ -393,18 +393,44 @@ function createPlayerCharacter() {
         skills: {},
 
         proficiencies: {
-
-            weapons: [],
-
-            armour: [],
-
-            tools: [],
-
-            other: []
-
+        
+        weapons: [],
+        
+        armour: [],
+        
+        tools: [],
+        
+        other: []
+        
+    },
+    
+    familiarity: {
+        
+        weapons: {
+            
+            blades: 0,
+            
+            polearms: 0,
+            
+            axes: 0
+            
         },
-
-        abilities: [],
+        
+        armour: {
+            
+            light: 0,
+            
+            medium: 0,
+            
+            heavy: 0
+            
+        },
+        
+        shields: 0
+        
+    },
+    
+    abilities: [],
 
         equipment: [],
 
