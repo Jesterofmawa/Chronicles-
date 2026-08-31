@@ -25,7 +25,8 @@ let playerEquipment = {
     name: "Short Sword",
     damage: "1d6",
     effect: null,
-    equipSlot: "weapon"
+    equipSlot: "weapon",
+    familiarityGroup: "blades"
 },
 
     offhand: null
@@ -146,7 +147,7 @@ function addWeaponFromDefinition(weapon) {
             damage: weapon.damage,
             twoHandedDamage: weapon.twoHandedDamage || null,
             familiarityGroup:
-    weapon.familiarityGroup || null,
+    weapon.familiarityGroup || null
         });
 
     }
@@ -525,7 +526,8 @@ function unequipItem(slot) {
     equippedItem.twoHandedDamage || null,
     equippedItem.protection || null,
     equippedItem.defenceBonus || null,
-    equippedItem.attackModifier || null
+    equippedItem.attackModifier || null,
+    equippedItem.familiarityGroup || null
 );
     
     playerEquipment[slot] = null;

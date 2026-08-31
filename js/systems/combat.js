@@ -151,6 +151,8 @@ function startCombat(enemies) {
 
 pausePipObservations();
 
+resetCombatWeaponFamiliarity();
+
     // =====================================
     // GET EQUIPPED WEAPON
     // =====================================
@@ -1540,7 +1542,11 @@ function resolvePlayerDamage() {
         return;
 
     }
-
+    
+    recordWeaponFamiliarity(
+    combatPlayer.weapon,
+    currentAttack.critical
+);
 
     let damageExpression =
     getWeaponDamage(

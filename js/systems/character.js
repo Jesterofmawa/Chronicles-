@@ -71,6 +71,106 @@ function getProficiencyBonus(familiarity) {
 }
 
 // =====================================
+// WEAPON FAMILIARITY - COMBAT TRACKING
+// =====================================
+
+let combatWeaponFamiliarityGained = {};
+
+function resetCombatWeaponFamiliarity() {
+
+    combatWeaponFamiliarityGained = {};
+
+}
+
+function recordWeaponFamiliarity(
+    weapon,
+    critical = false
+) {
+
+    if (!playerCharacter || !weapon) {
+
+        return;
+
+    }
+
+
+    const group =
+        weapon.familiarityGroup;
+
+    if (!group) {
+
+        return;
+
+    }
+
+
+    if (
+        !playerCharacter.familiarity ||
+        !playerCharacter.familiarity.weapons
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        typeof playerCharacter.familiarity.weapons[group]
+        !== "number"
+    ) {
+
+        playerCharacter.familiarity.weapons[group] = 0;
+
+    }
+
+
+    if (
+        typeof combatWeaponFamiliarityGained[group]
+        !== "number"
+    ) {
+
+        combatWeaponFamiliarityGained[group] = 0;
+
+    }
+
+
+    // Maximum of 3 Familiarity from
+    // one weapon group per encounter.
+
+    if (
+        combatWeaponFamiliarityGained[group] >= 3
+    ) {
+
+        return;
+
+    }
+
+
+    const amount =
+        critical ? 2 : 1;
+
+
+    const remaining =
+        3 -
+        combatWeaponFamiliarityGained[group];
+
+
+    const gained =
+        Math.min(
+            amount,
+            remaining
+        );
+
+
+    playerCharacter.familiarity.weapons[group]
+        += gained;
+
+
+    combatWeaponFamiliarityGained[group]
+        += gained;
+
+}
+// =====================================
 // CHARACTER DERIVED VALUES
 // =====================================
 
@@ -515,11 +615,6 @@ function createPlayerCharacter() {
 document.getElementById("mainMenu").style.display = "flex";
 
 }
-
-
-// =====================================
-// RENDER CHARACTER SHEET
-// =====================================
 
 // =====================================
 // RENDER CHARACTER SHEET
