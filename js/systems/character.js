@@ -24,50 +24,78 @@ function getAttributeModifier(score) {
 // =====================================
 
 const proficiencyThresholds = {
-    trained: 10,
-    expert: 50
+    familiar: 11,
+    trained: 26,
+    skilled: 46,
+    expert: 71
 };
 
 function getProficiencyLevel(familiarity) {
-
+    
     if (familiarity >= proficiencyThresholds.expert) {
-
+        
         return "Expert";
-
+        
     }
-
+    
+    if (familiarity >= proficiencyThresholds.skilled) {
+        
+        return "Skilled";
+        
+    }
+    
     if (familiarity >= proficiencyThresholds.trained) {
-
+        
         return "Trained";
-
+        
     }
-
+    
+    if (familiarity >= proficiencyThresholds.familiar) {
+        
+        return "Familiar";
+        
+    }
+    
     return "Untrained";
-
+    
 }
 
 function getProficiencyBonus(familiarity) {
-
+    
     const level =
         getProficiencyLevel(familiarity);
-
-
+    
+    
     if (level === "Expert") {
-
+        
         return 4;
-
+        
     }
-
-
+    
+    
+    if (level === "Skilled") {
+        
+        return 3;
+        
+    }
+    
+    
     if (level === "Trained") {
-
+        
         return 2;
-
+        
     }
-
-
+    
+    
+    if (level === "Familiar") {
+        
+        return 1;
+        
+    }
+    
+    
     return 0;
-
+    
 }
 
 // =====================================
@@ -162,8 +190,11 @@ function recordWeaponFamiliarity(
         );
 
 
-    playerCharacter.familiarity.weapons[group]
-        += gained;
+    playerCharacter.familiarity.weapons[group] =
+    Math.min(
+        100,
+        playerCharacter.familiarity.weapons[group] + gained
+    );
 
 
     combatWeaponFamiliarityGained[group]
