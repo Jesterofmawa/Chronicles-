@@ -20,6 +20,71 @@ function getAttributeModifier(score) {
 }
 
 // =====================================
+// CHRONICLES ACTION CHECKS
+// =====================================
+
+function getHiddenDifficulty(baseDifficulty) {
+
+    const variation =
+        Math.floor(Math.random() * 5) - 2;
+
+    return baseDifficulty + variation;
+
+}
+
+function performActionCheck(
+    attribute,
+    baseDifficulty
+) {
+
+    const hiddenDifficulty =
+        getHiddenDifficulty(
+            baseDifficulty
+        );
+
+
+    const attributeValue =
+        playerCharacter.attributes[
+            attribute
+        ] || 10;
+
+
+    const modifier =
+        getAttributeModifier(
+            attributeValue
+        );
+
+
+    const roll =
+        createPipRoll(
+            "1d20"
+        );
+
+
+    const total =
+        roll.result.total +
+        modifier;
+
+
+    const success =
+        total >= hiddenDifficulty;
+
+
+    return {
+
+        success: success,
+
+        roll: roll.result.total,
+
+        modifier: modifier,
+
+        total: total
+
+    };
+
+}
+
+// =====================================
 // CHRONICLES PROFICIENCY
 // =====================================
 
