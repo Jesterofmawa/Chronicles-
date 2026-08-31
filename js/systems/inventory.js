@@ -60,6 +60,7 @@ const weaponDefinitions = {
         category: "equipment",
         equipSlot: "weapon",
         damage: "1d4",
+        familiarityGroup: "blades",
         price: 15,
         description: "A plain but dependable dagger. Small enough to conceal and light enough to keep close at hand."
     },
@@ -71,6 +72,7 @@ const weaponDefinitions = {
         equipSlot: "weapon",
         damage: "1d6",
         twoHandedDamage: "1d8",
+        familiarityGroup: "polearms",
         price: 25,
         description: "A sturdy ash-wood spear tipped with a simple iron head. Practical, reliable, and well suited to keeping an enemy at reach."
     },
@@ -81,6 +83,7 @@ const weaponDefinitions = {
         category: "equipment",
         equipSlot: "weapon",
         damage: "1d6",
+        familiarityGroup: "axes",
         price: 30,
         description: "A compact iron-headed axe built for the hand. Useful both as a weapon and for the more practical problems of life on the road."
     },
@@ -91,6 +94,7 @@ const weaponDefinitions = {
         category: "equipment",
         equipSlot: "weapon",
         damage: "1d6",
+        familiarityGroup: "blades",
         price: 35,
         description: "A balanced blade favoured by sailors, guards, and anyone who expects a fight in cramped quarters."
     },
@@ -102,6 +106,7 @@ const weaponDefinitions = {
         equipSlot: "weapon",
         damage: "1d8",
         twoHandedDamage: "1d10",
+        familiarityGroup: "blades",
         price: 60,
         description: "A longer, heavier blade requiring more room to wield. It can be handled with one hand, but truly comes into its own when given both."
     },
@@ -112,6 +117,7 @@ const weaponDefinitions = {
         category: "equipment",
         equipSlot: "weapon",
         damage: "2d8",
+        familiarityGroup: "blades",
         price: 75,
         description: "A beautifully balanced cutlass of superior quality. The curved blade is finely finished, the grip wrapped in well-worn leather."
     }
@@ -138,7 +144,9 @@ function addWeaponFromDefinition(weapon) {
             identified: true,
             equipSlot: weapon.equipSlot,
             damage: weapon.damage,
-            twoHandedDamage: weapon.twoHandedDamage || null
+            twoHandedDamage: weapon.twoHandedDamage || null,
+            familiarityGroup:
+    weapon.familiarityGroup || null,
         });
 
     }
@@ -155,7 +163,8 @@ function addItem(
     twoHandedDamage = null,
     protection = null,
     defenceBonus = null,
-    attackModifier = null
+    attackModifier = null,
+    familiarityGroup = null
 ) {
 
     const existingItem = playerInventory.find(item => item.id === id);
@@ -176,7 +185,9 @@ function addItem(
             damage: damage,
             twoHandedDamage: twoHandedDamage,
             protection: protection, defenceBonus: defenceBonus,
-            attackModifier: attackModifier
+            attackModifier: attackModifier,
+            familiarityGroup:
+    familiarityGroup
         });
 
     }
@@ -370,7 +381,9 @@ function equipItem(itemId, slot) {
     twoHandedDamage: item.twoHandedDamage || null,
     protection: item.protection || null,
     defenceBonus: item.defenceBonus || null,
-    attackModifier: item.attackModifier || null
+    attackModifier: item.attackModifier || null,
+    familiarityGroup:
+    item.familiarityGroup || null,
 };
 
 // Remove the equipped item from inventory.
@@ -460,7 +473,8 @@ function replaceEquipment(itemId, slot) {
     oldItem.twoHandedDamage || null,
     oldItem.protection || null,
     oldItem.defenceBonus || null,
-    oldItem.attackModifier || null
+    oldItem.attackModifier ||null,
+    oldItem.familiarityGroup || null
 );
     
     // Equip the new item.
@@ -473,7 +487,10 @@ function replaceEquipment(itemId, slot) {
     twoHandedDamage: item.twoHandedDamage || null,
     protection: item.protection || null,
     defenceBonus: item.defenceBonus || null,
-    attackModifier: item.attackModifier || null
+    attackModifier: item.attackModifier || null,
+    familiarityGroup:
+    item.familiarityGroup || null,
+    
 };
     
     return true;
