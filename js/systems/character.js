@@ -34,7 +34,8 @@ function getHiddenDifficulty(baseDifficulty) {
 
 function performActionCheck(
     attribute,
-    baseDifficulty
+    baseDifficulty,
+    action = null
 ) {
 
     const hiddenDifficulty =
@@ -42,46 +43,53 @@ function performActionCheck(
             baseDifficulty
         );
 
-
     const attributeValue =
         playerCharacter.attributes[
             attribute
         ] || 10;
-
 
     const modifier =
         getAttributeModifier(
             attributeValue
         );
 
-
     const roll =
         createPipRoll(
             "1d20"
         );
 
-
     const total =
         roll.result.total +
         modifier;
 
-
     const success =
         total >= hiddenDifficulty;
 
+    const critical =
+        roll.result.total === 20;
+
+    const fumble =
+        roll.result.total === 1;
 
     return {
 
-        success: success,
+        action: action,
+
+        attribute: attribute,
 
         roll: roll.result.total,
 
         modifier: modifier,
 
-        total: total
+        total: total,
+
+        success: success,
+
+        critical: critical,
+
+        fumble: fumble
 
     };
-
 }
 
 // =====================================
