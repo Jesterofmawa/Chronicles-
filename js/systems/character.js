@@ -836,18 +836,26 @@ function renderCharacterSheet() {
                     </div>
 
                     <p>
-                        <strong>Weapons:</strong>
-                        ${renderList(
-                            c.proficiencies.weapons
-                        )}
-                    </p>
+    <strong>Weapons:</strong>
+</p>
 
-                    <p>
-                        <strong>Armor:</strong>
-                        ${renderList(
-                            c.proficiencies.armour
-                        )}
-                    </p>
+${renderFamiliarity(
+    "Blades",
+    "weapons",
+    "blades"
+)}
+
+${renderFamiliarity(
+    "Polearms",
+    "weapons",
+    "polearms"
+)}
+
+${renderFamiliarity(
+    "Axes",
+    "weapons",
+    "axes"
+)}
 
                     <p>
                         <strong>Tools:</strong>
@@ -1870,8 +1878,64 @@ function closeCarriedItems() {
 }
 
 // =====================================
+// FAMILIARITY DISPLAY
+// =====================================
+
+function renderFamiliarity(
+    name,
+    category,
+    group
+) {
+    
+    let familiarity = 0;
+    
+    if (
+        playerCharacter &&
+        playerCharacter.familiarity &&
+        playerCharacter.familiarity[category]
+    ) {
+        
+        familiarity =
+            playerCharacter.familiarity[category][group] || 0;
+        
+    }
+    
+    const level =
+        getProficiencyLevel(
+            familiarity
+        );
+    
+    const bonus =
+        getProficiencyBonus(
+            familiarity
+        );
+    
+    return `
+
+        <div class="character-proficiency-row">
+
+            <span>
+                ${name}
+            </span>
+
+            <span>
+                ${familiarity}/100
+                &nbsp;
+                ${level}
+                (${formatModifier(bonus)})
+            </span>
+
+        </div>
+
+    `;
+    
+}
+
+// =====================================
 // LIST HELPERS
 // =====================================
+
+
 
 function renderList(list) {
 
