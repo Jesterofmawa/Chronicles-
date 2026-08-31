@@ -74,7 +74,7 @@ Current Vitality may decrease during combat.
 
 Guard represents how difficult the character is to hit.
 
-Guard is influenced by equipment and other applicable modifiers.
+Armour and shields provide their own hard-coded defensive values. These values contribute to the character's final Guard.
 
 The exact final Guard formula is not yet locked.
 
@@ -306,7 +306,7 @@ Familiarity	Stage	Attack Bonus
 71–100	Expert	+4
 
 
-The proficiency bonus is automatically determined from the character's current Familiarity.
+The Familiarity Bonus is automatically determined from the character's current Familiarity.
 
 ---
 
@@ -365,7 +365,7 @@ Existing shield values must be preserved.
 
 Example: Tall Shield
 
-Defence: +3
+Guard: +3
 Attack: -2
 
 The attack penalty is an inherent property of the shield.
@@ -385,7 +385,7 @@ Total           -1 Attack
 
 The player therefore receives:
 
-+3 Defence
++3 Guard
 -1 Attack
 
 when wearing the Tall Shield and the applicable ring together.
@@ -499,3 +499,13 @@ Choose the equipment that suits your style.
 Experiment with combinations.
 
 Build the character through the way you play.
+
+Chronicles Action Checks
+Action Checks
+When a player attempts an uncertain action, the Storyteller determines the appropriate attribute based on the player's chosen approach.
+The game secretly determines a contextual Difficulty for the attempt. This Difficulty is never revealed to the player and may vary between repeated attempts.
+The player rolls a d20 and adds the relevant attribute modifier. The result is compared against the hidden Difficulty.
+The Storyteller narrates the resulting success, failure or consequence.
+Pip does not narrate the story. Pip remains the player's companion and chronicler.
+And our core principle:
+The player chooses what they attempt. The dice determine what happens. The Storyteller tells the story.
