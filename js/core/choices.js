@@ -1388,6 +1388,22 @@ if (choice === "⚡ Ask what happened sixty years ago") {
 
 }
 
+if (choice === "💡 Ask about the lighthouse") {
+
+    askHarbourmasterAboutLighthouse();
+
+    return;
+
+}
+
+if (choice === "↩️ End the Conversation") {
+
+    visitBentAnchor();
+
+    return;
+
+}
+
 if (choice === "↩️ Back to Explore the Streets") {
     
     setPipLocation("greyhaven");
@@ -1627,6 +1643,14 @@ if (choice === "↩️ Leave the Fish Market") {
 if (choice === "🍺 The Bent Anchor") {
 
     visitBentAnchor();
+
+    return;
+
+}
+
+if (choice === "↩️ Leave the Tavern") {
+
+    exploreGreyhavenStreets();
 
     return;
 

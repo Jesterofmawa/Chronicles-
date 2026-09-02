@@ -5832,7 +5832,7 @@ function visitBentAnchor() {
 }
 
 function speakWithHarbourmaster() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -5850,32 +5850,39 @@ function speakWithHarbourmaster() {
             </p>
 
             <p>
-                He studies you for a moment before gesturing towards the empty chair opposite him.
-            </p>
+    He studies you for a moment before gesturing towards the empty chair opposite him.
+</p>
 
-            <p>
-                "Sit, then."
-            </p>
+<p>
+    "Sit, then."
+</p>
 
-            <p>
-                "If you're determined to go poking around in old business, you may as well hear what I know."
-            </p>
+<p>
+    "If you're determined to go poking around in old business, you may as well hear what I know."
+</p>
+
+<p>
+    He holds out a hand.
+</p>
+
+<p>
+    "Larry."
+</p>
 
         </div>
 
     `;
-
+    
     showChoices([
         "🌊 Ask about the Old Harbour",
-        "📜 Ask about the old records",
-        "⚡ Ask what happened sixty years ago",
+        "💡 Ask about the lighthouse",
         "↩️ End the Conversation"
     ]);
-
+    
 }
 
 function askHarbourmasterAboutOldHarbour() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -5885,7 +5892,11 @@ function askHarbourmasterAboutOldHarbour() {
             </p>
 
             <p>
-                The Harbourmaster looks towards the tavern window, though there is little to see beyond the rain.
+                Larry looks towards the tavern window, though there is little to see beyond the rain.
+            </p>
+
+            <p>
+                "Ships came through every day. Fish, timber, salt, grain... the town lived because of that harbour."
             </p>
 
             <p>
@@ -5901,11 +5912,23 @@ function askHarbourmasterAboutOldHarbour() {
             </p>
 
             <p>
+                "Trade dried up. Ships stopped coming. People left."
+            </p>
+
+            <p>
                 He takes a drink.
             </p>
 
             <p>
+                "Greyhaven never really recovered."
+            </p>
+
+            <p>
                 "People say it was the storm."
+            </p>
+
+            <p>
+                He pauses.
             </p>
 
             <p>
@@ -5919,9 +5942,104 @@ function askHarbourmasterAboutOldHarbour() {
         </div>
 
     `;
+    
+    showChoices([
+        "💡 Ask about the lighthouse",
+        "⚡ Ask what happened sixty years ago",
+        "📜 Ask about the old records",
+        "↩️ End the Conversation"
+    ]);
+    
+}
+
+function askHarbourmasterAboutLighthouse() {
+
+    document.getElementById("story").innerHTML = `
+
+        <div class="story-panel">
+
+            <p>
+                "The lighthouse?"
+            </p>
+
+            <p>
+                Larry glances towards the tavern window, though the lighthouse itself cannot be seen from here.
+            </p>
+
+            <p>
+                "It should be working."
+            </p>
+
+            <p>
+                "Ships need a light. Especially coming into a harbour like this."
+            </p>
+
+            <p>
+                He takes another drink.
+            </p>
+
+            <p>
+                "And Greyhaven could use the trade."
+            </p>
+
+            <p>
+                "There are plenty in town who'd see it lit again tomorrow if they could."
+            </p>
+
+            <p>
+                He pauses.
+            </p>
+
+            <p>
+                "Others wouldn't go near it."
+            </p>
+
+            <p>
+                "Say it should stay dark."
+            </p>
+
+            <p>
+                "Old stories. Old fears."
+            </p>
+
+            <p>
+                Larry gives a small shake of his head.
+            </p>
+
+            <p>
+                "Hard to build a town's future around things nobody can prove."
+            </p>
+
+            <p>
+                You ask which side he is on.
+            </p>
+
+            <p>
+                Larry looks down at his drink.
+            </p>
+
+            <p>
+                "I'm the Harbourmaster. My job is to want the light working."
+            </p>
+
+            <p>
+                He takes another sip.
+            </p>
+
+            <p>
+                "Whether I want it working as a man who lives here..."
+            </p>
+
+            <p>
+                He leaves the thought unfinished.
+            </p>
+
+        </div>
+
+    `;
 
     showChoices([
-        "📜 Ask about the old records",
+        "🌊 Ask about the Old Harbour",
         "⚡ Ask what happened sixty years ago",
         "↩️ End the Conversation"
     ]);
@@ -5929,13 +6047,13 @@ function askHarbourmasterAboutOldHarbour() {
 }
 
 function askHarbourmasterWhatHappened() {
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
 
             <p>
-                The Harbourmaster is quiet for a moment.
+                Larry is quiet for a moment.
             </p>
 
             <p>
@@ -5951,7 +6069,7 @@ function askHarbourmasterWhatHappened() {
             </p>
 
             <p>
-                "The keeper died."
+                "The Keeper died."
             </p>
 
             <p>
@@ -5967,7 +6085,11 @@ function askHarbourmasterWhatHappened() {
             </p>
 
             <p>
-                "Some say the storm caused it all. Others swear they heard something out on the water."
+                "Some say the storm caused it all."
+            </p>
+
+            <p>
+                "Others swear they heard something out on the water."
             </p>
 
             <p>
@@ -5981,19 +6103,20 @@ function askHarbourmasterWhatHappened() {
         </div>
 
     `;
-
+    
     showChoices([
-        "📜 Ask about the old records",
         "🌊 Ask about the Old Harbour",
+        "💡 Ask about the lighthouse",
+        "📜 Ask about the old records",
         "↩️ End the Conversation"
     ]);
-
+    
 }
 
 function askHarbourmasterAboutRecords() {
-
+    
     harbourmasterRecordsRevealed = true;
-
+    
     document.getElementById("story").innerHTML = `
 
         <div class="story-panel">
@@ -6003,11 +6126,11 @@ function askHarbourmasterAboutRecords() {
             </p>
 
             <p>
-                The Harbourmaster leans back in his chair.
+                He leans back in his chair.
             </p>
 
             <p>
-                "Old harbour reports. Shipping logs. Damage reports. The lighthouse keeper's records."
+                "Old harbour reports. Shipping logs. Damage reports. The lighthouse Keeper's records."
             </p>
 
             <p>
@@ -6041,13 +6164,14 @@ function askHarbourmasterAboutRecords() {
         </div>
 
     `;
-
+    
     showChoices([
         "🌊 Ask about the Old Harbour",
+        "💡 Ask about the lighthouse",
         "⚡ Ask what happened sixty years ago",
         "↩️ End the Conversation"
     ]);
-
+    
 }
 
 function headTowardsBeach() {
